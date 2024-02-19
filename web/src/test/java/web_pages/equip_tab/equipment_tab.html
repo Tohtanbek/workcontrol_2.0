@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabulator Example</title>
+    <link href="https://unpkg.com/tabulator-tables@5.6.0/dist/css/tabulator_site.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.6.0/dist/js/tabulator.min.js"></script>
+    <link href="styles_equipment_tab.css" th:href="@{styles_equipment_tab.css}" rel="stylesheet" />
+    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+
+<!-- nav -->
+<nav class="sidebar">
+    <div class="nav-header">
+        <div class="logo-wrap">
+            <a class="logo-icon" href="https://workcontrol.site/form/authentication">
+                <img alt="logo-icon" src="../test_images/new_logo.jpg"></a>
+            <a class="logo-text" href="https://workcontrol.site/form/authentication">Личный <br> кабинет</a>
+        </div>
+
+        <div class="nav-search">
+            <div class="search">
+                <i class="material-icons">search</i>
+                <input type="search" name="search" placeholder="Поиск">
+            </div>
+        </div>
+    </div>
+    <ul class="nav-categories ul-base">
+        <li><a href="http://www.mediahawkz.com/topic/technology">Оборудование</a></li>
+        <li><a href="http://www.mediahawkz.com/topic/science">Рабочее время</a></li>
+        <li><a href="http://www.mediahawkz.com/topic/speak-up">Персонал</a></li>
+        <li><a href="http://www.mediahawkz.com/topic/general">Супервайзеры</a></li>
+        <li><a href="http://www.mediahawkz.com/topic/lifestyle">Клиенты</a></li>
+        <li><a href="http://www.mediahawkz.com/topic/world">Организации</a></li>
+        <li><a href="http://www.mediahawkz.com/topic/business">Объекты</a></li>
+        <li><a href="http://www.mediahawkz.com/topic/entertainment">Расходы</a></li>
+        <li><a href="http://www.mediahawkz.com/topic/sports">Счета</a></li>
+    </ul>
+    <div class="copyright">
+        <span>&copy; 2024 <a href="https://workcontrol.site/form/authentication" class="link">DeepClean.site</a> </span>
+        <span>Designed by <a href="https://twitter.com/rkchauhan01" target="_blank">DeepClean</a></span>
+    </div>
+</nav><!-- @end nav -->
+
+<!-- header -->
+<header>
+    <div class="header-inner clearfix">
+        <div class="nav-btn nav-slider">
+            <i class="material-icons">menu</i>
+        </div>
+        <div class="header-logo">
+            <a href="http://www.mediahawkz.com/"><img alt="logo" src="../test_images/new_logo_tight.jpg"></a>
+        </div>
+        <div class="header-categories">
+            <ul class="ul-base">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#"><span>Оборудование</span> <i class="material-icons">keyboard_arrow_down</i></a>
+                    <ul class="dropdown-menu ul-base">
+                        <li><a href="http://www.mediahawkz.com/topic/science">Рабочее время</a></li>
+                        <li><a href="http://www.mediahawkz.com/topic/speak-up">Персонал</a></li>
+                        <li><a href="http://www.mediahawkz.com/topic/general">Супервайзеры</a></li>
+                        <li><a href="http://www.mediahawkz.com/topic/lifestyle">Клиенты</a></li>
+                        <li><a href="http://www.mediahawkz.com/topic/world">Организации</a></li>
+                        <li><a href="http://www.mediahawkz.com/topic/business">Объекты</a></li>
+                        <li><a href="http://www.mediahawkz.com/topic/entertainment">Расходы</a></li>
+                        <li><a href="http://www.mediahawkz.com/topic/sports">Счета</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="header-categories">
+            <ul class="ul-base">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#"><span>Склад</span> <i class="material-icons">keyboard_arrow_down</i></a>
+                    <ul class="dropdown-menu ul-base">
+                        <li><a href="http://www.mediahawkz.com/topic/science">Выдать оборудование</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="header-search">
+            <div class="search">
+                <i class="material-icons">search</i>
+                <input type="search" name="search" placeholder="Искать">
+            </div>
+        </div>
+
+    </div>
+</header><!-- @end header -->
+
+<!-- Main content -->
+<footer></footer><!-- @end footer -->
+
+<main role="main">
+    <div id="parent">
+        <div id="table-buttons">
+            <button id="add-row-button">Добавить поле</button>
+            <button id="set-equip-types-button" href>Редактировать типы</button>
+        </div>
+<!--    форма на новое поле        -->
+            <div class="formbold-main-wrapper" style="display: none">
+                <div class="formbold-form-wrapper">
+                    <form action="https://formbold.com/s/FORM_ID" method="POST">
+                        <div class="formbold-input-group">
+                            <label for="naming" class="formbold-form-label"> Наименование </label>
+                            <input
+                                    type="text"
+                                    name="naming"
+                                    id="naming"
+                                    placeholder="Название оборудования"
+                                    class="formbold-form-input"
+                            />
+                        </div>
+
+                        <div class="formbold-input-group">
+                            <label for="type" class="formbold-form-label"> Тип </label>
+                            <select name="type" id="type">
+
+                            </select>
+                        </div>
+
+                        <div class="formbold-input-group">
+                            <label for="age" class="formbold-form-label"> Age </label>
+                            <input
+                                    type="text"
+                                    name="age"
+                                    id="age"
+                                    placeholder="Enter your age"
+                                    class="formbold-form-input"
+                            />
+                        </div>
+
+                        <div class="formbold-input-group">
+                            <label class="formbold-form-label">
+                                Which option best describes you?
+                            </label>
+
+                            <select class="formbold-form-select" name="occupation" id="occupation">
+                                <option value="Student">Student</option>
+                                <option value="designer">UX/UI Designer</option>
+                                <option value="fullstack">Full Stack Developer</option>
+                                <option value="frontend">Front End Developer</option>
+                            </select>
+                        </div>
+
+                        <div class="formbold-input-radio-wrapper">
+                            <label for="ans" class="formbold-form-label">
+                                Would you recomend our site to a friend?
+                            </label>
+
+                            <div class="formbold-radio-flex">
+                                <div class="formbold-radio-group">
+                                    <label class="formbold-radio-label">
+                                        <input
+                                                class="formbold-input-radio"
+                                                type="radio"
+                                                name="ans"
+                                                id="ans"
+                                        />
+                                        Yes
+                                        <span class="formbold-radio-checkmark"></span>
+                                    </label>
+                                </div>
+
+                                <div class="formbold-radio-group">
+                                    <label class="formbold-radio-label">
+                                        <input
+                                                class="formbold-input-radio"
+                                                type="radio"
+                                                name="ans"
+                                                id="ans"
+                                        />
+                                        No
+                                        <span class="formbold-radio-checkmark"></span>
+                                    </label>
+                                </div>
+
+                                <div class="formbold-radio-group">
+                                    <label class="formbold-radio-label">
+                                        <input
+                                                class="formbold-input-radio"
+                                                type="radio"
+                                                name="ans"
+                                                id="ans"
+                                        />
+                                        Maybe
+                                        <span class="formbold-radio-checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="formbold-input-radio-wrapper">
+                            <label class="formbold-form-label">
+                                Which languages & freameworks you know?
+                            </label>
+
+                            <div class="formbold-radio-flex">
+                                <div class="formbold-radio-group">
+                                    <label class="formbold-radio-label" for="c">
+                                        <input
+                                                class="formbold-input-radio"
+                                                type="radio"
+                                                name="c"
+                                                id="c"
+                                        />
+                                        C
+                                        <span class="formbold-radio-checkmark"></span>
+                                    </label>
+                                </div>
+
+                                <div class="formbold-radio-group">
+                                    <label class="formbold-radio-label" for="c++">
+                                        <input
+                                                class="formbold-input-radio"
+                                                type="radio"
+                                                name="c++"
+                                                id="c++"
+                                        />
+                                        c++
+                                        <span class="formbold-radio-checkmark"></span>
+                                    </label>
+                                </div>
+
+                                <div class="formbold-radio-group">
+                                    <label class="formbold-radio-label" for="java">
+                                        <input
+                                                class="formbold-input-radio"
+                                                type="radio"
+                                                name="java"
+                                                id="java"
+                                        />
+                                        Java
+                                        <span class="formbold-radio-checkmark"></span>
+                                    </label>
+                                </div>
+
+                                <div class="formbold-radio-group">
+                                    <label class="formbold-radio-label" for="python">
+                                        <input
+                                                class="formbold-input-radio"
+                                                type="radio"
+                                                name="python"
+                                                id="python"
+                                        />
+                                        Python
+                                        <span class="formbold-radio-checkmark"></span>
+                                    </label>
+                                </div>
+
+                                <div class="formbold-radio-group">
+                                    <label class="formbold-radio-label" for="javaScript">
+                                        <input
+                                                class="formbold-input-radio"
+                                                type="radio"
+                                                name="javaScript"
+                                                id="javaScript"
+                                        />
+                                        JavaScript
+                                        <span class="formbold-radio-checkmark"></span>
+                                    </label>
+                                </div>
+
+                                <div class="formbold-radio-group">
+                                    <label class="formbold-radio-label" for="react">
+                                        <input
+                                                class="formbold-input-radio"
+                                                type="radio"
+                                                name="react"
+                                                id="react"
+                                        />
+                                        React
+                                        <span class="formbold-radio-checkmark"></span>
+                                    </label>
+                                </div>
+
+                                <div class="formbold-radio-group">
+                                    <label class="formbold-radio-label" for="angular">
+                                        <input
+                                                class="formbold-input-radio"
+                                                type="radio"
+                                                name="angular"
+                                                id="angular"
+                                        />
+                                        Angular
+                                        <span class="formbold-radio-checkmark"></span>
+                                    </label>
+                                </div>
+
+                                <div class="formbold-radio-group">
+                                    <label class="formbold-radio-label" for="django">
+                                        <input
+                                                class="formbold-input-radio"
+                                                type="radio"
+                                                name="django"
+                                                id="django"
+                                        />
+                                        Django
+                                        <span class="formbold-radio-checkmark"></span>
+                                    </label>
+                                </div>
+
+                                <div class="formbold-radio-group">
+                                    <label class="formbold-radio-label" for="tailwind">
+                                        <input
+                                                class="formbold-input-radio"
+                                                type="radio"
+                                                name="tailwind"
+                                                id="tailwind"
+                                        />
+                                        Tailwind CSS
+                                        <span class="formbold-radio-checkmark"></span>
+                                    </label>
+                                </div>
+
+                                <div class="formbold-radio-group">
+                                    <label class="formbold-radio-label" for="bootstrap">
+                                        <input
+                                                class="formbold-input-radio"
+                                                type="radio"
+                                                name="bootstrap"
+                                                id="bootstrap"
+                                        />
+                                        Bootstrap
+                                        <span class="formbold-radio-checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="message" class="formbold-form-label">
+                                Any comments or suggestions
+                            </label>
+                            <textarea
+                                    rows="6"
+                                    name="message"
+                                    id="message"
+                                    placeholder="Type here..."
+                                    class="formbold-form-input"
+                            ></textarea>
+                        </div>
+
+                        <button class="formbold-btn">Submit</button>
+                    </form>
+                </div>
+            </div>
+        <!-- Таблица основная -->
+        <div id="equip-table"></div>
+    </div>
+    <div id="overlay"></div>
+</main><!-- @end main -->
+<!--Таблица типов, которая будет по центру-->
+<div id="type-table-box">
+    <div id="left-side-buttons">
+        <button id="prev-page-type">Назад</button>
+        <button id="add-type-button">Добавить тип</button>
+    </div>
+    <div id="type-table"></div>
+    <div id="right-side-buttons">
+        <button id="types-ready-button">Сохранить</button>
+        <button id="next-page-type">Вперед</button>
+    </div>
+</div>
+
+<!-- partial -->
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src="../header/script.js"></script>
+<script src="tabulator_script.js"></script>
+</body>
+</html>
