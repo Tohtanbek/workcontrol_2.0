@@ -2,6 +2,49 @@ let equipTable;
 let typeTable;
 createTables();
 
+//Переход к нопке добавить ряд-----------------------------------------------------
+//кнопка "добавить ряд" (выводит форму для нового ряда)
+document.getElementById("add-row-button").addEventListener("click",function (){
+    let equipForm = document.querySelector(".equip-form");
+    equipForm.style.display = "block";
+    let main = document.querySelector("main");
+    main.style.opacity = "0.5";
+    main.style.filter = "blur(5px)";
+    document.body.style.overflow = "hidden"; //Убрали возможность скролить после нажатия
+    document.getElementById("overlay").style.display = "block";
+
+    //Загружаем типы в форму из таблицы typeTable (но сначала очищаем, чтобы не дублировались):
+    let typeSelect = document.querySelector("#type-select");
+    while (typeSelect.firstChild) {
+        typeSelect.removeChild(typeSelect.firstChild);
+    }
+    let freshOption = document.createElement("option");
+    freshOption.selected = true;
+    freshOption.hidden = true;
+    freshOption.value = "default";
+    freshOption.text = "Выберите тип";
+    typeSelect.appendChild(freshOption);
+    let typesArray = typeTable.getData();
+    for (let row of typesArray){
+        let freshOption = document.createElement("option");
+        freshOption.value = row['type'];
+        freshOption.text = row['type'];
+        typeSelect.appendChild(freshOption);
+    }
+})
+//Крестик (закрыть форму)
+document.getElementById("form-exit").addEventListener("click",function (){
+    let equipForm = document.querySelector(".equip-form");
+    equipForm.style.display = "none";
+    let main = document.querySelector("main");
+    main.style.opacity = "1";
+    main.style.filter = "blur(0px)";
+    document.body.style.overflow = "visible"; //Вернули возможность скролить после нажатия
+    document.getElementById("overlay").style.display = "none";
+    let typeSelect = document.querySelector("#type-select");
+})
+//-----------------------------------------------------------------------------------
+
 //переход к кнопке "редактировать типы"--------------------------------
 document.getElementById("set-equip-types-button").addEventListener("click",function (){
     let typeTable = document.querySelector("#type-table");
@@ -17,21 +60,31 @@ document.getElementById("set-equip-types-button").addEventListener("click",funct
     document.getElementById("overlay").style.display = "block";
 })
 
-//кнопка "добавить ряд" (выводит форму для нового ряда)
-document.getElementById("add-row-button").addEventListener("click",function (){
-    let el = document.querySelector(".formbold-main-wrapper");
-    el.style.display = "block";
-})
-
 //При нажатии на кнопку "добавить тип"
 document.getElementById("add-type-button").addEventListener("click",function (){
     typeTable.addRow({});
 })
+//Предыдущая стр. типов
 document.getElementById("prev-page-type").addEventListener("click",function (){
     typeTable.previousPage();
 })
+//Следующая стр. типов
 document.getElementById("next-page-type").addEventListener("click",function (){
     typeTable.nextPage();
+})
+//Крестик (закрыть типы)
+document.getElementById("type-exit").addEventListener("click",function (){
+    let typeTable = document.querySelector("#type-table");
+    typeTable.style.visibility = "hidden";
+    typeTable.style.opacity = "0";
+    let typeTableDiv = document.querySelector("#type-table-box");
+    typeTableDiv.style.opacity = "0";
+    typeTableDiv.style.visibility = "hidden";
+    let main = document.querySelector("main");
+    main.style.opacity = "1";
+    main.style.filter = "blur(0px)";
+    document.body.style.overflow = "visible"; //Вернули возможность скролить после нажатия
+    document.getElementById("overlay").style.display = "none";
 })
 
 //---------------------------------------------------------------------

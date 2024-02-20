@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/pom.xml" afterDir="false" />
+    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Первый коммит workcontrol 2.0. Работа над frontend">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/test/java/web_pages/equip_tab/equipment_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/java/web_pages/equip_tab/equipment_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/test/java/web_pages/equip_tab/styles_equipment_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/java/web_pages/equip_tab/styles_equipment_tab.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/test/java/web_pages/equip_tab/tabulator_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/java/web_pages/equip_tab/tabulator_script.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +24,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -50,9 +53,11 @@
     "WebServerToolWindowFactoryState": "false",
     "jdk.selected.JAVA_MODULE": "17",
     "last_opened_file_path": "C:/Docs/Java Projects/workcontrol_2.0",
+    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "project.structure.side.proportion": "0.0",
+    "spring.configuration.checksum": "b906a601fee9d1b93ee0254b5e0ad9b4"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -159,8 +164,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1708251859084</updated>
-      <workItem from="1708251861171" duration="29244000" />
+      <workItem from="1708251861171" duration="29846000" />
+      <workItem from="1708359500270" duration="11865000" />
     </task>
+    <task id="LOCAL-00001" summary="Первый коммит workcontrol 2.0. Работа над frontend">
+      <created>1708303197812</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1708303197812</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,11 +185,27 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Первый коммит workcontrol 2.0. Работа над frontend" />
+    <option name="LAST_COMMIT_MESSAGE" value="Первый коммит workcontrol 2.0. Работа над frontend" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

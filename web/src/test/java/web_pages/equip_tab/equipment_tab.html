@@ -9,7 +9,6 @@
     <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 </head>
 <body>
 
@@ -99,262 +98,65 @@
     <div id="parent">
         <div id="table-buttons">
             <button id="add-row-button">Добавить поле</button>
-            <button id="set-equip-types-button" href>Редактировать типы</button>
+            <button id="set-equip-types-button">Редактировать типы</button>
         </div>
-<!--    форма на новое поле        -->
-            <div class="formbold-main-wrapper" style="display: none">
-                <div class="formbold-form-wrapper">
-                    <form action="https://formbold.com/s/FORM_ID" method="POST">
-                        <div class="formbold-input-group">
-                            <label for="naming" class="formbold-form-label"> Наименование </label>
-                            <input
-                                    type="text"
-                                    name="naming"
-                                    id="naming"
-                                    placeholder="Название оборудования"
-                                    class="formbold-form-input"
-                            />
-                        </div>
-
-                        <div class="formbold-input-group">
-                            <label for="type" class="formbold-form-label"> Тип </label>
-                            <select name="type" id="type">
-
-                            </select>
-                        </div>
-
-                        <div class="formbold-input-group">
-                            <label for="age" class="formbold-form-label"> Age </label>
-                            <input
-                                    type="text"
-                                    name="age"
-                                    id="age"
-                                    placeholder="Enter your age"
-                                    class="formbold-form-input"
-                            />
-                        </div>
-
-                        <div class="formbold-input-group">
-                            <label class="formbold-form-label">
-                                Which option best describes you?
-                            </label>
-
-                            <select class="formbold-form-select" name="occupation" id="occupation">
-                                <option value="Student">Student</option>
-                                <option value="designer">UX/UI Designer</option>
-                                <option value="fullstack">Full Stack Developer</option>
-                                <option value="frontend">Front End Developer</option>
-                            </select>
-                        </div>
-
-                        <div class="formbold-input-radio-wrapper">
-                            <label for="ans" class="formbold-form-label">
-                                Would you recomend our site to a friend?
-                            </label>
-
-                            <div class="formbold-radio-flex">
-                                <div class="formbold-radio-group">
-                                    <label class="formbold-radio-label">
-                                        <input
-                                                class="formbold-input-radio"
-                                                type="radio"
-                                                name="ans"
-                                                id="ans"
-                                        />
-                                        Yes
-                                        <span class="formbold-radio-checkmark"></span>
-                                    </label>
-                                </div>
-
-                                <div class="formbold-radio-group">
-                                    <label class="formbold-radio-label">
-                                        <input
-                                                class="formbold-input-radio"
-                                                type="radio"
-                                                name="ans"
-                                                id="ans"
-                                        />
-                                        No
-                                        <span class="formbold-radio-checkmark"></span>
-                                    </label>
-                                </div>
-
-                                <div class="formbold-radio-group">
-                                    <label class="formbold-radio-label">
-                                        <input
-                                                class="formbold-input-radio"
-                                                type="radio"
-                                                name="ans"
-                                                id="ans"
-                                        />
-                                        Maybe
-                                        <span class="formbold-radio-checkmark"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="formbold-input-radio-wrapper">
-                            <label class="formbold-form-label">
-                                Which languages & freameworks you know?
-                            </label>
-
-                            <div class="formbold-radio-flex">
-                                <div class="formbold-radio-group">
-                                    <label class="formbold-radio-label" for="c">
-                                        <input
-                                                class="formbold-input-radio"
-                                                type="radio"
-                                                name="c"
-                                                id="c"
-                                        />
-                                        C
-                                        <span class="formbold-radio-checkmark"></span>
-                                    </label>
-                                </div>
-
-                                <div class="formbold-radio-group">
-                                    <label class="formbold-radio-label" for="c++">
-                                        <input
-                                                class="formbold-input-radio"
-                                                type="radio"
-                                                name="c++"
-                                                id="c++"
-                                        />
-                                        c++
-                                        <span class="formbold-radio-checkmark"></span>
-                                    </label>
-                                </div>
-
-                                <div class="formbold-radio-group">
-                                    <label class="formbold-radio-label" for="java">
-                                        <input
-                                                class="formbold-input-radio"
-                                                type="radio"
-                                                name="java"
-                                                id="java"
-                                        />
-                                        Java
-                                        <span class="formbold-radio-checkmark"></span>
-                                    </label>
-                                </div>
-
-                                <div class="formbold-radio-group">
-                                    <label class="formbold-radio-label" for="python">
-                                        <input
-                                                class="formbold-input-radio"
-                                                type="radio"
-                                                name="python"
-                                                id="python"
-                                        />
-                                        Python
-                                        <span class="formbold-radio-checkmark"></span>
-                                    </label>
-                                </div>
-
-                                <div class="formbold-radio-group">
-                                    <label class="formbold-radio-label" for="javaScript">
-                                        <input
-                                                class="formbold-input-radio"
-                                                type="radio"
-                                                name="javaScript"
-                                                id="javaScript"
-                                        />
-                                        JavaScript
-                                        <span class="formbold-radio-checkmark"></span>
-                                    </label>
-                                </div>
-
-                                <div class="formbold-radio-group">
-                                    <label class="formbold-radio-label" for="react">
-                                        <input
-                                                class="formbold-input-radio"
-                                                type="radio"
-                                                name="react"
-                                                id="react"
-                                        />
-                                        React
-                                        <span class="formbold-radio-checkmark"></span>
-                                    </label>
-                                </div>
-
-                                <div class="formbold-radio-group">
-                                    <label class="formbold-radio-label" for="angular">
-                                        <input
-                                                class="formbold-input-radio"
-                                                type="radio"
-                                                name="angular"
-                                                id="angular"
-                                        />
-                                        Angular
-                                        <span class="formbold-radio-checkmark"></span>
-                                    </label>
-                                </div>
-
-                                <div class="formbold-radio-group">
-                                    <label class="formbold-radio-label" for="django">
-                                        <input
-                                                class="formbold-input-radio"
-                                                type="radio"
-                                                name="django"
-                                                id="django"
-                                        />
-                                        Django
-                                        <span class="formbold-radio-checkmark"></span>
-                                    </label>
-                                </div>
-
-                                <div class="formbold-radio-group">
-                                    <label class="formbold-radio-label" for="tailwind">
-                                        <input
-                                                class="formbold-input-radio"
-                                                type="radio"
-                                                name="tailwind"
-                                                id="tailwind"
-                                        />
-                                        Tailwind CSS
-                                        <span class="formbold-radio-checkmark"></span>
-                                    </label>
-                                </div>
-
-                                <div class="formbold-radio-group">
-                                    <label class="formbold-radio-label" for="bootstrap">
-                                        <input
-                                                class="formbold-input-radio"
-                                                type="radio"
-                                                name="bootstrap"
-                                                id="bootstrap"
-                                        />
-                                        Bootstrap
-                                        <span class="formbold-radio-checkmark"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label for="message" class="formbold-form-label">
-                                Any comments or suggestions
-                            </label>
-                            <textarea
-                                    rows="6"
-                                    name="message"
-                                    id="message"
-                                    placeholder="Type here..."
-                                    class="formbold-form-input"
-                            ></textarea>
-                        </div>
-
-                        <button class="formbold-btn">Submit</button>
-                    </form>
-                </div>
-            </div>
         <!-- Таблица основная -->
         <div id="equip-table"></div>
     </div>
     <div id="overlay"></div>
 </main><!-- @end main -->
 <!--Таблица типов, которая будет по центру-->
+<!--    форма на новое поле        -->
+<form class="equip-form">
+    <i id="form-exit" class="fa fa-times" aria-hidden="true"></i>
+    <div class="datainput">
+        <input class="validate" id="naming" name="naming" required="" type="text" value=''/>
+        <span class="highlight"></span><span class="bar"></span>
+        <label>Название</label>
+    </div>
+    <div class="datainput">
+        <select id="type-select">
+            <option hidden="hidden" selected="selected" value="default">Выберите тип</option>
+        </select>
+    </div>
+    <div class="datainput">
+        <select id="responsible-select">
+            <option hidden="hidden" selected="selected" value="default">Выберите ответственного</option>
+        </select>
+    </div>
+    <div class="datainput">
+        <input class="validate" id="amount" name="amount" required="" type="number" value=''/>
+        <span class="highlight"></span><span class="bar"></span>
+        <label>Количество</label>
+    </div>
+    <div class="datainput">
+        <input class="validate" id="price4each" name="price4each" required="" type="number" value=''/>
+        <span class="highlight"></span><span class="bar"></span>
+        <label>Цена за единицу Пример: (9.99)</label>
+    </div>
+    <div class="datainput">
+        <select id="unit-select">
+            <option hidden="hidden" selected="selected" value="default">Единица измерения</option>
+        </select>
+    </div>
+    <div class="datainput">
+        <input class="validate" id="link" name="link" required="" type="url" value=''/>
+        <span class="highlight"></span><span class="bar"></span>
+        <label>Ссылка(URL)</label>
+    </div>
+    <div class="datainput">
+        <input class="validate" id="source" name="source" required="" type="text" value=''/>
+        <span class="highlight"></span><span class="bar"></span>
+        <label>Поставщик</label>
+    </div>
+    <div class="datainput">
+        <input class="validate" id="supply-date" name="supply-date" required="" type="date" value=''/>
+        <span class="highlight"></span><span class="bar"></span>
+        <label></label>
+    </div>
+    <a class="send_form" href="javascript:void" type="submit" title="add-equip">Добавить</a>
+    <div id="text-info"></div>
+</form>
 <div id="type-table-box">
     <div id="left-side-buttons">
         <button id="prev-page-type">Назад</button>
@@ -362,6 +164,7 @@
     </div>
     <div id="type-table"></div>
     <div id="right-side-buttons">
+        <i id="type-exit" class="fa fa-times" aria-hidden="true"></i>
         <button id="types-ready-button">Сохранить</button>
         <button id="next-page-type">Вперед</button>
     </div>
