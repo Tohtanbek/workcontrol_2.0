@@ -36,7 +36,8 @@ public class EquipControllers {
      */
     @GetMapping("/main")
     String showEquipPage(){
-        log.info("Загружена страница оборудования");
+        log.info("testt Загружена страница оборудования");
+        System.out.println("Кириллица");
         return "equipment_tab";
     }
 

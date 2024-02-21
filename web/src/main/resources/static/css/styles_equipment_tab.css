@@ -7,21 +7,72 @@
     font-family: RaleWay;
     src: url("../images/fonts/Raleway-VariableFont_wght.ttf");
 }
-
-
-#parent{
-    height: 100vh;
+main{
     width: 100vw;
+    display: flex;
+    flex-direction: row;
+}
+
+#table-left{
+    height: 100vh;
+    width: 80vw;
+    padding-left: 3vh;
+}
+
+#filter-window{
+    color: white;
+    background: #121212;
+    border: 1px solid #2d2c2c;
+    font-size: 14px;
+    margin-top: 14vh;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    justify-content: start;
+    align-items: center;
+    height: 50vh;
+}
+#filter-window #header{
+    margin-top: 2vh;
+    font-size: x-large;
+    display: flex;
+    flex-direction: row;
+}
+#filter-input{
+    width: 80%;
+    padding: 4px 10px;
+    border: 1px solid #4b4b4b;
+    border-radius: 5px;
+    background: #1f1f1f;
+    outline: none;
+    color: white;
+    font-size: medium;
+}
+#filter-input:focus{
+    border-color: #3FB449;
+}
+.filter-window{
+    margin-bottom: 3vh;
+}
+#filter-column{
+    width: 80%;
+    color: white;
+    font-size: medium;
+    padding: 4px 10px;
+    border: 1px solid #4b4b4b;
+    border-radius: 5px;
+    background: #1f1f1f;
+    outline: none;
 }
 
 #table-buttons {
     margin-top: 12vh;
-    margin-left: 3vh;
     margin-bottom: 2vh;
 }
 #equip-table {
-    margin-left: 3vh;
-    width: 80%;
+    width: 100%;
 }
 /*Таблица типов оборудования*/
 #type-table-box{
@@ -78,7 +129,6 @@
 /* Input Field CSS */
 .datainput{position:relative;margin:5px 0 20px}.datainput p{font-size:12px;background:#eee;display:inline-block;padding:5px 15px;border-radius:.5rem}.equip-form textarea{min-height:120px}.datainput select{padding:12px 0;color:#555;font-size:14px;width:100%;border:0;border-bottom:1px solid #ddd;outline:none;background:#fff}.datainput input,.datainput textarea{font-size:15px;padding:15px 0;display:block;width:100%;border:none;border-bottom:1px solid #ddd}.datainput input:focus,.datainput textarea:focus{outline:none}.datainput label{color:#999;font-size:14px;font-weight:400;position:absolute;pointer-events:none;left:0;top:18px;transition:.2s ease all}.datainput input:focus~label,.datainput input:valid~label,.datainput textarea:focus~label,.datainput textarea:valid~label{top:-10px;font-size:14px;color:#21a51f}#notif-license span{font-size:40px}#notif-license{display:none;position:fixed}.bar{position:relative;display:block;width:100%}.bar:before,.bar:after{content:'';height:2px;width:0;bottom:1px;position:absolute;background:#21a51f;transition:.2s ease all}.bar:before{left:50%}.bar:after{right:50%}.datainput input:focus~.bar:before,.datainput input:focus~.bar:after,.datainput textarea:focus~.bar:before,.datainput textarea:focus~.bar:after{width:50%}.indigox{background:#3f51b5}.orangex{background:#ff9800}.pinkx{background:#e91e63}.bluex{background:#2196F3}.purplex{background:#9c27b0}.redx{background:#F44336}.greenx{background:#4CAF50}.highlight{position:absolute;height:50%;width:100px;top:25%;left:0;pointer-events:none;opacity:.5}.datainput input:focus~.highlight,.datainput textarea:focus~.highlight{animation:inputHighlighter .3s ease}.datainput input:focus~label,.datainput input:valid~label,.datainput textarea:focus~label,.datainput textarea:valid~label{top:-10px;font-size:13px;color:#21a51f}
 
-/* Default Whatsapp Form CSS by www.idblanter.com */
 #form-exit{
     color: red;
     position: absolute;
@@ -102,6 +152,7 @@ form.equip-form {
     left: 50%;
     transform: translate(-50%,-50%);
     display: none;
+    opacity: 0;
     box-shadow: 0 1px 6px rgba(32,33,36,.28);
     border-radius: .5rem;
     padding: 20px;
@@ -109,6 +160,7 @@ form.equip-form {
     color: #444;
     font-size: 14px;
     line-height: 1.5;
+    transition: opacity 0.3s ease, display 0.3s ease;
 }
 .equip-form a.send_form {
     color: #fff;
@@ -182,24 +234,6 @@ button:hover {
 
 
 /* -----------------------------------------------------
-  Material Design Mediahawkz.com Fixed & Responsive Header with Sidebar
-  CodePen URL: https://codepen.io/rkchauhan/pen/VamPVa
-  By: Ravikumar Chauhan
-
-  Find me on:-
-  * Twitter: https://twitter.com/rkchauhan01
-  * Facebook: https://www.facebook.com/ravi032chauhan
-  * GitHub: https://github.com/rkchauhan
-  * CodePen: https://codepen.io/rkchauhan
-  * UpLabs: http://uplabs.com/rkchauhan01
-
-  Thanks to:-
-  * Google Material design - https://www.google.com/design/spec/material-design/introduction.html
-  * Google Material Color - https://www.google.com/design/spec/style/color.html
-  * Google Material Icons - https://design.google.com/icons/
-  * Roboto Font - https://google.com/fonts/specimen/Roboto
-  * Font Awesome - http://fontawesome.io
-  * jQuery - https://jquery.com
 -------------------------------------------------------- */
 /* -----------------------------------------------------
   Body
@@ -212,6 +246,8 @@ body {
     font-family: "Roboto", sans-serif;
     background-color: black;
     transition: opacity 0.1s ease;
+    display: flex;
+    flex-direction: row;
 }
 
 *, *::after, *::before {

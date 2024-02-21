@@ -8,6 +8,7 @@ createTypeTable();
 document.getElementById("add-row-button").addEventListener("click",function (){
     let equipForm = document.querySelector(".equip-form");
     equipForm.style.display = "block";
+    equipForm.style.opacity = "1";
     let main = document.querySelector("main");
     main.style.opacity = "0.5";
     main.style.filter = "blur(5px)";
@@ -36,7 +37,8 @@ document.getElementById("add-row-button").addEventListener("click",function (){
 //Крестик (закрыть форму)
 document.getElementById("form-exit").addEventListener("click",function (){
     let equipForm = document.querySelector(".equip-form");
-    equipForm.style.display = "none";
+    equipForm.style.opacity = "0";
+    setTimeout(function (){equipForm.style.display = "none"},300);//Чтобы была анимация
     let main = document.querySelector("main");
     main.style.opacity = "1";
     main.style.filter = "blur(0px)";
@@ -84,11 +86,17 @@ document.getElementById("types-ready-button").addEventListener("click",function 
     })
         .then(response=>{
             if (!response.ok){
+                typeTable.alert("Ошибка. Изменения не сохранены","error");
+                setTimeout(function (){
+                    typeTable.clearAlert();
+                },2000)
                 throw new Error('DB error')
-                //todo:добавить popup ошибки
             }
             else {
-                //todo: добавить положительный popup
+                typeTable.alert("Изменения сохранены")
+                setTimeout(function (){
+                    typeTable.clearAlert();
+                },2000)
             }
         })
 })
@@ -118,6 +126,8 @@ function createEquipTable() {
     equipTable = new Tabulator("#equip-table", {
         ajaxURL: "/equip/main_table",
         maxHeight: "80%",
+        selectableRows: true,
+        movableColumns: true,
         addRowPos: "top",
         pagination: "local",
         paginationSize: 10,
@@ -190,4 +200,21 @@ function createTypeMenu(){
             }
         },
     ];
+}
+//Фильтры для основной таблицы-------------------
+let filterColumn = document.getElementById("filter-column");
+let filterInput = document.getElementById("filter-input");
+let filterClearButton = document.getElementById("clear-filter");
+filterColumn.addEventListener("change",updateFilter);
+filterInput.addEventListener("keyup",updateFilter);
+
+function updateFilter(){
+let filterColumnValue = filterColumn.options[filterColumn.selectedIndex].value;
+equipTable.setFilter(filterColumnValue,"like",filterInput.value);
+
+filterClearButton.addEventListener("click",function (){
+    filterColumn.value = "";
+    filterInput.value = "";
+    equipTable.clearFilter();
+})
 }
