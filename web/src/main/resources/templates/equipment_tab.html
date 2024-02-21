@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabulator Example</title>
+    <link href="https://unpkg.com/tabulator-tables@5.6.0/dist/css/tabulator_site.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.6.0/dist/js/tabulator.min.js"></script>
+    <link th:href="@{/css/styles_equipment_tab.css}" rel="stylesheet" />
+    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+<!-- nav -->
+<nav class="sidebar">
+    <div class="nav-header">
+        <div class="logo-wrap">
+            <a class="logo-icon" href="https://workcontrol.site/form/authentication">
+                <img alt="logo-icon" th:src="@{/images/new_logo.jpg}"></a>
+            <a class="logo-text" href="https://workcontrol.site/form/authentication">Личный <br> кабинет</a>
+        </div>
+
+        <div class="nav-search">
+            <div class="search">
+                <i class="material-icons">search</i>
+                <input type="search" name="search" placeholder="Поиск">
+            </div>
+        </div>
+    </div>
+    <ul class="nav-categories ul-base">
+        <li><a href="http://www.mediahawkz.com/topic/technology">Оборудование</a></li>
+        <li><a href="http://www.mediahawkz.com/topic/science">Рабочее время</a></li>
+        <li><a href="http://www.mediahawkz.com/topic/speak-up">Персонал</a></li>
+        <li><a href="http://www.mediahawkz.com/topic/general">Супервайзеры</a></li>
+        <li><a href="http://www.mediahawkz.com/topic/lifestyle">Клиенты</a></li>
+        <li><a href="http://www.mediahawkz.com/topic/world">Организации</a></li>
+        <li><a href="http://www.mediahawkz.com/topic/business">Объекты</a></li>
+        <li><a href="http://www.mediahawkz.com/topic/entertainment">Расходы</a></li>
+        <li><a href="http://www.mediahawkz.com/topic/sports">Счета</a></li>
+    </ul>
+    <div class="copyright">
+        <span>&copy; 2024 <a href="https://workcontrol.site/form/authentication" class="link">DeepClean.site</a> </span>
+        <span>Designed by <a href="https://twitter.com/rkchauhan01" target="_blank">DeepClean</a></span>
+    </div>
+</nav><!-- @end nav -->
+
+<!-- header -->
+<header>
+    <div class="header-inner clearfix">
+        <div class="nav-btn nav-slider">
+            <i class="material-icons">menu</i>
+        </div>
+        <div class="header-logo">
+            <a href="http://www.mediahawkz.com/"><img alt="logo" th:src="@{/images/new_logo_tight.jpg}"></a>
+        </div>
+        <div class="header-categories">
+            <ul class="ul-base">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#"><span>Оборудование</span> <i class="material-icons">keyboard_arrow_down</i></a>
+                    <ul class="dropdown-menu ul-base">
+                        <li><a href="http://www.mediahawkz.com/topic/science">Рабочее время</a></li>
+                        <li><a href="http://www.mediahawkz.com/topic/speak-up">Персонал</a></li>
+                        <li><a href="http://www.mediahawkz.com/topic/general">Супервайзеры</a></li>
+                        <li><a href="http://www.mediahawkz.com/topic/lifestyle">Клиенты</a></li>
+                        <li><a href="http://www.mediahawkz.com/topic/world">Организации</a></li>
+                        <li><a href="http://www.mediahawkz.com/topic/business">Объекты</a></li>
+                        <li><a href="http://www.mediahawkz.com/topic/entertainment">Расходы</a></li>
+                        <li><a href="http://www.mediahawkz.com/topic/sports">Счета</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="header-categories">
+            <ul class="ul-base">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#"><span>Склад</span> <i class="material-icons">keyboard_arrow_down</i></a>
+                    <ul class="dropdown-menu ul-base">
+                        <li><a href="http://www.mediahawkz.com/topic/science">Выдать оборудование</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="header-search">
+            <div class="search">
+                <i class="material-icons">search</i>
+                <input type="search" name="search" placeholder="Искать">
+            </div>
+        </div>
+
+    </div>
+</header><!-- @end header -->
+
+<!-- Main content -->
+<footer></footer><!-- @end footer -->
+
+<main role="main">
+    <div id="parent">
+        <div id="table-buttons">
+            <button id="add-row-button">Добавить поле</button>
+            <button id="set-equip-types-button">Редактировать типы</button>
+        </div>
+        <!-- Таблица основная -->
+        <div id="equip-table"></div>
+    </div>
+    <div id="overlay"></div>
+</main><!-- @end main -->
+<!--Таблица типов, которая будет по центру-->
+<!--    форма на новое поле        -->
+<form class="equip-form">
+    <i id="form-exit" class="fa fa-times" aria-hidden="true"></i>
+    <div class="datainput">
+        <input class="validate" id="naming" name="naming" required="" type="text" value=''/>
+        <span class="highlight"></span><span class="bar"></span>
+        <label>Название</label>
+    </div>
+    <div class="datainput">
+        <select id="type-select">
+            <option hidden="hidden" selected="selected" value="default">Выберите тип</option>
+        </select>
+    </div>
+    <div class="datainput">
+        <select id="responsible-select">
+            <option hidden="hidden" selected="selected" value="default">Выберите ответственного</option>
+        </select>
+    </div>
+    <div class="datainput">
+        <input class="validate" id="amount" name="amount" required="" type="number" value=''/>
+        <span class="highlight"></span><span class="bar"></span>
+        <label>Количество</label>
+    </div>
+    <div class="datainput">
+        <input class="validate" id="price4each" name="price4each" required="" type="number" value=''/>
+        <span class="highlight"></span><span class="bar"></span>
+        <label>Цена за единицу Пример: (9.99)</label>
+    </div>
+    <div class="datainput">
+        <select id="unit-select">
+            <option hidden="hidden" selected="selected" value="default">Единица измерения</option>
+        </select>
+    </div>
+    <div class="datainput">
+        <input class="validate" id="link" name="link" required="" type="url" value=''/>
+        <span class="highlight"></span><span class="bar"></span>
+        <label>Ссылка(URL)</label>
+    </div>
+    <div class="datainput">
+        <input class="validate" id="source" name="source" required="" type="text" value=''/>
+        <span class="highlight"></span><span class="bar"></span>
+        <label>Поставщик</label>
+    </div>
+    <div class="datainput">
+        <input class="validate" id="supply-date" name="supply-date" required="" type="date" value=''/>
+        <span class="highlight"></span><span class="bar"></span>
+        <label></label>
+    </div>
+    <a class="send_form" href="javascript:void" type="submit" title="add-equip">Добавить</a>
+    <div id="text-info"></div>
+</form>
+<div id="type-table-box">
+    <div id="left-side-buttons">
+        <button id="prev-page-type">Назад</button>
+        <button id="add-type-button">Добавить тип</button>
+    </div>
+    <div id="type-table"></div>
+    <div id="right-side-buttons">
+        <i id="type-exit" class="fa fa-times" aria-hidden="true"></i>
+        <button id="types-ready-button">Сохранить</button>
+        <button id="next-page-type">Вперед</button>
+    </div>
+</div>
+
+<!-- partial -->
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script th:src="@{/js/equip_header.js}"></script>
+<script th:src="@{/js/equip_script.js}"></script>
+</body>
+</html>

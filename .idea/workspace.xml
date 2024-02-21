@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Первый коммит workcontrol 2.0. Работа над frontend">
+    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Работа над макетной страницей equipment сайта.">
+      <change afterPath="$PROJECT_DIR$/web/src/test/java/integration/EquipControllerRealServerIT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/test/java/web_pages/equip_tab/equipment_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/java/web_pages/equip_tab/equipment_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/test/java/web_pages/equip_tab/styles_equipment_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/java/web_pages/equip_tab/styles_equipment_tab.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/test/java/web_pages/equip_tab/tabulator_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/java/web_pages/equip_tab/tabulator_script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/ApplicationRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/ApplicationRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/TableControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/EquipControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/test/java/integration/EquipControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/test/java/integration/IT.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/java/integration/IT.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +22,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="AnnotationType" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -52,21 +56,29 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "C:/Docs/Java Projects/workcontrol_2.0",
+    "last_opened_file_path": "C:/Docs/Java Projects/workcontrol_2.0/web/src/main/resources/static/js",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
     "spring.configuration.checksum": "b906a601fee9d1b93ee0254b5e0ad9b4"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\templates" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\test\resources" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\test\java" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\test\resources" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\test\java\web_pages\equip_tab" />
     </key>
@@ -74,11 +86,12 @@
       <recent name="" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="integration" />
       <recent name="com.tosDev.controllers.table_pages" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.EquipControllerTest">
-    <configuration name="EquipControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.EquipControllerRealServerIT.test">
+    <configuration name="EquipControllerMockMvcIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="web" />
       <extension name="coverage">
         <pattern>
@@ -87,13 +100,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="integration" />
-      <option name="MAIN_CLASS_NAME" value="integration.EquipControllerTest" />
+      <option name="MAIN_CLASS_NAME" value="integration.EquipControllerMockMvcIT" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EquipControllerTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="EquipControllerMockMvcIT.checkPagesAccessible" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="web" />
       <extension name="coverage">
         <pattern>
@@ -102,14 +115,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="integration" />
-      <option name="MAIN_CLASS_NAME" value="integration.EquipControllerTest" />
-      <option name="METHOD_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="integration.EquipControllerMockMvcIT" />
+      <option name="METHOD_NAME" value="checkPagesAccessible" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EquipController.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="EquipControllerRealServerIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="web" />
       <extension name="coverage">
         <pattern>
@@ -117,8 +130,23 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="integration_tests.contollers" />
-      <option name="MAIN_CLASS_NAME" value="integration_tests.contollers.EquipController" />
+      <option name="PACKAGE_NAME" value="integration" />
+      <option name="MAIN_CLASS_NAME" value="integration.EquipControllerRealServerIT" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EquipControllerRealServerIT.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="web" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="integration.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="integration" />
+      <option name="MAIN_CLASS_NAME" value="integration.EquipControllerRealServerIT" />
       <option name="METHOD_NAME" value="test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -138,20 +166,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="docker-compose.yaml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="sourceFilePath" value="docker-compose.yaml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.EquipControllerTest" />
-        <item itemvalue="Docker.docker-compose.yaml: Compose Deployment" />
-        <item itemvalue="JUnit.EquipControllerTest.test" />
-        <item itemvalue="JUnit.EquipController.test" />
+        <item itemvalue="JUnit.EquipControllerRealServerIT.test" />
+        <item itemvalue="JUnit.EquipControllerMockMvcIT" />
+        <item itemvalue="JUnit.EquipControllerMockMvcIT.checkPagesAccessible" />
+        <item itemvalue="JUnit.EquipControllerRealServerIT" />
         <item itemvalue="Spring Boot.ApplicationRunner" />
       </list>
     </recent_temporary>
@@ -165,7 +185,8 @@
       <option name="presentableId" value="Default" />
       <updated>1708251859084</updated>
       <workItem from="1708251861171" duration="29846000" />
-      <workItem from="1708359500270" duration="11865000" />
+      <workItem from="1708359500270" duration="12079000" />
+      <workItem from="1708430537126" duration="27601000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит workcontrol 2.0. Работа над frontend">
       <created>1708303197812</created>
@@ -174,7 +195,14 @@
       <option name="project" value="LOCAL" />
       <updated>1708303197812</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Работа над макетной страницей equipment сайта.">
+      <created>1708388490353</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1708388490353</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,7 +219,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="first_dev_branch" />
                       </list>
                     </value>
                   </entry>
@@ -205,17 +233,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Первый коммит workcontrol 2.0. Работа над frontend" />
-    <option name="LAST_COMMIT_MESSAGE" value="Первый коммит workcontrol 2.0. Работа над frontend" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/web/src/test/java/integration/EquipControllerTest.java</url>
-          <line>13</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Работа над макетной страницей equipment сайта." />
+    <option name="LAST_COMMIT_MESSAGE" value="Работа над макетной страницей equipment сайта." />
   </component>
 </project>

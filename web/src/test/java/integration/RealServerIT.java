@@ -14,8 +14,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @ActiveProfiles("test")
-@SpringBootTest
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @ContextConfiguration(classes = ApplicationRunner.class)
-public @interface IT {
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+public @interface RealServerIT {
 }
