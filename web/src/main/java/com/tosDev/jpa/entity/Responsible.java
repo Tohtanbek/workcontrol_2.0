@@ -12,20 +12,18 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@EqualsAndHashCode
 @Builder
-public class EquipmentType {
+public class Responsible {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Exclude
-    @JsonIgnore
     Integer id;
 
     String name;
+    Long phoneNumber;
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JsonIgnore
-    @OneToMany(mappedBy = "type")
+    @OneToMany(mappedBy = "responsible")
     List<Equipment> equipmentList = new ArrayList<>();
 }

@@ -1,11 +1,9 @@
-let equipTable;
-let typeTable;
 let typeMenu = createTypeMenu();
-createEquipTable();
-createTypeTable();
+let typeTable = createTypeTable()
+let equipTable = createEquipTable()
 //Переход к нопке добавить ряд-----------------------------------------------------
 //кнопка "добавить ряд" (выводит форму для нового ряда)
-document.getElementById("add-row-button").addEventListener("click",function (){
+document.getElementById("add-row-button").addEventListener("click",async function (){
     let equipForm = document.querySelector(".equip-form");
     equipForm.style.display = "block";
     equipForm.style.opacity = "1";
@@ -16,10 +14,11 @@ document.getElementById("add-row-button").addEventListener("click",function (){
     document.getElementById("overlay").style.display = "block";
 
     //Загружаем типы в форму из таблицы typeTable (но сначала очищаем, чтобы не дублировались):
-    let typeSelect = document.querySelector("#type-select");
+    let typeSelect = document.querySelector("#type");
     while (typeSelect.firstChild) {
         typeSelect.removeChild(typeSelect.firstChild);
     }
+    //Добавляем варианты типов оборудования
     let freshOption = document.createElement("option");
     freshOption.selected = true;
     freshOption.hidden = true;
@@ -27,13 +26,73 @@ document.getElementById("add-row-button").addEventListener("click",function (){
     freshOption.text = "Выберите тип";
     typeSelect.appendChild(freshOption);
     let typesArray = typeTable.getData();
+    console.log(typesArray);
     for (let row of typesArray){
         let freshOption = document.createElement("option");
-        freshOption.value = row['type'];
-        freshOption.text = row['type'];
+        freshOption.value = row['name'];
+        freshOption.text = row['name'];
         typeSelect.appendChild(freshOption);
     }
+
+    //Добавляем варианты ответственных из другой таблицы
+    //Берем их по ссылке в виде массива
+    try {
+        let response = await fetch("/tables/supervisors/responsible_names_array", {
+            method: "GET",
+        });
+        if (!response.ok) {
+            throw new Error("Ошибка при загрузке ответственных при создании формы оборудования")
+        } else {
+            console.log("Ответственные загружены для выбора в форме оборудования")
+            let responsibleSelect = document.querySelector("#responsible");
+            while (responsibleSelect.firstChild) {
+                responsibleSelect.removeChild(responsibleSelect.firstChild);
+            }
+            let freshOption = document.createElement("option");
+            freshOption.selected = true;
+            freshOption.hidden = true;
+            freshOption.value = "default";
+            freshOption.text = "Выберите ответственного";
+            responsibleSelect.appendChild(freshOption);
+
+            let responsibleArray = await response.json();
+            for (let row of responsibleArray) {
+                let freshOption = document.createElement("option");
+                freshOption.value = row;
+                freshOption.text = row;
+                responsibleSelect.appendChild(freshOption)
+            }
+        }
+    }
+    catch (error){
+        console.error('Ошибка при загрузке ответственного в форму', error);
+    }
 })
+//Отправляем форму и ожидаем ответа, чтобы обновить таблицу, не обновляя всю страницу
+document.getElementById("main-form-submit").addEventListener("click",
+    async function (event){
+        event.preventDefault();
+        let form = document.getElementById("main-form");
+        const formData = new FormData(form);
+        try {
+            let response = await fetch('/tables/equip/add_equip_row', {
+                method: "POST",
+                headers: {
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify(Object.fromEntries(formData))
+            });
+            if (!response.ok) {
+                throw new Error('Ошибка при отправке формы');
+            }
+            else {
+                console.log("Форма на создание супервайзера создана успешно");
+                responsibleTable.setData("/tables/supervisors/main_table");
+            }
+        } catch (error){
+            console.error('Ошибка при отправке формы', error);
+        }
+    })
 //Крестик (закрыть форму)
 document.getElementById("form-exit").addEventListener("click",function (){
     let equipForm = document.querySelector(".equip-form");
@@ -77,7 +136,7 @@ document.getElementById("next-page-type").addEventListener("click",function (){
 })
 //Сохранить изменения в бд
 document.getElementById("types-ready-button").addEventListener("click",function (){
-    fetch("/equip/add_equip_type",{
+    fetch("/tables/equip/add_equip_type",{
         method:'POST',
         headers: {
             'Content-Type': 'application/json' // Указываем тип контента как JSON
@@ -123,8 +182,8 @@ document.getElementById("type-exit").addEventListener("click",function (){
 
 //Сама таблица оборудования
 function createEquipTable() {
-    equipTable = new Tabulator("#equip-table", {
-        ajaxURL: "/equip/main_table",
+    return  new Tabulator("#equip-table", {
+        ajaxURL: "/tables/equip/main_table",
         maxHeight: "80%",
         selectableRows: true,
         movableColumns: true,
@@ -139,7 +198,7 @@ function createEquipTable() {
             {title: "Наименование", field: "naming", width: "10%", editor: true},
             {
                 title: "Тип", field: "type", editor: "list", editorParams: {
-                    valuesURL: "/equip/equip_types_array"
+                    valuesURL: "/tables/equip/equip_types_array"
                 }
             },
             {
@@ -174,8 +233,8 @@ function createEquipTable() {
 
 
 function createTypeTable() {
-    typeTable = new Tabulator("#type-table", {
-        ajaxURL: "/equip/equip_types",
+    return new Tabulator("#type-table", {
+        ajaxURL: "/tables/equip/equip_types",
         layout: "fitDataStretch",
         maxHeight: "80%",
         addRowPos: "top",

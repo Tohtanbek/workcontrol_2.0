@@ -1,12 +1,13 @@
 package com.tosDev.jpa.repository;
 
-import com.tosDev.jpa.entity.EquipmentType;
+import com.tosDev.jpa.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface EquipmentTypeRepository extends JpaRepository<EquipmentType,Integer> {
-    Optional<EquipmentType> findByName(String name);
+public interface UserRepository extends JpaRepository<User,Integer> {
+
+    Optional<User> findByName(String name);
 }

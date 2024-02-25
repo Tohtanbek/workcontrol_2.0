@@ -23,8 +23,8 @@ $('.nav-btn.nav-slider').on('click', function() {
 document.getElementById("overlay").addEventListener("click",function (){
   if($('nav').hasClass('open')) {
     $('nav').removeClass('open');
+    $(this).hide();
+    document.getElementById("overlay").style.display = "none";
   }
-  $(this).hide();
-  document.getElementById("overlay").style.display = "none";
 })
 
