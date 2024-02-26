@@ -101,6 +101,7 @@
         <div id="table-buttons">
             <button id="add-row-button">Добавить поле</button>
             <button id="set-equip-types-button">Редактировать типы</button>
+            <button id="main-table-save-update">Сохранить изменения в таблице</button>
         </div>
         <!-- Таблица основная -->
         <div id="equip-table"></div>
@@ -132,12 +133,12 @@
         <label>Название</label>
     </div>
     <div class="datainput">
-        <select id="type">
+        <select id="type" name="type">
             <option hidden="hidden" selected="selected" value="default">Выберите тип</option>
         </select>
     </div>
     <div class="datainput">
-        <select id="responsible">
+        <select id="responsible" name="responsible">
             <option hidden="hidden" selected="selected" value="default">Выберите ответственного</option>
         </select>
     </div>
@@ -174,17 +175,37 @@
     <button id="main-form-submit" class="send_form" type="submit" title="Сохранить">Добавить</button>
     <div id="text-info"></div>
 </form>
+<!--Меню при сохранении формы-->
+<div class="cd-popup" id="form-popup" role="alert">
+    <div class="cd-popup-container">
+        <p>Сохранено. Создать еще одну запись?</p>
+        <ul class="cd-buttons">
+            <li><a href="" id="cd-popup-yes">Да</a></li>
+            <li><a href="" id="cd-popup-no">Нет</a></li>
+        </ul>
+    </div> <!-- cd-popup-container -->
+</div> <!-- cd-popup -->
+<!--Меню при удалении записи equip-->
+<div class="cd-popup" id="equip-delete-popup" role="alert">
+    <div class="cd-popup-container">
+        <p>Вы точно хотите удалить записи?</p>
+        <ul class="cd-buttons">
+            <li><a href="" id="equip-popup-yes">Да</a></li>
+            <li><a href="" id="equip-popup-no">Нет</a></li>
+        </ul>
+    </div> <!-- cd-popup-container -->
+</div> <!-- cd-popup -->
 <!--Меню работы с типами оборудования-->
 <div id="type-table-box">
     <div id="left-side-buttons">
-        <button id="prev-page-type">Назад</button>
+        <button id="prev-page-type">Предыдущая страница</button>
         <button id="add-type-button">Добавить тип</button>
     </div>
     <div id="type-table"></div>
     <div id="right-side-buttons">
         <i id="type-exit" class="fa fa-times" aria-hidden="true"></i>
-        <button id="types-ready-button">Сохранить</button>
-        <button id="next-page-type">Вперед</button>
+        <button id="types-ready-button">Сохранить изменения</button>
+        <button id="next-page-type">Следующая страница</button>
     </div>
 </div>
 
@@ -193,5 +214,7 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script th:src="@{/js/main_header.js}" src="/static/js/main_header.js"></script>
 <script th:src="@{/js/equip_script.js}" src="/static/js/equip_script.js"></script>
+<script th:src="@{/js/form_popup_script.js}" src="/static/js/form_popup_script.js"></script>
+<script th:src="@{/js/equip_delete_popup_script.js}" src="/static/js/equip_delete_popup_script.js"></script>
 </body>
 </html>

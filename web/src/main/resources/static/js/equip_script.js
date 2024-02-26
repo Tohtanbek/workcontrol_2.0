@@ -1,4 +1,5 @@
 let typeMenu = createTypeMenu();
+let equipMenu = createEquipMenu();
 let typeTable = createTypeTable()
 let equipTable = createEquipTable()
 //Переход к нопке добавить ряд-----------------------------------------------------
@@ -82,12 +83,14 @@ document.getElementById("main-form-submit").addEventListener("click",
                 },
                 body: JSON.stringify(Object.fromEntries(formData))
             });
+            console.log(JSON.stringify(Object.fromEntries(formData)))
             if (!response.ok) {
                 throw new Error('Ошибка при отправке формы');
             }
             else {
-                console.log("Форма на создание супервайзера создана успешно");
-                responsibleTable.setData("/tables/supervisors/main_table");
+                console.log("Форма на создание оборудования создана успешно");
+                equipTable.setData("/tables/equip/main_table");
+                $('#form-popup').addClass('is-visible');
             }
         } catch (error){
             console.error('Ошибка при отправке формы', error);
@@ -95,15 +98,7 @@ document.getElementById("main-form-submit").addEventListener("click",
     })
 //Крестик (закрыть форму)
 document.getElementById("form-exit").addEventListener("click",function (){
-    let equipForm = document.querySelector(".equip-form");
-    equipForm.style.opacity = "0";
-    setTimeout(function (){equipForm.style.display = "none"},300);//Чтобы была анимация
-    let main = document.querySelector("main");
-    main.style.opacity = "1";
-    main.style.filter = "blur(0px)";
-    document.body.style.overflow = "visible"; //Вернули возможность скролить после нажатия
-    document.getElementById("overlay").style.display = "none";
-    let typeSelect = document.querySelector("#type-select");
+    closeForm()
 })
 //-----------------------------------------------------------------------------------
 
@@ -152,6 +147,9 @@ document.getElementById("types-ready-button").addEventListener("click",function 
                 throw new Error('DB error')
             }
             else {
+                typeTable.setData("/tables/equip/equip_types").then(function () {
+                    equipTable.setData("/tables/equip/main_table");
+                })
                 typeTable.alert("Изменения сохранены")
                 setTimeout(function (){
                     typeTable.clearAlert();
@@ -182,7 +180,7 @@ document.getElementById("type-exit").addEventListener("click",function (){
 
 //Сама таблица оборудования
 function createEquipTable() {
-    return  new Tabulator("#equip-table", {
+    return new Tabulator("#equip-table", {
         ajaxURL: "/tables/equip/main_table",
         maxHeight: "80%",
         selectableRows: true,
@@ -193,8 +191,12 @@ function createEquipTable() {
         paginationSizeSelector: [10, 20, 30, 50, 100, true],
         paginationCounter: "rows",
         layout: "fitDataTable",
+        initialSort:[
+            {column:"id", dir:"desc"}, //sort by this first
+        ],
+        rowContextMenu: equipMenu,
         columns: [
-            {title: "Id", field: "id"},
+            {title: "Id", field: "id", sorter: "number"},
             {title: "Наименование", field: "naming", width: "10%", editor: true},
             {
                 title: "Тип", field: "type", editor: "list", editorParams: {
@@ -240,12 +242,7 @@ function createTypeTable() {
         addRowPos: "top",
         rowContextMenu: typeMenu,
         columns: [
-            {
-                formatter: "rowSelection", titleFormatter: "rowSelection", hozAlign: "center", headerSort: false,
-                cellClick: function (e, cell) {
-                    cell.getRow().toggleSelect();
-                }
-            },
+            {title: "Id",field: "id"},
             {title: "Тип", field: "name", editor: true}
         ]
     })
@@ -258,6 +255,16 @@ function createTypeMenu(){
                 row.delete();
             }
         },
+    ];
+}
+function createEquipMenu(){
+    return [
+        {
+            label: "<i class='fas fa-user'></i>Удалить выбранные ряды",
+            action: function (e, row) {
+                $('#equip-delete-popup').addClass('is-visible');
+            }
+        }
     ];
 }
 //Фильтры для основной таблицы-------------------
@@ -277,3 +284,21 @@ filterClearButton.addEventListener("click",function (){
     equipTable.clearFilter();
 })
 }
+
+
+function closeForm(){
+    let equipForm = document.querySelector(".equip-form");
+    equipForm.style.opacity = "0";
+    setTimeout(function (){equipForm.style.display = "none"},300);//Чтобы была анимация
+    let main = document.querySelector("main");
+    main.style.opacity = "1";
+    main.style.filter = "blur(0px)";
+    document.body.style.overflow = "visible"; //Вернули возможность скролить после нажатия
+    document.getElementById("overlay").style.display = "none";
+    let typeSelect = document.querySelector("#type-select");
+}
+
+document.querySelector("#main-table-save-update")
+    .addEventListener("click",function () {
+    fetch("")
+})

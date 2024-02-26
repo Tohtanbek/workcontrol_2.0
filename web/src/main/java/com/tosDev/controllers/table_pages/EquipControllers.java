@@ -73,10 +73,28 @@ public class EquipControllers {
         return equipmentService.updateEquipTypes(equipTypeDtos);
     }
 
+    /**
+     * Принимает с фронтенда запрос на создание нового ряда в таблице оборудование
+     * @param equipDto dto нового оборудования
+     * @return Response entity with http status
+     */
     @PostMapping("/add_equip_row")
     ResponseEntity<Void> addEquipRow(@RequestBody EquipDto equipDto){
         return equipmentService.mapAndSaveFreshEquip(equipDto);
     }
 
+    /**
+     * Принимает с фронтенда запрос на удаление определенных рядов.
+     * @param ids массив id оборудования на удаление
+     * @return Response entity with http status
+     */
+    @DeleteMapping("/delete_equip_rows")
+    ResponseEntity<Void> deleteEquipRows(@RequestBody Long[] ids){
+        return equipmentService.deleteEquipRows(ids);
+    }
 
+    @PutMapping
+    //todo:настроить put запрос от клиента. js собирает все объекты вместе с id,
+    // которые изменяет пользователь. Потом он отправляет именно их (затронутые объекты)
+    // со всеми полями (затронутыми и не затронутыми)
 }

@@ -18,7 +18,6 @@ public class EquipmentType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Exclude
-    @JsonIgnore
     Integer id;
 
     String name;

@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class EquipDto {
+    private Long id;
     private String naming;
     private String type;
     private String responsible;

@@ -10,8 +10,8 @@ CREATE TABLE IF NOT EXISTS equipment_type(
 CREATE TABLE IF NOT EXISTS equipment(
     id BIGSERIAL PRIMARY KEY ,
     naming VARCHAR ,
-    type_id INTEGER references equipment_type(id),
-    responsible_id INTEGER references responsible(id),
+    type_id INTEGER references equipment_type(id) ON DELETE SET NULL ,
+    responsible_id INTEGER references responsible(id) ON DELETE SET NULL,
     amount INTEGER ,
     total FLOAT ,
     price4each FLOAT ,

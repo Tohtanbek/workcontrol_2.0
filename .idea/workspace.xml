@@ -4,20 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Продолжение работы с макетной страницей equipment. Решил проблему с логированием кириллицы в контроллерах, добавил окно фильтрации, дополнил внешний вид.">
-      <change afterPath="$PROJECT_DIR$/web/src/test/java/integration/MockMvcIT.java" afterDir="false" />
+    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Добавлена страница супервайзеров, работа над связями таблиц в sql. Логика пересена из контроллерова в сервисы. При создании новой записи через сайт выпадающие списки используют актуальные данные в sql. Сохранение новой строки происходит засчет ajax запроса из js, что позволяет обновлять таблицу на сайте без обновления всей страницы.&#10;Для тестирования доступны все страницы через отдельный config SecurityFilterChain.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/Dto/EquipTypeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/EquipTypeDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/config/SpringConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/config/SpringConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/EquipControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/EquipControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/EquipDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/EquipDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/EquipTypeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/EquipTypeDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Equipment.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Equipment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/EquipmentType.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/EquipmentType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/repository/EquipmentTypeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/repository/EquipmentTypeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/EquipmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/EquipmentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/styles_equipment_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/styles_equipment_tab.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/equip_header.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/main_header.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/equip_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/equip_script.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/equipment_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/equipment_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/test/java/integration/EquipControllerMockMvcIT.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/test/java/integration/EquipControllerRealServerIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/java/integration/EquipControllerRealServerIT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/test/resources/sql/equip.sql" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/resources/sql/equip.sql" afterDir="false" />
     </list>
@@ -212,7 +210,9 @@
       <workItem from="1708775446514" duration="16276000" />
       <workItem from="1708855507314" duration="9695000" />
       <workItem from="1708865330594" duration="178000" />
-      <workItem from="1708865567234" duration="3882000" />
+      <workItem from="1708865567234" duration="4376000" />
+      <workItem from="1708934786153" duration="50000" />
+      <workItem from="1708934900563" duration="26285000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит workcontrol 2.0. Работа над frontend">
       <created>1708303197812</created>
@@ -242,7 +242,14 @@
       <option name="project" value="LOCAL" />
       <updated>1708557407091</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Добавлена страница супервайзеров, работа над связями таблиц в sql. Логика пересена из контроллерова в сервисы. При создании новой записи через сайт выпадающие списки используют актуальные данные в sql. Сохранение новой строки происходит засчет ajax запроса из js, что позволяет обновлять таблицу на сайте без обновления всей страницы.&#10;Для тестирования доступны все страницы через отдельный config SecurityFilterChain.">
+      <created>1708869923500</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1708869923500</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -276,6 +283,12 @@
     <MESSAGE value="Работа над макетной страницей equipment сайта." />
     <MESSAGE value="Работа над макетной страницей equipment сайта, начало работы с backend." />
     <MESSAGE value="Продолжение работы с макетной страницей equipment. Решил проблему с логированием кириллицы в контроллерах, добавил окно фильтрации, дополнил внешний вид." />
-    <option name="LAST_COMMIT_MESSAGE" value="Продолжение работы с макетной страницей equipment. Решил проблему с логированием кириллицы в контроллерах, добавил окно фильтрации, дополнил внешний вид." />
+    <MESSAGE value="Добавлена страница супервайзеров, работа над связями таблиц в sql. Логика пересена из контроллерова в сервисы. При создании новой записи через сайт выпадающие списки используют актуальные данные в sql. Сохранение новой строки происходит засчет ajax запроса из js, что позволяет обновлять таблицу на сайте без обновления всей страницы.&#10;Для тестирования доступны все страницы через отдельный config SecurityFilterChain." />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлена страница супервайзеров, работа над связями таблиц в sql. Логика пересена из контроллерова в сервисы. При создании новой записи через сайт выпадающие списки используют актуальные данные в sql. Сохранение новой строки происходит засчет ajax запроса из js, что позволяет обновлять таблицу на сайте без обновления всей страницы.&#10;Для тестирования доступны все страницы через отдельный config SecurityFilterChain." />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/workcontrol_2_0$EquipControllerRealServerIT_test.ic" NAME="EquipControllerRealServerIT.test Coverage Results" MODIFIED="1708958551015" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>integration.*</FILTER>
+    </SUITE>
   </component>
 </project>

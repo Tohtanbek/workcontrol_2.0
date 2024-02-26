@@ -1,13 +1,12 @@
 package com.tosDev.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.util.StdDateFormat;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.text.SimpleDateFormat;
+import javax.swing.text.DateFormatter;
+import java.time.format.DateTimeFormatter;
 
 @Configuration
 public class SpringConfig {
@@ -17,5 +16,9 @@ public class SpringConfig {
         //Нужен для корректной работы с LocalDate в Entity
         objectMapper.registerModule(new JavaTimeModule());
         return objectMapper;
+    }
+    @Bean
+    DateTimeFormatter kebabFormatter(){
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd");
     }
 }
