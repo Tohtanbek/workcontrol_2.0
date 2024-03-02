@@ -1,3 +1,5 @@
+let updatedRows = [];
+
 let typeMenu = createTypeMenu();
 let equipMenu = createEquipMenu();
 let typeTable = createTypeTable()
@@ -7,7 +9,9 @@ let equipTable = createEquipTable()
 document.getElementById("add-row-button").addEventListener("click",async function (){
     let equipForm = document.querySelector(".equip-form");
     equipForm.style.display = "block";
-    equipForm.style.opacity = "1";
+    setTimeout(() => {
+        equipForm.style.opacity = "1";
+    }, 50);
     let main = document.querySelector("main");
     main.style.opacity = "0.5";
     main.style.filter = "blur(5px)";
@@ -176,7 +180,6 @@ document.getElementById("type-exit").addEventListener("click",function (){
 
 //Таблица оборудования-------------------------------------------------
 
-//editor для колонки типы
 
 //Сама таблица оборудования
 function createEquipTable() {
@@ -205,7 +208,7 @@ function createEquipTable() {
             },
             {
                 title: "Ответственный", field: "responsible", editor: "list", editorParams: {
-                    valuesLookup: "active", autocomplete: true, freetext: true
+                    valuesURL: "/tables/supervisors/responsible_names_array",
                 }
             },
             {title: "Кол-во", field: "amount", editor: "number"},
@@ -231,9 +234,37 @@ function createEquipTable() {
     });
 }
 
+function createEquipMenu(){
+    return [
+        {
+            label: "<i class='fas fa-user'></i>Удалить выбранные ряды",
+            action: function (e, row) {
+                $('#equip-delete-popup').addClass('is-visible');
+            }
+        }
+    ];
+}
 
+//Фильтры для основной таблицы
+let filterColumn = document.getElementById("filter-column");
+let filterInput = document.getElementById("filter-input");
+let filterClearButton = document.getElementById("clear-filter");
+filterColumn.addEventListener("change",updateFilter);
+filterInput.addEventListener("keyup",updateFilter);
 
+function updateFilter(){
+    let filterColumnValue = filterColumn.options[filterColumn.selectedIndex].value;
+    equipTable.setFilter(filterColumnValue,"like",filterInput.value);
 
+    filterClearButton.addEventListener("click",function (){
+        filterColumn.value = "";
+        filterInput.value = "";
+        equipTable.clearFilter();
+    })
+}
+
+//-------------------------------------------------
+//Таблица типов оборудования
 function createTypeTable() {
     return new Tabulator("#type-table", {
         ajaxURL: "/tables/equip/equip_types",
@@ -247,6 +278,7 @@ function createTypeTable() {
         ]
     })
 }
+
 function createTypeMenu(){
     return [
         {
@@ -257,33 +289,9 @@ function createTypeMenu(){
         },
     ];
 }
-function createEquipMenu(){
-    return [
-        {
-            label: "<i class='fas fa-user'></i>Удалить выбранные ряды",
-            action: function (e, row) {
-                $('#equip-delete-popup').addClass('is-visible');
-            }
-        }
-    ];
-}
-//Фильтры для основной таблицы-------------------
-let filterColumn = document.getElementById("filter-column");
-let filterInput = document.getElementById("filter-input");
-let filterClearButton = document.getElementById("clear-filter");
-filterColumn.addEventListener("change",updateFilter);
-filterInput.addEventListener("keyup",updateFilter);
 
-function updateFilter(){
-let filterColumnValue = filterColumn.options[filterColumn.selectedIndex].value;
-equipTable.setFilter(filterColumnValue,"like",filterInput.value);
+//------------------------------------------------------------------------------
 
-filterClearButton.addEventListener("click",function (){
-    filterColumn.value = "";
-    filterInput.value = "";
-    equipTable.clearFilter();
-})
-}
 
 
 function closeForm(){
@@ -295,10 +303,49 @@ function closeForm(){
     main.style.filter = "blur(0px)";
     document.body.style.overflow = "visible"; //Вернули возможность скролить после нажатия
     document.getElementById("overlay").style.display = "none";
-    let typeSelect = document.querySelector("#type-select");
 }
 
+
+//При нажатии кнопки коллекция с измененными dto отправляется на сервер и очищается
 document.querySelector("#main-table-save-update")
     .addEventListener("click",function () {
-    fetch("")
+    fetch("/tables/equip/update_equip_rows",{
+        method: "PUT",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify(updatedRows)
+    }).then(response => {
+        if (!response.ok){
+            updatedRows = [];
+            equipTable.alert("Ошибка. Изменения не сохранены","error");
+            setTimeout(function (){
+                equipTable.clearAlert();
+            },3000)
+            throw new Error('DB error')
+        }
+        else {
+            updatedRows = [];
+            equipTable.alert("Изменения сохранены успешно");
+            setTimeout(function (){
+                equipTable.clearAlert();
+            },2000)
+        }
+    })
+})
+
+//Слушатель обновления рядов в основной таблице. Сохраняет ряды, в которых внесены изменения
+equipTable.on("cellEdited",function (cell){
+    let row = cell.getRow().getData();
+    console.log(JSON.stringify(row));
+    for (let i=0; i<updatedRows.length;i++){
+        let prevUpdRow = updatedRows[i];
+        if (prevUpdRow.id === row.id){
+            updatedRows.splice(i,1);
+            break;
+        }
+    }
+    updatedRows.push(row);
+    console.log(updatedRows);
+    console.log(JSON.stringify(updatedRows));
 })

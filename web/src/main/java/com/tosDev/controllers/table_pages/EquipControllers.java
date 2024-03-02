@@ -39,7 +39,7 @@ public class EquipControllers {
      */
     @GetMapping("/main_table")
     @ResponseBody
-    String getAllEquipRows(){
+    ResponseEntity<String> getAllEquipRows(){
         return equipmentService.mapAllEquipmentToJson();
     }
 
@@ -93,8 +93,15 @@ public class EquipControllers {
         return equipmentService.deleteEquipRows(ids);
     }
 
-    @PutMapping
-    //todo:настроить put запрос от клиента. js собирает все объекты вместе с id,
-    // которые изменяет пользователь. Потом он отправляет именно их (затронутые объекты)
-    // со всеми полями (затронутыми и не затронутыми)
+    /**
+     * Принимает с фронтенда заявку на сохранение изменений в существующих записях
+     * @param equipDtos дто, в которых были совершены изменения
+     * @return http status
+     */
+    @PutMapping("/update_equip_rows")
+    ResponseEntity<Void> update_equip_rows(@RequestBody List<EquipDto> equipDtos){
+        return equipmentService.saveEquipUpdate(equipDtos);
+    }
+
+
 }

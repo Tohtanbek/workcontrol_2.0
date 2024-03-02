@@ -6,7 +6,7 @@
     <title>Оборудование</title>
     <link href="https://unpkg.com/tabulator-tables@5.6.0/dist/css/tabulator_site.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.6.0/dist/js/tabulator.min.js"></script>
-    <link th:href="@{/css/styles_equipment_tab.css}" href="/static/css/styles_equipment_tab.css" rel="stylesheet" />
+    <link th:href="@{/css/equipment/styles_equipment_tab.css}" href="/static/css/equipment/styles_equipment_tab.css" rel="stylesheet" />
     <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -34,10 +34,10 @@
         <li><a href="/tables/equip/main">Оборудование</a></li>
         <li><a href="http://www.mediahawkz.com/topic/science">Рабочее время</a></li>
         <li><a href="http://www.mediahawkz.com/topic/speak-up">Персонал</a></li>
-        <li><a href="http://www.mediahawkz.com/topic/general">Супервайзеры</a></li>
+        <li><a href="/tables/supervisors/main">Супервайзеры</a></li>
         <li><a href="http://www.mediahawkz.com/topic/lifestyle">Клиенты</a></li>
         <li><a href="http://www.mediahawkz.com/topic/world">Организации</a></li>
-        <li><a href="http://www.mediahawkz.com/topic/business">Объекты</a></li>
+        <li><a href="/tables/address/main">Объекты</a></li>
         <li><a href="http://www.mediahawkz.com/topic/entertainment">Расходы</a></li>
         <li><a href="http://www.mediahawkz.com/topic/sports">Счета</a></li>
     </ul>
@@ -63,7 +63,7 @@
                     <ul class="dropdown-menu ul-base">
                         <li><a href="http://www.mediahawkz.com/topic/science">Рабочее время</a></li>
                         <li><a href="http://www.mediahawkz.com/topic/speak-up">Персонал</a></li>
-                        <li><a href="http://www.mediahawkz.com/topic/general">Супервайзеры</a></li>
+                        <li><a href="/tables/supervisors/main">Супервайзеры</a></li>
                         <li><a href="http://www.mediahawkz.com/topic/lifestyle">Клиенты</a></li>
                         <li><a href="http://www.mediahawkz.com/topic/world">Организации</a></li>
                         <li><a href="http://www.mediahawkz.com/topic/business">Объекты</a></li>
@@ -168,7 +168,7 @@
         <label>Поставщик</label>
     </div>
     <div class="datainput">
-        <input class="validate" id="supply-date" name="supply-date" required="" type="date" value=''/>
+        <input class="validate" id="supplyDate" name="supplyDate" required="" type="date" value=''/>
         <span class="highlight"></span><span class="bar"></span>
         <label></label>
     </div>
@@ -213,8 +213,8 @@
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script th:src="@{/js/main_header.js}" src="/static/js/main_header.js"></script>
-<script th:src="@{/js/equip_script.js}" src="/static/js/equip_script.js"></script>
-<script th:src="@{/js/form_popup_script.js}" src="/static/js/form_popup_script.js"></script>
-<script th:src="@{/js/equip_delete_popup_script.js}" src="/static/js/equip_delete_popup_script.js"></script>
+<script th:src="@{/js/equip/equip_script.js}" src="/js/equip/equip_script.js"></script>
+<script th:src="@{/js/equip/form_popup_script.js}" src="/js/equip/form_popup_script.js"></script>
+<script th:src="@{/js/equip/equip_delete_popup_script.js}" src="/js/equip/equip_delete_popup_script.js"></script>
 </body>
 </html>

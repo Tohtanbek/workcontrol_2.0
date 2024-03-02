@@ -13,6 +13,7 @@ import com.tosDev.jpa.repository.EquipmentTypeRepository;
 import com.tosDev.jpa.repository.ResponsibleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cglib.core.Local;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +34,7 @@ public class EquipmentService {
     private final ObjectMapper objectMapper;
     private final DateTimeFormatter kebabFormatter;
 
-    public String mapAllEquipmentToJson(){
+    public ResponseEntity<String> mapAllEquipmentToJson(){
         List<Equipment> equipmentList =
                 Optional.of(equipmentRepository.findAll()).orElse(Collections.emptyList());
         String allEquipStr;
@@ -41,10 +42,11 @@ public class EquipmentService {
             allEquipStr = objectMapper.writeValueAsString(equipmentList);
         } catch (JsonProcessingException e) {
             log.error("При конвертации таблицы оборудования в json произошла ошибка");
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
         }
         log.info("Загружена таблица оборудования");
-        return allEquipStr;
+        return ResponseEntity.ok(allEquipStr);
     }
     public String mapAllEquipTypesToJson(){
         List<EquipmentType> equipmentTypes =
@@ -154,12 +156,13 @@ public class EquipmentService {
     public ResponseEntity<Void> saveEquipUpdate(List<EquipDto> equipDtos){
         try {
             for (EquipDto equipDto : equipDtos) {
-                 Equipment equipDao = equipmentRepository.findById(equipDto.getId()).orElseThrow();
+                Equipment equipDao = equipmentRepository.findById(equipDto.getId()).orElseThrow();
                 EquipmentType chosenType =
                         equipmentTypeRepository.findByName(equipDto.getType()).orElseThrow();
                 Responsible responsible =
                         responsibleRepository.findByName(equipDto.getResponsible()).orElseThrow();
-                LocalDate localDate = LocalDate.parse(equipDto.getSupplyDate(),kebabFormatter);
+                Optional<String> optSupplyDate = Optional.ofNullable(equipDto.getSupplyDate());
+
                 equipDao.setNaming(equipDto.getNaming());
                 equipDao.setType(chosenType);
                 equipDao.setResponsible(responsible);
@@ -168,7 +171,9 @@ public class EquipmentService {
                 equipDao.setUnit(equipDto.getUnit());
                 equipDao.setLink(equipDto.getLink());
                 equipDao.setSource(equipDto.getSource());
-                equipDao.setSupplyDate(localDate);
+                optSupplyDate.ifPresentOrElse(
+                        dateStr -> equipDao.setSupplyDate(LocalDate.parse(dateStr,kebabFormatter)),
+                        ()->equipDao.setSupplyDate(null));
 
                 equipmentRepository.save(equipDao);
             }
@@ -176,7 +181,7 @@ public class EquipmentService {
         log.error("При изменении выбранного оборудования по одному из id не было найдено записи в бд");
         e.printStackTrace();
     }
-        log.info("Записи обновлены");
+        log.info("Записи {} обновлены",equipDtos);
         return ResponseEntity.ok().build();
     }
 }

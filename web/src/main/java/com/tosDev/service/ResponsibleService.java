@@ -13,9 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -61,5 +60,38 @@ public class ResponsibleService {
                 .orElse(Collections.emptyList());
         return responsibleList
                 .stream().map(Responsible::getName).toArray(String[]::new);
+    }
+
+    public ResponseEntity<Void> deleteResponsibleRows(Integer[] ids){
+        try {
+            Arrays.stream(ids)
+                    .map(responsibleRepository::findById)
+                    .forEach(optional -> responsibleRepository.delete(optional.orElseThrow()));
+        } catch (NoSuchElementException e) {
+            log.error("При удалении выбранного ответственного по одному из id не было найдено записи в бд");
+            e.printStackTrace();
+        }
+        log.info("Записи ответственных удалены по айди: {}",ids);
+        return ResponseEntity.ok().build();
+    }
+
+    public ResponseEntity<String> loadJsonSuperVisorBrigadiers() {
+        List<Responsible> list = responsibleRepository.findAll();
+        //Получаем map с ключом - id ответственного, value - список его бригадиров
+        Map<Integer, List<String>> map = list.stream()
+                .collect(Collectors.toMap(Responsible::getId,
+                        responsible -> responsible.getResponsibleBrigadierList().stream()
+                                .map(responsibleBrigadier ->
+                                        responsibleBrigadier.getBrigadier().getName()).toList()));
+        String result;
+        try {
+            result = objectMapper.writeValueAsString(map);
+        } catch (JsonProcessingException e) {
+            log.error("Не удалось спарсить json бригадиров каждого супервайзера");
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+        log.info("Отправили в фронтенд связанные с супервайзерами бригадиры");
+        return ResponseEntity.ok().body(result);
     }
 }

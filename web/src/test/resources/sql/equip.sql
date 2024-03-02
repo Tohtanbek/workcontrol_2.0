@@ -3,10 +3,77 @@ id SERIAL PRIMARY KEY ,
 name VARCHAR,
 phone_number BIGINT
 );
+INSERT INTO responsible(name,phone_number)
+VALUES
+    ('Имя ответственного 1',9991115566), ('Имя ответственного 2',9991115567);
+
 CREATE TABLE IF NOT EXISTS equipment_type(
     id SERIAL PRIMARY KEY ,
     name VARCHAR
 );
+INSERT INTO equipment_type (name)
+VALUES ('химия'),('оборудование'),('иное');
+
+CREATE TABLE IF NOT EXISTS brigadier(
+    id SERIAL PRIMARY KEY ,
+    name VARCHAR,
+    phone_number BIGINT
+);
+INSERT INTO brigadier (name, phone_number)
+VALUES ('Бригадир Иван',88005553535),('Бригадир Пётр',13337272727);
+
+
+CREATE TABLE IF NOT EXISTS worker(
+    id SERIAL PRIMARY KEY ,
+    name VARCHAR,
+    job VARCHAR,
+    phone_number BIGINT
+);
+INSERT INTO worker (name, job, phone_number)
+VALUES ('Работник Елена', 'клинер', 19568004545),('работник Александр', 'механик',19002332323);
+
+CREATE TABLE if NOT EXISTS address(
+    id SERIAL PRIMARY KEY ,
+    short_name VARCHAR,
+    full_name VARCHAR
+);
+INSERT INTO address (short_name, full_name) VALUES ('123 Main St', '123 Main Street');
+INSERT INTO address (short_name, full_name) VALUES ('456 Elm St', '456 Elm Street');
+INSERT INTO address (short_name, full_name) VALUES ('789 Oak St', '789 Oak Street');
+INSERT INTO address (short_name, full_name) VALUES ('10 Pine Ave', '10 Pine Avenue');
+INSERT INTO address (short_name, full_name) VALUES ('321 Maple Dr', '321 Maple Drive');
+INSERT INTO address (short_name, full_name) VALUES ('555 Cedar Ln', '555 Cedar Lane');
+INSERT INTO address (short_name, full_name) VALUES ('777 Birch Rd', '777 Birch Road');
+INSERT INTO address (short_name, full_name) VALUES ('999 Walnut Blvd', '999 Walnut Boulevard');
+INSERT INTO address (short_name, full_name) VALUES ('111 Willow Ct', '111 Willow Court');
+INSERT INTO address (short_name, full_name) VALUES ('888 Spruce Pl', '888 Spruce Place');
+
+
+CREATE TABLE If NOT EXISTS brigadier_address(
+    id SERIAL PRIMARY KEY ,
+    brigadier_id INTEGER references brigadier(id),
+    address_id INTEGER references address(id)
+);
+INSERT INTO brigadier_address (brigadier_id, address_id)
+VALUES (1,1),(1,2),(2,1);
+
+CREATE TABLE IF NOT EXISTS worker_address(
+    id SERIAL PRIMARY KEY ,
+    worker_id INTEGER references worker(id),
+    address_id INTEGER references address(id)
+);
+INSERT INTO worker_address (worker_id, address_id)
+VALUES (1,1),(1,2),(2,1);
+
+CREATE TABLE IF NOT EXISTS responsible_brigadier(
+    id SERIAL PRIMARY KEY ,
+    responsible_id INTEGER references responsible(id),
+    brigadier_id INTEGER references brigadier(id)
+);
+INSERT INTO responsible_brigadier (responsible_id, brigadier_id)
+VALUES (1,1),(1,2),(2,1);
+
+
 CREATE TABLE IF NOT EXISTS equipment(
     id BIGSERIAL PRIMARY KEY ,
     naming VARCHAR ,
@@ -32,12 +99,6 @@ CREATE TABLE IF NOT EXISTS users(
 );
 
 
-INSERT INTO responsible(name,phone_number)
-VALUES
-('Имя ответственного 1',9991115566), ('Имя ответственного 2',9991115567);
-
-INSERT INTO equipment_type (name)
-VALUES ('химия'),('оборудование'),('иное');
 
 INSERT INTO equipment(naming,type_id,responsible_id,amount,total,price4each,total_left,amount_left,unit,given_amount,given_total,link,source,supply_date) VALUES ('Hyper Tough Hyper Tough 1.5 Amp Corded Rotary Tool, Variable Speed with 105 Rotary Accessories & Storage Case, 120 Volts',1,1,1,22.97,22.97,22.97,1,'шт.',NULL,0,'https://www.walmart.com/ip/Hyper-Tough-1-5-Amp-Corded-Rotary-Tool-Variable-Speed-with-105-Rotary-Accessories-Storage-Case-120-Volts/388836290?athbdg=L1200&from=/search','Walmart',TO_DATE('13.02.2024', 'DD.MM.YYYY'));
 INSERT INTO equipment(naming,type_id,responsible_id,amount,total,price4each,total_left,amount_left,unit,given_amount,given_total,link,source,supply_date) VALUES ('Super Sliders Super Sliders 1" Round Rubber Tip Chair Leg Caps Floor Protection Pad White, 4 Pack',1,1,4,3.44,0.86,3.44,4,'шт.',NULL,0,'https://www.walmart.com/ip/Super-Sliders-1-Round-Rubber-Tip-Chair-Leg-Caps-Floor-Protection-Pad-White-4-Pack/16782106?from=/search','Walmart',TO_DATE('13.02.2024', 'DD.MM.YYYY'));

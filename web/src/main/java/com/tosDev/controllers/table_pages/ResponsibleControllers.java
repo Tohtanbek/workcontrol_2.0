@@ -55,4 +55,23 @@ public class ResponsibleControllers {
         return responsibleService.mapAndSaveFreshResponsible(responsibleDto);
     }
 
+    /**
+     * Принимает с фронтенда запрос на удаление определенных рядов.
+     * @param ids массив id ответственных на удаление
+     * @return Response entity with http status
+     */
+    @DeleteMapping("/delete_supervisor_rows")
+    ResponseEntity<Void> deleteSupervisorRows(@RequestBody Integer[] ids){
+        return responsibleService.deleteResponsibleRows(ids);
+    }
+
+    /**
+     * Принимает запрос на список супервайзеров и связанных с ними бригадиров.
+     * @return status ok и body с мапой бригадиров связанных с супервайзерами.
+     */
+    @GetMapping("/get_supervisor_brigadiers")
+    ResponseEntity<String> getSupervisorBrigadierJsons(){
+        return responsibleService.loadJsonSuperVisorBrigadiers();
+    }
+
 }

@@ -4,19 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Добавлена страница супервайзеров, работа над связями таблиц в sql. Логика пересена из контроллерова в сервисы. При создании новой записи через сайт выпадающие списки используют актуальные данные в sql. Сохранение новой строки происходит засчет ajax запроса из js, что позволяет обновлять таблицу на сайте без обновления всей страницы.&#10;Для тестирования доступны все страницы через отдельный config SecurityFilterChain.">
+    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Добавлены popup окна для проверки действия пользователя, продолжение работы над таблицей оборудования в качестве макетного варианта для последующей проекции на другие &quot;приложения&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/config/SpringConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/config/SpringConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/EquipControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/EquipControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/ResponsibleControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/ResponsibleControllers.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/EquipDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/EquipDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/EquipTypeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/EquipTypeDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Equipment.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Equipment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/EquipmentType.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/EquipmentType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Responsible.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Responsible.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/repository/ResponsibleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/repository/ResponsibleRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/EquipmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/EquipmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/styles_equipment_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/styles_equipment_tab.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/equip_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/equip_script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/ResponsibleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/ResponsibleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/styles_equipment_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/equipment/styles_equipment_tab.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/styles_responsible_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/responsible/styles_responsible_tab.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/equip_delete_popup_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/equip/equip_delete_popup_script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/equip_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/equip/equip_script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/form_popup_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/equip/form_popup_script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/responsible_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/responsible/responsible_script.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/equipment_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/equipment_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/responsible_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/responsible_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/test/java/integration/DataBaseIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/java/integration/DataBaseIT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/test/java/integration/EquipControllerRealServerIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/java/integration/EquipControllerRealServerIT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/test/java/unit/CommonTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/java/unit/CommonTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/test/resources/sql/equip.sql" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/resources/sql/equip.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,46 +61,50 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;database.data.extractors.current.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Docs/Java Projects/workcontrol_2.0/web/src/main/resources&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;b906a601fee9d1b93ee0254b5e0ad9b4&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
+    "database.data.extractors.current.id": "Comma-separated (CSV)_id",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "C:/Docs/Java Projects/workcontrol_2.0/web/src/main/resources/static/css/address",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "JavaScript.Libraries",
+    "spring.configuration.checksum": "b906a601fee9d1b93ee0254b5e0ad9b4"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.tosDev.jpa.entity" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css\address" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\address" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\templates" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\responsible" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css\responsible" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css\equipment" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\equip" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\responsible" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\images" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\test\resources" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\test\java\web_pages\equip_tab" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
@@ -105,7 +116,7 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.EquipControllerRealServerIT.test">
-    <configuration name="EquipControllerMockMvcIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DataBaseIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="web" />
       <extension name="coverage">
         <pattern>
@@ -114,13 +125,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="integration" />
-      <option name="MAIN_CLASS_NAME" value="integration.EquipControllerMockMvcIT" />
+      <option name="MAIN_CLASS_NAME" value="integration.DataBaseIT" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EquipControllerMockMvcIT.checkAdminPagesAccessible" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DataBaseIT.testAddressToJsonMapping" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="web" />
       <extension name="coverage">
         <pattern>
@@ -129,8 +140,40 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="integration" />
-      <option name="MAIN_CLASS_NAME" value="integration.EquipControllerMockMvcIT" />
-      <option name="METHOD_NAME" value="checkAdminPagesAccessible" />
+      <option name="MAIN_CLASS_NAME" value="integration.DataBaseIT" />
+      <option name="METHOD_NAME" value="testAddressToJsonMapping" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DataBaseIT.testHql" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="web" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="integration.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="integration" />
+      <option name="MAIN_CLASS_NAME" value="integration.DataBaseIT" />
+      <option name="METHOD_NAME" value="testHql" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DataBaseIT.testResponsibleBrigadierMapping" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="web" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="integration.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="integration" />
+      <option name="MAIN_CLASS_NAME" value="integration.DataBaseIT" />
+      <option name="METHOD_NAME" value="testResponsibleBrigadierMapping" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -152,44 +195,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MockMvcIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="web" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="integration.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="integration" />
-      <option name="MAIN_CLASS_NAME" value="integration.MockMvcIT" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MockMvcIT.testUnauthenticatedAccessDenied" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="web" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="integration.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="integration" />
-      <option name="MAIN_CLASS_NAME" value="integration.MockMvcIT" />
-      <option name="METHOD_NAME" value="testUnauthenticatedAccessDenied" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.EquipControllerRealServerIT.test" />
-        <item itemvalue="JUnit.MockMvcIT.testUnauthenticatedAccessDenied" />
-        <item itemvalue="JUnit.MockMvcIT" />
-        <item itemvalue="JUnit.EquipControllerMockMvcIT.checkAdminPagesAccessible" />
-        <item itemvalue="JUnit.EquipControllerMockMvcIT" />
+        <item itemvalue="JUnit.DataBaseIT.testAddressToJsonMapping" />
+        <item itemvalue="JUnit.DataBaseIT.testResponsibleBrigadierMapping" />
+        <item itemvalue="JUnit.DataBaseIT.testHql" />
+        <item itemvalue="JUnit.DataBaseIT" />
       </list>
     </recent_temporary>
   </component>
@@ -212,7 +224,11 @@
       <workItem from="1708865330594" duration="178000" />
       <workItem from="1708865567234" duration="4376000" />
       <workItem from="1708934786153" duration="50000" />
-      <workItem from="1708934900563" duration="26285000" />
+      <workItem from="1708934900563" duration="26640000" />
+      <workItem from="1709045208800" duration="8390000" />
+      <workItem from="1709117533334" duration="9385000" />
+      <workItem from="1709192400948" duration="6919000" />
+      <workItem from="1709371372061" duration="21558000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит workcontrol 2.0. Работа над frontend">
       <created>1708303197812</created>
@@ -249,7 +265,14 @@
       <option name="project" value="LOCAL" />
       <updated>1708869923500</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Добавлены popup окна для проверки действия пользователя, продолжение работы над таблицей оборудования в качестве макетного варианта для последующей проекции на другие &quot;приложения&quot;">
+      <created>1708984755976</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1708984755976</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -284,7 +307,12 @@
     <MESSAGE value="Работа над макетной страницей equipment сайта, начало работы с backend." />
     <MESSAGE value="Продолжение работы с макетной страницей equipment. Решил проблему с логированием кириллицы в контроллерах, добавил окно фильтрации, дополнил внешний вид." />
     <MESSAGE value="Добавлена страница супервайзеров, работа над связями таблиц в sql. Логика пересена из контроллерова в сервисы. При создании новой записи через сайт выпадающие списки используют актуальные данные в sql. Сохранение новой строки происходит засчет ajax запроса из js, что позволяет обновлять таблицу на сайте без обновления всей страницы.&#10;Для тестирования доступны все страницы через отдельный config SecurityFilterChain." />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлена страница супервайзеров, работа над связями таблиц в sql. Логика пересена из контроллерова в сервисы. При создании новой записи через сайт выпадающие списки используют актуальные данные в sql. Сохранение новой строки происходит засчет ajax запроса из js, что позволяет обновлять таблицу на сайте без обновления всей страницы.&#10;Для тестирования доступны все страницы через отдельный config SecurityFilterChain." />
+    <MESSAGE value="Добавлены popup окна для проверки действия пользователя, продолжение работы над таблицей оборудования в качестве макетного варианта для последующей проекции на другие &quot;приложения&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлены popup окна для проверки действия пользователя, продолжение работы над таблицей оборудования в качестве макетного варианта для последующей проекции на другие &quot;приложения&quot;" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/workcontrol_2_0$EquipControllerRealServerIT_test.ic" NAME="EquipControllerRealServerIT.test Coverage Results" MODIFIED="1708958551015" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
