@@ -1,7 +1,8 @@
 let updatedRows = [];
 
 let addressMenu = createAddressMenu();
-let equipTable = createAddressTable()
+let addressTable = createAddressTable();
+let dragBrigadiersTable = createDragBrigadiersTable();
 //Переход к нопке добавить ряд-----------------------------------------------------
 //кнопка "добавить ряд" (выводит форму для нового ряда)
 document.getElementById("add-row-button").addEventListener("click",async function (){
@@ -16,82 +17,69 @@ document.getElementById("add-row-button").addEventListener("click",async functio
     document.body.style.overflow = "hidden"; //Убрали возможность скролить после нажатия
     document.getElementById("overlay").style.display = "block";
 
-    //Загружаем типы в форму из таблицы typeTable (но сначала очищаем, чтобы не дублировались):
-    let typeSelect = document.querySelector("#type");
-    while (typeSelect.firstChild) {
-        typeSelect.removeChild(typeSelect.firstChild);
+    //Получаем бригадиров в форму  (но сначала очищаем, чтобы не дублировались):
+    let brigadierCheckBoxDiv = document.querySelector("#brigadiers");
+    while (brigadierCheckBoxDiv.firstChild) {
+        brigadierCheckBoxDiv.removeChild(brigadierCheckBoxDiv.firstChild);
     }
-    //Добавляем варианты типов оборудования
-    let freshOption = document.createElement("option");
-    freshOption.selected = true;
-    freshOption.hidden = true;
-    freshOption.value = "default";
-    freshOption.text = "Выберите тип";
-    typeSelect.appendChild(freshOption);
-    let typesArray = typeTable.getData();
-    console.log(typesArray);
-    for (let row of typesArray){
-        let freshOption = document.createElement("option");
-        freshOption.value = row['name'];
-        freshOption.text = row['name'];
-        typeSelect.appendChild(freshOption);
-    }
+    let jsonBrigadierMap;
+    loadBrigadierJsonMap().then(json => {
+        jsonBrigadierMap = json;
+        //Добавляем варианты чекбокса бригадиров (сначала загружаем через api)
+        for (let entry in jsonBrigadierMap){
+            let freshVariant = document.createElement("INPUT");
+            freshVariant.setAttribute("type","checkbox");
+            freshVariant.setAttribute("name",jsonBrigadierMap[entry]);
+            freshVariant.setAttribute("value",entry);
+            let label = document.createElement("span");
+            label.textContent = jsonBrigadierMap[entry];
 
-    //Добавляем варианты ответственных из другой таблицы
-    //Берем их по ссылке в виде массива
-    try {
-        let response = await fetch("/tables/supervisors/responsible_names_array", {
-            method: "GET",
-        });
-        if (!response.ok) {
-            throw new Error("Ошибка при загрузке ответственных при создании формы оборудования")
-        } else {
-            console.log("Ответственные загружены для выбора в форме оборудования")
-            let responsibleSelect = document.querySelector("#responsible");
-            while (responsibleSelect.firstChild) {
-                responsibleSelect.removeChild(responsibleSelect.firstChild);
-            }
-            let freshOption = document.createElement("option");
-            freshOption.selected = true;
-            freshOption.hidden = true;
-            freshOption.value = "default";
-            freshOption.text = "Выберите ответственного";
-            responsibleSelect.appendChild(freshOption);
-
-            let responsibleArray = await response.json();
-            for (let row of responsibleArray) {
-                let freshOption = document.createElement("option");
-                freshOption.value = row;
-                freshOption.text = row;
-                responsibleSelect.appendChild(freshOption)
-            }
+            brigadierCheckBoxDiv.appendChild(label);
+            brigadierCheckBoxDiv.appendChild(freshVariant)
         }
+    });
+//Получаем работников в форму
+    let workerCheckBoxDiv = document.querySelector("#workers");
+    while (workerCheckBoxDiv.firstChild) {
+        workerCheckBoxDiv.removeChild(workerCheckBoxDiv.firstChild);
     }
-    catch (error){
-        console.error('Ошибка при загрузке ответственного в форму', error);
-    }
+    let jsonWorkerMap;
+    loadWorkerJsonMap().then(json => {
+        jsonWorkerMap = json
+        //Добавляем варианты чекбокса бригадиров (сначала загружаем через api)
+        for (let entry in jsonWorkerMap){
+            let freshVariant = document.createElement("INPUT");
+            freshVariant.setAttribute("type","checkbox");
+            freshVariant.setAttribute("name",jsonWorkerMap[entry]);
+            freshVariant.setAttribute("value",entry);
+            let label = document.createElement("span");
+            label.textContent = jsonWorkerMap[entry];
+
+            workerCheckBoxDiv.appendChild(label);
+            workerCheckBoxDiv.appendChild(freshVariant)
+        }
+    });
 })
 //Отправляем форму и ожидаем ответа, чтобы обновить таблицу, не обновляя всю страницу
 document.getElementById("main-form-submit").addEventListener("click",
     async function (event){
         event.preventDefault();
-        let form = document.getElementById("main-form");
-        const formData = new FormData(form);
+        let formJson = JSON.stringify(createFormJson());
+        console.log(formJson)
         try {
-            let response = await fetch('/tables/equip/add_equip_row', {
+            let response = await fetch('/tables/address/add_address_row', {
                 method: "POST",
                 headers: {
                     "Content-Type":"application/json"
                 },
-                body: JSON.stringify(Object.fromEntries(formData))
+                body: formJson
             });
-            console.log(JSON.stringify(Object.fromEntries(formData)))
             if (!response.ok) {
                 throw new Error('Ошибка при отправке формы');
             }
             else {
                 console.log("Форма на создание оборудования создана успешно");
-                equipTable.setData("/tables/equip/main_table");
+                addressTable.setData("/tables/address/main_table");
                 $('#form-popup').addClass('is-visible');
             }
         } catch (error){
@@ -142,7 +130,19 @@ function createAddressMenu(){
         {
             label: "<i class='fas fa-user'></i>Удалить выбранные ряды",
             action: function (e, row) {
-                $('#equip-delete-popup').addClass('is-visible');
+                $('#address-delete-popup').addClass('is-visible');
+            }
+        },
+        {
+            label: "<i class='fas fa-user'></i> Изменить список работников",
+            action: function (e, row) {
+
+            }
+        },
+        {
+            label: "<i class='fas fa-user'></i> Изменить список бригадиров",
+            action: function (e, row) {
+                editBrigadiersOfAddressRow(e,row)
             }
         }
     ];
@@ -157,19 +157,19 @@ filterInput.addEventListener("keyup",updateFilter);
 
 function updateFilter(){
     let filterColumnValue = filterColumn.options[filterColumn.selectedIndex].value;
-    equipTable.setFilter(filterColumnValue,"like",filterInput.value);
+    addressTable.setFilter(filterColumnValue,"like",filterInput.value);
 
     filterClearButton.addEventListener("click",function (){
         filterColumn.value = "";
         filterInput.value = "";
-        equipTable.clearFilter();
+        addressTable.clearFilter();
     })
 }
 
 function closeForm(){
-    let equipForm = document.querySelector(".equip-form");
-    equipForm.style.opacity = "0";
-    setTimeout(function (){equipForm.style.display = "none"},300);//Чтобы была анимация
+    let addressForm = document.querySelector(".address-form");
+    addressForm.style.opacity = "0";
+    setTimeout(function (){addressForm.style.display = "none"},300);//Чтобы была анимация
     let main = document.querySelector("main");
     main.style.opacity = "1";
     main.style.filter = "blur(0px)";
@@ -181,7 +181,7 @@ function closeForm(){
 //При нажатии кнопки коллекция с измененными dto отправляется на сервер и очищается
 document.querySelector("#main-table-save-update")
     .addEventListener("click",function () {
-    fetch("/tables/equip/update_equip_rows",{
+    fetch("/tables/address/update_address_rows",{
         method: "PUT",
         headers:{
             "Content-Type":"application/json"
@@ -190,24 +190,24 @@ document.querySelector("#main-table-save-update")
     }).then(response => {
         if (!response.ok){
             updatedRows = [];
-            equipTable.alert("Ошибка. Изменения не сохранены","error");
+            addressTable.alert("Ошибка. Изменения не сохранены","error");
             setTimeout(function (){
-                equipTable.clearAlert();
+                addressTable.clearAlert();
             },3000)
             throw new Error('DB error')
         }
         else {
             updatedRows = [];
-            equipTable.alert("Изменения сохранены успешно");
+            addressTable.alert("Изменения сохранены успешно");
             setTimeout(function (){
-                equipTable.clearAlert();
+                addressTable.clearAlert();
             },2000)
         }
     })
 })
 
 //Слушатель обновления рядов в основной таблице. Сохраняет ряды, в которых внесены изменения
-equipTable.on("cellEdited",function (cell){
+addressTable.on("cellEdited",function (cell){
     let row = cell.getRow().getData();
     console.log(JSON.stringify(row));
     for (let i=0; i<updatedRows.length;i++){
@@ -221,3 +221,54 @@ equipTable.on("cellEdited",function (cell){
     console.log(updatedRows);
     console.log(JSON.stringify(updatedRows));
 })
+
+// Метод загрузки бригадиров для формы
+async function loadBrigadierJsonMap() {
+    try {
+        let response = await fetch("/tables/brigadier/load_brigadier_map", {
+            method: "GET"
+        });
+        if (!response.ok) {
+            throw new Error("Internal Server Error");
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error while fetching brigadier map:", error);
+        throw error;
+    }
+}
+//метод загрузки работников для формы
+async function loadWorkerJsonMap(){
+    try {
+        let response = await fetch("/tables/worker/load_worker_map", {
+            method: "GET"
+        })
+        if (!response.ok){
+            throw new Error("internal server error");
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error while fetching worker map:", error);
+        throw error;
+    }
+}
+
+//Создает корректный json формы на отправку
+function createFormJson(){
+
+    let shortName = document.querySelector("#shortNaming").value;
+    let fullName = document.querySelector("#fullNaming").value;
+
+    let selectedBrigadiers = document.querySelectorAll('#brigadiers input:checked');
+    let selectedWorkers = document.querySelectorAll('#workers input:checked');
+
+    let selectedBrigadiersArray = Array.from(selectedBrigadiers).map(input => input.name);
+    let selectedWorkersArray = Array.from(selectedWorkers).map(input => input.name);
+
+    return {
+        shortName: shortName,
+        fullName: fullName,
+        brigadiers: selectedBrigadiersArray,
+        workers: selectedWorkersArray
+    };
+}
