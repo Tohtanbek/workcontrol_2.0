@@ -3,7 +3,9 @@ package com.tosDev.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tosDev.dto.AddressDto;
+import com.tosDev.dto.BrigadierSmallDto;
 import com.tosDev.dto.EquipDto;
+import com.tosDev.dto.WorkerDto;
 import com.tosDev.jpa.entity.*;
 import com.tosDev.jpa.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -120,6 +122,110 @@ public class AddressService {
             e.printStackTrace();
         }
         log.info("Записи удалены по айди: {}",ids);
+        return ResponseEntity.ok().build();
+    }
+
+    public ResponseEntity<Void> updateBrigadiersOnAddress(
+            Integer id, List<BrigadierSmallDto> brigadierDtos) {
+        try {
+            //Получаем дао адреса
+            Address addressDao = addressRepository.findById(id).orElseThrow();
+            //Получаем список айди актуальных бригадиров на адресе
+            List<Integer> actualBrigadiersIds =
+                    brigadierDtos.stream()
+                            .map(BrigadierSmallDto::getId)
+                            .toList();
+            //Получаем старый список айди бригадиров на адресе
+            List<Integer> oldBrigadierIds = addressDao.getBrigadierAddressList().stream()
+                    .map(entity -> entity.getBrigadier().getId())
+                    .toList();
+            //Получаем список айди бригадиров, которых больше не должно быть на адресе
+            List<Integer> notExistingIdsAnymore =
+                    oldBrigadierIds.stream()
+                            .filter(oldId -> !actualBrigadiersIds.contains(oldId))
+                            .toList();
+
+            //Удаляем сущности brigadierAddress, которые больше не актуальны
+            Iterator<BrigadierAddress> iterator = addressDao.getBrigadierAddressList().iterator();
+            while (iterator.hasNext()){
+                BrigadierAddress brigadierAddress = iterator.next();
+                if (notExistingIdsAnymore.contains(brigadierAddress.getBrigadier().getId())) {
+                    iterator.remove();
+                }
+            }
+            //save or update сущностей brigadierAddress. Сначала ищем, была ли такая пара уже
+            //если была, то не сохраняем, если не было, то сохраняем новую
+            for (BrigadierSmallDto brigadierSmallDto : brigadierDtos){
+                Brigadier brigadierDao =
+                        brigadierRepository.findById(brigadierSmallDto.getId()).orElseThrow();
+                Optional<BrigadierAddress> existedBrigadierAddress =
+                        brigadierAddressRepository.findByBrigadierIdAndAddressId(brigadierSmallDto.getId(),id);
+                if (existedBrigadierAddress.isEmpty()) {
+                    brigadierAddressRepository.save(BrigadierAddress
+                            .builder()
+                            .brigadier(brigadierDao)
+                            .address(addressDao)
+                            .build());
+                }
+            }
+        } catch (Exception e) {
+            log.error("Не удалось сохранить изменения бригадиров на адресе с id {}",id);
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+        log.info("Успешно сменили бригадиров на адресе с id {}",id);
+        return ResponseEntity.ok().build();
+    }
+
+    public ResponseEntity<Void> updateWorkersOnAddress(
+            Integer id, List<WorkerDto> workerDtos) {
+        try {
+            //Получаем дао адреса
+            Address addressDao = addressRepository.findById(id).orElseThrow();
+            //Получаем список айди актуальных работников на адресе
+            List<Integer> actualWorkerIds =
+                    workerDtos.stream()
+                            .map(WorkerDto::getId)
+                            .toList();
+            //Получаем старый список айди работников на адресе
+            List<Integer> oldWorkerIds = addressDao.getWorkerAddressList().stream()
+                    .map(entity -> entity.getWorker().getId())
+                    .toList();
+            //Получаем список айди работников, которых больше не должно быть на адресе
+            List<Integer> notExistingIdsAnymore =
+                    oldWorkerIds.stream()
+                            .filter(oldId -> !actualWorkerIds.contains(oldId))
+                            .toList();
+
+            //Удаляем сущности workerAddress, которые больше не актуальны
+            Iterator<WorkerAddress> iterator = addressDao.getWorkerAddressList().iterator();
+            while (iterator.hasNext()){
+                WorkerAddress workerAddress = iterator.next();
+                if (notExistingIdsAnymore.contains(workerAddress.getWorker().getId())) {
+                    iterator.remove();
+                }
+            }
+            //save or update сущностей brigadierAddress. Сначала ищем, была ли такая пара уже
+            //если была, то не сохраняем, если не было, то сохраняем новую
+            for (WorkerDto workerDto : workerDtos){
+                Worker workerDao =
+                        workerRepository.findById(workerDto.getId()).orElseThrow();
+                Optional<WorkerAddress> existedWorkerAddress =
+                        workerAddressRepository.findByWorkerIdAndAddressId(workerDto.getId(),id);
+                if (existedWorkerAddress.isEmpty()) {
+                    workerAddressRepository.save(WorkerAddress
+                            .builder()
+                            .worker(workerDao)
+                            .address(addressDao)
+                            .build());
+                }
+            }
+        } catch (Exception e) {
+            log.error("Не удалось сохранить изменения работников на адресе с id {}",id);
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+        log.info("Успешно сменили работников на адресе с id {}",id);
         return ResponseEntity.ok().build();
     }
 }

@@ -28,4 +28,5 @@ public class BrigadierAddress {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne
     Address address;
+
 }

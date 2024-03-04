@@ -6,10 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @Slf4j
@@ -30,12 +27,13 @@ public class BrigadierControllers {
     }
 
     /**
-     * Получает запрос с фронтенда на список бригадиров
-     * @return возвращает укороченный список json бригадиров
+     * Получает запрос с фронтенда на список бригадиров без тех, которые уже есть в переданном ряду
+     * (Нужно для функционала перетаскивания рядов бригадиров)
+     * @return возвращает укороченный список json бригадиров без тех, которые уже есть в переданном ряду
      */
     @GetMapping("/load_brigadier_small_table")
-    ResponseEntity<String> loadBrigadierSmallTable(){
-        return brigadierService.mapBrigadiersToShortJson();
+    ResponseEntity<String> loadBrigadierSmallTableWithoutChosen(@RequestParam("id")Integer id){
+        return brigadierService.mapBrigadiersToShortJsonWithoutChosen(id);
     }
 
     /**

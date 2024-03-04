@@ -2,7 +2,6 @@ let updatedRows = [];
 
 let addressMenu = createAddressMenu();
 let addressTable = createAddressTable();
-let dragBrigadiersTable = createDragBrigadiersTable();
 //Переход к нопке добавить ряд-----------------------------------------------------
 //кнопка "добавить ряд" (выводит форму для нового ряда)
 document.getElementById("add-row-button").addEventListener("click",async function (){
@@ -136,7 +135,7 @@ function createAddressMenu(){
         {
             label: "<i class='fas fa-user'></i> Изменить список работников",
             action: function (e, row) {
-
+                editWorkersOfAddressRow(e,row)
             }
         },
         {

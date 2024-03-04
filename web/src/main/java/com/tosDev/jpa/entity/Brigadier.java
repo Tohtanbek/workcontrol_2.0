@@ -28,6 +28,6 @@ public class Brigadier {
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "brigadier")
+    @OneToMany(mappedBy = "brigadier", cascade = CascadeType.ALL,orphanRemoval = true)
     List<BrigadierAddress> brigadierAddressList = new ArrayList<>();
 }

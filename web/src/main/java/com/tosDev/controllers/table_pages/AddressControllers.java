@@ -1,7 +1,9 @@
 package com.tosDev.controllers.table_pages;
 
 import com.tosDev.dto.AddressDto;
+import com.tosDev.dto.BrigadierSmallDto;
 import com.tosDev.dto.EquipDto;
+import com.tosDev.dto.WorkerDto;
 import com.tosDev.jpa.repository.AddressRepository;
 import com.tosDev.service.AddressService;
 import lombok.RequiredArgsConstructor;
@@ -66,6 +68,32 @@ public class AddressControllers {
     @DeleteMapping("/delete_address_rows")
     ResponseEntity<Void> deleteAddressRows(@RequestBody Integer[] ids){
         return addressService.deleteAddressRows(ids);
+    }
+
+    /**
+     * Принимает с фронтенда запрос на смену бригадиров на адресе
+     * @param id - айди адреса
+     * @param brigadierDtos новые актуальные бригадиры на адресе
+     * @return http result code
+     */
+    @PutMapping("/change_brigadiers_on_address")
+    ResponseEntity<Void> changeBrigadiersOnAddress(
+            @RequestParam("id") Integer id,
+            @RequestBody List<BrigadierSmallDto> brigadierDtos) {
+        return addressService.updateBrigadiersOnAddress(id,brigadierDtos);
+    }
+
+    /**
+     * Принимает с фронтенда запрос на смену работников на адресе
+     * @param id - айди адреса
+     * @param workerDtos новые актуальные работники на адресе
+     * @return http result code
+     */
+    @PutMapping("/change_workers_on_address")
+    ResponseEntity<Void> changeWorkersOnAddress(
+            @RequestParam("id") Integer id,
+            @RequestBody List<WorkerDto> workerDtos) {
+        return addressService.updateWorkersOnAddress(id,workerDtos);
     }
 
 }

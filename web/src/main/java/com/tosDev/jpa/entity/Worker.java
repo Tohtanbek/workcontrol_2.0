@@ -25,7 +25,7 @@ public class Worker {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "worker")
+    @OneToMany(mappedBy = "worker",cascade = CascadeType.ALL,orphanRemoval = true)
     List<WorkerAddress> workerAddressList = new ArrayList<>();
 
 

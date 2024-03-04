@@ -4,16 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Добавлены popup окна для проверки действия пользователя, продолжение работы над таблицей оборудования в качестве макетного варианта для последующей проекции на другие &quot;приложения&quot;">
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/equip/equip_delete_popup_script.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/equip/form_popup_script.js" afterDir="false" />
+    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Продвижение с таблицей &quot;адреса&quot;, начальный вариант таблицы супервайзеров и оборудования готов.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/AddressControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/AddressControllers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Address.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/BrigadierControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/BrigadierControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/WorkerControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/WorkerControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Brigadier.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Brigadier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/BrigadierAddress.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/BrigadierAddress.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Responsible.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Responsible.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Worker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/repository/BrigadierAddressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/repository/BrigadierAddressRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/repository/WorkerAddressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/repository/WorkerAddressRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/AddressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/AddressService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/BrigadierService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/BrigadierService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/WorkerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/WorkerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/address/styles_address_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/address/styles_address_tab.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/address/address_delete_popup_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/address/address_delete_popup_script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/responsible/styles_responsible_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/responsible/styles_responsible_tab.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/address/address_drag_brigadiers_and_workers.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/address/address_drag_brigadiers_and_workers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/address/address_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/address/address_script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/responsible/responsible_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/responsible/responsible_script.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/address_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/address_tab.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/equipment_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/equipment_tab.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/responsible_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/responsible_tab.html" afterDir="false" />
@@ -54,50 +63,50 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;database.data.extractors.current.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Docs/Java Projects/workcontrol_2.0/web/src/main/resources/static/css/address&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;JavaScript.Libraries&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;b906a601fee9d1b93ee0254b5e0ad9b4&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
+    "database.data.extractors.current.id": "Comma-separated (CSV)_id",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "C:/Docs/Java Projects/workcontrol_2.0/web/src/main/resources/static/css/worker",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "JavaScript.Libraries",
+    "spring.configuration.checksum": "b906a601fee9d1b93ee0254b5e0ad9b4"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.tosDev.jpa.entity" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css\worker" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\worker" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css\address" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\address" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\templates" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\responsible" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\templates" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css\responsible" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css\equipment" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\equip" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\responsible" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\images" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
@@ -222,7 +231,8 @@
       <workItem from="1709117533334" duration="9385000" />
       <workItem from="1709192400948" duration="6919000" />
       <workItem from="1709371372061" duration="22459000" />
-      <workItem from="1709455630880" duration="28414000" />
+      <workItem from="1709455630880" duration="28695000" />
+      <workItem from="1709540216358" duration="25774000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит workcontrol 2.0. Работа над frontend">
       <created>1708303197812</created>
@@ -273,7 +283,14 @@
       <option name="project" value="LOCAL" />
       <updated>1709416562398</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Продвижение с таблицей &quot;адреса&quot;, начальный вариант таблицы супервайзеров и оборудования готов.">
+      <created>1709503747713</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1709503747713</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -309,7 +326,8 @@
     <MESSAGE value="Продолжение работы с макетной страницей equipment. Решил проблему с логированием кириллицы в контроллерах, добавил окно фильтрации, дополнил внешний вид." />
     <MESSAGE value="Добавлена страница супервайзеров, работа над связями таблиц в sql. Логика пересена из контроллерова в сервисы. При создании новой записи через сайт выпадающие списки используют актуальные данные в sql. Сохранение новой строки происходит засчет ajax запроса из js, что позволяет обновлять таблицу на сайте без обновления всей страницы.&#10;Для тестирования доступны все страницы через отдельный config SecurityFilterChain." />
     <MESSAGE value="Продолжение работы, добавлены новые сущности и таблицы, работа над страницей address, popup с доп. информацией на странице responsible" />
-    <option name="LAST_COMMIT_MESSAGE" value="Продолжение работы, добавлены новые сущности и таблицы, работа над страницей address, popup с доп. информацией на странице responsible" />
+    <MESSAGE value="Продвижение с таблицей &quot;адреса&quot;, начальный вариант таблицы супервайзеров и оборудования готов." />
+    <option name="LAST_COMMIT_MESSAGE" value="Продвижение с таблицей &quot;адреса&quot;, начальный вариант таблицы супервайзеров и оборудования готов." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

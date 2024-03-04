@@ -30,6 +30,6 @@ public class Responsible {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JsonIgnore
-    @OneToMany(mappedBy = "responsible")
+    @OneToMany(mappedBy = "responsible", cascade = CascadeType.ALL, orphanRemoval = true)
     List<ResponsibleBrigadier> responsibleBrigadierList = new ArrayList<>();
 }

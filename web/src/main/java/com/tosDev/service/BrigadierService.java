@@ -3,10 +3,7 @@ package com.tosDev.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tosDev.dto.BrigadierSmallDto;
-import com.tosDev.jpa.entity.Brigadier;
-import com.tosDev.jpa.entity.BrigadierAddress;
-import com.tosDev.jpa.entity.EquipmentType;
-import com.tosDev.jpa.entity.Worker;
+import com.tosDev.jpa.entity.*;
 import com.tosDev.jpa.repository.AddressRepository;
 import com.tosDev.jpa.repository.BrigadierRepository;
 import lombok.RequiredArgsConstructor;
@@ -49,13 +46,25 @@ public class BrigadierService {
         return ResponseEntity.ok(brigadierMapStr);
     }
 
-    public ResponseEntity<String> mapBrigadiersToShortJson(){
+    /**
+     *  Метод получает весь список бригадиров в бд, но отбрасывает те, которые уже есть
+     *  у адреса с переданным айди
+     * @param id - id адреса, который выбрал пользователь, чтобы менять бригадиров
+     * @return json отфильтрованного списка бригадиров
+     */
+    public ResponseEntity<String> mapBrigadiersToShortJsonWithoutChosen(Integer id){
+        Address chosenAddress = addressRepository.findById(id).orElseThrow();
+        List<Integer> chosenAddressBrigadierIds = chosenAddress.getBrigadierAddressList()
+                .stream()
+                .map(entity -> entity.getBrigadier().getId())
+                .toList();
         List<Brigadier> brigadierDaos =
                 Optional.of(brigadierRepository.findAll()).orElse(Collections.emptyList());
         String dtoStr;
         try {
             List<BrigadierSmallDto> brigadierSmallDtoList =
                     brigadierDaos.stream()
+                            .filter(brigadier -> !chosenAddressBrigadierIds.contains(brigadier.getId()) )
                             .map(dao -> BrigadierSmallDto.builder()
                                     .id(dao.getId())
                                     .name(dao.getName())

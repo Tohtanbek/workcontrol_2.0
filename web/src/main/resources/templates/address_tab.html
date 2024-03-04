@@ -33,7 +33,7 @@
     <ul class="nav-categories ul-base">
         <li><a href="/tables/address/main">Объекты</a></li>
         <li><a href="http://www.mediahawkz.com/topic/science">Рабочее время</a></li>
-        <li><a href="http://www.mediahawkz.com/topic/speak-up">Персонал</a></li>
+        <li><a href="/tables/worker/main">Персонал</a></li>
         <li><a href="/tables/supervisors/main">Супервайзеры</a></li>
         <li><a href="http://www.mediahawkz.com/topic/lifestyle">Клиенты</a></li>
         <li><a href="http://www.mediahawkz.com/topic/world">Организации</a></li>
@@ -62,7 +62,7 @@
                     <a class="dropdown-toggle" href="#"><span>Объекты</span> <i class="material-icons">keyboard_arrow_down</i></a>
                     <ul class="dropdown-menu ul-base">
                         <li><a href="http://www.mediahawkz.com/topic/science">Рабочее время</a></li>
-                        <li><a href="http://www.mediahawkz.com/topic/speak-up">Персонал</a></li>
+                        <li><a href="/tables/worker/main">Персонал</a></li>
                         <li><a href="/tables/supervisors/main">Супервайзеры</a></li>
                         <li><a href="http://www.mediahawkz.com/topic/lifestyle">Клиенты</a></li>
                         <li><a href="http://www.mediahawkz.com/topic/world">Организации</a></li>
@@ -168,14 +168,41 @@
         </ul>
     </div> <!-- cd-popup-container -->
 </div> <!-- cd-popup -->
+<div id="upper-drag-menu">
+    <i id="drag-exit" class="fa fa-times" aria-hidden="true"></i>
+    <span id="brig-main-header">Перетащите доступных бригадиров</span>
+    <div id="drag-brigadier-headers">
+        <div id="brig-header1">
+            <span>Все доступные бригадиры</span>
+        </div>
+        <div id="brig-header2">
+            <span>Бригадиры выбранного объекта</span>
+        </div>
+    </div>
+</div>
+<div id="upper-drag-menu-workers">
+    <i id="drag-exit-workers" class="fa fa-times" aria-hidden="true"></i>
+    <span id="workers-main-header">Перетащите доступных работников</span>
+    <div id="drag-workers-headers">
+        <div id="worker-header1">
+            <span>Все доступные работники</span>
+        </div>
+        <div id="worker-header2">
+            <span>Работники выбранного объекта</span>
+        </div>
+    </div>
+</div>
 <div id="drag-brigadiers-box">
     <div id="dragBrigadiersTable"></div>
+    <button class="button-save-on-address" id="save-brigadiers-on-address">Сохранить изменения</button>
     <div id="addressBrigadiersTable"></div>
 </div>
 <div id="drag-workers-box">
     <div id="dragWorkersTable"></div>
+    <button class="button-save-on-address" id="save-workers-on-address">Сохранить изменения</button>
     <div id="addressWorkersTable"></div>
 </div>
+<div id="lower-drag-menu"></div>
 <!-- partial -->
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
