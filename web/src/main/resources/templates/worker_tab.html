@@ -33,6 +33,7 @@
         </div>
     </div>
     <ul class="nav-categories ul-base">
+        <li><a href="/tables/brigadier/main">Бригадиры</a></li>
         <li><a href="/tables/equip/main">Оборудование</a></li>
         <li><a href="http://www.mediahawkz.com/topic/science">Рабочее время</a></li>
         <li><a href="/tables/supervisors/main">Супервайзеры</a></li>
@@ -62,6 +63,7 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" href="#"><span>Персонал</span> <i class="material-icons">keyboard_arrow_down</i></a>
                     <ul class="dropdown-menu ul-base">
+                        <li><a href="/tables/brigadier/main">Бригадиры</a></li>
                         <li><a href="http://www.mediahawkz.com/topic/science">Рабочее время</a></li>
                         <li><a href="/tables/supervisors/main">Супервайзеры</a></li>
                         <li><a href="/tables/equip/main">Оборудование</a></li>
@@ -99,6 +101,7 @@
     <div id="table-left">
         <div id="table-buttons">
             <button id="add-row-button">Добавить поле</button>
+            <button id="main-table-save-update">Сохранить изменения в таблице</button>
         </div>
         <!-- Таблица основная -->
         <div id="worker-table"></div>
@@ -123,6 +126,10 @@
         <span class="highlight"></span><span class="bar"></span>
         <label>Специальность</label>
     </div>
+    <label for="addresses">Выберите объекты:</label><br>
+    <div id="addresses">
+    </div>
+    <span class="bar-static"></span>
     <button id="main-form-submit" class="send_form" type="submit">Добавить</button>
     <div id="text-info"></div>
 </form>

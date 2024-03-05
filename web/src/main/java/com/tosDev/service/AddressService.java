@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -227,5 +228,24 @@ public class AddressService {
         }
         log.info("Успешно сменили работников на адресе с id {}",id);
         return ResponseEntity.ok().build();
+    }
+
+
+    public ResponseEntity<String> addressToJsonMap(){
+        String addressMapStr;
+        try {
+            List<Address> addresses =
+                    Optional.of(addressRepository.findAll()).orElse(Collections.emptyList());
+            Map<Integer,String> addressMap = addresses
+                    .stream()
+                    .collect(Collectors.toMap(Address::getId,Address::getShortName));
+            addressMapStr = objectMapper.writeValueAsString(addressMap);
+        } catch (JsonProcessingException e) {
+            log.error("Не удалось передать мапу бригадиров для фронтенда");
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+        log.info("Загружена мапа бригадиров из бд");
+        return ResponseEntity.ok(addressMapStr);
     }
 }

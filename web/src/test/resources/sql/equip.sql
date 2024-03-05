@@ -91,6 +91,20 @@ CREATE TABLE IF NOT EXISTS equipment(
     source VARCHAR ,
     supply_date DATE
 );
+
+CREATE TABLE IF NOT EXISTS shift(
+    id SERIAL PRIMARY KEY ,
+    short_info VARCHAR,
+    start_date_time TIMESTAMP,
+    end_date_time TIMESTAMP,
+    status VARCHAR,
+    address_id INTEGER references address(id) ON DELETE SET NULL,
+    worker_id INTEGER references worker(id) ON DELETE SET NULL ,
+    job VARCHAR,
+    brigadier_id INTEGER references brigadier(id) ON DELETE SET NULL ,
+    total_hours FLOAT
+);
+
 CREATE TABLE IF NOT EXISTS users(
     id SERIAL PRIMARY KEY ,
     name VARCHAR,

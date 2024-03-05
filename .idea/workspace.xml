@@ -4,29 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Продвижение с таблицей &quot;адреса&quot;, начальный вариант таблицы супервайзеров и оборудования готов.">
+    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Доделал таблицу &quot;адреса&quot;, сделана таблица &quot;персонал&quot;. В адресах реализовано меню управления персоналом и бригадирами с помощью перетаскивания в tabulator.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/AddressControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/AddressControllers.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/BrigadierControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/BrigadierControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/ResponsibleControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/ResponsibleControllers.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/WorkerControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/WorkerControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/WorkerDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/WorkerDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Address.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Brigadier.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Brigadier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/BrigadierAddress.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/BrigadierAddress.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Responsible.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Responsible.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Worker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/repository/BrigadierAddressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/repository/BrigadierAddressRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/repository/WorkerAddressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/repository/WorkerAddressRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/repository/AddressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/repository/AddressRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/repository/ResponsibleBrigadierRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/repository/ResponsibleBrigadierRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/AddressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/AddressService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/BrigadierService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/BrigadierService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/ResponsibleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/ResponsibleService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/WorkerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/WorkerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/address/styles_address_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/address/styles_address_tab.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/responsible/styles_responsible_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/responsible/styles_responsible_tab.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/address/address_drag_brigadiers_and_workers.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/address/address_drag_brigadiers_and_workers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/address/address_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/address/address_script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/worker/styles_worker_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/worker/styles_worker_tab.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/responsible/responsible_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/responsible/responsible_script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/worker/worker_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/worker/worker_script.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/address_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/address_tab.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/equipment_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/equipment_tab.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/responsible_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/responsible_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/worker_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/worker_tab.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/test/java/integration/EquipControllerRealServerIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/java/integration/EquipControllerRealServerIT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/test/resources/sql/equip.sql" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/resources/sql/equip.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +79,7 @@
     "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
     "database.data.extractors.current.id": "Comma-separated (CSV)_id",
     "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "C:/Docs/Java Projects/workcontrol_2.0/web/src/main/resources/static/css/worker",
+    "last_opened_file_path": "C:/Docs/Java Projects/workcontrol_2.0/web/src/main/resources/static/css/shift",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
@@ -95,11 +98,11 @@
       <recent name="com.tosDev.jpa.entity" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css\worker" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\worker" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css\address" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\address" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css\shift" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\shift" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\templates" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\responsible" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css\brigadier" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\templates" />
@@ -232,7 +235,9 @@
       <workItem from="1709192400948" duration="6919000" />
       <workItem from="1709371372061" duration="22459000" />
       <workItem from="1709455630880" duration="28695000" />
-      <workItem from="1709540216358" duration="25774000" />
+      <workItem from="1709540216358" duration="25880000" />
+      <workItem from="1709579553943" duration="3058000" />
+      <workItem from="1709629604511" duration="21482000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит workcontrol 2.0. Работа над frontend">
       <created>1708303197812</created>
@@ -290,7 +295,14 @@
       <option name="project" value="LOCAL" />
       <updated>1709503747713</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Доделал таблицу &quot;адреса&quot;, сделана таблица &quot;персонал&quot;. В адресах реализовано меню управления персоналом и бригадирами с помощью перетаскивания в tabulator.">
+      <created>1709574010812</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1709574010812</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -327,7 +339,8 @@
     <MESSAGE value="Добавлена страница супервайзеров, работа над связями таблиц в sql. Логика пересена из контроллерова в сервисы. При создании новой записи через сайт выпадающие списки используют актуальные данные в sql. Сохранение новой строки происходит засчет ajax запроса из js, что позволяет обновлять таблицу на сайте без обновления всей страницы.&#10;Для тестирования доступны все страницы через отдельный config SecurityFilterChain." />
     <MESSAGE value="Продолжение работы, добавлены новые сущности и таблицы, работа над страницей address, popup с доп. информацией на странице responsible" />
     <MESSAGE value="Продвижение с таблицей &quot;адреса&quot;, начальный вариант таблицы супервайзеров и оборудования готов." />
-    <option name="LAST_COMMIT_MESSAGE" value="Продвижение с таблицей &quot;адреса&quot;, начальный вариант таблицы супервайзеров и оборудования готов." />
+    <MESSAGE value="Доделал таблицу &quot;адреса&quot;, сделана таблица &quot;персонал&quot;. В адресах реализовано меню управления персоналом и бригадирами с помощью перетаскивания в tabulator." />
+    <option name="LAST_COMMIT_MESSAGE" value="Доделал таблицу &quot;адреса&quot;, сделана таблица &quot;персонал&quot;. В адресах реализовано меню управления персоналом и бригадирами с помощью перетаскивания в tabulator." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

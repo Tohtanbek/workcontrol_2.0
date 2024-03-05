@@ -28,6 +28,11 @@ public class Worker {
     @OneToMany(mappedBy = "worker",cascade = CascadeType.ALL,orphanRemoval = true)
     List<WorkerAddress> workerAddressList = new ArrayList<>();
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "worker")
+    List<Shift> shiftList = new ArrayList<>();
+
 
 
 }

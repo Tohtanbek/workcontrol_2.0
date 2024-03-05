@@ -96,4 +96,13 @@ public class AddressControllers {
         return addressService.updateWorkersOnAddress(id,workerDtos);
     }
 
+    /**
+     * Получает запрос с фронтенда на список адресов
+     * @return возвращает json мапы с ключом - id и value - коротким именем адреса.
+     */
+    @GetMapping("/load_address_map")
+    ResponseEntity<String> loadBrigadierMap(){
+        return addressService.addressToJsonMap();
+    }
+
 }

@@ -19,11 +19,12 @@ public class Address {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    Integer id;
+    private Integer id;
 
-    String shortName;
-    String fullName;
+    private String shortName;
+    private String fullName;
 
+    private String zone;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
@@ -34,4 +35,9 @@ public class Address {
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
     List<WorkerAddress> workerAddressList = new ArrayList<>();
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "address", orphanRemoval = true)
+    List<Shift> shiftList = new ArrayList<>();
 }

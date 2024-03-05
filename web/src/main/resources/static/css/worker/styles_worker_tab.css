@@ -172,6 +172,16 @@ button:hover {
     color: #000;
 }
 
+.bar-static {
+    display: block;
+    width: 100%;
+    content: '';
+    height: 2px;
+    bottom: 1px;
+    background: #21a51f; /* Цвет полосы подчеркивания */
+    margin-bottom: 2vh;
+}
+
 #overlay {
     position: fixed;
     top: 0;

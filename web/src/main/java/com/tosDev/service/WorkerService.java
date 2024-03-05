@@ -4,9 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tosDev.dto.BrigadierSmallDto;
 import com.tosDev.dto.ResponsibleDto;
+import com.tosDev.dto.ResponsibleDtoWithBrigs;
 import com.tosDev.dto.WorkerDto;
 import com.tosDev.jpa.entity.*;
 import com.tosDev.jpa.repository.AddressRepository;
+import com.tosDev.jpa.repository.WorkerAddressRepository;
 import com.tosDev.jpa.repository.WorkerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +28,7 @@ public class WorkerService {
     private final WorkerRepository workerRepository;
     private final AddressRepository addressRepository;
     private final ObjectMapper objectMapper;
+    private final WorkerAddressRepository workerAddressRepository;
 
     public ResponseEntity<String> workersToJsonMap(){
         List<Worker> workers =
@@ -111,6 +114,10 @@ public class WorkerService {
                         .name(dao.getName())
                         .phoneNumber(dao.getPhoneNumber())
                         .job(dao.getJob())
+                        .addresses(
+                                dao.getWorkerAddressList().stream().
+                                        map(wa -> wa.getAddress().getShortName()).toList()
+                        )
                         .build()).toList();
         String allWorkerStr;
         try {
@@ -125,12 +132,19 @@ public class WorkerService {
 
     public ResponseEntity<Void> mapAndSaveFreshWorker(WorkerDto workerDto){
         try {
-            workerRepository.save(Worker
+            Worker freshWorker = workerRepository.save(Worker
                     .builder()
                     .name(workerDto.getName())
                     .phoneNumber(workerDto.getPhoneNumber())
                     .job(workerDto.getJob())
                     .build());
+            for (String shortName : workerDto.getAddresses()){
+                workerAddressRepository.save(WorkerAddress
+                        .builder()
+                        .worker(freshWorker)
+                        .address(addressRepository.findByShortName(shortName).orElseThrow())
+                        .build());
+            }
         } catch (Exception e) {
             log.error("Ошибка при сохранении нового работника в бд{}",workerDto);
             e.printStackTrace();
@@ -150,6 +164,24 @@ public class WorkerService {
             e.printStackTrace();
         }
         log.info("Записи работников удалены по айди: {}",ids);
+        return ResponseEntity.ok().build();
+    }
+
+    public ResponseEntity<Void> saveWorkerUpdate(List<WorkerDto> workerDtos){
+        try {
+            for (WorkerDto workerDto : workerDtos) {
+                Worker workerDao =
+                        workerRepository.findById(workerDto.getId()).orElseThrow();
+                workerDao.setName(workerDto.getName());
+                workerDao.setPhoneNumber(workerDto.getPhoneNumber());
+                workerDao.setJob(workerDto.getJob());
+                workerRepository.save(workerDao);
+            }
+        } catch (NoSuchElementException e) {
+            log.error("При изменении выбранного работника по одному из id не было найдено записи в бд");
+            e.printStackTrace();
+        }
+        log.info("Записи {} обновлены",workerDtos);
         return ResponseEntity.ok().build();
     }
 }

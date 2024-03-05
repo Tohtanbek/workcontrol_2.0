@@ -30,4 +30,16 @@ public class Brigadier {
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "brigadier", cascade = CascadeType.ALL,orphanRemoval = true)
     List<BrigadierAddress> brigadierAddressList = new ArrayList<>();
+
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "brigadier", cascade = CascadeType.ALL,orphanRemoval = true)
+    List<ResponsibleBrigadier> responsibleBrigadierList = new ArrayList<>();
+
+    @JsonIgnore
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "brigadier")
+    List<Shift> shiftList = new ArrayList<>();
 }

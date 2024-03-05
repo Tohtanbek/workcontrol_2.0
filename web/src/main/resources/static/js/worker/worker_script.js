@@ -1,3 +1,5 @@
+let updatedRows = [];
+
 let workerTable = createWorkerTable();
 
 //кнопка "добавить ряд" (выводит форму для нового ряда)
@@ -10,33 +12,54 @@ document.getElementById("add-row-button").addEventListener("click",function (){
     main.style.filter = "blur(5px)";
     document.body.style.overflow = "hidden"; //Убрали возможность скролить после нажатия
     document.getElementById("overlay").style.display = "block";
+    //Получаем адреса в форму  (но сначала очищаем, чтобы не дублировались):
+    let workerCheckBoxDiv = document.querySelector("#addresses");
+    while (workerCheckBoxDiv.firstChild) {
+        workerCheckBoxDiv.removeChild(workerCheckBoxDiv.firstChild);
+    }
+    let jsonAddressMap;
+    loadAddressJsonMap().then(json => {
+        jsonAddressMap = json;
+        //Добавляем варианты чекбокса бригадиров (сначала загружаем через api)
+        for (let entry in jsonAddressMap){
+            let freshVariant = document.createElement("INPUT");
+            freshVariant.setAttribute("type","checkbox");
+            freshVariant.setAttribute("name",jsonAddressMap[entry]);
+            freshVariant.setAttribute("value",entry);
+            let label = document.createElement("span");
+            label.textContent = jsonAddressMap[entry];
+
+            workerCheckBoxDiv.appendChild(label);
+            workerCheckBoxDiv.appendChild(freshVariant)
+        }
+    });
 })
 //Отправляем форму и ожидаем ответа, чтобы обновить таблицу, не обновляя всю страницу
 document.getElementById("main-form-submit").addEventListener("click",
     async function (event){
-    event.preventDefault();
-    let form = document.getElementById("main-form");
-    const formData = new FormData(form);
-    try {
-        let response = await fetch('/tables/worker/add_worker_row', {
-            method: "POST",
-            headers: {
-                "Content-Type":"application/json"
-            },
-            body: JSON.stringify(Object.fromEntries(formData))
-        });
-        if (!response.ok) {
-            throw new Error('Ошибка при отправке формы');
+        event.preventDefault();
+        let formJson = JSON.stringify(createFormJson());
+        console.log(formJson)
+        try {
+            let response = await fetch('/tables/worker/add_worker_row', {
+                method: "POST",
+                headers: {
+                    "Content-Type":"application/json"
+                },
+                body: formJson
+            });
+            if (!response.ok) {
+                throw new Error('Ошибка при отправке формы');
+            }
+            else {
+                console.log("Форма на создание оборудования создана успешно");
+                workerTable.setData("/tables/worker/main_table");
+                $('#form-popup').addClass('is-visible');
+            }
+        } catch (error){
+            console.error('Ошибка при отправке формы', error);
         }
-        else {
-            console.log("Форма на создание работника создана успешно");
-            workerTable.setData("/tables/worker/main_table");
-            $('#form-popup').addClass('is-visible');
-        }
-    } catch (error){
-        console.error('Ошибка при отправке формы', error);
-    }
-})
+    })
 //Крестик (закрыть форму)
 document.getElementById("form-exit").addEventListener("click",function (){
     let workerForm = document.querySelector(".worker-form");
@@ -47,7 +70,6 @@ document.getElementById("form-exit").addEventListener("click",function (){
     main.style.filter = "blur(0px)";
     document.body.style.overflow = "visible"; //Вернули возможность скролить после нажатия
     document.getElementById("overlay").style.display = "none";
-    let typeSelect = document.querySelector("#type-select");
 })
 //-----------------------------------------------------------------------------------
 
@@ -67,9 +89,10 @@ function createWorkerTable(){
         rowContextMenu: createWorkerMenu(),
         columns: [
             {title:"Id", field: "id"},
-            {title: "Имя", field: "name"},
-            {title: "Телефон",field: "phoneNumber"},
-            {title: "Специальность",field: "job"}
+            {title: "Имя", field: "name", editor: true},
+            {title: "Телефон",field: "phoneNumber", editor: true},
+            {title: "Специальность",field: "job",editor: true},
+            {title: "Объекты", field: "addresses"}
         ]
     })
 }
@@ -100,3 +123,81 @@ function closeForm(){
     document.getElementById("overlay").style.display = "none";
 }
 
+// Метод загрузки бригадиров для формы
+async function loadAddressJsonMap() {
+    try {
+        let response = await fetch("/tables/address/load_address_map", {
+            method: "GET"
+        });
+        if (!response.ok) {
+            throw new Error("Internal Server Error");
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error while fetching address map:", error);
+        throw error;
+    }
+}
+
+//Создает корректный json формы на отправку
+function createFormJson(){
+
+    let name = document.querySelector("#name").value;
+    let job = document.querySelector("#job").value;
+    let phoneNumber = document.querySelector("#phoneNumber").value;
+    let selectedAddresses = document.querySelectorAll('#addresses input:checked');
+
+    let selectedAddressesArray = Array.from(selectedAddresses).map(input => input.name);
+
+    return {
+        name: name,
+        job: job,
+        phoneNumber: phoneNumber,
+        addresses: selectedAddressesArray,
+    };
+}
+
+
+//При нажатии кнопки коллекция с измененными dto отправляется на сервер и очищается
+document.querySelector("#main-table-save-update")
+    .addEventListener("click",function () {
+        fetch("/tables/worker/update_worker_rows",{
+            method: "PUT",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(updatedRows)
+        }).then(response => {
+            if (!response.ok){
+                updatedRows = [];
+                workerTable.alert("Ошибка. Изменения не сохранены","error");
+                setTimeout(function (){
+                    workerTable.clearAlert();
+                },3000)
+                throw new Error('DB error')
+            }
+            else {
+                updatedRows = [];
+                workerTable.alert("Изменения сохранены успешно");
+                setTimeout(function (){
+                    workerTable.clearAlert();
+                },2000)
+            }
+        })
+    })
+
+//Слушатель обновления рядов в основной таблице. Сохраняет ряды, в которых внесены изменения
+workerTable.on("cellEdited",function (cell){
+    let row = cell.getRow().getData();
+    console.log(JSON.stringify(row));
+    for (let i=0; i<updatedRows.length;i++){
+        let prevUpdRow = updatedRows[i];
+        if (prevUpdRow.id === row.id){
+            updatedRows.splice(i,1);
+            break;
+        }
+    }
+    updatedRows.push(row);
+    console.log(updatedRows);
+    console.log(JSON.stringify(updatedRows));
+})
