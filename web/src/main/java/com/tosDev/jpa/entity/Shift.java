@@ -39,5 +39,8 @@ public class Shift {
 
     private Float totalHours;
 
+    @OneToOne
+    private Expense expense;
+
 
 }

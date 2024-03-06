@@ -27,36 +27,16 @@ function createShiftTable() {
         rowContextMenu: shiftMenu,
         columns: [
             {title: "Id", field: "id", sorter: "number"},
-            {title: "Наименование", field: "naming", width: "10%", editor: true},
-            {
-                title: "Тип", field: "type", editor: "list", editorParams: {
-                    valuesURL: "/tables/shift/shift_types_array"
-                }
-            },
-            {
-                title: "Ответственный", field: "responsible", editor: "list", editorParams: {
-                    valuesURL: "/tables/supervisors/responsible_names_array",
-                }
-            },
-            {title: "Кол-во", field: "amount", editor: "number"},
-            {title: "Итого", field: "total", bottomCalc: "sum", bottomCalcParams: {precision: 1}},
-            {title: "Цена за 1", field: "price4each"},
-            {title: "Остаток суммы", field: "totalLeft"},
-            {title: "Остаток кол-во", field: "amountLeft"},
-            {
-                title: "Ед.изм", field: "unit", editor: "list", editorParams: {
-                    valuesLookup: "active", autocomplete: true, freetext: true
-                }
-            },
-            {title: "Выдано кол-во", field: "givenAmount"},
-            {title: "Выдано сумма", field: "givenTotal", bottomCalc: "sum", bottomCalcParams: {precision: 1}},
-            {title: "Ссылка", field: "link", width: "10%", editor: true},
-            {
-                title: "Поставщик", field: "source", editor: "list", editorParams: {
-                    valuesLookup: "active", autocomplete: true, freetext: true
-                }
-            },
-            {title: "Дата поставки", field: "supplyDate", editor: "date"},
+            {title: "Отчет", field: "shortInfo", editor: true},
+            {title: "Статус", field: "status"},
+            {title: "Зона", field: "zone"},
+            {title: "Объект", field: "address"},
+            {title: "Работник", field: "worker"},
+            {title: "Специальность", field: "job"},
+            {title: "Бригадир", field: "brigadier"},
+            {title: "Начало", field: "startDateTime",sorter:"date"},
+            {title: "Конец", field: "endDateTime",sorter:"date"},
+            {title: "Время работы", field: "totalHours"},
         ]
     });
 }
@@ -74,20 +54,46 @@ function createShiftMenu(){
 
 //Фильтры для основной таблицы
 let filterColumn = document.getElementById("filter-column");
+let filterType = document.getElementById("filter-type");
 let filterInput = document.getElementById("filter-input");
 let filterClearButton = document.getElementById("clear-filter");
 filterColumn.addEventListener("change",updateFilter);
+filterType.addEventListener("change",updateFilter);
 filterInput.addEventListener("keyup",updateFilter);
 
 function updateFilter(){
-    let filterColumnValue = filterColumn.options[filterColumn.selectedIndex].value;
-    shiftTable.setFilter(filterColumnValue,"like",filterInput.value);
+    let filterColumnValue = filterColumn.options[filterColumn.selectedIndex].value
+    let filterTypeValue = filterType.options[filterType.selectedIndex].value;
+    let filterInputValue = filterInput.value;
+    //Если выбрана для фильтра колонка startDate или endDate, то вставляем кастомный фильтр для дат
+    if (filterColumnValue === "startDate" || filterColumnValue === "endDate"){
+        let columnDateTime = new Date(filterColumnValue);
+        let inputDateTime = new Date(filterInputValue);
+        if (filterTypeValue === "<"){
+            shiftTable.setFilter(dateTimeFilterLess(columnDateTime,inputDateTime))
+        }
+        else if (filterTypeValue === ">"){
+            shiftTable.setFilter(dateTimeFilterBigger(columnDateTime,inputDateTime))
+        }
+    }else {
+        shiftTable.setFilter(filterColumnValue,filterType.value,filterInput.value);
+    }
 
-    filterClearButton.addEventListener("click",function (){
-        filterColumn.value = "";
-        filterInput.value = "";
-        shiftTable.clearFilter();
-    })
+}
+//Очистка фильтров слушатель
+filterClearButton.addEventListener("click",function (){
+    filterColumn.value = "";
+    filterInput.value = "";
+    shiftTable.clearFilter();
+})
+
+//Кастомный фильтр для дат
+function dateTimeFilterLess(columnDateTime, inputDateTime){
+    return inputDateTime<columnDateTime;
+}
+//Кастомный фильтр для дат
+function dateTimeFilterBigger(columnDateTime, inputDateTime){
+    return inputDateTime>columnDateTime;
 }
 
 //-------------------------------------------------

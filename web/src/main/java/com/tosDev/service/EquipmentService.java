@@ -13,6 +13,7 @@ import com.tosDev.jpa.repository.EquipmentTypeRepository;
 import com.tosDev.jpa.repository.ResponsibleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cglib.core.Local;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,7 @@ public class EquipmentService {
     private final EquipmentTypeRepository equipmentTypeRepository;
     private final ResponsibleRepository responsibleRepository;
     private final ObjectMapper objectMapper;
+    @Qualifier("kebabFormatter")
     private final DateTimeFormatter kebabFormatter;
 
     public ResponseEntity<String> mapAllEquipmentToJson(){

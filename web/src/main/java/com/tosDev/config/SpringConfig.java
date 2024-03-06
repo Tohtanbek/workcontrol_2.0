@@ -21,4 +21,9 @@ public class SpringConfig {
     DateTimeFormatter kebabFormatter(){
         return DateTimeFormatter.ofPattern("yyyy-MM-dd");
     }
+
+    @Bean
+    DateTimeFormatter basicDateTimeFormatter(){
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    }
 }

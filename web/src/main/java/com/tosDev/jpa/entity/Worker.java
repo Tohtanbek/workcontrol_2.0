@@ -33,6 +33,10 @@ public class Worker {
     @OneToMany(mappedBy = "worker")
     List<Shift> shiftList = new ArrayList<>();
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "worker")
+    List<Income> incomeList = new ArrayList<>();
 
 
 }

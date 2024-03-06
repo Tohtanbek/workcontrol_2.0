@@ -36,7 +36,7 @@ public class AddressControllers {
      * @return json таблицы "адреса"
      */
     @GetMapping("/main_table")
-    ResponseEntity<String> getAllEquipRows(){
+    ResponseEntity<String> getAllAddressRows(){
         return addressService.mapAllAddressToJson();
     }
 
@@ -46,7 +46,7 @@ public class AddressControllers {
      * @return Response entity with http status
      */
     @PostMapping("/add_address_row")
-    ResponseEntity<Void> addEquipRow(@RequestBody AddressDto addressDto){
+    ResponseEntity<Void> addAddressRow(@RequestBody AddressDto addressDto){
         return addressService.mapAndSaveFreshAddress(addressDto);
     }
 

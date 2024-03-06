@@ -118,6 +118,7 @@ function createAddressTable() {
             {title: "Id", field: "id", sorter: "number"},
             {title: "Название", field: "shortName", editor: true},
             {title: "Полный адрес", field: "fullName", editor: true},
+            {title: "Зона", field: "zone",editor: true},
             {title: "Бригадиры", field: "brigadiers"},
             {title: "Персонал", field: "workers"}
         ]
@@ -257,6 +258,7 @@ function createFormJson(){
 
     let shortName = document.querySelector("#shortNaming").value;
     let fullName = document.querySelector("#fullNaming").value;
+    let zone = document.querySelector("#zone").value;
 
     let selectedBrigadiers = document.querySelectorAll('#brigadiers input:checked');
     let selectedWorkers = document.querySelectorAll('#workers input:checked');
@@ -268,6 +270,7 @@ function createFormJson(){
         shortName: shortName,
         fullName: fullName,
         brigadiers: selectedBrigadiersArray,
-        workers: selectedWorkersArray
+        workers: selectedWorkersArray,
+        zone: zone
     };
 }

@@ -1,9 +1,6 @@
 package com.tosDev.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -15,5 +12,8 @@ public class BrigadierDtoWithSuper {
     private Integer id;
     private String name;
     private Long phoneNumber;
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private List<String> supervisors;
 }

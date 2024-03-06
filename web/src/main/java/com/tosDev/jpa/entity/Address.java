@@ -40,4 +40,9 @@ public class Address {
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "address", orphanRemoval = true)
     List<Shift> shiftList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "address")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    List<Income> incomeList = new ArrayList<>();
 }

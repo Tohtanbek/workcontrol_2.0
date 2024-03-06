@@ -1,9 +1,6 @@
 package com.tosDev.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -16,5 +13,8 @@ public class WorkerDto {
     private String name;
     private long phoneNumber;
     private String job;
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private List<String> addresses;
 }

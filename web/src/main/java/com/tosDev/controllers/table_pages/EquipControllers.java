@@ -19,9 +19,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EquipControllers {
 
-    private final ObjectMapper objectMapper;
-    private final EquipmentRepository equipmentRepository;
-    private final EquipmentTypeRepository equipmentTypeRepository;
     private final EquipmentService equipmentService;
 
     /**

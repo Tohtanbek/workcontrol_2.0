@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS responsible(
 id SERIAL PRIMARY KEY ,
-name VARCHAR,
+name VARCHAR UNIQUE ,
 phone_number BIGINT
 );
 INSERT INTO responsible(name,phone_number)
@@ -9,14 +9,14 @@ VALUES
 
 CREATE TABLE IF NOT EXISTS equipment_type(
     id SERIAL PRIMARY KEY ,
-    name VARCHAR
+    name VARCHAR UNIQUE
 );
 INSERT INTO equipment_type (name)
 VALUES ('химия'),('оборудование'),('иное');
 
 CREATE TABLE IF NOT EXISTS brigadier(
     id SERIAL PRIMARY KEY ,
-    name VARCHAR,
+    name VARCHAR UNIQUE ,
     phone_number BIGINT
 );
 INSERT INTO brigadier (name, phone_number)
@@ -25,7 +25,7 @@ VALUES ('Бригадир Иван',88005553535),('Бригадир Пётр',13
 
 CREATE TABLE IF NOT EXISTS worker(
     id SERIAL PRIMARY KEY ,
-    name VARCHAR,
+    name VARCHAR UNIQUE ,
     job VARCHAR,
     phone_number BIGINT
 );
@@ -34,41 +34,61 @@ VALUES ('Работник Елена', 'клинер', 19568004545),('работ
 
 CREATE TABLE if NOT EXISTS address(
     id SERIAL PRIMARY KEY ,
-    short_name VARCHAR,
-    full_name VARCHAR
+    short_name VARCHAR UNIQUE ,
+    full_name VARCHAR UNIQUE ,
+    zone VARCHAR
 );
-INSERT INTO address (short_name, full_name) VALUES ('123 Main St', '123 Main Street');
-INSERT INTO address (short_name, full_name) VALUES ('456 Elm St', '456 Elm Street');
-INSERT INTO address (short_name, full_name) VALUES ('789 Oak St', '789 Oak Street');
-INSERT INTO address (short_name, full_name) VALUES ('10 Pine Ave', '10 Pine Avenue');
-INSERT INTO address (short_name, full_name) VALUES ('321 Maple Dr', '321 Maple Drive');
-INSERT INTO address (short_name, full_name) VALUES ('555 Cedar Ln', '555 Cedar Lane');
-INSERT INTO address (short_name, full_name) VALUES ('777 Birch Rd', '777 Birch Road');
-INSERT INTO address (short_name, full_name) VALUES ('999 Walnut Blvd', '999 Walnut Boulevard');
-INSERT INTO address (short_name, full_name) VALUES ('111 Willow Ct', '111 Willow Court');
-INSERT INTO address (short_name, full_name) VALUES ('888 Spruce Pl', '888 Spruce Place');
+INSERT INTO address (short_name, full_name, zone)
+VALUES ('123 Main St', '123 Main Street', 'US');
+
+INSERT INTO address (short_name, full_name, zone)
+VALUES ('456 Elm St', '456 Elm Street', 'US');
+
+INSERT INTO address (short_name, full_name, zone)
+VALUES ('789 Oak St', '789 Oak Street', 'US');
+
+INSERT INTO address (short_name, full_name, zone)
+VALUES ('10 Pine Ave', '10 Pine Avenue', 'US');
+
+INSERT INTO address (short_name, full_name, zone)
+VALUES ('321 Maple Dr', '321 Maple Drive', 'US');
+
+INSERT INTO address (short_name, full_name, zone)
+VALUES ('555 Cedar Ln', '555 Cedar Lane', 'US');
+
+INSERT INTO address (short_name, full_name, zone)
+VALUES ('777 Birch Rd', '777 Birch Road', 'US');
+
+INSERT INTO address (short_name, full_name, zone)
+VALUES ('999 Walnut Blvd', '999 Walnut Boulevard', 'US');
+
+INSERT INTO address (short_name, full_name, zone)
+VALUES ('111 Willow Ct', '111 Willow Court', 'US');
+
+INSERT INTO address (short_name, full_name, zone)
+VALUES ('888 Spruce Pl', '888 Spruce Place', 'US');
 
 
 CREATE TABLE If NOT EXISTS brigadier_address(
     id SERIAL PRIMARY KEY ,
-    brigadier_id INTEGER references brigadier(id),
-    address_id INTEGER references address(id)
+    brigadier_id INTEGER references brigadier(id) ON DELETE CASCADE ,
+    address_id INTEGER references address(id) ON DELETE CASCADE
 );
 INSERT INTO brigadier_address (brigadier_id, address_id)
 VALUES (1,1),(1,2),(2,1);
 
 CREATE TABLE IF NOT EXISTS worker_address(
     id SERIAL PRIMARY KEY ,
-    worker_id INTEGER references worker(id),
-    address_id INTEGER references address(id)
+    worker_id INTEGER references worker(id) ON DELETE CASCADE ,
+    address_id INTEGER references address(id) ON DELETE CASCADE
 );
 INSERT INTO worker_address (worker_id, address_id)
 VALUES (1,1),(1,2),(2,1);
 
 CREATE TABLE IF NOT EXISTS responsible_brigadier(
     id SERIAL PRIMARY KEY ,
-    responsible_id INTEGER references responsible(id),
-    brigadier_id INTEGER references brigadier(id)
+    responsible_id INTEGER references responsible(id) ON DELETE CASCADE,
+    brigadier_id INTEGER references brigadier(id) ON DELETE CASCADE
 );
 INSERT INTO responsible_brigadier (responsible_id, brigadier_id)
 VALUES (1,1),(1,2),(2,1);
@@ -104,6 +124,44 @@ CREATE TABLE IF NOT EXISTS shift(
     brigadier_id INTEGER references brigadier(id) ON DELETE SET NULL ,
     total_hours FLOAT
 );
+INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job, brigadier_id, total_hours)
+VALUES ('Short info 1', '2024-03-06 09:00:00', '2024-03-06 17:00:00', 'Completed', 1, 1, 'Job A', 1, 8.0);
+
+INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job, brigadier_id, total_hours)
+VALUES ('Short info 2', '2024-03-07 10:00:00', '2024-03-07 18:00:00', 'In progress', 2, 2, 'Job B', 2, 8.0);
+
+INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job, brigadier_id, total_hours)
+VALUES ('Short info 3', '2024-03-08 08:00:00', '2024-03-08 16:00:00', 'Completed', 1, 2, 'Job C', 1, 8.0);
+
+INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job, brigadier_id, total_hours)
+VALUES ('Short info 4', '2024-03-09 07:00:00', '2024-03-09 15:00:00', 'In progress', 2, 1, 'Job D', 2, 8.0);
+
+INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job, brigadier_id, total_hours)
+VALUES ('Short info 5', '2024-03-10 08:00:00', '2024-03-10 16:00:00', 'Completed', 1, 1, 'Job E', 1, 8.0);
+
+INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job, brigadier_id, total_hours)
+VALUES ('Short info 6', '2024-03-11 09:00:00', '2024-03-11 17:00:00', 'In progress', 2, 2, 'Job F', 2, 8.0);
+
+CREATE TABLE IF NOT EXISTS expense(
+    id SERIAL PRIMARY KEY ,
+    short_info VARCHAR,
+    total_sum FLOAT,
+    type VARCHAR,
+    status VARCHAR,
+    address_id INTEGER references address(id) ON DELETE SET NULL ,
+    worker_id INTEGER references worker(id) ON DELETE SET NULL
+);
+
+ALTER TABLE shift ADD COLUMN expense_id INTEGER references expense(id) ON DELETE SET NULL;
+ALTER TABLE expense ADD COLUMN shift_id INTEGER  references shift(id) ON DELETE SET NULL;
+
+INSERT INTO expense (short_info, total_sum, type, status, address_id, worker_id, shift_id)
+VALUES
+    ('Expense 1', 100.01, 'Type 1', 'Status 1', 1, 1, 1),
+    ('Expense 2', 150.20, 'Type 2', 'Status 2', 2, 2, 2),
+    ('Expense 3', 200.00, 'Type 1', 'Status 1', 1, 1, 2),
+    ('Expense 4', 250.55, 'Type 2', 'Status 2', 2, 2, 1);
+
 
 CREATE TABLE IF NOT EXISTS users(
     id SERIAL PRIMARY KEY ,
@@ -111,6 +169,7 @@ CREATE TABLE IF NOT EXISTS users(
     password VARCHAR,
     role VARCHAR
 );
+
 
 
 

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tosDev.dto.AddressDto;
 import com.tosDev.dto.BrigadierSmallDto;
-import com.tosDev.dto.EquipDto;
 import com.tosDev.dto.WorkerDto;
 import com.tosDev.jpa.entity.*;
 import com.tosDev.jpa.repository.*;
@@ -14,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -50,6 +48,7 @@ public class AddressService {
                             .fullName(dao.getFullName())
                             .brigadiers(brigadierNames)
                             .workers(workerNames)
+                            .zone(dao.getZone())
                             .build()
             );
         }
@@ -70,6 +69,7 @@ public class AddressService {
         try {
             freshAddress.setShortName(addressDto.getShortName());
             freshAddress.setFullName(addressDto.getFullName());
+            freshAddress.setZone(addressDto.getZone());
             addressRepository.save(freshAddress);
             for (String brigadierName: addressDto.getBrigadiers()){
                 Brigadier brigadier = brigadierRepository.findByName(brigadierName).orElseThrow();
@@ -102,6 +102,7 @@ public class AddressService {
                 Address addressDao = addressRepository.findById(addressDto.getId()).orElseThrow();
                 addressDao.setFullName(addressDto.getFullName());
                 addressDao.setShortName(addressDto.getShortName());
+                addressDao.setZone(addressDto.getZone());
 
                 addressRepository.save(addressDao);
             }
