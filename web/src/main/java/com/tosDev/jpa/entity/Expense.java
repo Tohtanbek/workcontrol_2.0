@@ -3,6 +3,7 @@ package com.tosDev.jpa.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,8 @@ public class Expense {
     private String type;
 
     private String status;
+
+    private LocalDateTime dateTime;
 
     @ManyToOne
     private Address address;

@@ -38,7 +38,8 @@ function createExpenseTable() {
             {title: "Зона", field: "zone"},
             {title: "Объект", field: "address"},
             {title: "Работник", field: "worker"},
-            {title: "Рабочий день",field: "shift"}
+            {title: "Рабочий день",field: "shift"},
+            {title: "Дата" ,field: "dateTime"}
         ]
     });
 }
@@ -159,12 +160,11 @@ document.getElementById("add-row-button").addEventListener("click",async functio
     document.body.style.overflow = "hidden"; //Убрали возможность скролить после нажатия
     document.getElementById("overlay").style.display = "block";
 
-    //Загружаем типы в форму из таблицы typeTable (но сначала очищаем, чтобы не дублировались):
+    //Добавляем варианты адресов
     let addressSelect = document.querySelector("#address");
     while (addressSelect.firstChild) {
         addressSelect.removeChild(addressSelect.firstChild);
     }
-    //Добавляем варианты адресов
     let freshOption = document.createElement("option");
     freshOption.selected = true;
     freshOption.hidden = true;
@@ -180,6 +180,29 @@ document.getElementById("add-row-button").addEventListener("click",async functio
             freshOption.value = addressIdMap[entry]
             freshOption.text = addressIdMap[entry]
             addressSelect.appendChild(freshOption);
+        }
+    })
+
+    //Добавляем варианты работников
+    let workerSelect = document.querySelector("#worker");
+    while (workerSelect.firstChild) {
+        workerSelect.removeChild(workerSelect.firstChild);
+    }
+    freshOption = document.createElement("option");
+    freshOption.selected = true;
+    freshOption.hidden = true;
+    freshOption.value = "default";
+    freshOption.text = "Выберите работника";
+    workerSelect.appendChild(freshOption);
+    let workerIdMap;
+    loadWorkerJsonMap().then(jsonMap => {
+        workerIdMap = jsonMap;
+        console.log(workerIdMap);
+        for (let entry in workerIdMap){
+            let freshOption = document.createElement("option");
+            freshOption.value = workerIdMap[entry]
+            freshOption.text = workerIdMap[entry]
+            workerSelect.appendChild(freshOption);
         }
     })
 
@@ -220,6 +243,21 @@ document.getElementById("form-exit").addEventListener("click",function (){
 async function loadAddressJsonMap() {
     try {
         let response = await fetch("/tables/address/load_address_map", {
+            method: "GET"
+        });
+        if (!response.ok) {
+            throw new Error("Internal Server Error");
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error while fetching brigadier map:", error);
+        throw error;
+    }
+}
+// Метод загрузки работников для формы
+async function loadWorkerJsonMap() {
+    try {
+        let response = await fetch("/tables/worker/load_worker_map", {
             method: "GET"
         });
         if (!response.ok) {

@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc
 @AllArgsConstructor
-@Sql({"/sql/equip.sql"})
+@Sql({"/sql/test.sql"})
 @Transactional
 public class MockMvcIT extends IntegrationTestBase {
     private MockMvc mockMvc;

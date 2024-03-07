@@ -4,31 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Доделал таблицу работники и бригадиры. Начал работу над таблицей &quot;рабочее время&quot;. Доработал в таблицах базовый функционал.">
+    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Доделал таблицу &quot;рабочее время&quot;, сделал таблицу расходы.">
+      <change afterPath="$PROJECT_DIR$/tg/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/config/SpringConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/config/SpringConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/AddressControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/AddressControllers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/EquipControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/EquipControllers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/ShiftControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/controllers/table_pages/ShiftControllers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/AddressDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/AddressDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/BrigadierDtoWithSuper.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/BrigadierDtoWithSuper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/ResponsibleDtoWithBrigs.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/ResponsibleDtoWithBrigs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/ShiftDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/ShiftDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/WorkerDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/WorkerDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Address.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Shift.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Shift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/ApplicationRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/ApplicationRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/ExpenseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/ExpenseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Brigadier.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Brigadier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Expense.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Expense.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Responsible.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Responsible.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/entity/Worker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/repository/ShiftRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/jpa/repository/ShiftRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/AddressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/AddressService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/EquipmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/EquipmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/ShiftService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/ShiftService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/shift/styles_shift_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/shift/styles_shift_tab.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/address/address_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/address/address_script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/shift/shift_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/shift/shift_script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/address_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/address_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/shift_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/shift_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/ExpenseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/service/ExpenseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/expense/expense_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/expense/expense_script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/expense_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/expense_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/test/java/integration/DataBaseIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/java/integration/DataBaseIT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/test/java/integration/EquipControllerRealServerIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/java/integration/EquipControllerRealServerIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/test/resources/sql/equip.sql" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/resources/sql/equip.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/test/java/integration/MockMvcIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/java/integration/MockMvcIT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/test/resources/sql/equip.sql" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,9 +31,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="AnnotationType" />
-        <option value="Enum" />
         <option value="HTML File" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -78,7 +70,7 @@
     "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
     "database.data.extractors.current.id": "Comma-separated (CSV)_id",
     "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "C:/Docs/Java Projects/workcontrol_2.0/web/src/main/resources/static/js/expense",
+    "last_opened_file_path": "C:/Docs/Java Projects/workcontrol_2.0/tg/src/test/resources/sql",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
@@ -97,11 +89,11 @@
       <recent name="com.tosDev.jpa.entity" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\expense" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css\expense" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\templates" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css\shift" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\shift" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\tg\src\test\resources\sql" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\tg\src\test\resources" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\tg\src\test" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\tg\src\test\java" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\templates" />
@@ -114,87 +106,87 @@
       <recent name="" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="integration.bd_and_tg.bd" />
+      <recent name="integration" />
       <recent name="com.tosDev.controllers.table_pages" />
       <recent name="com.tosDev.dto" />
       <recent name="com.tosDev.jpa.repository" />
-      <recent name="com.tosDev.service" />
-      <recent name="com.tosDev.config" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.EquipControllerRealServerIT.test">
-    <configuration name="DataBaseIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="web" />
+  <component name="RunManager" selected="JUnit.TgRealServerIT.test">
+    <configuration name="BotIT.runBot" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tg" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="integration.*" />
+          <option name="PATTERN" value="integration.tg.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="integration" />
-      <option name="MAIN_CLASS_NAME" value="integration.DataBaseIT" />
+      <option name="PACKAGE_NAME" value="integration.tg" />
+      <option name="MAIN_CLASS_NAME" value="integration.tg.BotIT" />
+      <option name="METHOD_NAME" value="runBot" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TgDataBaseIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tg" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="integration.bd_and_tg.bd.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="integration.bd_and_tg.bd" />
+      <option name="MAIN_CLASS_NAME" value="integration.bd_and_tg.bd.TgDataBaseIT" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DataBaseIT.testAddressToJsonMapping" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="web" />
+    <configuration name="TgDataBaseIT.checkByChatIdTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tg" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="integration.*" />
+          <option name="PATTERN" value="integration.bd_and_tg.bd.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="integration" />
-      <option name="MAIN_CLASS_NAME" value="integration.DataBaseIT" />
-      <option name="METHOD_NAME" value="testAddressToJsonMapping" />
+      <option name="PACKAGE_NAME" value="integration.bd_and_tg.bd" />
+      <option name="MAIN_CLASS_NAME" value="integration.bd_and_tg.bd.TgDataBaseIT" />
+      <option name="METHOD_NAME" value="checkByChatIdTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DataBaseIT.testHql" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="web" />
+    <configuration name="TgDataBaseIT.checkByChatIdTestAdmin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tg" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="integration.*" />
+          <option name="PATTERN" value="integration.bd_and_tg.bd.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="integration" />
-      <option name="MAIN_CLASS_NAME" value="integration.DataBaseIT" />
-      <option name="METHOD_NAME" value="testHql" />
+      <option name="PACKAGE_NAME" value="integration.bd_and_tg.bd" />
+      <option name="MAIN_CLASS_NAME" value="integration.bd_and_tg.bd.TgDataBaseIT" />
+      <option name="METHOD_NAME" value="checkByChatIdTestAdmin" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DataBaseIT.testResponsibleBrigadierMapping" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="web" />
+    <configuration name="TgRealServerIT.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tg" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="integration.*" />
+          <option name="PATTERN" value="integration.bd_and_tg.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="integration" />
-      <option name="MAIN_CLASS_NAME" value="integration.DataBaseIT" />
-      <option name="METHOD_NAME" value="testResponsibleBrigadierMapping" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="EquipControllerRealServerIT.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="web" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="integration.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="integration" />
-      <option name="MAIN_CLASS_NAME" value="integration.EquipControllerRealServerIT" />
+      <option name="PACKAGE_NAME" value="integration.bd_and_tg" />
+      <option name="MAIN_CLASS_NAME" value="integration.bd_and_tg.TgRealServerIT" />
       <option name="METHOD_NAME" value="test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -203,11 +195,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.EquipControllerRealServerIT.test" />
-        <item itemvalue="JUnit.DataBaseIT.testAddressToJsonMapping" />
-        <item itemvalue="JUnit.DataBaseIT.testResponsibleBrigadierMapping" />
-        <item itemvalue="JUnit.DataBaseIT.testHql" />
-        <item itemvalue="JUnit.DataBaseIT" />
+        <item itemvalue="JUnit.TgRealServerIT.test" />
+        <item itemvalue="JUnit.BotIT.runBot" />
+        <item itemvalue="JUnit.TgDataBaseIT" />
+        <item itemvalue="JUnit.TgDataBaseIT.checkByChatIdTestAdmin" />
+        <item itemvalue="JUnit.TgDataBaseIT.checkByChatIdTest" />
       </list>
     </recent_temporary>
   </component>
@@ -241,7 +233,9 @@
       <workItem from="1709629604511" duration="21827000" />
       <workItem from="1709677831994" duration="1440000" />
       <workItem from="1709682728755" duration="408000" />
-      <workItem from="1709718387149" duration="23069000" />
+      <workItem from="1709718387149" duration="23712000" />
+      <workItem from="1709764328350" duration="628000" />
+      <workItem from="1709804396491" duration="22361000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит workcontrol 2.0. Работа над frontend">
       <created>1708303197812</created>
@@ -313,7 +307,14 @@
       <option name="project" value="LOCAL" />
       <updated>1709670795881</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Доделал таблицу &quot;рабочее время&quot;, сделал таблицу расходы.">
+      <created>1709750033330</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1709750033330</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -352,7 +353,8 @@
     <MESSAGE value="Продвижение с таблицей &quot;адреса&quot;, начальный вариант таблицы супервайзеров и оборудования готов." />
     <MESSAGE value="Доделал таблицу &quot;адреса&quot;, сделана таблица &quot;персонал&quot;. В адресах реализовано меню управления персоналом и бригадирами с помощью перетаскивания в tabulator." />
     <MESSAGE value="Доделал таблицу работники и бригадиры. Начал работу над таблицей &quot;рабочее время&quot;. Доработал в таблицах базовый функционал." />
-    <option name="LAST_COMMIT_MESSAGE" value="Доделал таблицу работники и бригадиры. Начал работу над таблицей &quot;рабочее время&quot;. Доработал в таблицах базовый функционал." />
+    <MESSAGE value="Доделал таблицу &quot;рабочее время&quot;, сделал таблицу расходы." />
+    <option name="LAST_COMMIT_MESSAGE" value="Доделал таблицу &quot;рабочее время&quot;, сделал таблицу расходы." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

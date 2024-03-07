@@ -25,6 +25,8 @@ public class Brigadier {
     private String name;
     private Long phoneNumber;
 
+    private Long chatId;
+
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

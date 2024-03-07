@@ -12,10 +12,13 @@ import com.tosDev.jpa.repository.ShiftRepository;
 import com.tosDev.jpa.repository.WorkerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @RequiredArgsConstructor
@@ -30,6 +33,9 @@ public class ExpenseService {
     private final ShiftRepository shiftRepository;
     private final WorkerRepository workerRepository;
 
+    @Qualifier("basicDateTimeFormatter")
+    private final DateTimeFormatter basicDateTimeFormatter;
+
     public ResponseEntity<String> mapAllExpenseToJson(){
         String allExpenseStr;
         try {
@@ -43,6 +49,7 @@ public class ExpenseService {
                                     .totalSum(dao.getTotalSum())
                                     .type(dao.getType())
                                     .status(dao.getStatus())
+                                    .dateTime(dao.getDateTime().format(basicDateTimeFormatter))
                                     .address(Optional.ofNullable(dao.getAddress()).isPresent()?dao.getAddress().getShortName():null)
                                     .worker(Optional.ofNullable(dao.getWorker()).isPresent()?dao.getWorker().getName():null)
                                     .shift(Optional.ofNullable(dao.getShift()).isPresent()?dao.getShift().getShortInfo():null)
@@ -97,6 +104,7 @@ public class ExpenseService {
             freshExpense.setStatus(expenseDto.getStatus());
             freshExpense.setTotalSum(expenseDto.getTotalSum());
             freshExpense.setType(expenseDto.getType());
+            freshExpense.setDateTime(LocalDateTime.parse(expenseDto.getDateTime()));
             if (!expenseDto.getAddress().equals("default")){
                 freshExpense.setAddress(addressRepository.findByShortName(expenseDto.getAddress())
                         .orElseThrow());
@@ -104,12 +112,6 @@ public class ExpenseService {
             if (!expenseDto.getWorker().equals("default")){
                 freshExpense.setWorker(workerRepository.findByName(expenseDto.getWorker())
                         .orElseThrow());
-            }
-            if (!expenseDto.getShift().equals("default")){
-                freshExpense.setShift(shiftRepository.findByShortInfo(expenseDto.getShift())
-                        .orElseThrow());
-            }else {
-
             }
             expenseRepository.save(freshExpense);
 

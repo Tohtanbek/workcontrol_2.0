@@ -22,6 +22,7 @@ public class Worker {
     private String name;
     private Long phoneNumber;
     private String job;
+    private Long chatId;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

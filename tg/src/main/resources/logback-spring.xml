@@ -1,0 +1,38 @@
+<configuration>
+    <springProfile name="dev,test">
+        <root level="info">
+            <appender-ref ref="CONSOLE" />
+        </root>
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="fileAppender" />
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <root level="info">
+            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+        </root>
+        <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+            <file>/root/botdir/tg_module_logs.log</file> <!-- Укажите путь и имя файла для логов -->
+            <encoder>
+                <pattern>%date [%thread] %-5level %logger{35} - %msg%n</pattern>
+            </encoder>
+        </appender>
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="fileAppender" />
+        </root>
+    </springProfile>
+</configuration>

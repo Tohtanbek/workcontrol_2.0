@@ -16,20 +16,22 @@ import java.util.List;
 public class Responsible {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    private Integer id;
 
-    String name;
-    Long phoneNumber;
+    private String name;
+    private Long phoneNumber;
+
+    private Long chatId;
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JsonIgnore
     @OneToMany(mappedBy = "responsible")
-    List<Equipment> equipmentList = new ArrayList<>();
+    private List<Equipment> equipmentList = new ArrayList<>();
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @JsonIgnore
     @OneToMany(mappedBy = "responsible", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<ResponsibleBrigadier> responsibleBrigadierList = new ArrayList<>();
+    private List<ResponsibleBrigadier> responsibleBrigadierList = new ArrayList<>();
 }

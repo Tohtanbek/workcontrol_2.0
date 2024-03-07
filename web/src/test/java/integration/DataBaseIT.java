@@ -17,7 +17,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
-@Sql({"/sql/equip.sql"})
+@Sql({"/sql/test.sql"})
 public class DataBaseIT extends IntegrationTestBase {
     private final ResponsibleBrigadierRepository responsibleBrigadierRepository;
     private final ResponsibleRepository responsibleRepository;
