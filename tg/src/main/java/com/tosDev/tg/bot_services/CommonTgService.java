@@ -4,14 +4,17 @@ import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.KeyboardButton;
 import com.pengrad.telegrambot.model.request.ReplyKeyboardMarkup;
+import com.pengrad.telegrambot.request.DeleteMessage;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.tosDev.amqp.RabbitMQMessageProducer;
+import com.tosDev.tg.db.WorkerTgQueries;
 import com.tosDev.web.jpa.entity.Admin;
+import com.tosDev.web.jpa.entity.Worker;
 import com.tosDev.web.jpa.repository.AdminRepository;
 import com.tosDev.web.jpa.repository.BrigadierRepository;
 import com.tosDev.web.jpa.repository.ResponsibleRepository;
 import com.tosDev.web.jpa.repository.WorkerRepository;
-import com.tosDev.tg.db.HqlQueries;
+import com.tosDev.tg.db.TgQueries;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,13 +28,16 @@ public class CommonTgService {
 
     private final TelegramBot bot;
     private final RabbitMQMessageProducer rabbitMQMessageProducer;
-    private final HqlQueries hqlQueries;
+    private final TgQueries tgQueries;
+    private final WorkerTgQueries workerTgQueries;
     private final AdminRepository adminRepository;
     private final WorkerRepository workerRepository;
     private final BrigadierRepository brigadierRepository;
     private final ResponsibleRepository responsibleRepository;
-    private final WorkerTgService workerTgService;
     private final AdminTgService adminTgService;
+    private final WorkerTgService workerTgService;
+    private final BrigadierTgService brigadierTgService;
+    private final ResponsibleTgService responsibleTgService;
 
     private final String GREETING_MESSAGE = """
             Здравствуйте. Вам нужно авторизоваться, для этого нажмите на кнопку ниже.
@@ -61,28 +67,29 @@ public class CommonTgService {
         Long phoneNumber = Long.valueOf(update.message().contact().phoneNumber());
         Long chatId = update.message().chat().id();
 
-        Optional<Object> optionalExistingUser = hqlQueries.findByPhoneNumber(phoneNumber);
+        Optional<Object> optionalExistingUser = tgQueries.findByPhoneNumber(phoneNumber);
         if (optionalExistingUser.isPresent()) {
             String className = optionalExistingUser.get().getClass().getName();
             switch (className) {
-                case ("com.tosDev.jpa.entity.Admin") -> {
+                case ("com.tosDev.web.jpa.entity.Admin") -> {
                     log.info("Пользователь найден в бд в роли админа");
                     Admin updatedAdmin = adminTgService.linkChatIdToExistingAdmin(phoneNumber,chatId);
-//                  adminTgService.startAdminLogic(updatedAdmin);
+                  adminTgService.startAdminLogic(update);
                 }
-                case ("com.tosDev.jpa.entity.Worker") -> {
+                case ("com.tosDev.web.jpa.entity.Worker") -> {
                     log.info("Пользователь найден в бд в роли работника");
-//                    workerTgService.linkChatIdToExistingWorker(phoneNumber,chatId);
-//                  workerTgService.startWorkerLogic(worker);
+                    Worker linkedWorker =
+                            workerTgQueries.linkChatIdToExistingWorker(phoneNumber,chatId);
+                  workerTgService.startWorkerLogic(update,linkedWorker.getId());
                 }
-                case ("com.tosDev.jpa.entity.Brigadier") -> {
+                case ("com.tosDev.web.jpa.entity.Brigadier") -> {
                     log.info("Пользователь найден в бд в роли бригадира");
-//                    brigadierTgService.linkChatIdToExistingBrigadier(phoneNumber,chatId);
+                    brigadierTgService.linkChatIdToExistingBrigadier(phoneNumber,chatId);
 //                  brigadierTgService.startBrigadierLogic(worker);
                 }
-                case ("com.tosDev.jpa.entity.Responsible") -> {
+                case ("com.tosDev.web.jpa.entity.Responsible") -> {
                     log.info("Пользователь найден в бд в роли супервайзера");
-//                    responsibleTgService.linkChatIdToExistingResponsible(phoneNumber,chatId);
+                    responsibleTgService.linkChatIdToExistingSupervisor(phoneNumber,chatId);
 //                  responsibleTgService.startResponsibleLogic(worker);
                 }
                 default -> {
@@ -91,7 +98,9 @@ public class CommonTgService {
                 }
             }
         }
-        System.out.println();
+        else {
+            log.warn("Попытка зайти от неавторизованного пользователя с номером {}",phoneNumber);
+        }
     }
 
     /**
@@ -99,26 +108,30 @@ public class CommonTgService {
      * Затем вызывает логику для роли авторизованного пользователя
      */
     public void checkAuthorityAndRunLogic(Update update) {
-        Long chatId = update.message().chat().id();
+        Long chatId = update.message()==null?
+                update.callbackQuery().from().id()
+                :
+                update.message().chat().id();
 
-        Optional<Object> optionalAuthorizedUser = hqlQueries.findByChatId(chatId);
+        Optional<Object> optionalAuthorizedUser = tgQueries.findByChatId(chatId);
         if (optionalAuthorizedUser.isPresent()) {
             Object someAuthorizedUser = optionalAuthorizedUser.get();
             String className = optionalAuthorizedUser.get().getClass().getName();
             switch (className) {
-                case ("com.tosDev.jpa.entity.Admin") -> {
+                case ("com.tosDev.web.jpa.entity.Admin") -> {
                     log.info("update от админа");
-//                    adminLogic((Admin) someAuthorizedUser);
+//                    adminTgService.startAdminLogic((Admin)someAuthorizedUser);
                 }
-                case ("com.tosDev.jpa.entity.Worker") -> {
+                case ("com.tosDev.web.jpa.entity.Worker") -> {
                     log.info("update от работника");
-//                    workerTgService.continueWorkerLogic((Worker) someAuthorizedUser);
+                    Worker worker = (Worker) someAuthorizedUser;
+                    workerTgService.startWorkerLogic(update,worker.getId());
                 }
-                case ("com.tosDev.jpa.entity.Brigadier") -> {
+                case ("com.tosDev.web.jpa.entity.Brigadier") -> {
                     log.info("update от бригадира");
 //                    continueBrigadierLogic((Brigadier) someAuthorizedUser);
                 }
-                case ("com.tosDev.jpa.entity.Responsible") -> {
+                case ("com.tosDev.web.jpa.entity.Responsible") -> {
                     log.info("update от супервайзера");
 //                    continueResponsibleLogic((Responsible) someAuthorizedUser);
                 }
@@ -131,5 +144,18 @@ public class CommonTgService {
         else {
             requestPhoneNumber(update);
         }
+    }
+
+    public void deletePrevMessage(Update update){
+        Long chatId = update.callbackQuery().from().id();
+        //todo: когда поправят maybeInaccessibleMessage, избавиться от deprecated
+        Integer messageId = update.callbackQuery().message().messageId();
+        try {
+            bot.execute(new DeleteMessage(chatId,messageId));
+        } catch (Exception e) {
+            log.warn("Не удалось удалить предыдущее сообщение");
+            e.printStackTrace();
+        }
+        log.info("Удалили предыдущее сообщение у chatId: {}",chatId);
     }
 }

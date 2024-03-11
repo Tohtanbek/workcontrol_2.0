@@ -14,9 +14,7 @@ public class TgRealServerIT extends IntegrationTestBase {
 
     @Test
     void test() {
-        /*todo:Делаем реализацию rabbitMQ, чтобы при отключении сайта бот мог продолжить работу и
-        todo: сообщения могли просто копиться на отдельном сервисе.
-         */
+
         mainListener.activateListener();
         //Оставляем сервер работать
         while (true){

@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface BrigadierRepository extends JpaRepository<Brigadier,Integer> {
     Optional<Brigadier> findByName(String name);
+
+    Optional<Brigadier> findByPhoneNumber(Long brigadierPhoneNumber);
 }

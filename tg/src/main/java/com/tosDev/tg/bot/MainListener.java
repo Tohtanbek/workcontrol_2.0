@@ -26,10 +26,14 @@ public class MainListener {
             @Override
             public int process(List<Update> updates) {
                 for (Update update : updates){
-                    if (update.message().contact()!=null) {
+                    //Если это сообщение с контактом
+                    if (update.message()!= null && update.message().contact()!=null) {
                         commonTgService.authorizeNewChatAndRunLogic(update);
                     }
-                    commonTgService.checkAuthorityAndRunLogic(update);
+                    //Если это обычное сообщение или нажатие на кнопку
+                    else if (update.message()!=null || update.callbackQuery()!=null){
+                        commonTgService.checkAuthorityAndRunLogic(update);
+                    }
                 }
                 return CONFIRMED_UPDATES_ALL;
             }

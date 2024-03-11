@@ -39,6 +39,8 @@ public class Shift {
 
     @OneToOne
     private Expense expense;
+    @OneToOne
+    private Income income;
 
 
 }

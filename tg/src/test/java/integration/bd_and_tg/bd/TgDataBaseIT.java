@@ -1,6 +1,6 @@
 package integration.bd_and_tg.bd;
 
-import com.tosDev.tg.db.HqlQueries;
+import com.tosDev.tg.db.TgQueries;
 import com.tosDev.web.jpa.entity.Admin;
 import com.tosDev.web.jpa.entity.Brigadier;
 import com.tosDev.web.jpa.entity.Responsible;
@@ -28,7 +28,7 @@ public class TgDataBaseIT extends IntegrationTestBase {
     private final WorkerRepository workerRepository;
     private final BrigadierRepository brigadierRepository;
     private final ResponsibleRepository responsibleRepository;
-    private final HqlQueries hqlQueries;
+    private final TgQueries tgQueries;
     @Test
     @Transactional
     void checkByChatIdTestAdmin(){
@@ -36,7 +36,7 @@ public class TgDataBaseIT extends IntegrationTestBase {
         admin.setChatId(12345L);
         adminRepository.saveAndFlush(admin);
         var startMillis = System.currentTimeMillis();
-        var result = hqlQueries.findByChatId(12345L);
+        var result = tgQueries.findByChatId(12345L);
         Assertions.assertTrue(result.isPresent());
         Assertions.assertEquals("com.tosDev.jpa.entity.Admin",result.get().getClass().getName());
 
@@ -75,7 +75,7 @@ public class TgDataBaseIT extends IntegrationTestBase {
         worker.setChatId(12345L);
         workerRepository.saveAndFlush(worker);
         var startMillis = System.currentTimeMillis();
-        var result = hqlQueries.findByChatId(12345L);
+        var result = tgQueries.findByChatId(12345L);
         Assertions.assertTrue(result.isPresent());
         Assertions.assertEquals("com.tosDev.jpa.entity.Worker",result.get().getClass().getName());
 
@@ -115,7 +115,7 @@ public class TgDataBaseIT extends IntegrationTestBase {
         brigadier.setChatId(12345L);
         brigadierRepository.saveAndFlush(brigadier);
         var startMillis = System.currentTimeMillis();
-        var result = hqlQueries.findByChatId(12345L);
+        var result = tgQueries.findByChatId(12345L);
         Assertions.assertTrue(result.isPresent());
         Assertions.assertEquals("com.tosDev.jpa.entity.Brigadier",result.get().getClass().getName());
 
@@ -154,7 +154,7 @@ public class TgDataBaseIT extends IntegrationTestBase {
         responsible.setChatId(12345L);
         responsibleRepository.saveAndFlush(responsible);
         var startMillis = System.currentTimeMillis();
-        var result = hqlQueries.findByChatId(12345L);
+        var result = tgQueries.findByChatId(12345L);
         Assertions.assertTrue(result.isPresent());
         Assertions.assertEquals("com.tosDev.jpa.entity.Responsible",result.get().getClass().getName());
 
@@ -190,7 +190,7 @@ public class TgDataBaseIT extends IntegrationTestBase {
     @Transactional
     void checkByChatIdTestNull(){
         var startMillis = System.currentTimeMillis();
-        var result = hqlQueries.findByChatId(12345L);
+        var result = tgQueries.findByChatId(12345L);
         Assertions.assertFalse(result.isPresent());
                     if (result.isPresent()) {
                         String className = result.get().getClass().getName();

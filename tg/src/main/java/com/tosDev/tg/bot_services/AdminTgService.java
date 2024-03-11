@@ -1,5 +1,8 @@
 package com.tosDev.tg.bot_services;
 
+import com.pengrad.telegrambot.TelegramBot;
+import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.request.SendMessage;
 import com.tosDev.web.jpa.entity.Admin;
 import com.tosDev.web.jpa.repository.AdminRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class AdminTgService {
+
+    private final String GREETING = """
+            Приветствую, администратор! Вы успешно авторизованы.
+            """;
     private final AdminRepository adminRepository;
+    private final TelegramBot bot;
 
     @Transactional
     public Admin linkChatIdToExistingAdmin(Long adminPhoneNumber,Long chatId){
@@ -22,5 +30,15 @@ public class AdminTgService {
         log.info("Привязали новый чат {} пользователя {} в роли админа",
                 chatId,adminPhoneNumber);
         return admin;
+    }
+
+    public void startAdminLogic(Update update) {
+        Long chatId = update.message().chat().id();
+        sendGreeting(chatId);
+    }
+
+    public void sendGreeting(Long chatId){
+        SendMessage sendMessage = new SendMessage(chatId,GREETING);
+        bot.execute(sendMessage);
     }
 }

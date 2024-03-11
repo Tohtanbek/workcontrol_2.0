@@ -7,4 +7,8 @@ import java.util.Optional;
 
 public interface WorkerRepository extends JpaRepository<Worker,Integer> {
     Optional<Worker> findByName(String name);
+
+    Optional<Worker> findByPhoneNumber(Long workerPhoneNumber);
+
+
 }

@@ -1,24 +1,23 @@
 package com.tosDev.tg.db;
 
-import com.tosDev.web.jpa.entity.Admin;
-import com.tosDev.web.jpa.entity.Brigadier;
-import com.tosDev.web.jpa.entity.Responsible;
-import com.tosDev.web.jpa.entity.Worker;
+import com.tosDev.web.jpa.entity.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
 @Transactional
 @Slf4j
-public class HqlQueries {
+public class TgQueries {
     private final EntityManager entityManager;
 
 
@@ -118,4 +117,5 @@ public class HqlQueries {
         }
         return Optional.empty();
     }
+
 }

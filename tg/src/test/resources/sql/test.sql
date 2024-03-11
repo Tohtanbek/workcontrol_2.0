@@ -33,7 +33,8 @@ CREATE TABLE IF NOT EXISTS worker(
                                      chat_id BIGINT
 );
 INSERT INTO worker (name, job, phone_number)
-VALUES ('Работник Елена', 'клинер', 19568004545),('работник Александр', 'механик',19002332323);
+VALUES ('Работник Елена', 'клинер', 19568004545),('работник Александр', 'механик',19002332323),
+       ('тестовый тг','тестировщик',27817913239);
 
 CREATE TABLE if NOT EXISTS address(
                                       id SERIAL PRIMARY KEY ,
@@ -86,7 +87,7 @@ CREATE TABLE IF NOT EXISTS worker_address(
                                              address_id INTEGER references address(id) ON DELETE CASCADE
 );
 INSERT INTO worker_address (worker_id, address_id)
-VALUES (1,1),(1,2),(2,1);
+VALUES (1,1),(1,2),(2,1),(3,1),(3,2);
 
 CREATE TABLE IF NOT EXISTS responsible_brigadier(
                                                     id SERIAL PRIMARY KEY ,
@@ -155,6 +156,27 @@ CREATE TABLE IF NOT EXISTS expense(
                                       address_id INTEGER references address(id) ON DELETE SET NULL ,
                                       worker_id INTEGER references worker(id) ON DELETE SET NULL
 );
+
+CREATE TABLE IF NOT EXISTS contact(
+    id SERIAL PRIMARY KEY ,
+    name VARCHAR
+);
+
+CREATE TABLE IF NOT EXISTS income(
+                                      id SERIAL PRIMARY KEY ,
+                                      short_info VARCHAR,
+                                      total_sum FLOAT,
+                                      type VARCHAR,
+                                      status VARCHAR,
+                                      date_time TIMESTAMP,
+                                      address_id INTEGER references address(id) ON DELETE SET NULL ,
+                                      worker_id INTEGER references worker(id) ON DELETE SET NULL,
+                                      contact_id INTEGER references contact(id) ON DELETE SET NULL
+
+);
+
+ALTER TABLE shift ADD COLUMN income_id INTEGER references income(id) ON DELETE SET NULL;
+ALTER TABLE income ADD COLUMN shift_id INTEGER  references shift(id) ON DELETE SET NULL;
 
 ALTER TABLE shift ADD COLUMN expense_id INTEGER references expense(id) ON DELETE SET NULL;
 ALTER TABLE expense ADD COLUMN shift_id INTEGER  references shift(id) ON DELETE SET NULL;

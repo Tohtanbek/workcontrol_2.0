@@ -33,4 +33,7 @@ public class Income {
     @ManyToOne
     Contact contact;
 
+    @OneToOne
+    private Shift shift;
+
 }

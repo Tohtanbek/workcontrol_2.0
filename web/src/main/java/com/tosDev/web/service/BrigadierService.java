@@ -2,13 +2,11 @@ package com.tosDev.web.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tosDev.web.dto.BrigadierDtoWithSuper;
 import com.tosDev.web.dto.BrigadierSmallDto;
 import com.tosDev.web.jpa.entity.*;
 import com.tosDev.web.jpa.repository.AddressRepository;
 import com.tosDev.web.jpa.repository.BrigadierRepository;
-import com.tosDev.web.dto.BrigadierDtoWithSuper;
-import com.tosDev.jpa.entity.*;
-import com.web.jpa.entity.*;
 import com.tosDev.web.jpa.repository.ResponsibleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
