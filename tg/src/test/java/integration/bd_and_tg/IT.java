@@ -1,6 +1,6 @@
 package integration.bd_and_tg;
 
-import com.tosDev.TgApplicationRunner;
+import com.tosDev.tg.TgApplicationRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;

@@ -1,6 +1,6 @@
 package integration;
 
-import com.tosDev.dto.EquipTypeDto;
+import com.tosDev.web.dto.EquipTypeDto;
 import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

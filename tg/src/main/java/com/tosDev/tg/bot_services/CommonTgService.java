@@ -5,14 +5,12 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.KeyboardButton;
 import com.pengrad.telegrambot.model.request.ReplyKeyboardMarkup;
 import com.pengrad.telegrambot.request.SendMessage;
-import com.tosDev.jpa.entity.Admin;
-import com.tosDev.jpa.entity.Brigadier;
-import com.tosDev.jpa.entity.Responsible;
-import com.tosDev.jpa.entity.Worker;
-import com.tosDev.jpa.repository.AdminRepository;
-import com.tosDev.jpa.repository.BrigadierRepository;
-import com.tosDev.jpa.repository.ResponsibleRepository;
-import com.tosDev.jpa.repository.WorkerRepository;
+import com.tosDev.amqp.RabbitMQMessageProducer;
+import com.tosDev.web.jpa.entity.Admin;
+import com.tosDev.web.jpa.repository.AdminRepository;
+import com.tosDev.web.jpa.repository.BrigadierRepository;
+import com.tosDev.web.jpa.repository.ResponsibleRepository;
+import com.tosDev.web.jpa.repository.WorkerRepository;
 import com.tosDev.tg.db.HqlQueries;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +24,7 @@ import java.util.Optional;
 public class CommonTgService {
 
     private final TelegramBot bot;
+    private final RabbitMQMessageProducer rabbitMQMessageProducer;
     private final HqlQueries hqlQueries;
     private final AdminRepository adminRepository;
     private final WorkerRepository workerRepository;

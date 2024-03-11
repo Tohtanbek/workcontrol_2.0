@@ -1,6 +1,6 @@
 package integration;
 
-import com.tosDev.ApplicationRunner;
+import com.tosDev.web.ApplicationRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;

@@ -1,6 +1,6 @@
 package integration.bd_and_tg;
 
-import com.tosDev.tg.MainListener;
+import com.tosDev.tg.bot.MainListener;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.jdbc.Sql;
@@ -14,6 +14,9 @@ public class TgRealServerIT extends IntegrationTestBase {
 
     @Test
     void test() {
+        /*todo:Делаем реализацию rabbitMQ, чтобы при отключении сайта бот мог продолжить работу и
+        todo: сообщения могли просто копиться на отдельном сервисе.
+         */
         mainListener.activateListener();
         //Оставляем сервер работать
         while (true){

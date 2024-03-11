@@ -1,7 +1,6 @@
 package integration.tg;
 
-import com.tosDev.jpa.repository.AdminRepository;
-import com.tosDev.tg.MainListener;
+import com.tosDev.tg.bot.MainListener;
 import integration.bd_and_tg.IT;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;

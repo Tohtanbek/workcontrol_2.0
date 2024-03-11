@@ -2,11 +2,12 @@ package integration;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tosDev.dto.AddressDto;
-import com.tosDev.jpa.entity.*;
-import com.tosDev.jpa.repository.AddressRepository;
-import com.tosDev.jpa.repository.ResponsibleBrigadierRepository;
-import com.tosDev.jpa.repository.ResponsibleRepository;
+import com.tosDev.web.dto.AddressDto;
+import com.tosDev.web.jpa.entity.Address;
+import com.tosDev.web.jpa.entity.Responsible;
+import com.tosDev.web.jpa.repository.AddressRepository;
+import com.tosDev.web.jpa.repository.ResponsibleBrigadierRepository;
+import com.tosDev.web.jpa.repository.ResponsibleRepository;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;

@@ -1,10 +1,9 @@
 package com.tosDev.tg.db;
 
-import com.tosDev.jpa.entity.Admin;
-import com.tosDev.jpa.entity.Brigadier;
-import com.tosDev.jpa.entity.Responsible;
-import com.tosDev.jpa.entity.Worker;
-import jakarta.persistence.Entity;
+import com.tosDev.web.jpa.entity.Admin;
+import com.tosDev.web.jpa.entity.Brigadier;
+import com.tosDev.web.jpa.entity.Responsible;
+import com.tosDev.web.jpa.entity.Worker;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;

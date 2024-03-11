@@ -1,11 +1,14 @@
 package integration.bd_and_tg.bd;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tosDev.dto.AddressDto;
-import com.tosDev.jpa.entity.*;
-import com.tosDev.jpa.repository.*;
 import com.tosDev.tg.db.HqlQueries;
+import com.tosDev.web.jpa.entity.Admin;
+import com.tosDev.web.jpa.entity.Brigadier;
+import com.tosDev.web.jpa.entity.Responsible;
+import com.tosDev.web.jpa.entity.Worker;
+import com.tosDev.web.jpa.repository.AdminRepository;
+import com.tosDev.web.jpa.repository.BrigadierRepository;
+import com.tosDev.web.jpa.repository.ResponsibleRepository;
+import com.tosDev.web.jpa.repository.WorkerRepository;
 import integration.bd_and_tg.IntegrationTestBase;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -14,13 +17,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Slf4j
