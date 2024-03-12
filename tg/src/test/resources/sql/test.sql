@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS brigadier(
                                         chat_id BIGINT
 );
 INSERT INTO brigadier (name, phone_number)
-VALUES ('Бригадир Иван',88005553535),('Бригадир Пётр',13337272727);
+VALUES ('Бригадир Иван',88005553535),('Бригадир Пётр',13337272729),('Тестовый бригадир тг',84792547313);
 
 
 CREATE TABLE IF NOT EXISTS worker(
@@ -79,7 +79,7 @@ CREATE TABLE If NOT EXISTS brigadier_address(
                                                 address_id INTEGER references address(id) ON DELETE CASCADE
 );
 INSERT INTO brigadier_address (brigadier_id, address_id)
-VALUES (1,1),(1,2),(2,1);
+VALUES (1,1),(1,2),(2,1),(3,1),(3,2);
 
 CREATE TABLE IF NOT EXISTS worker_address(
                                              id SERIAL PRIMARY KEY ,
@@ -122,6 +122,7 @@ CREATE TABLE IF NOT EXISTS shift(
                                     start_date_time TIMESTAMP,
                                     end_date_time TIMESTAMP,
                                     status VARCHAR,
+                                    type VARCHAR,
                                     address_id INTEGER references address(id) ON DELETE SET NULL,
                                     worker_id INTEGER references worker(id) ON DELETE SET NULL ,
                                     job VARCHAR,

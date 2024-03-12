@@ -15,6 +15,7 @@ public class TgRealServerIT extends IntegrationTestBase {
     @Test
     void test() {
 
+
         mainListener.activateListener();
         //Оставляем сервер работать
         while (true){

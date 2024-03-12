@@ -1,6 +1,7 @@
 package com.tosDev.tg.db;
 
 import com.tosDev.web.jpa.entity.*;
+import com.tosDev.web.jpa.repository.AddressRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Component
@@ -19,6 +21,7 @@ import java.util.Optional;
 @Slf4j
 public class TgQueries {
     private final EntityManager entityManager;
+    private final AddressRepository addressRepository;
 
 
     /**
@@ -116,6 +119,16 @@ public class TgQueries {
             log.info("{} - не ответственный, такой phoneNumber не существует в бд",phoneNumber);
         }
         return Optional.empty();
+    }
+
+    public String checkAddressNameById(String id){
+        String shortName = "";
+        try {
+            shortName = addressRepository.findById(Integer.valueOf(id)).orElseThrow().getShortName();
+        } catch (NoSuchElementException e) {
+            log.error("Не найден адрес по этому id {}",id);
+        }
+        return shortName;
     }
 
 }

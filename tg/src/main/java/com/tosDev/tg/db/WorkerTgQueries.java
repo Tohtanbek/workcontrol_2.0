@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import static com.tosDev.tg.bot.enums.ShiftStatusEnum.*;
+
 @Component
 @RequiredArgsConstructor
 @Transactional
@@ -58,16 +60,6 @@ public class WorkerTgQueries {
         return resultList;
     }
 
-    public String checkAddressNameById(String id){
-        String shortName = "";
-        try {
-            shortName = addressRepository.findById(Integer.valueOf(id)).orElseThrow().getShortName();
-        } catch (NoSuchElementException e) {
-            log.error("Не найден адрес по этому id {}",id);
-        }
-        return shortName;
-    }
-
     public boolean loadFreshWorkerShift(String addressId,Integer workerId){
 
         Address chosenAddress = new Address();
@@ -76,7 +68,7 @@ public class WorkerTgQueries {
             chosenAddress = addressRepository.findById(Integer.valueOf(addressId)).orElseThrow();
             worker = workerRepository.findById(workerId).orElseThrow();
             //Проверка на наличие активной смены
-            if (shiftRepository.existsByWorkerAndStatus(worker,ShiftStatusEnum.AT_WORK.getDescription()))
+            if (shiftRepository.existsByWorkerAndStatus(worker, AT_WORK.getDescription()))
             {
                 return false;
             }
@@ -94,11 +86,39 @@ public class WorkerTgQueries {
                 .address(chosenAddress)
                 .worker(worker)
                 .job(worker.getJob())
-                .status(ShiftStatusEnum.AT_WORK.getDescription())
+                .status(AT_WORK.getDescription())
                 .startDateTime(LocalDateTime.now())
                 .build());
         log.info("Смена {} загружена в базу данных",shift);
 
         return true;
+    }
+
+    public Shift saveFinishedShift(Integer workerId,String callbackData){
+        try {
+            Worker worker = workerRepository.findById(workerId).orElseThrow();
+            Shift shift = shiftRepository
+                            .findByWorkerAndStatus(worker,AT_WORK.getDescription())
+                            .orElseThrow();
+
+            String shortInfo = String.format("""
+                %s %s закончил работу на %s тип: %s
+                """,worker.getJob(),worker.getName(),shift.getAddress().getShortName(),callbackData);
+
+            shift.setShortInfo(shortInfo);
+            shift.setEndDateTime(LocalDateTime.now());
+            shift.setStatus(FINISHED.getDescription());
+            shift.setType(callbackData);
+
+            shiftRepository.save(shift);
+            log.info("Успешно обновили смену {} после ее окончания работником {}",shift,worker);
+            return shift;
+        } catch (NoSuchElementException e) {
+            log.error("При поиске единственной открытой смены у работника {} произошла ошибка" +
+                            "или при поиске самого работника по id произошла ошибка",
+                    workerId);
+            e.printStackTrace();
+            return null;
+        }
     }
 }

@@ -23,6 +23,7 @@ public class Shift {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
     private String status;
+    private String type;
 
     @ManyToOne
     private Address address;

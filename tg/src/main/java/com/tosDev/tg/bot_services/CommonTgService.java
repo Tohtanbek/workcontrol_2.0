@@ -7,8 +7,10 @@ import com.pengrad.telegrambot.model.request.ReplyKeyboardMarkup;
 import com.pengrad.telegrambot.request.DeleteMessage;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.tosDev.amqp.RabbitMQMessageProducer;
+import com.tosDev.tg.db.BrigadierTgQueries;
 import com.tosDev.tg.db.WorkerTgQueries;
 import com.tosDev.web.jpa.entity.Admin;
+import com.tosDev.web.jpa.entity.Brigadier;
 import com.tosDev.web.jpa.entity.Worker;
 import com.tosDev.web.jpa.repository.AdminRepository;
 import com.tosDev.web.jpa.repository.BrigadierRepository;
@@ -30,10 +32,7 @@ public class CommonTgService {
     private final RabbitMQMessageProducer rabbitMQMessageProducer;
     private final TgQueries tgQueries;
     private final WorkerTgQueries workerTgQueries;
-    private final AdminRepository adminRepository;
-    private final WorkerRepository workerRepository;
-    private final BrigadierRepository brigadierRepository;
-    private final ResponsibleRepository responsibleRepository;
+    private final BrigadierTgQueries brigadierTgQueries;
     private final AdminTgService adminTgService;
     private final WorkerTgService workerTgService;
     private final BrigadierTgService brigadierTgService;
@@ -84,8 +83,9 @@ public class CommonTgService {
                 }
                 case ("com.tosDev.web.jpa.entity.Brigadier") -> {
                     log.info("Пользователь найден в бд в роли бригадира");
-                    brigadierTgService.linkChatIdToExistingBrigadier(phoneNumber,chatId);
-//                  brigadierTgService.startBrigadierLogic(worker);
+                    Brigadier linkedBrigadier =
+                            brigadierTgQueries.linkChatIdToExistingBrigadier(phoneNumber,chatId);
+                  brigadierTgService.startBrigadierLogic(update,linkedBrigadier.getId());
                 }
                 case ("com.tosDev.web.jpa.entity.Responsible") -> {
                     log.info("Пользователь найден в бд в роли супервайзера");
@@ -129,7 +129,8 @@ public class CommonTgService {
                 }
                 case ("com.tosDev.web.jpa.entity.Brigadier") -> {
                     log.info("update от бригадира");
-//                    continueBrigadierLogic((Brigadier) someAuthorizedUser);
+                    Brigadier brigadier = (Brigadier) someAuthorizedUser;
+                    brigadierTgService.startBrigadierLogic(update, brigadier.getId());
                 }
                 case ("com.tosDev.web.jpa.entity.Responsible") -> {
                     log.info("update от супервайзера");
@@ -146,16 +147,4 @@ public class CommonTgService {
         }
     }
 
-    public void deletePrevMessage(Update update){
-        Long chatId = update.callbackQuery().from().id();
-        //todo: когда поправят maybeInaccessibleMessage, избавиться от deprecated
-        Integer messageId = update.callbackQuery().message().messageId();
-        try {
-            bot.execute(new DeleteMessage(chatId,messageId));
-        } catch (Exception e) {
-            log.warn("Не удалось удалить предыдущее сообщение");
-            e.printStackTrace();
-        }
-        log.info("Удалили предыдущее сообщение у chatId: {}",chatId);
-    }
 }
