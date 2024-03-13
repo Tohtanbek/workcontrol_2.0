@@ -5,23 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Работа над логикой worker и brigadier в tg bot&#10;Добавил общие методы в суперклассы.">
-      <change afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot/enums/ShiftEndTypeEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/BrigadierWorkerCommonTgMethods.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/CommonTgMethods.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/BrigadierTgQueries.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/TgSpringConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/TgSpringConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot/MainListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot/MainListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/BrigadierTgService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/BrigadierTgService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/CommonTgService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/CommonTgService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/BrigadierWorkerCommonTgMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/BrigadierWorkerCommonTgMethods.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/WorkerTgService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/WorkerTgService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/BrigadierTgQueries.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/BrigadierTgQueries.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/TgQueries.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/TgQueries.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/WorkerTgQueries.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/WorkerTgQueries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/test/java/integration/bd_and_tg/TgRealServerIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/test/java/integration/bd_and_tg/TgRealServerIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/test/java/integration/tg/BotIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/test/java/integration/tg/BotIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/test/resources/sql/test.sql" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/test/resources/sql/test.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/entity/Shift.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/entity/Shift.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/repository/ShiftRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/repository/ShiftRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/repository/AdminRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/repository/AdminRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +27,7 @@
         <option value="Interface" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -72,6 +64,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
     "database.data.extractors.current.id": "Comma-separated (CSV)_id",
     "jdk.selected.JAVA_MODULE": "17",
@@ -108,8 +102,14 @@
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\equip" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\responsible" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="unit" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.tosDev.tg.db" />
@@ -119,19 +119,50 @@
       <recent name="com.tosDev.controllers.table_pages" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TgRealServerIT.test">
-    <configuration name="BotIT.runBot" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.SendOutOtherBrigsThatShiftApprovedTest">
+    <configuration name="BrigadierTgServiceTest.sendOutOtherBrigsThatShiftApprovedTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="tg" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="integration.tg.*" />
+          <option name="PATTERN" value="unit.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="integration.tg" />
-      <option name="MAIN_CLASS_NAME" value="integration.tg.BotIT" />
-      <option name="METHOD_NAME" value="runBot" />
+      <option name="PACKAGE_NAME" value="unit" />
+      <option name="MAIN_CLASS_NAME" value="unit.BrigadierTgServiceTest" />
+      <option name="METHOD_NAME" value="sendOutOtherBrigsThatShiftApprovedTest" />
       <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BrigadierWorkerCommonTgMethodsTest.countTotalHours" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tg" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="unit.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="unit" />
+      <option name="MAIN_CLASS_NAME" value="unit.BrigadierWorkerCommonTgMethodsTest" />
+      <option name="METHOD_NAME" value="countTotalHours" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SendOutOtherBrigsThatShiftApprovedTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tg" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="unit.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="unit" />
+      <option name="MAIN_CLASS_NAME" value="unit.SendOutOtherBrigsThatShiftApprovedTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -174,19 +205,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SpringTgReceiverRunner" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="tg_receiver" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.tosDev.tg_receiver.SpringTgReceiverRunner" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.tosDev.tg_receiver.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TgApplicationRunner" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="tg" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.tosDev.tg.TgApplicationRunner" />
@@ -194,26 +212,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="docker-compose.yaml.rabbitmq: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="rabbitmq" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yaml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TgRealServerIT.test" />
+        <item itemvalue="JUnit.SendOutOtherBrigsThatShiftApprovedTest" />
+        <item itemvalue="JUnit.BrigadierTgServiceTest.sendOutOtherBrigsThatShiftApprovedTest" />
         <item itemvalue="JUnit.TgRealServerIT" />
-        <item itemvalue="Spring Boot.SpringTgReceiverRunner" />
-        <item itemvalue="Docker.docker-compose.yaml.rabbitmq: Compose Deployment" />
-        <item itemvalue="JUnit.BotIT.runBot" />
+        <item itemvalue="JUnit.BrigadierWorkerCommonTgMethodsTest.countTotalHours" />
+        <item itemvalue="JUnit.TgRealServerIT.test" />
       </list>
     </recent_temporary>
   </component>
@@ -252,7 +257,9 @@
       <workItem from="1709804396491" duration="22494000" />
       <workItem from="1709983745940" duration="13201000" />
       <workItem from="1710149852394" duration="29599000" />
-      <workItem from="1710236778229" duration="23047000" />
+      <workItem from="1710236778229" duration="23223000" />
+      <workItem from="1710267545207" duration="187000" />
+      <workItem from="1710320241130" duration="22985000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит workcontrol 2.0. Работа над frontend">
       <created>1708303197812</created>
@@ -352,7 +359,14 @@
       <option name="project" value="LOCAL" />
       <updated>1710197411846</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Работа над логикой worker и brigadier в tg bot&#10;Добавил общие методы в суперклассы.">
+      <created>1710267513922</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1710267513922</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

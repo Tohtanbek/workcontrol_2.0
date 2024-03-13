@@ -11,7 +11,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Locale;
 
 import static com.tosDev.tg.bot.enums.ShiftEndTypeEnum.PLANNED;
 import static com.tosDev.tg.bot.enums.ShiftEndTypeEnum.UNPLANNED;
@@ -97,6 +103,15 @@ public class BrigadierWorkerCommonTgMethods extends CommonTgMethods {
         ikbMarkup.addRow(ikbButtonUnplanned);
 
         bot.execute(new SendMessage(chatId,CHOOSE_SHIFT_END_TYPE).replyMarkup(ikbMarkup));
+    }
+
+    public String countTotalHours(LocalDateTime start, LocalDateTime finish){
+        Duration duration = Duration.between(start,finish);
+        float totalMinutes = (float) duration.toMinutes();
+        DecimalFormat df = new DecimalFormat("#.##",
+                DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+        float totalHours = totalMinutes/60;
+        return df.format(totalHours);
     }
 
 }

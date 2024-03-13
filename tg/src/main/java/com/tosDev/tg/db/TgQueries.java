@@ -131,4 +131,19 @@ public class TgQueries {
         return shortName;
     }
 
+    public Optional<List<Brigadier>> findBrigsOnShiftAddress(Shift freshlySavedShift) {
+
+        List<Brigadier> brigsOnAddress = freshlySavedShift
+                .getAddress()
+                .getBrigadierAddressList()
+                .stream()
+                .map(BrigadierAddress::getBrigadier)
+                .toList();
+
+        return brigsOnAddress.isEmpty()?
+                Optional.empty()
+                :
+                Optional.of(brigsOnAddress);
+    }
+
 }

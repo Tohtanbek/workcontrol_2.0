@@ -1,12 +1,13 @@
 package com.tosDev.tg.db;
 
+import com.pengrad.telegrambot.TelegramBot;
+import com.tosDev.tg.bot_services.BrigadierWorkerCommonTgMethods;
 import com.tosDev.web.jpa.entity.*;
 import com.tosDev.web.jpa.repository.AddressRepository;
 import com.tosDev.web.jpa.repository.BrigadierRepository;
 import com.tosDev.web.jpa.repository.ShiftRepository;
-import com.tosDev.web.jpa.repository.WorkerRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,19 +15,29 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
-import static com.tosDev.tg.bot.enums.ShiftStatusEnum.AT_WORK;
-import static com.tosDev.tg.bot.enums.ShiftStatusEnum.FINISHED;
+import static com.tosDev.tg.bot.enums.ShiftStatusEnum.*;
 
 @Component
-@RequiredArgsConstructor
 @Transactional
 @Slf4j
-public class BrigadierTgQueries {
+public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
 
     private final BrigadierRepository brigadierRepository;
     private final AddressRepository addressRepository;
     private final ShiftRepository shiftRepository;
+
+    @Autowired
+    public BrigadierTgQueries(TelegramBot bot, TgQueries tgQueries,
+                              BrigadierRepository brigadierRepository,
+                              AddressRepository addressRepository,
+                              ShiftRepository shiftRepository) {
+        super(bot, tgQueries);
+        this.brigadierRepository = brigadierRepository;
+        this.addressRepository = addressRepository;
+        this.shiftRepository = shiftRepository;
+    }
 
     public Brigadier linkChatIdToExistingBrigadier(Long brigadierPhoneNumber, Long chatId){
         Brigadier brigadier =
@@ -115,6 +126,42 @@ public class BrigadierTgQueries {
                     brigadierId);
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public Optional<Shift> approveShift(Integer brigadierId, Integer shiftId) {
+        try {
+            Shift shift = shiftRepository.findById(shiftId).orElseThrow();
+            //Если смену уже подтвердили или она по какой-то причине не окончена
+            if (!shift.getStatus().equals(FINISHED.getDescription())){
+                log.warn("Смена {} уже подтверждена",shift.getShortInfo());
+                return Optional.empty();
+            }
+            Brigadier brigadier = brigadierRepository.findById(brigadierId).orElseThrow();
+            shift.setStatus(APPROVED.getDescription());
+            shift.setBrigadier(brigadier);
+            String totalHours = countTotalHours(shift.getStartDateTime(), shift.getEndDateTime());
+            shift.setTotalHours(Float.valueOf(totalHours));
+            //todo: посчитать зп
+
+            shiftRepository.save(shift);
+            log.info("Смена {}, подтвержденная бригадиром {}, обновлена в бд",
+                    shift.getShortInfo(), brigadier.getName());
+            return Optional.of(shift);
+        } catch (NoSuchElementException e) {
+            log.error("Не найдена смена {} или бригадир {} при подтверждении смены",
+                    shiftId,brigadierId);
+            return Optional.empty();
+        }
+    }
+
+    public Optional<Shift> handleChangeOfJob(Integer shiftId,Integer brigadierId){
+        try {
+            Brigadier brigadier = brigadierRepository.findById(brigadierId).orElseThrow();
+            Shift shift = shiftRepository.findById(shiftId).orElseThrow();
+            log.info("Бригадир {} решил сменить профессию у смены {}",
+                    brigadier.getName(),shift.getShortInfo());
+            //todo:Сделать таблицу AddressJob и оттуда подгружать профессии, доступные на смене
         }
     }
 }
