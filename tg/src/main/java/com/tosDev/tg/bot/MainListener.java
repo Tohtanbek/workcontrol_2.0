@@ -43,8 +43,9 @@ public class MainListener extends CommonTgMethods {
                         else if (update.message()!=null || update.callbackQuery()!=null){
                             commonTgService.checkAuthorityAndRunLogic(update);
                         }
-                    } catch (NullPointerException e) {
+                    } catch (Exception e) {
                         handleStrangeMove(update);
+                        e.printStackTrace();
                     }
                 }
                 return CONFIRMED_UPDATES_ALL;

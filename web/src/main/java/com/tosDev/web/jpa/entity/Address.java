@@ -41,4 +41,9 @@ public class Address {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     List<Income> incomeList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    List<AddressJob> addressJobList = new ArrayList<>();
 }

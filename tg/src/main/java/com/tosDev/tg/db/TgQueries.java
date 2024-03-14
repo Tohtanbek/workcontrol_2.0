@@ -7,7 +7,6 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Hibernate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -131,19 +130,15 @@ public class TgQueries {
         return shortName;
     }
 
-    public Optional<List<Brigadier>> findBrigsOnShiftAddress(Shift freshlySavedShift) {
+    public List<Brigadier> findBrigsWithChatIdOnShiftAddress(Shift freshlySavedShift) {
 
-        List<Brigadier> brigsOnAddress = freshlySavedShift
+        return freshlySavedShift
                 .getAddress()
                 .getBrigadierAddressList()
                 .stream()
                 .map(BrigadierAddress::getBrigadier)
+                .filter(brigadier -> brigadier.getChatId()!=null)
                 .toList();
-
-        return brigsOnAddress.isEmpty()?
-                Optional.empty()
-                :
-                Optional.of(brigsOnAddress);
     }
 
 }

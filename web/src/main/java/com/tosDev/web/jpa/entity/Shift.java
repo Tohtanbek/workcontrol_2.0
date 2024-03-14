@@ -31,7 +31,8 @@ public class Shift {
     @ManyToOne
     private Worker worker;
 
-    private String job;
+    @ManyToOne
+    private Job job;
 
     @ManyToOne
     private Brigadier brigadier;

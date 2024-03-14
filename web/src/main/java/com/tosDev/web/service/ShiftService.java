@@ -3,11 +3,9 @@ package com.tosDev.web.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tosDev.web.dto.ShiftDto;
+import com.tosDev.web.jpa.entity.Job;
 import com.tosDev.web.jpa.entity.Shift;
-import com.tosDev.web.jpa.repository.AddressRepository;
-import com.tosDev.web.jpa.repository.BrigadierRepository;
-import com.tosDev.web.jpa.repository.ShiftRepository;
-import com.tosDev.web.jpa.repository.WorkerRepository;
+import com.tosDev.web.jpa.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,9 +23,7 @@ import java.util.*;
 public class ShiftService {
 
     private final ShiftRepository shiftRepository;
-    private final AddressRepository addressRepository;
-    private final BrigadierRepository brigadierRepository;
-    private final WorkerRepository workerRepository;
+    private final JobRepository jobRepository;
     private final ObjectMapper objectMapper;
 
     @Qualifier("basicDateTimeFormatter")
@@ -44,7 +40,7 @@ public class ShiftService {
                             .map(dao -> ShiftDto.builder()
                                     .id(dao.getId())
                                     .shortInfo(dao.getShortInfo())
-                                    .job(dao.getJob())
+                                    .job(dao.getJob().getName())
                                     .address(dao.getAddress().getShortName())
                                     .brigadier(dao.getBrigadier().getName())
                                     .status(dao.getStatus())
@@ -83,7 +79,7 @@ public class ShiftService {
                 Shift shiftDao = shiftRepository.findById(shiftDto.getId()).orElseThrow();
 
                 shiftDao.setShortInfo(shiftDto.getShortInfo());
-                shiftDao.setJob(shiftDto.getJob());
+                shiftDao.setJob(checkAndReturnJob(shiftDto.getJob()));
 
                 shiftRepository.save(shiftDao);
             }
@@ -93,5 +89,18 @@ public class ShiftService {
         }
         log.info("Записи {} обновлены",shiftDtos);
         return ResponseEntity.ok().build();
+    }
+
+    private Job checkAndReturnJob(String jobName){
+        Optional<Job> existingJob = jobRepository.findByName(jobName);
+        //Если такой профессии еще не использовали, то сохраняем ее в бд и возвращаем
+        if (existingJob.isEmpty()){
+            return jobRepository.save(
+                    Job.builder().name(jobName).build());
+        }
+        //Иначе берем уже существующую с таким же названием и возвращаем для новой сущности
+        else {
+            return existingJob.get();
+        }
     }
 }

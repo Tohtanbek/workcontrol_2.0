@@ -20,6 +20,10 @@ public class Brigadier {
     private String name;
     private Long phoneNumber;
 
+    private Float incomeRate;
+    private Float wageRate;
+    private boolean isHourly;
+
     private Long chatId;
 
     @JsonIgnore

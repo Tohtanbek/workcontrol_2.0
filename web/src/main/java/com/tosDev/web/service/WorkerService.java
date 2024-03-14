@@ -4,9 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tosDev.web.dto.WorkerDto;
 import com.tosDev.web.jpa.entity.Address;
+import com.tosDev.web.jpa.entity.Job;
 import com.tosDev.web.jpa.entity.Worker;
 import com.tosDev.web.jpa.entity.WorkerAddress;
 import com.tosDev.web.jpa.repository.AddressRepository;
+import com.tosDev.web.jpa.repository.JobRepository;
 import com.tosDev.web.jpa.repository.WorkerAddressRepository;
 import com.tosDev.web.jpa.repository.WorkerRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +30,7 @@ public class WorkerService {
     private final AddressRepository addressRepository;
     private final ObjectMapper objectMapper;
     private final WorkerAddressRepository workerAddressRepository;
+    private final JobRepository jobRepository;
 
     public ResponseEntity<String> workersToJsonMap(){
         List<Worker> workers =
@@ -70,7 +73,7 @@ public class WorkerService {
                                     .id(dao.getId())
                                     .name(dao.getName())
                                     .phoneNumber(dao.getPhoneNumber())
-                                    .job(dao.getJob())
+                                    .job(dao.getJob().getName())
                                     .build())
                             .toList();
             dtoStr = objectMapper.writeValueAsString(workerDtoList);
@@ -92,7 +95,7 @@ public class WorkerService {
                             .id(workerDao.getId())
                             .name(workerDao.getName())
                             .phoneNumber(workerDao.getPhoneNumber())
-                            .job(workerDao.getJob())
+                            .job(workerDao.getJob().getName())
                             .build())
                     .toList();
             jsonStr = objectMapper.writeValueAsString(workerDtoList);
@@ -112,7 +115,7 @@ public class WorkerService {
                         .id(dao.getId())
                         .name(dao.getName())
                         .phoneNumber(dao.getPhoneNumber())
-                        .job(dao.getJob())
+                        .job(dao.getJob().getName())
                         .addresses(
                                 dao.getWorkerAddressList().stream().
                                         map(wa -> wa.getAddress().getShortName()).toList()
@@ -135,8 +138,9 @@ public class WorkerService {
                     .builder()
                     .name(workerDto.getName())
                     .phoneNumber(workerDto.getPhoneNumber())
-                    .job(workerDto.getJob())
+                    .job(checkAndReturnJob(workerDto.getName()))
                     .build());
+
             for (String shortName : workerDto.getAddresses()){
                 workerAddressRepository.save(WorkerAddress
                         .builder()
@@ -173,7 +177,8 @@ public class WorkerService {
                         workerRepository.findById(workerDto.getId()).orElseThrow();
                 workerDao.setName(workerDto.getName());
                 workerDao.setPhoneNumber(workerDto.getPhoneNumber());
-                workerDao.setJob(workerDto.getJob());
+                workerDao.setJob(checkAndReturnJob(workerDto.getJob()));
+
                 workerRepository.save(workerDao);
             }
         } catch (NoSuchElementException e) {
@@ -182,5 +187,18 @@ public class WorkerService {
         }
         log.info("Записи {} обновлены",workerDtos);
         return ResponseEntity.ok().build();
+    }
+
+    private Job checkAndReturnJob(String jobName){
+        Optional<Job> existingJob = jobRepository.findByName(jobName);
+        //Если такой профессии еще не использовали, то сохраняем ее в бд и возвращаем
+        if (existingJob.isEmpty()){
+            return jobRepository.save(
+                    Job.builder().name(jobName).build());
+        }
+        //Иначе берем уже существующую с таким же названием и возвращаем для новой сущности
+        else {
+            return existingJob.get();
+        }
     }
 }

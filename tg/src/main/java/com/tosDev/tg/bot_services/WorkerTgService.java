@@ -67,13 +67,14 @@ public class WorkerTgService extends BrigadierWorkerCommonTgMethods {
     private final TelegramBot bot;
     private final DateTimeFormatter tgDateTimeFormatter;
 
+
     @Autowired
     public WorkerTgService(TelegramBot bot,
                            WorkerTgQueries workerTgQueries,
                            TgQueries tgQueries,
                            AdminTgQueries adminTgQueries,
                            DateTimeFormatter tgDateTimeFormatter) {
-        super(bot,tgQueries);
+        super(bot,tgQueries,tgDateTimeFormatter,adminTgQueries);
         this.bot = bot;
         this.tgQueries = tgQueries;
         this.workerTgQueries = workerTgQueries;
@@ -167,6 +168,7 @@ public class WorkerTgService extends BrigadierWorkerCommonTgMethods {
             //todo: Рассылка супервайзерам.
             sendOutWorkerEndToBrigs(shift.get());
             sendOutWorkerEndToAdmins(shift.get());
+
         }
         else {
             bot.execute(new SendMessage(chatId,ERROR_FINISH_OF_SHIFT));
@@ -195,8 +197,8 @@ public class WorkerTgService extends BrigadierWorkerCommonTgMethods {
     }
 
     private void sendOutWorkerEndToBrigs(Shift freshlyUpdatedShift){
-        Optional<List<Brigadier>> maybeBrigs =
-                tgQueries.findBrigsOnShiftAddress(freshlyUpdatedShift);
+        List<Brigadier> maybeBrigs =
+                tgQueries.findBrigsWithChatIdOnShiftAddress(freshlyUpdatedShift);
         String msg = formatFinishedWorkerShift(freshlyUpdatedShift);
         InlineKeyboardMarkup ikbMarkup = new InlineKeyboardMarkup();
         InlineKeyboardButton ikButtonApprove =
@@ -206,8 +208,8 @@ public class WorkerTgService extends BrigadierWorkerCommonTgMethods {
                 new InlineKeyboardButton("Сменить должность")
                         .callbackData(CHANGE_JOB_ON_SHIFT_CALLBACK+freshlyUpdatedShift.getId());
         ikbMarkup.addRow(ikButtonApprove).addRow(ikButtonChangeJob);
-        if (maybeBrigs.isPresent()){
-            for (Brigadier brigadier : maybeBrigs.get()){
+        if (!maybeBrigs.isEmpty()){
+            for (Brigadier brigadier : maybeBrigs){
                 if (brigadier.getChatId()!=null) {
                     SendMessage sendMessage =
                             new SendMessage(brigadier.getChatId(), msg).replyMarkup(ikbMarkup);
@@ -278,10 +280,10 @@ public class WorkerTgService extends BrigadierWorkerCommonTgMethods {
     }
 
     private void sendOutWorkerStartToBrigs(Shift freshlySavedShift) {
-        Optional<List<Brigadier>> maybeBrigs =
-                tgQueries.findBrigsOnShiftAddress(freshlySavedShift);
-        if (maybeBrigs.isPresent()){
-            for (Brigadier brigadier : maybeBrigs.get()){
+        List<Brigadier> maybeBrigs =
+                tgQueries.findBrigsWithChatIdOnShiftAddress(freshlySavedShift);
+        if (!maybeBrigs.isEmpty()){
+            for (Brigadier brigadier : maybeBrigs){
                 if (brigadier.getChatId()!=null){
                     String message = formatStartedWorkerShift(freshlySavedShift);
                     SendMessage sendMessage =
@@ -340,17 +342,9 @@ public class WorkerTgService extends BrigadierWorkerCommonTgMethods {
         String startDateTime = tgDateTimeFormatter.format(shift.getStartDateTime());
 
         return "ℹ Рабочий день начался "+"\n"+
-                shift.getShortInfo() +"\n"+
-                "Начало в "+startDateTime+"\n";
+                "✔" + shift.getShortInfo() +"\n"+
+                "⏰ Начало в "+startDateTime+"\n";
     }
-    private String formatFinishedWorkerShift(Shift shift){
-        String startDateTime = tgDateTimeFormatter.format(shift.getStartDateTime());
-        String endDateTime = tgDateTimeFormatter.format(shift.getEndDateTime());
 
-        return "ℹ Рабочий день окончен "+"\n"+
-                shift.getShortInfo() +"\n"+
-                "Начало в "+startDateTime+"\n"+
-                "Конец в "+endDateTime;
-    }
 
 }

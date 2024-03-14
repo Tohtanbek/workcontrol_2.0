@@ -75,7 +75,7 @@ public class WorkerTgQueries {
         }
         String shortInfo = String.format("""
                 %s %s начал работу на %s
-                """,worker.getJob(),worker.getName(),chosenAddress.getShortName());
+                """,worker.getJob().getName(),worker.getName(),chosenAddress.getShortName());
 
         Shift shift = shiftRepository.save(Shift
                 .builder()
@@ -102,8 +102,12 @@ public class WorkerTgQueries {
                             .orElseThrow();
 
             String shortInfo = String.format("""
-                %s %s закончил работу на %s тип: %s
-                """,worker.getJob(),worker.getName(),shift.getAddress().getShortName(),callbackData);
+                %s %s закончил работу на %s \n
+                тип: %s
+                """,worker.getJob().getName(),
+                    worker.getName(),
+                    shift.getAddress().getShortName(),
+                    callbackData);
 
             shift.setShortInfo(shortInfo);
             shift.setEndDateTime(LocalDateTime.now());

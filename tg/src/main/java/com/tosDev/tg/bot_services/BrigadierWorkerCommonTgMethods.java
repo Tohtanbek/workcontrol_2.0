@@ -5,8 +5,11 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.SendMessage;
+import com.tosDev.tg.db.AdminTgQueries;
 import com.tosDev.tg.db.TgQueries;
 import com.tosDev.web.jpa.entity.Address;
+import com.tosDev.web.jpa.entity.Admin;
+import com.tosDev.web.jpa.entity.Shift;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,9 +18,11 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 import static com.tosDev.tg.bot.enums.ShiftEndTypeEnum.PLANNED;
 import static com.tosDev.tg.bot.enums.ShiftEndTypeEnum.UNPLANNED;
@@ -38,12 +43,19 @@ public class BrigadierWorkerCommonTgMethods extends CommonTgMethods {
 
     private final TelegramBot bot;
     private final TgQueries tgQueries;
+    private final DateTimeFormatter tgDateTimeFormatter;
+    private final AdminTgQueries adminTgQueries;
 
     @Autowired
-    public BrigadierWorkerCommonTgMethods(TelegramBot bot, TgQueries tgQueries) {
+    public BrigadierWorkerCommonTgMethods(TelegramBot bot,
+                                          TgQueries tgQueries,
+                                          DateTimeFormatter tgDateTimeFormatter,
+                                          AdminTgQueries adminTgQueries) {
         super(bot);
         this.bot = bot;
         this.tgQueries = tgQueries;
+        this.tgDateTimeFormatter = tgDateTimeFormatter;
+        this.adminTgQueries = adminTgQueries;
     }
 
     String offerStart(Update update, String callBackData) {
@@ -112,6 +124,25 @@ public class BrigadierWorkerCommonTgMethods extends CommonTgMethods {
                 DecimalFormatSymbols.getInstance(Locale.ENGLISH));
         float totalHours = totalMinutes/60;
         return df.format(totalHours);
+    }
+
+    public String formatFinishedWorkerShift(Shift shift){
+        String startDateTime = tgDateTimeFormatter.format(shift.getStartDateTime());
+        String endDateTime = tgDateTimeFormatter.format(shift.getEndDateTime());
+
+        return "ℹ Рабочий день окончен "+"\n"+
+                "✔" + shift.getShortInfo() +"\n"+
+                "⏰ Начало в "+startDateTime+"\n"+
+                "⏰ Конец в "+endDateTime;
+    }
+
+    public void sendOutErrToAdmins(String err){
+        Optional<List<Admin>> authorizedAdmins = adminTgQueries.findAuthorizedAdmins();
+        if (authorizedAdmins.isPresent()){
+            for (Admin admin : authorizedAdmins.get()){
+                bot.execute(new SendMessage(admin.getChatId(),err));
+            }
+        }
     }
 
 }

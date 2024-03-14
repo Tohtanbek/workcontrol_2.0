@@ -4,15 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Работа над логикой worker и brigadier в tg bot&#10;Добавил общие методы в суперклассы.">
+    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Продолжение работы с тг ботом">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot/MainListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot/MainListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/BrigadierTgService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/BrigadierTgService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/BrigadierWorkerCommonTgMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/BrigadierWorkerCommonTgMethods.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/WorkerTgService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/WorkerTgService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/BrigadierTgQueries.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/BrigadierTgQueries.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/TgQueries.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/TgQueries.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/WorkerTgQueries.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/WorkerTgQueries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/repository/AdminRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/repository/AdminRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tg/src/test/java/integration/bd_and_tg/TgRealServerIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/test/java/integration/bd_and_tg/TgRealServerIT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tg/src/test/java/unit/BrigadierTgServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/test/java/unit/BrigadierTgServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tg/src/test/java/unit/BrigadierWorkerCommonTgMethodsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/test/java/unit/BrigadierWorkerCommonTgMethodsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tg/src/test/resources/sql/test.sql" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/test/resources/sql/test.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/entity/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/entity/Address.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/entity/Brigadier.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/entity/Brigadier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/entity/Shift.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/entity/Shift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/entity/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/entity/Worker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/repository/AddressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/repository/AddressRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/service/ShiftService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/service/ShiftService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/service/WorkerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/service/WorkerService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,9 +35,9 @@
       <list>
         <option value="AnnotationType" />
         <option value="HTML File" />
-        <option value="Interface" />
         <option value="Enum" />
         <option value="Class" />
+        <option value="Interface" />
         <option value="JUnit5 Test Class" />
       </list>
     </option>
@@ -74,7 +85,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "Errors",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "spring.configuration.checksum": "db952fcf6ed0899e7f339ea0e5b090f8"
   },
   "keyToStringList": {
@@ -119,7 +130,7 @@
       <recent name="com.tosDev.controllers.table_pages" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SendOutOtherBrigsThatShiftApprovedTest">
+  <component name="RunManager" selected="JUnit.TgRealServerIT.test">
     <configuration name="BrigadierTgServiceTest.sendOutOtherBrigsThatShiftApprovedTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="tg" />
       <extension name="coverage">
@@ -136,7 +147,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BrigadierWorkerCommonTgMethodsTest.countTotalHours" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="HandleChangeOfJobTest.checkRegex" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="tg" />
       <extension name="coverage">
         <pattern>
@@ -145,8 +156,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="unit" />
-      <option name="MAIN_CLASS_NAME" value="unit.BrigadierWorkerCommonTgMethodsTest" />
-      <option name="METHOD_NAME" value="countTotalHours" />
+      <option name="MAIN_CLASS_NAME" value="unit.HandleChangeOfJobTest" />
+      <option name="METHOD_NAME" value="checkRegex" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -162,21 +173,6 @@
       </extension>
       <option name="PACKAGE_NAME" value="unit" />
       <option name="MAIN_CLASS_NAME" value="unit.SendOutOtherBrigsThatShiftApprovedTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TgRealServerIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="tg" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="integration.bd_and_tg.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="integration.bd_and_tg" />
-      <option name="MAIN_CLASS_NAME" value="integration.bd_and_tg.TgRealServerIT" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -198,6 +194,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="handleChangeOfJobRegexTest.checkRegex" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tg" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="unit.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="unit" />
+      <option name="MAIN_CLASS_NAME" value="unit.handleChangeOfJobRegexTest" />
+      <option name="METHOD_NAME" value="checkRegex" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ApplicationRunner" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="web" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.tosDev.web.ApplicationRunner" />
@@ -214,11 +226,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TgRealServerIT.test" />
+        <item itemvalue="JUnit.HandleChangeOfJobTest.checkRegex" />
+        <item itemvalue="JUnit.handleChangeOfJobRegexTest.checkRegex" />
         <item itemvalue="JUnit.SendOutOtherBrigsThatShiftApprovedTest" />
         <item itemvalue="JUnit.BrigadierTgServiceTest.sendOutOtherBrigsThatShiftApprovedTest" />
-        <item itemvalue="JUnit.TgRealServerIT" />
-        <item itemvalue="JUnit.BrigadierWorkerCommonTgMethodsTest.countTotalHours" />
-        <item itemvalue="JUnit.TgRealServerIT.test" />
       </list>
     </recent_temporary>
   </component>
@@ -260,6 +272,8 @@
       <workItem from="1710236778229" duration="23223000" />
       <workItem from="1710267545207" duration="187000" />
       <workItem from="1710320241130" duration="22985000" />
+      <workItem from="1710374245815" duration="120000" />
+      <workItem from="1710405983198" duration="22816000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит workcontrol 2.0. Работа над frontend">
       <created>1708303197812</created>
@@ -366,7 +380,14 @@
       <option name="project" value="LOCAL" />
       <updated>1710267513922</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Продолжение работы с тг ботом">
+      <created>1710374330957</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1710374330957</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -410,7 +431,8 @@
     <MESSAGE value="Подключение rabbitMQ." />
     <MESSAGE value="Работа над логикой worker в tg bot." />
     <MESSAGE value="Работа над логикой worker и brigadier в tg bot&#10;Добавил общие методы в суперклассы." />
-    <option name="LAST_COMMIT_MESSAGE" value="Работа над логикой worker и brigadier в tg bot&#10;Добавил общие методы в суперклассы." />
+    <MESSAGE value="Продолжение работы с тг ботом" />
+    <option name="LAST_COMMIT_MESSAGE" value="Продолжение работы с тг ботом" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -3,19 +3,18 @@ package com.tosDev.tg.db;
 import com.pengrad.telegrambot.TelegramBot;
 import com.tosDev.tg.bot_services.BrigadierWorkerCommonTgMethods;
 import com.tosDev.web.jpa.entity.*;
-import com.tosDev.web.jpa.repository.AddressRepository;
-import com.tosDev.web.jpa.repository.BrigadierRepository;
-import com.tosDev.web.jpa.repository.ShiftRepository;
+import com.tosDev.web.jpa.repository.*;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 import static com.tosDev.tg.bot.enums.ShiftStatusEnum.*;
 
@@ -27,16 +26,30 @@ public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
     private final BrigadierRepository brigadierRepository;
     private final AddressRepository addressRepository;
     private final ShiftRepository shiftRepository;
+    private final JobRepository jobRepository;
+    private final ExpenseRepository expenseRepository;
+    private final IncomeRepository incomeRepository;
+    private final DateTimeFormatter tgDateTimeFormatter;
 
     @Autowired
     public BrigadierTgQueries(TelegramBot bot, TgQueries tgQueries,
                               BrigadierRepository brigadierRepository,
                               AddressRepository addressRepository,
-                              ShiftRepository shiftRepository) {
-        super(bot, tgQueries);
+                              DateTimeFormatter tgDateTimeFormatter,
+                              ShiftRepository shiftRepository,
+                              JobRepository jobRepository,
+                              ExpenseRepository expenseRepository,
+                              IncomeRepository incomeRepository,
+                              DateTimeFormatter tgDateTimeFormatter1,
+                              AdminTgQueries adminTgQueries) {
+        super(bot, tgQueries,tgDateTimeFormatter,adminTgQueries);
         this.brigadierRepository = brigadierRepository;
         this.addressRepository = addressRepository;
         this.shiftRepository = shiftRepository;
+        this.jobRepository = jobRepository;
+        this.expenseRepository = expenseRepository;
+        this.incomeRepository = incomeRepository;
+        this.tgDateTimeFormatter = tgDateTimeFormatter1;
     }
 
     public Brigadier linkChatIdToExistingBrigadier(Long brigadierPhoneNumber, Long chatId){
@@ -109,13 +122,16 @@ public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
                             .orElseThrow();
 
             String shortInfo = String.format("""
-                Бригадир %s закончил работу на %s тип: %s
+                Бригадир %s закончил работу на %s \n
+                тип: %s
                 """,brigadier.getName(),shift.getAddress().getShortName(),callbackData);
 
             shift.setShortInfo(shortInfo);
             shift.setEndDateTime(LocalDateTime.now());
             shift.setStatus(FINISHED.getDescription());
             shift.setType(callbackData);
+            String totalHours = countTotalHours(shift.getStartDateTime(), shift.getEndDateTime());
+            shift.setTotalHours(Float.valueOf(totalHours));
 
             shiftRepository.save(shift);
             log.info("Успешно обновили смену {} после ее окончания бригадиром {}",shift,brigadier);
@@ -147,6 +163,8 @@ public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
             shiftRepository.save(shift);
             log.info("Смена {}, подтвержденная бригадиром {}, обновлена в бд",
                     shift.getShortInfo(), brigadier.getName());
+            //Инициализируем для последующей работы с сущностью
+            Hibernate.initialize(shift.getAddress().getBrigadierAddressList());
             return Optional.of(shift);
         } catch (NoSuchElementException e) {
             log.error("Не найдена смена {} или бригадир {} при подтверждении смены",
@@ -155,13 +173,254 @@ public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
         }
     }
 
-    public Optional<Shift> handleChangeOfJob(Integer shiftId,Integer brigadierId){
+    public List<Job> loadJobsOfAddress(Integer shiftId,Integer brigadierId){
         try {
             Brigadier brigadier = brigadierRepository.findById(brigadierId).orElseThrow();
             Shift shift = shiftRepository.findById(shiftId).orElseThrow();
             log.info("Бригадир {} решил сменить профессию у смены {}",
                     brigadier.getName(),shift.getShortInfo());
-            //todo:Сделать таблицу AddressJob и оттуда подгружать профессии, доступные на смене
+            List<Job> jobsOfAddress = shift.getAddress().getAddressJobList()
+                    .stream().map(AddressJob::getJob).toList();
+            log.info("нашли следующие профессии {} для бригадира {} для смены на смене {}",
+                    jobsOfAddress,brigadier.getName(),shift.getShortInfo());
+            return jobsOfAddress;
+        } catch (NoSuchElementException e) {
+            log.error("Ошибка при поиске сущности во время " +
+                    "загрузки списка профессий бригадира {}",brigadierId);
+            e.printStackTrace();
+            return Collections.emptyList();
         }
+    }
+
+    public Optional<Shift> saveChangeOfJob(Integer chosenJobId,Integer chosenShiftId){
+        try {
+            Shift shift = shiftRepository.findById(chosenShiftId).orElseThrow();
+            Job jobToSet = jobRepository.findById(chosenJobId).orElseThrow();
+            shift.setJob(jobToSet);
+            //Не забываем помимо job поменять shortInfo, а том там останется старая профессия
+            String shortInfo = String.format("""
+                %s %s закончил работу на %s \n
+                тип: %s
+                """,shift.getJob().getName(),
+                    shift.getWorker().getName(),
+                    shift.getAddress().getShortName(),
+                    shift.getType());
+            shift.setShortInfo(shortInfo);
+            return Optional.of(shiftRepository.save(shift));
+        } catch (NoSuchElementException e) {
+            log.error("При смене профессии на смене {} на job {} не была найдена сущность по id",
+                    chosenShiftId,chosenJobId);
+            e.printStackTrace();
+            return Optional.empty();
+        }
+    }
+
+    public Optional<String> countAndSaveExpense(Shift shift){
+        Job jobOfShift = shift.getJob();
+        Float totalHours = shift.getTotalHours();
+        Optional<Float> expenseRate = Optional.ofNullable(jobOfShift.getWageRate());
+        DecimalFormat df = new DecimalFormat("#.##",
+                DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+        if (expenseRate.isPresent()) {
+            String expenseResult;
+            if (jobOfShift.isHourly()) {
+                 expenseResult = df.format(totalHours * expenseRate.get());
+            }
+            else {
+                expenseResult = df.format(expenseRate.get());
+            }
+            Expense expense = Expense
+                    .builder()
+                    .address(shift.getAddress())
+                    .status("Не оплачен")
+                    .shift(shift)
+                    .dateTime(shift.getEndDateTime())
+                    .type("ЗП")
+                    .worker(shift.getWorker())
+                    .totalSum(Float.valueOf(expenseResult))
+                    .build();
+            expense.setShortInfo(generateExpenseShortInfo(expense,jobOfShift.isHourly()));
+            expenseRepository.save(expense);
+            log.info("Сохранили расход зарплаты {} с завершенной смены {}",
+                    expense.getShortInfo(),shift.getShortInfo());
+            return Optional.empty();
+        }
+        else {
+            log.warn("Не удалось посчитать зарплату для смены {}, expenseRate {} == null ",
+                    shift.getShortInfo(),jobOfShift.getName());
+            return Optional.of("Ошибка при расчете зарплаты для смены "+
+                    jobOfShift.getName() + " " + shift.getWorker().getName());
+        }
+    }
+
+    public Optional<String> countAndSaveIncome(Shift shift){
+        Job jobOfShift = shift.getJob();
+        Float totalHours = shift.getTotalHours();
+        Optional<Float> incomeRate = Optional.ofNullable(jobOfShift.getIncomeRate());
+        DecimalFormat df = new DecimalFormat("#.##",
+                DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+        if (incomeRate.isPresent()) {
+            String incomeResult;
+            if (jobOfShift.isHourly()) {
+                incomeResult = df.format(totalHours * incomeRate.get());
+            }
+            else {
+                incomeResult = df.format(incomeRate.get());
+            }
+            Income income = Income
+                    .builder()
+                    .address(shift.getAddress())
+                    .status("Не оплачен")
+                    .shift(shift)
+                    .type("Рабочий день")
+                    .worker(shift.getWorker())
+                    .totalSum(Float.valueOf(incomeResult))
+                    .build();
+            income.setShortInfo(generateIncomeShortInfo(income,jobOfShift.isHourly()));
+            incomeRepository.save(income);
+            log.info("Сохранили счет за работу {} с завершенной смены {}",
+                    income.getShortInfo(),shift.getShortInfo());
+            return Optional.empty();
+        }
+        else {
+            log.warn("Не удалось посчитать счет для смены {}, incomeRate {} == null ",
+                    shift.getShortInfo(),jobOfShift.getName());
+            return Optional.of("Ошибка при расчете счета для смены "+
+                    jobOfShift.getName() + " " + shift.getWorker().getName());
+        }
+    }
+
+    public Optional<String> countAndSaveBrigExpense(Shift shift){
+        Brigadier brigadier = shift.getBrigadier();
+        Float totalHours = shift.getTotalHours();
+        Optional<Float> expenseRate = Optional.ofNullable(brigadier.getWageRate());
+        DecimalFormat df = new DecimalFormat("#.##",
+                DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+        if (expenseRate.isPresent()) {
+            String expenseResult;
+            if (brigadier.isHourly()) {
+                expenseResult = df.format(totalHours * expenseRate.get());
+            }
+            else {
+                expenseResult = df.format(expenseRate.get());
+            }
+            Expense expense = Expense
+                    .builder()
+                    .address(shift.getAddress())
+                    .status("Не оплачен")
+                    .shift(shift)
+                    .dateTime(shift.getEndDateTime())
+                    .type("ЗП")
+                    .totalSum(Float.valueOf(expenseResult))
+                    .build();
+            expense.setShortInfo(generateBrigExpenseShortInfo(expense,brigadier.isHourly()));
+            expenseRepository.save(expense);
+            log.info("Сохранили расход зарплаты {} с завершенной смены бригадира {}",
+                    expense.getShortInfo(),shift.getShortInfo());
+            return Optional.empty();
+        }
+        else {
+            log.warn("Не удалось посчитать зарплату для смены {}, expenseRate == null ",
+                    shift.getShortInfo());
+            return Optional.of("Ошибка при расчете зарплаты для бригадира "+
+                    brigadier.getName());
+        }
+    }
+
+    public Optional<String> countAndSaveBrigIncome(Shift shift){
+        Brigadier brigadier = shift.getBrigadier();
+        Float totalHours = shift.getTotalHours();
+        Optional<Float> incomeRate = Optional.ofNullable(brigadier.getIncomeRate());
+        DecimalFormat df = new DecimalFormat("#.##",
+                DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+        if (incomeRate.isPresent()) {
+            String incomeResult;
+            if (brigadier.isHourly()) {
+                incomeResult = df.format(totalHours * incomeRate.get());
+            }
+            else {
+                incomeResult = df.format(incomeRate.get());
+            }
+            Income income = Income
+                    .builder()
+                    .address(shift.getAddress())
+                    .status("Не оплачен")
+                    .shift(shift)
+                    .type("Рабочий день")
+                    .totalSum(Float.valueOf(incomeResult))
+                    .build();
+            income.setShortInfo(generateBrigIncomeShortInfo(income,brigadier.isHourly()));
+            incomeRepository.save(income);
+            log.info("Сохранили счет за работу {} с завершенной смены {}",
+                    income.getShortInfo(),shift.getShortInfo());
+            return Optional.empty();
+        }
+        else {
+            log.warn("Не удалось посчитать счет для смены бригадира {}, incomeRate  == null ",
+                    shift.getShortInfo());
+            return Optional.of("Ошибка при расчете счета для смены бригадира: "
+                    +brigadier.getName());
+        }
+    }
+
+
+    private String generateExpenseShortInfo(Expense expense, boolean isHourly){
+        String dateTime = tgDateTimeFormatter.format(expense.getDateTime());
+        return String.format("""
+                Сумма: %f
+                тип : %s
+                Статус: %s
+                тип расчета: %s
+                Работник: %s
+                Дата: %s
+                Адрес: %s
+                """,expense.getTotalSum(),expense.getType(),expense.getStatus(),
+                isHourly?"Почасово":"Сдельная",expense.getWorker().getName(),
+                dateTime,expense.getAddress().getShortName());
+
+    }
+    private String generateBrigExpenseShortInfo(Expense expense, boolean isHourly){
+        String brigName = expense.getShift().getBrigadier().getName();
+        String dateTime = tgDateTimeFormatter.format(expense.getDateTime());
+        return String.format("""
+                Сумма: %f
+                тип : %s
+                Статус: %s
+                тип расчета: %s
+                Работник: бригадир %s
+                Дата: %s
+                Адрес: %s
+                """,expense.getTotalSum(),expense.getType(),expense.getStatus(),
+                isHourly?"Почасово":"Сдельная",brigName,
+                dateTime,expense.getAddress().getShortName());
+
+    }
+
+    private String generateBrigIncomeShortInfo(Income income, boolean isHourly){
+        String brigName = income.getShift().getBrigadier().getName();
+        return String.format("""
+                Сумма: %f
+                тип : %s
+                Статус: %s
+                тип расчета: %s
+                Работник: бригадир %s
+                Адрес: %s
+                """,income.getTotalSum(),income.getType(),income.getStatus(),
+                isHourly?"Почасово":"Сдельная",brigName,
+                income.getAddress().getShortName());
+
+    }
+    private String generateIncomeShortInfo(Income income, boolean isHourly){
+        return String.format("""
+                Сумма: %f
+                тип : %s
+                Статус: %s
+                тип расчета: %s
+                Работник: %s
+                Адрес: %s
+                """,income.getTotalSum(),income.getType(),income.getStatus(),
+                isHourly?"Почасово":"Сдельная",income.getWorker().getName(),
+                income.getAddress().getShortName());
+
     }
 }

@@ -18,7 +18,10 @@ public class Worker {
 
     private String name;
     private Long phoneNumber;
-    private String job;
+
+    @ManyToOne
+    private Job job;
+
     private Long chatId;
 
     @ToString.Exclude

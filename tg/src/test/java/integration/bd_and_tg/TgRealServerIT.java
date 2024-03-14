@@ -15,6 +15,10 @@ public class TgRealServerIT extends IntegrationTestBase {
     @Test
     void test() {
 
+        /*todo:нынешняя концепция расчета зп: работникам по entity Job,
+            бригадирам - по entityJob с названием по имени бригадира.
+            то есть при расчете зарплаты бригадиру ищем job идентичный имени бригадира
+         */
 
         mainListener.activateListener();
         //Оставляем сервер работать

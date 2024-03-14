@@ -1,7 +1,6 @@
 package unit;
 
 import com.pengrad.telegrambot.TelegramBot;
-import com.pengrad.telegrambot.request.SendMessage;
 import com.tosDev.tg.bot_services.BrigadierTgService;
 import com.tosDev.tg.db.AdminTgQueries;
 import com.tosDev.tg.db.BrigadierTgQueries;
@@ -9,19 +8,14 @@ import com.tosDev.tg.db.TgQueries;
 import com.tosDev.web.jpa.entity.Brigadier;
 import com.tosDev.web.jpa.entity.Shift;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Before;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
@@ -73,8 +67,8 @@ class SendOutOtherBrigsThatShiftApprovedTest {
         when(approvedShiftMock.getBrigadier()).thenReturn(brigMock1);
 
         TgQueries tgQueriesMock = mock(TgQueries.class);
-        when(tgQueriesMock.findBrigsOnShiftAddress(any()))
-                .thenReturn(Optional.of(List.of(brigMock1,brigMock2,brigMock3)));
+        when(tgQueriesMock.findBrigsWithChatIdOnShiftAddress(any()))
+                .thenReturn(List.of(brigMock1,brigMock2,brigMock3));
 
         brigadierTgServiceMock = new BrigadierTgService(
                 botMock,
