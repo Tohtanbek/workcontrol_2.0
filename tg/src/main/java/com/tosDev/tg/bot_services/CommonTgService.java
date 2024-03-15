@@ -8,9 +8,11 @@ import com.pengrad.telegrambot.request.DeleteMessage;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.tosDev.amqp.RabbitMQMessageProducer;
 import com.tosDev.tg.db.BrigadierTgQueries;
+import com.tosDev.tg.db.ResponsibleTgQueries;
 import com.tosDev.tg.db.WorkerTgQueries;
 import com.tosDev.web.jpa.entity.Admin;
 import com.tosDev.web.jpa.entity.Brigadier;
+import com.tosDev.web.jpa.entity.Responsible;
 import com.tosDev.web.jpa.entity.Worker;
 import com.tosDev.web.jpa.repository.AdminRepository;
 import com.tosDev.web.jpa.repository.BrigadierRepository;
@@ -33,6 +35,8 @@ public class CommonTgService {
     private final TgQueries tgQueries;
     private final WorkerTgQueries workerTgQueries;
     private final BrigadierTgQueries brigadierTgQueries;
+
+    private final ResponsibleTgQueries responsibleTgQueries;
     private final AdminTgService adminTgService;
     private final WorkerTgService workerTgService;
     private final BrigadierTgService brigadierTgService;
@@ -89,8 +93,9 @@ public class CommonTgService {
                 }
                 case ("com.tosDev.web.jpa.entity.Responsible") -> {
                     log.info("Пользователь найден в бд в роли супервайзера");
-                    responsibleTgService.linkChatIdToExistingSupervisor(phoneNumber,chatId);
-//                  responsibleTgService.startResponsibleLogic(worker);
+                    Responsible linkedResponsible =
+                            responsibleTgQueries.linkChatIdToExistingSupervisor(phoneNumber,chatId);
+                    responsibleTgService.startResponsibleLogic(update, linkedResponsible.getId());
                 }
                 default -> {
                     log.error("update от неправильного класса");
@@ -134,7 +139,8 @@ public class CommonTgService {
                 }
                 case ("com.tosDev.web.jpa.entity.Responsible") -> {
                     log.info("update от супервайзера");
-//                    continueResponsibleLogic((Responsible) someAuthorizedUser);
+                    Responsible responsible = (Responsible) someAuthorizedUser;
+                    responsibleTgService.startResponsibleLogic(update,responsible.getId());
                 }
                 default -> {
                     log.error("update от неправильного класса");

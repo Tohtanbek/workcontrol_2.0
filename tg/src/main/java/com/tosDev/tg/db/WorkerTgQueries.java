@@ -119,6 +119,7 @@ public class WorkerTgQueries {
             //Для последующей рассылки загружаем адреса
             Hibernate.initialize(shift.getAddress().getBrigadierAddressList());
 
+
             log.info("Успешно обновили смену {} после ее окончания работником {}",shift,worker);
             return shift;
         } catch (NoSuchElementException e) {

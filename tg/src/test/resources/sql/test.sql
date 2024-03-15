@@ -6,7 +6,9 @@ CREATE TABLE IF NOT EXISTS responsible(
 );
 INSERT INTO responsible(name,phone_number)
 VALUES
-    ('Имя ответственного 1',9991115566), ('Имя ответственного 2',9991115567);
+    ('Имя ответственного 1',9991115566),
+    ('Имя ответственного 2',9991115567),
+    ('Тестовый супервайзер тг',66994854013);
 
 CREATE TABLE IF NOT EXISTS equipment_type(
                                              id SERIAL PRIMARY KEY ,
@@ -124,7 +126,7 @@ CREATE TABLE IF NOT EXISTS responsible_brigadier(
                                                     brigadier_id INTEGER references brigadier(id) ON DELETE CASCADE
 );
 INSERT INTO responsible_brigadier (responsible_id, brigadier_id)
-VALUES (1,1),(1,2),(2,1);
+VALUES (1,1),(1,2),(2,1),(3,3),(3,1);
 
 
 CREATE TABLE IF NOT EXISTS equipment(

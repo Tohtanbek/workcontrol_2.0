@@ -67,6 +67,10 @@ public class BrigadierTgService extends BrigadierWorkerCommonTgMethods {
     Для данного адреса не найдено ни одной связанной профессии.
     Утвердите смену без смены профессии.
     """;
+    private final String START_SHIFT_COMMAND = "start_shift";
+    private final String CHECK_WORKERS_COMMAND = "check_workers";
+    private final String CHECK_ADDRESS_COMMAND = "check_address";
+    private final String CHECK_WORKERS_WORKING_COMMAND = "check_workers_working";
 
     private final TelegramBot bot;
 
@@ -144,12 +148,64 @@ public class BrigadierTgService extends BrigadierWorkerCommonTgMethods {
         if (freshMsg.contact()!=null){
             sendGreeting(chatId);
         }
-        else if (freshMsg.text().equals("/start_shift")){
+        else if (freshMsg.text().equals("/"+START_SHIFT_COMMAND)){
             sendAddressList(update,brigadierId);
+        }
+        else if (freshMsg.text().equals("/"+CHECK_WORKERS_COMMAND)){
+            checkWorkers(chatId,brigadierId);
+        }
+        else if (freshMsg.text().equals("/"+CHECK_WORKERS_WORKING_COMMAND)){
+            checkWorkersWorking(chatId,brigadierId);
+        }
+        else if (freshMsg.text().equals("/"+CHECK_ADDRESS_COMMAND)){
+            checkAddressList(chatId,brigadierId);
         }
     }
     //    Приватные методы ---------------------------------------------------------------
 
+    private void checkAddressList(Long chatId,Integer brigadierId){
+        List<Address> maybeAddressList =
+                brigadierTgQueries.findAddressListOfBrig(brigadierId);
+        if (!maybeAddressList.isEmpty()){
+            String msg = formatListOfAddress(maybeAddressList);
+            bot.execute(new SendMessage(chatId,msg));
+            log.info("Отправили бригадиру {} список его адресов {}",
+                    brigadierId,msg);
+        }
+        else {
+            log.warn("Не найдены адреса бригадира {} по команде",
+                    brigadierId);
+            bot.execute(new SendMessage(chatId,"Адреса не найдены"));
+        }
+    }
+    private void checkWorkersWorking(Long chatId,Integer brigadierId){
+        List<Worker> maybeWorkers = brigadierTgQueries.findLinkedWorkersWorking(brigadierId);
+        if (!maybeWorkers.isEmpty()){
+            String msg = formatListOfWorkers(maybeWorkers);
+            bot.execute(new SendMessage(chatId,msg));
+            log.info("Отправили бригадиру {} список работников на смене {} по команде",
+                    brigadierId,msg);
+        }
+        else {
+            bot.execute(new SendMessage(chatId,"Работники не найдены"));
+            log.warn("Не найдены работники на смене по запросу команды бригадира {}",
+                    brigadierId);
+        }
+    }
+    private void checkWorkers(Long chatId,Integer brigadierId){
+        List<Worker> maybeWorkers = brigadierTgQueries.findLinkedWorkers(brigadierId);
+        if (!maybeWorkers.isEmpty()){
+            String msg = formatListOfWorkers(maybeWorkers);
+            bot.execute(new SendMessage(chatId,msg));
+            log.info("Отправили бригадиру {} список работников {} по команде",
+                    brigadierId,msg);
+        }
+        else {
+            bot.execute(new SendMessage(chatId,"Работники не найдены"));
+            log.warn("Не найдены работники по запросу команды бригадира {}",
+                    brigadierId);
+        }
+    }
 
     private void handleChangeOfJob(Update update, Integer brigadierId) {
         Long chatId = update.callbackQuery().from().id();
@@ -245,7 +301,7 @@ public class BrigadierTgService extends BrigadierWorkerCommonTgMethods {
             bot.execute(new SendMessage(chatId,approvedMsg));
             sendOutShiftApprovedToAdmins(approvedMsg);
             sendOutOtherBrigsThatShiftApproved(maybeShift.get(),chatId);
-            //todo:рассылка супервайзеру
+            sendOutLinkedSupervisorsShiftMsg(maybeShift.get(),approvedMsg);
 
             //Расчет зп
             Optional<String> optionalExpenseError =
@@ -259,6 +315,24 @@ public class BrigadierTgService extends BrigadierWorkerCommonTgMethods {
         else {
             //Скорее всего ее уже подтвердили
             bot.execute(new SendMessage(chatId,ALREADY_APPROVED_ERR_MSG));
+        }
+    }
+
+    private void sendOutLinkedSupervisorsShiftMsg(Shift shift, String shiftMsg) {
+        List<Responsible> linkedSupervisors = shift
+                .getBrigadier()
+                .getResponsibleBrigadierList()
+                .stream().map(ResponsibleBrigadier::getResponsible)
+                .filter(responsible -> responsible.getChatId()!=null)
+                .toList();
+        if (!linkedSupervisors.isEmpty()){
+            for (Responsible responsible : linkedSupervisors){
+                bot.execute(new SendMessage(responsible.getChatId(),shiftMsg));
+            }
+        }
+        else {
+            log.warn("У бригадира смены {} нет авторизованных в tg супервайзеров, рассылка" +
+                    "супервайзерам не возможна",shift.getShortInfo());
         }
     }
 
@@ -301,15 +375,21 @@ public class BrigadierTgService extends BrigadierWorkerCommonTgMethods {
     }
 
     private void editMenuForBrigadier(Update update){
-        //Ставим личное меню работнику
         Long chatId = update.message() == null?
                 update.callbackQuery().from().id()
                 :
                 update.message().chat().id();
-        BotCommand botCommand = new BotCommand("start_shift",
-                "Начать собственный рабочий день");
 
-        bot.execute(new SetMyCommands(botCommand)
+        BotCommand startShiftC = new BotCommand(START_SHIFT_COMMAND,
+                "Начать собственный рабочий день");
+        BotCommand checkWorkersC = new BotCommand(CHECK_WORKERS_COMMAND,
+                "Список работников на моих адресах");
+        BotCommand checkWorkingC = new BotCommand(CHECK_WORKERS_WORKING_COMMAND,
+                "Работники, начавшие рабочий день");
+        BotCommand checkAddressC = new BotCommand(CHECK_ADDRESS_COMMAND,
+                "Список моих адресов");
+
+        bot.execute(new SetMyCommands(startShiftC,checkWorkersC,checkWorkingC,checkAddressC)
                 .scope(new BotCommandsScopeChat(chatId)));
     }
 
@@ -322,11 +402,12 @@ public class BrigadierTgService extends BrigadierWorkerCommonTgMethods {
                 Optional.ofNullable(brigadierTgQueries.saveFinishedShift(brigadierId, callbackData));
         deletePrevCallbackMessage(update);
         if (shift.isPresent()){
-            bot.execute(new SendMessage(chatId,formatFinishedBrigadierShift(shift.get())));
+            String shiftMsg = formatFinishedBrigadierShift(shift.get());
+            bot.execute(new SendMessage(chatId,shiftMsg));
             bot.execute(new SendMessage(chatId,SUCCESSFUL_FINISH_OF_SHIFT));
             sendOutBrigEndToAdmins(shift.get());
+            sendOutLinkedSupervisorsShiftMsg(shift.get(),shiftMsg);
             log.info("Бригадир {} завершил смену",brigadierId);
-            //todo:рассылка супервайзерам.
 
             //Расчет зп
             Optional<String> optionalExpenseError =
@@ -340,6 +421,26 @@ public class BrigadierTgService extends BrigadierWorkerCommonTgMethods {
         else {
             bot.execute(new SendMessage(chatId,ERROR_FINISH_OF_SHIFT));
             handleStrangeMove(update);
+        }
+    }
+
+    private void sendOutBrigStartToAdmins(Shift freshlyUpdatedShift){
+        Optional<List<Admin>> maybeAdmins = adminTgQueries.findAuthorizedAdmins();
+        if (maybeAdmins.isPresent()){
+            for (Admin admin : maybeAdmins.get()){
+                SendMessage sendMessage =
+                        new SendMessage(admin.getChatId(),
+                                formatStartedBrigadierShift(freshlyUpdatedShift));
+                bot.execute(sendMessage);
+                log.info("Отправлено сообщение о начале смены {} админу {}",
+                        freshlyUpdatedShift.getShortInfo(),admin.getPhoneNumber());
+            }
+            log.info("Админам разосланы сообщения о начале смены {}",
+                    freshlyUpdatedShift.getShortInfo());
+        }
+        else {
+            log.warn("Для рассылки сообщения о начале смены " +
+                    "нет ни одного авторизованного в тг админа");
         }
     }
 
@@ -373,15 +474,17 @@ public class BrigadierTgService extends BrigadierWorkerCommonTgMethods {
         String addressId = callBackData.substring(AGREE_TO_START_SHIFT_CALLBACK.length());
         Long chatId = update.callbackQuery().from().id();
         log.info("Бригадир с id {} согласился начать смену на address_id {}", brigadierId, addressId);
-        boolean savedSuccessfully =
+        Optional<Shift> maybeShift =
                 brigadierTgQueries.loadFreshBrigadierShift(addressId, brigadierId);
         deletePrevCallbackMessage(update);
-        if (!savedSuccessfully) {
+        if (maybeShift.isEmpty()) {
             bot.execute(new SendMessage(chatId, ALREADY_EXISTING_SHIFT_AT_WORK));
             log.warn("У бригадира {} уже есть активная смена", brigadierId);
         } else {
+            String shiftMsg = formatStartedBrigadierShift(maybeShift.get());
             bot.execute(new SendMessage(chatId, SHIFT_WAS_BEGAN_MSG));
-            //todo: Рассылка админам, супервайзерам.
+            sendOutLinkedSupervisorsShiftMsg(maybeShift.get(),shiftMsg);
+            sendOutBrigStartToAdmins(maybeShift.get());
             sendButtonEndingShift(update, brigadierId);
         }
     }
@@ -424,6 +527,14 @@ public class BrigadierTgService extends BrigadierWorkerCommonTgMethods {
         log.info("Отправили бригадиру {} кнопку для окончания рабочего дня",brigadierId);
     }
 
+    private String formatStartedBrigadierShift(Shift shift){
+        String startDateTime = tgDateTimeFormatter.format(shift.getStartDateTime());
+
+        return "ℹ Рабочий день начат "+"\n"+
+                "✔" + shift.getShortInfo() +"\n"+
+                "⏰ Начало в "+startDateTime+"\n";
+    }
+
     private String formatFinishedBrigadierShift(Shift shift){
         String startDateTime = tgDateTimeFormatter.format(shift.getStartDateTime());
         String endDateTime = tgDateTimeFormatter.format(shift.getEndDateTime());
@@ -442,6 +553,21 @@ public class BrigadierTgService extends BrigadierWorkerCommonTgMethods {
                 "⏰ Начало в "+startDateTime+"\n"+
                 "⏰ Конец в "+endDateTime+"\n"+
                 "⏳ Отработано часов: "+shift.getTotalHours();
+    }
+
+    private String formatListOfWorkers(List<Worker> workerList){
+        String msg = "Список ваших работников:\n";
+        for (Worker worker : workerList){
+            msg = msg.concat(worker.getJob().getName() + " " + worker.getName() + "\n");
+        }
+        return msg;
+    }
+    private String formatListOfAddress(List<Address> addressList){
+        String msg = "Список ваших адресов:\n";
+        for (Address address : addressList){
+            msg = msg.concat(address.getShortName() + "\n");
+        }
+        return msg;
     }
 
 

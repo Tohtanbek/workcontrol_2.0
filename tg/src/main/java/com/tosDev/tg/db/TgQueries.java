@@ -2,14 +2,18 @@ package com.tosDev.tg.db;
 
 import com.tosDev.web.jpa.entity.*;
 import com.tosDev.web.jpa.repository.AddressRepository;
+import com.tosDev.web.jpa.repository.BrigadierRepository;
+import com.tosDev.web.jpa.repository.ResponsibleBrigadierRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -21,6 +25,7 @@ import java.util.Optional;
 public class TgQueries {
     private final EntityManager entityManager;
     private final AddressRepository addressRepository;
+    private final BrigadierRepository brigadierRepository;
 
 
     /**
@@ -130,9 +135,9 @@ public class TgQueries {
         return shortName;
     }
 
-    public List<Brigadier> findBrigsWithChatIdOnShiftAddress(Shift freshlySavedShift) {
+    public List<Brigadier> findBrigsWithChatIdOnShiftAddress(Shift shift) {
 
-        return freshlySavedShift
+        return shift
                 .getAddress()
                 .getBrigadierAddressList()
                 .stream()
@@ -140,5 +145,30 @@ public class TgQueries {
                 .filter(brigadier -> brigadier.getChatId()!=null)
                 .toList();
     }
+    public List<Responsible> findAllAuthorizedResponsibleOfShift(Shift shift) {
+
+        List<Integer> brigadierIds = shift
+                .getAddress()
+                .getBrigadierAddressList()
+                .stream()
+                .map(BrigadierAddress::getBrigadier)
+                .filter(brigadier -> brigadier.getChatId()!=null)
+                .map(Brigadier::getId)
+                .toList();
+
+        List<Responsible> responsibleList = new ArrayList<>();
+
+        for (Brigadier brigadier : brigadierRepository.findAllById(brigadierIds)){
+           responsibleList.addAll(
+                   brigadier.getResponsibleBrigadierList()
+                    .stream()
+                    .map(ResponsibleBrigadier::getResponsible)
+                    .filter(responsible -> responsible.getChatId()!=null)
+                    .toList());
+        }
+        return responsibleList;
+    }
+
+
 
 }

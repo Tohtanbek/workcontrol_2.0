@@ -1,6 +1,7 @@
 package com.tosDev.tg.db;
 
 import com.pengrad.telegrambot.TelegramBot;
+import com.tosDev.tg.bot.enums.ShiftStatusEnum;
 import com.tosDev.tg.bot_services.BrigadierWorkerCommonTgMethods;
 import com.tosDev.web.jpa.entity.*;
 import com.tosDev.web.jpa.repository.*;
@@ -81,7 +82,7 @@ public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
     }
 
 
-    public boolean loadFreshBrigadierShift(String addressId,Integer brigadierId){
+    public Optional<Shift> loadFreshBrigadierShift(String addressId,Integer brigadierId){
 
         Address chosenAddress = new Address();
         Brigadier brigadier = new Brigadier();
@@ -91,7 +92,7 @@ public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
             //Проверка на наличие активной смены
             if (shiftRepository.existsByBrigadierAndStatus(brigadier, AT_WORK.getDescription()))
             {
-                return false;
+                return Optional.empty();
             }
         } catch (NoSuchElementException e) {
             log.error("Ошибка поиска бригадира или адреса при начале смены бригадира.");
@@ -109,9 +110,11 @@ public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
                 .status(AT_WORK.getDescription())
                 .startDateTime(LocalDateTime.now())
                 .build());
+        //Инициализируем, чтобы потом найти супервайзеров для переправки
+        Hibernate.initialize(shift.getBrigadier().getResponsibleBrigadierList());
         log.info("Смена бригадира {} загружена в базу данных",shift);
 
-        return true;
+        return Optional.of(shift);
     }
 
     public Shift saveFinishedShift(Integer brigadierId,String callbackData){
@@ -134,6 +137,8 @@ public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
             shift.setTotalHours(Float.valueOf(totalHours));
 
             shiftRepository.save(shift);
+            //Инициализируем, чтобы потом найти супервайзеров для переправки
+            Hibernate.initialize(shift.getBrigadier().getResponsibleBrigadierList());
             log.info("Успешно обновили смену {} после ее окончания бригадиром {}",shift,brigadier);
             return shift;
         } catch (NoSuchElementException e) {
@@ -158,13 +163,13 @@ public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
             shift.setBrigadier(brigadier);
             String totalHours = countTotalHours(shift.getStartDateTime(), shift.getEndDateTime());
             shift.setTotalHours(Float.valueOf(totalHours));
-            //todo: посчитать зп
 
             shiftRepository.save(shift);
             log.info("Смена {}, подтвержденная бригадиром {}, обновлена в бд",
                     shift.getShortInfo(), brigadier.getName());
             //Инициализируем для последующей работы с сущностью
             Hibernate.initialize(shift.getAddress().getBrigadierAddressList());
+            Hibernate.initialize(shift.getBrigadier().getResponsibleBrigadierList());
             return Optional.of(shift);
         } catch (NoSuchElementException e) {
             log.error("Не найдена смена {} или бригадир {} при подтверждении смены",
@@ -363,6 +368,49 @@ public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
         }
     }
 
+    public List<Worker> findLinkedWorkers(Integer brigadierId){
+        try {
+            //1 Получаем бригадира
+            Brigadier brigadier = brigadierRepository.findById(brigadierId).orElseThrow();
+            //2 Получаем его адреса
+            List<Address> addressListOfBrig =
+                    brigadier.getBrigadierAddressList()
+                    .stream()
+                    .map(BrigadierAddress::getAddress)
+                    .toList();
+            //3 С каждого адреса получаем всех работников и записываем в финальный list
+            Set<Worker> workersOfBrig = new HashSet<>();
+            for (Address address : addressListOfBrig){
+                address.getWorkerAddressList().stream()
+                        .map(WorkerAddress::getWorker)
+                        .forEach(workersOfBrig::add);
+            }
+            return workersOfBrig.stream().toList();
+        } catch (Exception e) {
+            log.error("Ошибка при поиске в бд бригадира {} или его работников",brigadierId);
+            return Collections.emptyList();
+        }
+    }
+    public List<Worker> findLinkedWorkersWorking(Integer brigadierId){
+        return findLinkedWorkers(brigadierId)
+                .stream()
+                .filter(worker -> worker.getShiftList()
+                        .stream().anyMatch(shift -> shift.getStatus().equals(AT_WORK.getDescription())))
+                .toList();
+    }
+
+    public List<Address> findAddressListOfBrig(Integer brigadierId){
+        try {
+            Brigadier brigadier = brigadierRepository.findById(brigadierId).orElseThrow();
+            return brigadier.getBrigadierAddressList()
+                    .stream()
+                    .map(BrigadierAddress::getAddress).toList();
+        } catch (NoSuchElementException e) {
+            log.error("Не нашли бригадира {} или его адресов в бд по команде",
+                    brigadierId);
+            return Collections.emptyList();
+        }
+    }
 
     private String generateExpenseShortInfo(Expense expense, boolean isHourly){
         String dateTime = tgDateTimeFormatter.format(expense.getDateTime());
