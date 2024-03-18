@@ -5,15 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
-public class ExpenseDto {
+public class IncomeDto {
     private Integer id;
+
     private String shortInfo;
+    private String contact;
     private Float totalSum;
     private String type;
     private String status;

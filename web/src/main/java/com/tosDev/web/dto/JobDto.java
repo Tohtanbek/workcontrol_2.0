@@ -8,14 +8,15 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
-public class BrigadierSmallDto {
+@Builder
+public class JobDto {
     private Integer id;
+
     private String name;
-    private Long phoneNumber;
     private Float wageRate;
     private Float incomeRate;
+
     @JsonProperty("isHourly")
     private boolean isHourly;
 }

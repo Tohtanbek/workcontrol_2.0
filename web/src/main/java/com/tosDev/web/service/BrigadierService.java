@@ -116,6 +116,9 @@ public class BrigadierService {
                                             .map(rb -> rb.getResponsible().getName())
                                             .toList()
                             )
+                            .isHourly(dao.isHourly())
+                            .wageRate(dao.getWageRate())
+                            .incomeRate(dao.getIncomeRate())
                             .build()).toList();
             allBrigadiersStr = objectMapper.writeValueAsString(brigadierSmallDtoList);
         } catch (JsonProcessingException e) {
@@ -132,6 +135,9 @@ public class BrigadierService {
                     .builder()
                     .name(brigadierDto.getName())
                     .phoneNumber(brigadierDto.getPhoneNumber())
+                    .wageRate(brigadierDto.getWageRate())
+                    .incomeRate(brigadierDto.getIncomeRate())
+                    .isHourly(brigadierDto.isHourly())
                     .build());
         } catch (Exception e) {
             log.error("Ошибка при сохранении нового бригадира в бд{}",brigadierDto);
@@ -217,6 +223,9 @@ public class BrigadierService {
                         brigadierRepository.findById(brigadierDtoWithSuper.getId()).orElseThrow();
                 brigadierDao.setName(brigadierDtoWithSuper.getName());
                 brigadierDao.setPhoneNumber(brigadierDtoWithSuper.getPhoneNumber());
+                brigadierDao.setHourly(brigadierDtoWithSuper.isHourly());
+                brigadierDao.setWageRate(brigadierDtoWithSuper.getWageRate());
+                brigadierDao.setIncomeRate(brigadierDtoWithSuper.getIncomeRate());
                 brigadierRepository.save(brigadierDao);
             }
         } catch (NoSuchElementException e) {

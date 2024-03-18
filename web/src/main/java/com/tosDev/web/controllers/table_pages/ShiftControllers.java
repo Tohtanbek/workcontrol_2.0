@@ -22,7 +22,7 @@ public class ShiftControllers {
      * Загружает страницу со сменами
      */
     @GetMapping("/main")
-    String showEquipPage(){
+    String showShiftPage(){
         log.info("Загружена страница смен");
         return "shift_tab";
     }

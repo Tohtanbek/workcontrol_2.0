@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Расходы</title>
+    <title>Доходы</title>
     <link href="https://unpkg.com/tabulator-tables@5.6.0/dist/css/tabulator_site.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.6.0/dist/js/tabulator.min.js"></script>
-    <link th:href="@{/css/expense/styles_expense_tab.css}" href="/static/css/expense/styles_expense_tab.css" rel="stylesheet" />
+    <link th:href="@{/css/income/styles_income_tab.css}" href="/static/css/income/styles_income_tab.css" rel="stylesheet" />
     <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -39,8 +39,7 @@
         <li><a href="http://www.mediahawkz.com/topic/lifestyle">Клиенты</a></li>
         <li><a href="http://www.mediahawkz.com/topic/world">Организации</a></li>
         <li><a href="/tables/address/main">Объекты</a></li>
-        <li><a href="http://www.mediahawkz.com/topic/entertainment">Расходы</a></li>
-        <li><a href="http://www.mediahawkz.com/topic/sports">Счета</a></li>
+        <li><a href="/tables/expense/main">Расходы</a></li>
     </ul>
     <div class="copyright">
         <span>&copy; 2024 <a href="https://workcontrol.site/form/authentication" class="link">DeepClean.site</a> </span>
@@ -70,7 +69,7 @@
                         <li><a href="http://www.mediahawkz.com/topic/world">Организации</a></li>
                         <li><a href="/tables/address/main">Объекты</a></li>
                         <li><a href="/tables/shift/main">Рабочее время</a></li>
-                        <li><a href="/tables/income/main">Доходы</a></li>
+                        <li><a href="http://www.mediahawkz.com/topic/sports">Счета</a></li>
                     </ul>
                 </li>
             </ul>
@@ -105,7 +104,7 @@
             <button id="main-table-save-update">Сохранить изменения в таблице</button>
         </div>
         <!-- Таблица основная -->
-        <div id="expense-table"></div>
+        <div id="income-table"></div>
     </div>
     <!-- Окно фильтров -->
     <div id="filter-window">
@@ -137,7 +136,7 @@
     <div id="overlay"></div>
 </main><!-- @end main -->
 <!--    форма на новое поле        -->
-<form id="main-form" class="expense-form">
+<form id="main-form" class="income-form">
     <i id="form-exit" class="fa fa-times" aria-hidden="true"></i>
     <div class="datainput">
         <input class="validate" id="shortInfo" name="shortInfo" required="" type="text" value=''/>
@@ -158,11 +157,6 @@
         <input class="validate" id="type" name="type" required="" type="text" value=''/>
         <span class="highlight"></span><span class="bar"></span>
         <label>Тип</label>
-    </div>
-    <div class="datainput">
-        <input class="validate" id="zone" name="zone" required="" type="text" value=''/>
-        <span class="highlight"></span><span class="bar"></span>
-        <label>Географическая зона</label>
     </div>
     <div class="datainput">
         <select id="address" name="address">
@@ -192,13 +186,13 @@
         </ul>
     </div> <!-- cd-popup-container -->
 </div> <!-- cd-popup -->
-<!--Меню при удалении записи expense-->
-<div class="cd-popup" id="expense-delete-popup" role="alert">
+<!--Меню при удалении записи income-->
+<div class="cd-popup" id="income-delete-popup" role="alert">
     <div class="cd-popup-container">
         <p>Вы точно хотите удалить записи?</p>
         <ul class="cd-buttons">
-            <li><a href="" id="expense-popup-yes">Да</a></li>
-            <li><a href="" id="expense-popup-no">Нет</a></li>
+            <li><a href="" id="income-popup-yes">Да</a></li>
+            <li><a href="" id="income-popup-no">Нет</a></li>
         </ul>
     </div> <!-- cd-popup-container -->
 </div> <!-- cd-popup -->
@@ -207,7 +201,7 @@
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script th:src="@{/js/main_header.js}" src="/static/js/main_header.js"></script>
-<script th:src="@{/js/expense/expense_script.js}" src="/js/expense/expense_script.js"></script>
-<script th:src="@{/js/expense/expense_delete_popup_script.js}" src="/js/expense/expense_delete_popup_script.js"></script>
+<script th:src="@{/js/income/income_script.js}" src="/js/income/income_script.js"></script>
+<script th:src="@{/js/income/income_delete_popup_script.js}" src="/js/income/income_delete_popup_script.js"></script>
 </body>
 </html>

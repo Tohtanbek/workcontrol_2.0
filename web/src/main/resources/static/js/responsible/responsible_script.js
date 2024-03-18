@@ -14,7 +14,7 @@ let rowPopupFormatter = function (e,row,onRendered){
     return container;
 }
 
-let workerTable = createResponsibleTable();
+let responsibleTable = createResponsibleTable();
 let superBrigadierMap;
 responsibleTable.on("tableBuilt",function (){loadLinkedBrigadiers()})
 

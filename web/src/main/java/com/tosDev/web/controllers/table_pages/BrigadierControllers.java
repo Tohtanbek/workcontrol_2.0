@@ -56,7 +56,7 @@ public class BrigadierControllers {
      * @return html страница работников
      */
     @GetMapping("/main")
-    String loadMainWorkerPage(){
+    String loadMainBrigadierPage(){
         return "brigadier_tab";
     }
 
@@ -86,7 +86,7 @@ public class BrigadierControllers {
      * @return Response entity with http status
      */
     @DeleteMapping("/delete_brigadier_rows")
-    ResponseEntity<Void> deleteWorkerRows(@RequestBody Integer[] ids){
+    ResponseEntity<Void> deleteBrigadierRows(@RequestBody Integer[] ids){
         return brigadierService.deleteBrigadierRows(ids);
     }
 

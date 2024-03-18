@@ -28,7 +28,6 @@ public class ExpenseService {
     private final ObjectMapper objectMapper;
     private final ExpenseRepository expenseRepository;
     private final AddressRepository addressRepository;
-    private final ShiftRepository shiftRepository;
     private final WorkerRepository workerRepository;
 
     @Qualifier("basicDateTimeFormatter")
@@ -48,10 +47,14 @@ public class ExpenseService {
                                     .type(dao.getType())
                                     .status(dao.getStatus())
                                     .dateTime(dao.getDateTime().format(basicDateTimeFormatter))
-                                    .address(Optional.ofNullable(dao.getAddress()).isPresent()?dao.getAddress().getShortName():null)
-                                    .worker(Optional.ofNullable(dao.getWorker()).isPresent()?dao.getWorker().getName():null)
-                                    .shift(Optional.ofNullable(dao.getShift()).isPresent()?dao.getShift().getShortInfo():null)
-                                    .zone(Optional.ofNullable(dao.getAddress()).isPresent()?dao.getAddress().getZone():null)
+                                    .address(Optional.ofNullable(dao
+                                            .getAddress()).isPresent()?dao.getAddress().getShortName():null)
+                                    .worker(Optional.ofNullable(dao
+                                            .getWorker()).isPresent()?dao.getWorker().getName():null)
+                                    .shift(Optional.ofNullable(dao
+                                            .getShift()).isPresent()?dao.getShift().getShortInfo():null)
+                                    .zone(Optional.ofNullable(dao
+                                            .getAddress()).isPresent()?dao.getAddress().getZone():null)
                                     .build()).toList();
             allExpenseStr = objectMapper.writeValueAsString(expenseDtos);
         } catch (JsonProcessingException e) {

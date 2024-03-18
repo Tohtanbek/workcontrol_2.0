@@ -71,167 +71,13 @@ main{
     margin-top: 12vh;
     margin-bottom: 2vh;
 }
-#brigadier-table {
+#address-jobs-table {
     width: 100%;
 }
 
 /*Форма добавления Супервайзера*/
 /* Input Field CSS */
-.datainput {
-    position: relative;
-    margin: 5px 0 20px
-}
-
-.datainput p {
-    font-size: 12px;
-    background: #eee;
-    display: inline-block;
-    padding: 5px 15px;
-    border-radius: .5rem
-}
-
-.brigadier-form textarea {
-    min-height: 120px
-}
-
-.datainput select {
-    padding: 12px 0;
-    color: #555;
-    font-size: 14px;
-    width: 100%;
-    border: 0;
-    border-bottom: 1px solid #ddd;
-    outline: none;
-    background: #fff
-}
-
-.datainput input,
-.datainput textarea {
-    font-size: 15px;
-    padding: 15px 0;
-    display: block;
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid #ddd
-}
-
-.datainput input:focus,
-.datainput textarea:focus {
-    outline: none
-}
-
-.datainput label {
-    color: #999;
-    font-size: 14px;
-    font-weight: 400;
-    position: absolute;
-    pointer-events: none;
-    left: 0;
-    top: 18px;
-    transition: .2s ease all
-}
-
-.datainput input:focus~label,
-.datainput input:valid~label,
-.datainput textarea:focus~label,
-.datainput textarea:valid~label {
-    top: -10px;
-    font-size: 14px;
-    color: #21a51f
-}
-
-#notif-license span {
-    font-size: 40px
-}
-
-#notif-license {
-    display: none;
-    position: fixed
-}
-
-.bar {
-    position: relative;
-    display: block;
-    width: 100%
-}
-
-.bar:before,
-.bar:after {
-    content: '';
-    height: 2px;
-    width: 0;
-    bottom: 1px;
-    position: absolute;
-    background: #21a51f;
-    transition: .2s ease all
-}
-
-.bar:before {
-    left: 50%
-}
-
-.bar:after {
-    right: 50%
-}
-
-.datainput input:focus~.bar:before,
-.datainput input:focus~.bar:after,
-.datainput textarea:focus~.bar:before,
-.datainput textarea:focus~.bar:after {
-    width: 50%
-}
-
-.indigox {
-    background: #3f51b5
-}
-
-.orangex {
-    background: #ff9800
-}
-
-.pinkx {
-    background: #e91e63
-}
-
-.bluex {
-    background: #2196F3
-}
-
-.purplex {
-    background: #9c27b0
-}
-
-.redx {
-    background: #F44336
-}
-
-.greenx {
-    background: #4CAF50
-}
-
-.highlight {
-    position: absolute;
-    height: 50%;
-    width: 100px;
-    top: 25%;
-    left: 0;
-    pointer-events: none;
-    opacity: .5
-}
-
-.datainput input:focus~.highlight,
-.datainput textarea:focus~.highlight {
-    animation: inputHighlighter .3s ease
-}
-
-.datainput input:focus~label,
-.datainput input:valid~label,
-.datainput textarea:focus~label,
-.datainput textarea:valid~label {
-    top: -10px;
-    font-size: 13px;
-    color: #21a51f
-}
+.datainput{position:relative;margin:5px 0 20px}.datainput p{font-size:12px;background:#eee;display:inline-block;padding:5px 15px;border-radius:.5rem}.job-form textarea{min-height:120px}.datainput select{padding:12px 0;color:#555;font-size:14px;width:100%;border:0;border-bottom:1px solid #ddd;outline:none;background:#fff}.datainput input,.datainput textarea{font-size:15px;padding:15px 0;display:block;width:100%;border:none;border-bottom:1px solid #ddd}.datainput input:focus,.datainput textarea:focus{outline:none}.datainput label{color:#999;font-size:14px;font-weight:400;position:absolute;pointer-events:none;left:0;top:18px;transition:.2s ease all}.datainput input:focus~label,.datainput input:valid~label,.datainput textarea:focus~label,.datainput textarea:valid~label{top:-10px;font-size:14px;color:#21a51f}#notif-license span{font-size:40px}#notif-license{display:none;position:fixed}.bar{position:relative;display:block;width:100%}.bar:before,.bar:after{content:'';height:2px;width:0;bottom:1px;position:absolute;background:#21a51f;transition:.2s ease all}.bar:before{left:50%}.bar:after{right:50%}.datainput input:focus~.bar:before,.datainput input:focus~.bar:after,.datainput textarea:focus~.bar:before,.datainput textarea:focus~.bar:after{width:50%}.indigox{background:#3f51b5}.orangex{background:#ff9800}.pinkx{background:#e91e63}.bluex{background:#2196F3}.purplex{background:#9c27b0}.redx{background:#F44336}.greenx{background:#4CAF50}.highlight{position:absolute;height:50%;width:100px;top:25%;left:0;pointer-events:none;opacity:.5}.datainput input:focus~.highlight,.datainput textarea:focus~.highlight{animation:inputHighlighter .3s ease}.datainput input:focus~label,.datainput input:valid~label,.datainput textarea:focus~label,.datainput textarea:valid~label{top:-10px;font-size:13px;color:#21a51f}
 
 #form-exit{
     color: red;
@@ -246,7 +92,7 @@ main{
     color: darkred;
     cursor: pointer;
 }
-form.brigadier-form {
+form.job-form {
     margin-top: 5vh;
     max-height: 80vh;
     overflow-y: auto;
@@ -266,7 +112,7 @@ form.brigadier-form {
     line-height: 1.5;
     transition: opacity 0.3s ease, display 0.3s ease;
 }
-.brigadier-form a.send_form {
+.job-form a.send_form {
     color: #fff;
     background: #21a51f;
     text-decoration: none;
@@ -294,12 +140,126 @@ form.brigadier-form {
     background: #ffc5c5;
     color: #ce0404;
 }
-.brigadier-form{
+.job-form{
     width:100%;
     max-width:700px;
     margin:0 auto;
     box-sizing:border-box;
 }
+/*-----------------------------*/
+
+/*Таблица редактирования профессий на адресе,список всех работников*/
+#drag-jobs-box, #all-jobs-box{
+    transform: translate(-50%, -50%);
+    position: fixed;
+    top: 65%;
+    left: 50%;
+    width: 80%;
+    height: 60%;
+    visibility: hidden;
+    opacity: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.5s ease
+}
+#all-jobs-box {
+    width: 50%;
+    top: 50%;
+    left: 50%;
+    justify-content: center;
+    align-items: start;
+}
+#all-jobs-table {
+    margin-top: 4vh;
+    width: 90%;
+}
+#jobs-of-address-table, #drag-jobs-table{
+    width: 40%;
+}
+
+#drag-jobs-headers {
+    width: 100%;
+    margin-top: 6vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#job-main-header{
+    font-size: x-large;
+}
+#jobs-header1, #jobs-header2 {
+    display: flex;
+    width: 40%;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-save-on-address {
+    position: sticky;
+    width: 15%;
+}
+
+#upper-drag-menu {
+    color: white;
+    transform: translate(-50%, -50%);
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    height: 30%;
+    width: 80%;
+    visibility: hidden;
+    opacity: 0;
+    align-self: center;
+    margin-bottom: 2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s ease
+}
+#all-jobs-exit{
+    color: red;
+    position: absolute;
+    font-size: x-large;
+    top: 0;
+    right: 0;
+}
+#drag-exit {
+    color: red;
+    position: absolute;
+    top: 20%;
+    right: 0%;
+    font-size: x-large;
+}
+#drag-exit:hover,
+#drag-exit:active,
+#all-jobs-exit:hover,
+#all-jobs-exit:active
+{
+    transform: scale(1.1);
+    color: darkred;
+    cursor: pointer;
+}
+
+#drag-jobs-table
+{
+    height: 80%;
+    width: 40%;
+}
+#jobs-of-address-table
+{
+    height: 80%;
+    width: 40%;
+}
+/*-----------------------*/
+
+
+.logo-icon img{
+    width: 5vw;
+    height: 10vh;
+}
+
 .bar-static {
     display: block;
     width: 100%;
@@ -308,11 +268,6 @@ form.brigadier-form {
     bottom: 1px;
     background: #21a51f; /* Цвет полосы подчеркивания */
     margin-bottom: 2vh;
-}
-/*-----------------------------*/
-.logo-icon img{
-    width: 5vw;
-    height: 10vh;
 }
 
 button {

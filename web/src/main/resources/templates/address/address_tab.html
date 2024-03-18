@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Расходы</title>
+    <title>Объекты</title>
     <link href="https://unpkg.com/tabulator-tables@5.6.0/dist/css/tabulator_site.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.6.0/dist/js/tabulator.min.js"></script>
-    <link th:href="@{/css/expense/styles_expense_tab.css}" href="/static/css/expense/styles_expense_tab.css" rel="stylesheet" />
+    <link th:href="@{/css/address/styles_address_tab.css}" href="/css/address/styles_address_tab.css" rel="stylesheet" />
     <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" href="/static/images/favicon.ico" th:href="@{/images/favicon.ico}">
+    <link rel="icon" href="/images/favicon.ico" th:href="@{/images/favicon.ico}">
 </head>
 <body>
 
@@ -19,7 +19,7 @@
     <div class="nav-header">
         <div class="logo-wrap">
             <a class="logo-icon" href="https://workcontrol.site/form/authentication">
-                <img src="/static/images/new_logo.jpg" alt="logo-icon" th:src="@{/images/new_logo.jpg}"></a>
+                <img src="/images/new_logo.jpg" alt="logo-icon" th:src="@{/images/new_logo.jpg}"></a>
             <a class="logo-text" href="https://workcontrol.site/form/authentication">Личный <br> кабинет</a>
         </div>
 
@@ -31,16 +31,16 @@
         </div>
     </div>
     <ul class="nav-categories ul-base">
-        <li><a href="/tables/equip/main">Оборудование</a></li>
-        <li><a href="/tables/shift/main">Рабочее время</a></li>
+        <li><a href="/tables/address/main">Объекты</a></li>
+        <li><a href="http://www.mediahawkz.com/topic/science">Рабочее время</a></li>
         <li><a href="/tables/brigadier/main">Бригадиры</a></li>
         <li><a href="/tables/worker/main">Персонал</a></li>
         <li><a href="/tables/supervisors/main">Супервайзеры</a></li>
         <li><a href="http://www.mediahawkz.com/topic/lifestyle">Клиенты</a></li>
         <li><a href="http://www.mediahawkz.com/topic/world">Организации</a></li>
-        <li><a href="/tables/address/main">Объекты</a></li>
+        <li><a href="/tables/equip/main">Оборудование</a></li>
         <li><a href="http://www.mediahawkz.com/topic/entertainment">Расходы</a></li>
-        <li><a href="http://www.mediahawkz.com/topic/sports">Счета</a></li>
+        <li><a href="/tables/income/main">Доходы</a></li>
     </ul>
     <div class="copyright">
         <span>&copy; 2024 <a href="https://workcontrol.site/form/authentication" class="link">DeepClean.site</a> </span>
@@ -55,22 +55,22 @@
             <i class="material-icons">menu</i>
         </div>
         <div class="header-logo">
-            <a href="http://www.mediahawkz.com/"><img alt="logo" th:src="@{/images/new_logo_tight.jpg}" src="/static/images/new_logo_tight.jpg"></a>
+            <a href="http://www.mediahawkz.com/"><img alt="logo" th:src="@{/images/new_logo_tight.jpg}" src="/images/new_logo_tight.jpg"></a>
         </div>
         <div class="header-categories">
             <ul class="ul-base">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" href="#"><span>Расходы</span> <i class="material-icons">keyboard_arrow_down</i></a>
+                    <a class="dropdown-toggle" href="#"><span>Объекты</span> <i class="material-icons">keyboard_arrow_down</i></a>
                     <ul class="dropdown-menu ul-base">
-                        <li><a href="/tables/equip/main">Оборудование</a></li>
+                        <li><a href="http://www.mediahawkz.com/topic/science">Рабочее время</a></li>
                         <li><a href="/tables/brigadier/main">Бригадиры</a></li>
                         <li><a href="/tables/worker/main">Персонал</a></li>
                         <li><a href="/tables/supervisors/main">Супервайзеры</a></li>
                         <li><a href="http://www.mediahawkz.com/topic/lifestyle">Клиенты</a></li>
                         <li><a href="http://www.mediahawkz.com/topic/world">Организации</a></li>
-                        <li><a href="/tables/address/main">Объекты</a></li>
-                        <li><a href="/tables/shift/main">Рабочее время</a></li>
-                        <li><a href="/tables/income/main">Доходы</a></li>
+                        <li><a href="/tables/equip/main">Оборудование</a></li>
+                        <li><a href="http://www.mediahawkz.com/topic/entertainment">Расходы</a></li>
+                        <li><a href="http://www.mediahawkz.com/topic/sports">Счета</a></li>
                     </ul>
                 </li>
             </ul>
@@ -78,9 +78,9 @@
         <div class="header-categories">
             <ul class="ul-base">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" href="#"><span>Расходы</span> <i class="material-icons">keyboard_arrow_down</i></a>
+                    <a class="dropdown-toggle" href="#"><span>Список объектов</span> <i class="material-icons">keyboard_arrow_down</i></a>
                     <ul class="dropdown-menu ul-base">
-                        <li><a href="http://www.mediahawkz.com/topic/science">Вариант 1</a></li>
+                        <li><a href="/tables/address/address_job_main">Профессии на объектах</a></li>
                     </ul>
                 </li>
             </ul>
@@ -105,7 +105,7 @@
             <button id="main-table-save-update">Сохранить изменения в таблице</button>
         </div>
         <!-- Таблица основная -->
-        <div id="expense-table"></div>
+        <div id="address-table"></div>
     </div>
     <!-- Окно фильтров -->
     <div id="filter-window">
@@ -115,70 +115,43 @@
         </div>
         <span style="margin-bottom: 1vh">Выберите столбик</span>
         <select class="filter-window" id="filter-column">
-            <option value="shortInfo">Отчет</option>
-            <option value="totalSum">Сумма</option>
-            <option value="status">Статус</option>
-            <option value="type">Тип</option>
-            <option value="zone">Зона</option>
-            <option value="address">Объект</option>
-            <option value="worker">Работник</option>
-            <option value="dateTime">Дата</option>
+            <option value="shortName">Название</option>
+            <option value="fullName">Адрес</option>
+            <option value="brigadiers">Бригадиры</option>
+            <option value="workers">Персонал</option>
         </select>
         <input class="filter-window" type="text" id="filter-input" placeholder="Впишите значение">
-        <select class="filter-window" id="filter-type">
-            <option value="like">Совпадение</option>
-            <option value="=">Точное совпадение</option>
-            <option value="<">Меньше</option>
-            <option value=">">Больше</option>
-            <option value="!=">Не равно</option>
-        </select>
         <button class="filter-window" id="clear-filter">Очистить фильтр</button>
     </div>
     <div id="overlay"></div>
 </main><!-- @end main -->
+
 <!--    форма на новое поле        -->
-<form id="main-form" class="expense-form">
+<form id="main-form" class="address-form">
     <i id="form-exit" class="fa fa-times" aria-hidden="true"></i>
     <div class="datainput">
-        <input class="validate" id="shortInfo" name="shortInfo" required="" type="text" value=''/>
+        <input class="validate" id="shortNaming" name="shortNaming" required="" type="text" value=''/>
         <span class="highlight"></span><span class="bar"></span>
-        <label>Описание</label>
+        <label>Название</label>
     </div>
     <div class="datainput">
-        <input class="validate" id="totalSum" name="totalSum" required="" type="number" step="any" value=''/>
+        <input class="validate" id="fullNaming" name="fullNaming" required="" type="text" value=''/>
         <span class="highlight"></span><span class="bar"></span>
-        <label>Сумма</label>
-    </div>
-    <div class="datainput">
-        <input class="validate" id="status" name="status" required="" type="text" value=''/>
-        <span class="highlight"></span><span class="bar"></span>
-        <label>Статус</label>
-    </div>
-    <div class="datainput">
-        <input class="validate" id="type" name="type" required="" type="text" value=''/>
-        <span class="highlight"></span><span class="bar"></span>
-        <label>Тип</label>
+        <label>Полный адрес</label>
     </div>
     <div class="datainput">
         <input class="validate" id="zone" name="zone" required="" type="text" value=''/>
         <span class="highlight"></span><span class="bar"></span>
         <label>Географическая зона</label>
     </div>
-    <div class="datainput">
-        <select id="address" name="address">
-            <option hidden="hidden" selected="selected" value="default">Выберите объект</option>
-        </select>
+    <label for="brigadiers">Выберите бригадиров:</label><br>
+    <div id="brigadiers">
     </div>
-    <div class="datainput">
-        <select id="worker" name="worker">
-            <option hidden="hidden" selected="selected" value="default">Выберите работника</option>
-        </select>
+    <span class="bar-static"></span>
+    <label for="workers">Выберите персонал:</label><br>
+    <div id="workers">
     </div>
-    <div class="datainput">
-        <input class="validate" id="dateTime" name="dateTime" required="" type="datetime-local" value=''/>
-        <span class="highlight"></span><span class="bar"></span>
-        <label></label>
-    </div>
+    <span class="bar-static"></span>
     <button id="main-form-submit" class="send_form" type="submit" title="Сохранить">Добавить</button>
     <div id="text-info"></div>
 </form>
@@ -192,22 +165,58 @@
         </ul>
     </div> <!-- cd-popup-container -->
 </div> <!-- cd-popup -->
-<!--Меню при удалении записи expense-->
-<div class="cd-popup" id="expense-delete-popup" role="alert">
+<!--Меню при удалении записи address-->
+<div class="cd-popup" id="address-delete-popup" role="alert">
     <div class="cd-popup-container">
         <p>Вы точно хотите удалить записи?</p>
         <ul class="cd-buttons">
-            <li><a href="" id="expense-popup-yes">Да</a></li>
-            <li><a href="" id="expense-popup-no">Нет</a></li>
+            <li><a href="" id="address-popup-yes">Да</a></li>
+            <li><a href="" id="address-popup-no">Нет</a></li>
         </ul>
     </div> <!-- cd-popup-container -->
 </div> <!-- cd-popup -->
-
+<div id="upper-drag-menu">
+    <i id="drag-exit" class="fa fa-times" aria-hidden="true"></i>
+    <span id="brig-main-header">Перетащите доступных бригадиров</span>
+    <div id="drag-brigadier-headers">
+        <div id="brig-header1">
+            <span>Все доступные бригадиры</span>
+        </div>
+        <div id="brig-header2">
+            <span>Бригадиры выбранного объекта</span>
+        </div>
+    </div>
+</div>
+<div id="upper-drag-menu-workers">
+    <i id="drag-exit-workers" class="fa fa-times" aria-hidden="true"></i>
+    <span id="workers-main-header">Перетащите доступных работников</span>
+    <div id="drag-workers-headers">
+        <div id="worker-header1">
+            <span>Все доступные работники</span>
+        </div>
+        <div id="worker-header2">
+            <span>Работники выбранного объекта</span>
+        </div>
+    </div>
+</div>
+<div id="drag-brigadiers-box">
+    <div id="dragBrigadiersTable"></div>
+    <button class="button-save-on-address" id="save-brigadiers-on-address">Сохранить изменения</button>
+    <div id="addressBrigadiersTable"></div>
+</div>
+<div id="drag-workers-box">
+    <div id="dragWorkersTable"></div>
+    <button class="button-save-on-address" id="save-workers-on-address">Сохранить изменения</button>
+    <div id="addressWorkersTable"></div>
+</div>
+<div id="lower-drag-menu"></div>
 <!-- partial -->
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script th:src="@{/js/main_header.js}" src="/static/js/main_header.js"></script>
-<script th:src="@{/js/expense/expense_script.js}" src="/js/expense/expense_script.js"></script>
-<script th:src="@{/js/expense/expense_delete_popup_script.js}" src="/js/expense/expense_delete_popup_script.js"></script>
+<script th:src="@{/js/address/address_drag_brigadiers_and_workers.js}" src="/js/address/address_drag_brigadiers_and_workers.js"></script>
+<script th:src="@{/js/main_header.js}" src="/js/main_header.js"></script>
+<script th:src="@{/js/address/address_script.js}" src="/js/address/address_script.js"></script>
+<script th:src="@{/js/form_popup_common.js}" src="/js/form_popup_common.js"></script>
+<script th:src="@{/js/address/address_delete_popup_script.js}" src="/js/address/address_delete_popup_script.js"></script>
 </body>
 </html>

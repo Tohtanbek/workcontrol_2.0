@@ -17,7 +17,6 @@ import java.util.List;
 @RequestMapping("/tables/worker")
 public class WorkerControllers {
 
-    private final WorkerRepository workerRepository;
     private final WorkerService workerService;
 
     /**

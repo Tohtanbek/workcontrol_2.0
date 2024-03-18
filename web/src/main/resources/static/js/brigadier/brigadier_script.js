@@ -16,15 +16,14 @@ document.getElementById("add-row-button").addEventListener("click",function (){
 document.getElementById("main-form-submit").addEventListener("click",
     async function (event){
     event.preventDefault();
-    let form = document.getElementById("main-form");
-    const formData = new FormData(form);
+    let formJson = JSON.stringify(createFormJson());
     try {
         let response = await fetch('/tables/brigadier/add_brigadier_row', {
             method: "POST",
             headers: {
                 "Content-Type":"application/json"
             },
-            body: JSON.stringify(Object.fromEntries(formData))
+            body: formJson
         });
         if (!response.ok) {
             throw new Error('Ошибка при отправке формы');
@@ -69,7 +68,10 @@ function createBrigadierTable(){
         columns: [
             {title:"Id", field: "id"},
             {title: "Имя", field: "name",editor: true},
-            {title: "Телефон",field: "phoneNumber", editor: true},
+            {title: "Телефон",field: "phoneNumber", editor: "number"},
+            {title: "ЗП", field: "wageRate", editor: "number"},
+            {title: "Доходный коэф.", field: "incomeRate", editor: "number"},
+            {title: "Почасово", field: "isHourly", formatter: "tickCross",editor: "tickCross"},
             {title: "Ответственные",field: "supervisors"}
         ]
     })
@@ -145,4 +147,21 @@ brigadierTable.on("cellEdited",function (cell){
     console.log(JSON.stringify(updatedRows));
 })
 
+//Создает корректный json формы на отправку
+function createFormJson(){
+
+    let name = document.querySelector("#name").value;
+    let phoneNumber = document.querySelector("#phoneNumber").value;
+    let wageRate = document.querySelector('#wageRate').value;
+    let incomeRate = document.querySelector('#incomeRate').value;
+    let isHourly = document.querySelector('#isHourly');
+
+    return {
+        name: name,
+        phoneNumber: phoneNumber,
+        wageRate: wageRate,
+        incomeRate: incomeRate,
+        isHourly: isHourly.checked,
+    };
+}
 

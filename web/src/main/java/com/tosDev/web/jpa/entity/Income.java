@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -15,23 +17,25 @@ public class Income {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    Integer id;
+    private Integer id;
 
-    String shortInfo;
+    private String shortInfo;
 
-    Float totalSum;
-    String type;
+    private Float totalSum;
+    private String type;
 
-    String status;
+    private String status;
 
-    @ManyToOne
-    Address address;
-
-    @ManyToOne
-    Worker worker;
+    private LocalDateTime dateTime;
 
     @ManyToOne
-    Contact contact;
+    private Address address;
+
+    @ManyToOne
+    private Worker worker;
+
+    @ManyToOne
+    private Contact contact;
 
     @OneToOne
     private Shift shift;

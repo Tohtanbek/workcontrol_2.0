@@ -2,9 +2,7 @@ package com.tosDev.web.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tosDev.web.dto.AddressDto;
-import com.tosDev.web.dto.BrigadierSmallDto;
-import com.tosDev.web.dto.WorkerDto;
+import com.tosDev.web.dto.*;
 import com.tosDev.web.jpa.entity.*;
 import com.tosDev.web.jpa.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -26,9 +24,12 @@ public class AddressService {
     private final WorkerRepository workerRepository;
     private final WorkerAddressRepository workerAddressRepository;
     private final BrigadierAddressRepository brigadierAddressRepository;
+    private final JobRepository jobRepository;
+    private final AddressJobRepository addressJobRepository;
     private final ObjectMapper objectMapper;
     public ResponseEntity<String> mapAllAddressToJson() {
-        List<Address> addressList = Optional.of(addressRepository.findAll()).orElse(Collections.emptyList());
+        List<Address> addressList = Optional.of(addressRepository.findAll())
+                .orElse(Collections.emptyList());
         List<AddressDto> dtoList = new ArrayList<>();
         for (Address dao : addressList){
             List<String> brigadierNames =
@@ -123,7 +124,7 @@ public class AddressService {
             log.error("При удалении выбранного адреса по одному из id не было найдено записи в бд");
             e.printStackTrace();
         }
-        log.info("Записи удалены по айди: {}",ids);
+        log.info("Записи удалены по айди: {}", Arrays.toString(ids));
         return ResponseEntity.ok().build();
     }
 
@@ -148,13 +149,8 @@ public class AddressService {
                             .toList();
 
             //Удаляем сущности brigadierAddress, которые больше не актуальны
-            Iterator<BrigadierAddress> iterator = addressDao.getBrigadierAddressList().iterator();
-            while (iterator.hasNext()){
-                BrigadierAddress brigadierAddress = iterator.next();
-                if (notExistingIdsAnymore.contains(brigadierAddress.getBrigadier().getId())) {
-                    iterator.remove();
-                }
-            }
+            addressDao.getBrigadierAddressList().removeIf(brigadierAddress ->
+                    notExistingIdsAnymore.contains(brigadierAddress.getBrigadier().getId()));
             //save or update сущностей brigadierAddress. Сначала ищем, была ли такая пара уже
             //если была, то не сохраняем, если не было, то сохраняем новую
             for (BrigadierSmallDto brigadierSmallDto : brigadierDtos){
@@ -200,13 +196,8 @@ public class AddressService {
                             .toList();
 
             //Удаляем сущности workerAddress, которые больше не актуальны
-            Iterator<WorkerAddress> iterator = addressDao.getWorkerAddressList().iterator();
-            while (iterator.hasNext()){
-                WorkerAddress workerAddress = iterator.next();
-                if (notExistingIdsAnymore.contains(workerAddress.getWorker().getId())) {
-                    iterator.remove();
-                }
-            }
+            addressDao.getWorkerAddressList().removeIf(workerAddress ->
+                    notExistingIdsAnymore.contains(workerAddress.getWorker().getId()));
             //save or update сущностей brigadierAddress. Сначала ищем, была ли такая пара уже
             //если была, то не сохраняем, если не было, то сохраняем новую
             for (WorkerDto workerDto : workerDtos){
@@ -248,5 +239,85 @@ public class AddressService {
         }
         log.info("Загружена мапа бригадиров из бд");
         return ResponseEntity.ok(addressMapStr);
+    }
+
+    public ResponseEntity<String> mapAddressJobs(){
+        try {
+            List<AddressJobsDto> addressJobsDtos = new ArrayList<>();
+            String jobsStr;
+            for (Address address : addressRepository.findAll()) {
+                String[] jobNamesArr = address.getAddressJobList()
+                        .stream().map(AddressJob::getJob).map(Job::getName).toArray(String[]::new);
+                if (jobNamesArr.length != 0) {
+                    StringBuilder jobNamesSb = new StringBuilder();
+                    jobNamesSb.append(jobNamesArr[0]);
+                    for (int i = 1; i < jobNamesArr.length; i++) {
+                        jobNamesSb.append(", ").append(jobNamesArr[i]);
+                    }
+                    jobsStr = jobNamesSb.toString();
+                } else {
+                    jobsStr = "";
+                }
+                addressJobsDtos.add(AddressJobsDto.builder()
+                        .id(address.getId())
+                        .name(address.getShortName())
+                        .jobs(jobsStr)
+                        .build());
+            }
+            String addressJobStr = objectMapper.writeValueAsString(addressJobsDtos);
+            log.info("Отправляем в фронтенд addressJobs JSON {}",addressJobStr);
+            return ResponseEntity.ok(addressJobStr);
+        } catch (Exception e) {
+            log.error("Ошибка при загрузке JSON AddressJobs");
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    public ResponseEntity<Void> updateJobsOnAddress(
+            Integer id, List<JobDto> jobDtos) {
+        try {
+            //Получаем дао адреса
+            Address addressDao = addressRepository.findById(id).orElseThrow();
+            //Получаем список айди актуальных профессий на адресе
+            List<Integer> actualJobIds =
+                    jobDtos.stream()
+                            .map(JobDto::getId)
+                            .toList();
+            //Получаем старый список айди профессий на адресе
+            List<Integer> oldJobIds = addressDao.getAddressJobList().stream()
+                    .map(entity -> entity.getJob().getId())
+                    .toList();
+            //Получаем список айди профессий, которых больше не должно быть на адресе
+            List<Integer> notExistingIdsAnymore =
+                    oldJobIds.stream()
+                            .filter(oldId -> !actualJobIds.contains(oldId))
+                            .toList();
+
+            //Удаляем сущности JobAddress, которые больше не актуальны
+            addressDao.getAddressJobList()
+                    .removeIf(addressJob -> notExistingIdsAnymore.contains(addressJob.getJob().getId()));
+            //save or update сущностей addressJob. Сначала ищем, была ли такая пара уже
+            //если была, то не сохраняем, если не было, то сохраняем новую
+            for (JobDto jobDto : jobDtos){
+                Job jobDao =
+                        jobRepository.findById(jobDto.getId()).orElseThrow();
+                Optional<AddressJob> existedAddressJob =
+                        addressJobRepository.findByAddressIdAndJobId(id,jobDto.getId());
+                if (existedAddressJob.isEmpty()) {
+                    addressJobRepository.save(AddressJob
+                            .builder()
+                            .job(jobDao)
+                            .address(addressDao)
+                            .build());
+                }
+            }
+        } catch (Exception e) {
+            log.error("Не удалось сохранить изменения профессий на адресе с id {}",id);
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+        log.info("Успешно сменили профессии на адресе с id {}",id);
+        return ResponseEntity.ok().build();
     }
 }

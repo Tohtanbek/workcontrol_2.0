@@ -64,37 +64,62 @@ filterInput.addEventListener("keyup",updateFilter);
 function updateFilter(){
     let filterColumnValue = filterColumn.options[filterColumn.selectedIndex].value
     let filterTypeValue = filterType.options[filterType.selectedIndex].value;
-    let filterInputValue = filterInput.value;
     //Если выбрана для фильтра колонка startDate или endDate, то вставляем кастомный фильтр для дат
-    if (filterColumnValue === "startDate" || filterColumnValue === "endDate"){
-        let columnDateTime = new Date(filterColumnValue);
-        let inputDateTime = new Date(filterInputValue);
+    if (filterColumnValue === "startDateTime" || filterColumnValue === "endDateTime"){
         if (filterTypeValue === "<"){
-            shiftTable.setFilter(dateTimeFilterLess(columnDateTime,inputDateTime))
+            shiftTable.setFilter(dateTimeFilterLess);
         }
         else if (filterTypeValue === ">"){
-            shiftTable.setFilter(dateTimeFilterBigger(columnDateTime,inputDateTime))
+            shiftTable.setFilter(dateTimeFilterBigger)
+        }
+        else {
+            shiftTable.setFilter(filterColumnValue,filterType.value,filterInput.value);
         }
     }else {
         shiftTable.setFilter(filterColumnValue,filterType.value,filterInput.value);
     }
 
 }
+
+//Кастомный фильтр для дат
+function dateTimeFilterLess(data){
+    let filterColumnValue = filterColumn.options[filterColumn.selectedIndex].value
+    let filterInput = document.getElementById("filter-input");
+    let filterInputValue = filterInput.value;
+    if (filterColumnValue === "startDateTime") {
+        let tableStartDateTime = new Date(data.startDateTime);
+        let inputStartDateTime = new Date(filterInputValue);
+        return tableStartDateTime.getTime()<inputStartDateTime.getTime();
+    }
+    else {
+        let tableEndDateTime = new Date(data.endDateTime);
+        let inputEndDateTime = new Date(filterInputValue);
+        return tableEndDateTime.getTime()<inputEndDateTime.getTime();
+    }
+}
+//Кастомный фильтр для дат
+function dateTimeFilterBigger(data){
+    let filterColumnValue = filterColumn.options[filterColumn.selectedIndex].value
+    let filterInput = document.getElementById("filter-input");
+    let filterInputValue = filterInput.value;
+    if (filterColumnValue === "startDateTime") {
+        let tableStartDateTime = new Date(data.startDateTime);
+        let inputStartDateTime = new Date(filterInputValue);
+        return tableStartDateTime.getTime()>inputStartDateTime.getTime();
+    }
+    else {
+        let tableEndDateTime = new Date(data.endDateTime);
+        let inputEndDateTime = new Date(filterInputValue);
+        return tableEndDateTime.getTime()>inputEndDateTime.getTime();
+    }
+}
+
 //Очистка фильтров слушатель
 filterClearButton.addEventListener("click",function (){
     filterColumn.value = "";
     filterInput.value = "";
     shiftTable.clearFilter();
 })
-
-//Кастомный фильтр для дат
-function dateTimeFilterLess(columnDateTime, inputDateTime){
-    return inputDateTime<columnDateTime;
-}
-//Кастомный фильтр для дат
-function dateTimeFilterBigger(columnDateTime, inputDateTime){
-    return inputDateTime>columnDateTime;
-}
 
 //-------------------------------------------------
 

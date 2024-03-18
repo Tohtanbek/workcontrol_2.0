@@ -6,7 +6,9 @@ CREATE TABLE IF NOT EXISTS responsible(
 );
 INSERT INTO responsible(name,phone_number)
 VALUES
-    ('Имя ответственного 1',9991115566), ('Имя ответственного 2',9991115567);
+    ('Имя ответственного 1',9991115566),
+    ('Имя ответственного 2',9991115567),
+    ('Тестовый супервайзер тг',66994854013);
 
 CREATE TABLE IF NOT EXISTS equipment_type(
                                              id SERIAL PRIMARY KEY ,
@@ -19,22 +21,42 @@ CREATE TABLE IF NOT EXISTS brigadier(
                                         id SERIAL PRIMARY KEY ,
                                         name VARCHAR UNIQUE ,
                                         phone_number BIGINT,
+                                        wage_rate FLOAT,
+                                        income_rate FLOAT,
+                                        is_hourly BOOLEAN,
                                         chat_id BIGINT
 );
-INSERT INTO brigadier (name, phone_number)
-VALUES ('Бригадир Иван',88005553535),('Бригадир Пётр',13337272727);
+INSERT INTO brigadier (name, phone_number,wage_rate,income_rate,is_hourly)
+VALUES ('Бригадир Иван',88005553535,150.5,200.0,true),
+       ('Бригадир Пётр',13337272729,150.5,200.0,true),
+       ('Тестовый бригадир тг',84792547313,150.5,200.0,true);
 
+CREATE TABLE IF NOT EXISTS job (
+    id SERIAL PRIMARY KEY ,
+    name VARCHAR UNIQUE,
+    wage_rate FLOAT,
+    income_rate FLOAT,
+    is_hourly BOOLEAN
+);
+
+INSERT INTO job (name,wage_rate,income_rate,is_hourly) VALUES
+('клинер',50.0,100.0,true),
+('механик',25.55,55.55,true),
+('космонавт',1000.0,5000.0,false),
+('плотник',50.0,100.0,true),
+('слесарь',50.0,100.0,true),
+('водитель',50.0,100.0,false);
 
 CREATE TABLE IF NOT EXISTS worker(
                                      id SERIAL PRIMARY KEY ,
                                      name VARCHAR UNIQUE ,
-                                     job VARCHAR,
+                                     job_id INTEGER references job(id),
                                      phone_number BIGINT,
                                      chat_id BIGINT
 );
-INSERT INTO worker (name, job, phone_number)
-VALUES ('Работник Елена', 'клинер', 19568004545),('работник Александр', 'механик',19002332323),
-       ('тестовый тг','тестировщик',27817913239);
+INSERT INTO worker (name, job_id, phone_number)
+VALUES ('Работник Елена', 1, 19568004545),('работник Александр', 2,19002332323),
+       ('тестовый тг',3,27817913239);
 
 CREATE TABLE if NOT EXISTS address(
                                       id SERIAL PRIMARY KEY ,
@@ -72,6 +94,15 @@ VALUES ('111 Willow Ct', '111 Willow Court', 'US');
 INSERT INTO address (short_name, full_name, zone)
 VALUES ('888 Spruce Pl', '888 Spruce Place', 'US');
 
+CREATE TABLE IF NOT EXISTS address_job(
+    id SERIAL primary key ,
+    address_id INTEGER references address(id) ON DELETE CASCADE ,
+    job_id INTEGER references job(id) ON DELETE CASCADE
+);
+
+INSERT INTO address_job (address_id, job_id)
+VALUES (1,1),(1,2),(2,1),(3,1),(3,2);
+
 
 CREATE TABLE If NOT EXISTS brigadier_address(
                                                 id SERIAL PRIMARY KEY ,
@@ -79,7 +110,7 @@ CREATE TABLE If NOT EXISTS brigadier_address(
                                                 address_id INTEGER references address(id) ON DELETE CASCADE
 );
 INSERT INTO brigadier_address (brigadier_id, address_id)
-VALUES (1,1),(1,2),(2,1);
+VALUES (1,1),(1,2),(2,1),(3,1),(3,2);
 
 CREATE TABLE IF NOT EXISTS worker_address(
                                              id SERIAL PRIMARY KEY ,
@@ -87,7 +118,7 @@ CREATE TABLE IF NOT EXISTS worker_address(
                                              address_id INTEGER references address(id) ON DELETE CASCADE
 );
 INSERT INTO worker_address (worker_id, address_id)
-VALUES (1,1),(1,2),(2,1);
+VALUES (1,1),(1,2),(2,1),(3,1),(3,2);
 
 CREATE TABLE IF NOT EXISTS responsible_brigadier(
                                                     id SERIAL PRIMARY KEY ,
@@ -95,7 +126,7 @@ CREATE TABLE IF NOT EXISTS responsible_brigadier(
                                                     brigadier_id INTEGER references brigadier(id) ON DELETE CASCADE
 );
 INSERT INTO responsible_brigadier (responsible_id, brigadier_id)
-VALUES (1,1),(1,2),(2,1);
+VALUES (1,1),(1,2),(2,1),(3,3),(3,1);
 
 
 CREATE TABLE IF NOT EXISTS equipment(
@@ -122,29 +153,31 @@ CREATE TABLE IF NOT EXISTS shift(
                                     start_date_time TIMESTAMP,
                                     end_date_time TIMESTAMP,
                                     status VARCHAR,
+                                    type VARCHAR,
                                     address_id INTEGER references address(id) ON DELETE SET NULL,
                                     worker_id INTEGER references worker(id) ON DELETE SET NULL ,
-                                    job VARCHAR,
+                                    job_id INTEGER references job(id) ON DELETE SET NULL ,
                                     brigadier_id INTEGER references brigadier(id) ON DELETE SET NULL ,
                                     total_hours FLOAT
 );
-INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job, brigadier_id, total_hours)
-VALUES ('Short info 1', '2024-03-06 09:00:00', '2024-03-06 17:00:00', 'Completed', 1, 1, 'Job A', 1, 8.0);
+INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job_id, brigadier_id, total_hours)
+VALUES ('Short info 1', '2024-03-06 09:00:00', '2024-03-06 17:00:00', 'Completed', 1, 1, 1, 1, 8.0);
 
-INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job, brigadier_id, total_hours)
-VALUES ('Short info 2', '2024-03-07 10:00:00', '2024-03-07 18:00:00', 'In progress', 2, 2, 'Job B', 2, 8.0);
+INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job_id, brigadier_id, total_hours)
+VALUES ('Short info 2', '2024-03-07 10:00:00', '2024-03-07 18:00:00', 'In progress', 2, 2, 2, 2, 8.0);
 
-INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job, brigadier_id, total_hours)
-VALUES ('Short info 3', '2024-03-08 08:00:00', '2024-03-08 16:00:00', 'Completed', 1, 2, 'Job C', 1, 8.0);
+INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job_id, brigadier_id, total_hours)
+VALUES ('Short info 3', '2024-03-08 08:00:00', '2024-03-08 16:00:00', 'Completed', 1, 2, 3, 1, 8.0);
 
-INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job, brigadier_id, total_hours)
-VALUES ('Short info 4', '2024-03-09 07:00:00', '2024-03-09 15:00:00', 'In progress', 2, 1, 'Job D', 2, 8.0);
+INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job_id, brigadier_id, total_hours)
+VALUES ('Short info 4', '2024-03-09 07:00:00', '2024-03-09 15:00:00', 'In progress', 2, 1, 4, 2, 8.0);
 
-INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job, brigadier_id, total_hours)
-VALUES ('Short info 5', '2024-03-10 08:00:00', '2024-03-10 16:00:00', 'Completed', 1, 1, 'Job E', 1, 8.0);
+INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job_id, brigadier_id, total_hours)
+VALUES ('Short info 5', '2024-03-10 08:00:00', '2024-03-10 16:00:00', 'Completed', 1, 1, 5, 1, 8.0);
 
-INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job, brigadier_id, total_hours)
-VALUES ('Short info 6', '2024-03-11 09:00:00', '2024-03-11 17:00:00', 'In progress', 2, 2, 'Job F', 2, 8.0);
+INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job_id, brigadier_id, total_hours)
+VALUES ('Short info 6', '2024-03-11 09:00:00', '2024-03-11 17:00:00', 'In progress', 2, 2, 6, 2, 8.0);
+
 
 CREATE TABLE IF NOT EXISTS expense(
                                       id SERIAL PRIMARY KEY ,
@@ -187,6 +220,13 @@ VALUES
     ('Expense 2', 150.20, 'Type 2', 'Status 2', '2024-03-11 17:00:00', 2, 2, 2),
     ('Expense 3', 200.00, 'Type 1', 'Status 1', '2024-03-11 17:00:00', 1, 1, 2),
     ('Expense 4', 250.55, 'Type 2', 'Status 2', '2024-03-11 17:00:00', 2, 2, 1);
+
+INSERT INTO income (short_info, total_sum, type, status, date_time, address_id, worker_id, shift_id)
+VALUES
+    ('Income 1', 200.02, 'Type 1', 'Status 1','2024-03-11 17:00:00', 1, 1, 1),
+    ('Income 2', 300.40, 'Type 2', 'Status 2', '2024-03-11 17:00:00', 2, 2, 2),
+    ('Income 3', 400.00, 'Type 1', 'Status 1', '2024-03-11 17:00:00', 1, 1, 2),
+    ('Income 4', 500.11, 'Type 2', 'Status 2', '2024-03-11 17:00:00', 2, 2, 1);
 
 CREATE TABLE IF NOT EXISTS admin(
                                     id SERIAL PRIMARY KEY ,

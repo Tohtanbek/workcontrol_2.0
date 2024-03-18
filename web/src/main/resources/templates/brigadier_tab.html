@@ -34,12 +34,13 @@
     </div>
     <ul class="nav-categories ul-base">
         <li><a href="/tables/equip/main">Оборудование</a></li>
-        <li><a href="http://www.mediahawkz.com/topic/science">Рабочее время</a></li>
+        <li><a href="/tables/shift/main">Рабочее время</a></li>
         <li><a href="/tables/supervisors/main">Супервайзеры</a></li>
+        <li><a href="/tables/worker/main">Персонал</a></li>
         <li><a href="http://www.mediahawkz.com/topic/lifestyle">Клиенты</a></li>
         <li><a href="http://www.mediahawkz.com/topic/world">Организации</a></li>
         <li><a href="/tables/address/main">Объекты</a></li>
-        <li><a href="http://www.mediahawkz.com/topic/entertainment">Расходы</a></li>
+        <li><a href="/tables/expense/main">Расходы</a></li>
         <li><a href="http://www.mediahawkz.com/topic/sports">Счета</a></li>
     </ul>
     <div class="copyright">
@@ -62,14 +63,15 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" href="#"><span>Бригадиры</span> <i class="material-icons">keyboard_arrow_down</i></a>
                     <ul class="dropdown-menu ul-base">
-                        <li><a href="http://www.mediahawkz.com/topic/science">Рабочее время</a></li>
+                        <li><a href="/tables/shift/main">Рабочее время</a></li>
                         <li><a href="/tables/supervisors/main">Супервайзеры</a></li>
                         <li><a href="/tables/equip/main">Оборудование</a></li>
+                        <li><a href="/tables/worker/main">Персонал</a></li>
                         <li><a href="http://www.mediahawkz.com/topic/lifestyle">Клиенты</a></li>
                         <li><a href="http://www.mediahawkz.com/topic/world">Организации</a></li>
                         <li><a href="/tables/address/main">Объекты</a></li>
-                        <li><a href="http://www.mediahawkz.com/topic/entertainment">Расходы</a></li>
-                        <li><a href="http://www.mediahawkz.com/topic/sports">Счета</a></li>
+                        <li><a href="/tables/expense/main">Расходы</a></li>
+                        <li><a href="/tables/income/main">Доходы</a></li>
                     </ul>
                 </li>
             </ul>
@@ -119,6 +121,23 @@
         <span class="highlight"></span><span class="bar"></span>
         <label>Номер телефона</label>
     </div>
+    <div class="datainput">
+        <input class="validate" id="wageRate" name="wageRate"
+               required="" type="number" step="0.01" value=''/>
+        <span class="highlight"></span><span class="bar"></span>
+        <label>Коэффициент ЗП</label>
+    </div>
+    <div class="datainput">
+        <input class="validate" id="incomeRate" name="incomeRate"
+               required="" type="number" step="0.01" value=''/>
+        <span class="highlight"></span><span class="bar"></span>
+        <label>Коэффициент дохода</label>
+    </div>
+    <div>
+        <input id="isHourly" name="isHourly" required="" type="checkbox" checked/>
+        <label>Почасовой расчет</label>
+        <span class="bar-static"></span>
+    </div>
     <button id="main-form-submit" class="send_form" type="submit">Добавить</button>
     <div id="text-info"></div>
 </form>
@@ -144,7 +163,7 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script th:src="@{/js/main_header.js}" src="/js/main_header.js"></script>
 <script th:src="@{/js/brigadier/brigadier_script.js}" src="/js/brigadier/brigadier_script.js"></script>
-<script th:src="@{/js/brigadier/form_popup_script_brigadier.js}" src="/js/brigadier/form_popup_script_brigadier.js"></script>
+<script th:src="@{/js/form_popup_common.js}" src="/js/form_popup_common.js"></script>
 <script th:src="@{/js/brigadier/brigadier_delete_popup_script.js}" src="/js/brigadier/brigadier_delete_popup_script.js"></script>
 </body>
 </html>

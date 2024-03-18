@@ -1,17 +1,17 @@
 let updatedRows = [];
 
-let expenseMenu = createExpenseMenu();
-let expenseTable = createExpenseTable()
+let incomeMenu = createIncomeMenu();
+let incomeTable = createIncomeTable()
 
 
 
-//Таблица смен-------------------------------------------------
+//Таблица -------------------------------------------------
 
 
-//Сама таблица смен
-function createExpenseTable() {
-    return new Tabulator("#expense-table", {
-        ajaxURL: "/tables/expense/main_table",
+//Сама таблица
+function createIncomeTable() {
+    return new Tabulator("#income-table", {
+        ajaxURL: "/tables/income/main_table",
         maxHeight: "80%",
         selectableRows: true,
         movableColumns: true,
@@ -24,7 +24,7 @@ function createExpenseTable() {
         initialSort:[
             {column:"id", dir:"desc"}, //sort by this first
         ],
-        rowContextMenu: expenseMenu,
+        rowContextMenu: incomeMenu,
         columns: [
             {title: "Id", field: "id", sorter: "number"},
             {title: "Отчет", field: "shortInfo", editor: true},
@@ -39,17 +39,17 @@ function createExpenseTable() {
             {title: "Объект", field: "address"},
             {title: "Работник", field: "worker"},
             {title: "Рабочий день",field: "shift"},
-            {title: "Дата" ,field: "dateTime"}
+            {title: "Дата",field: "dateTime"}
         ]
     });
 }
 
-function createExpenseMenu(){
+function createIncomeMenu(){
     return [
         {
             label: "<i class='fas fa-user'></i>Удалить выбранные ряды",
             action: function (e, row) {
-                $('#expense-delete-popup').addClass('is-visible');
+                $('#income-delete-popup').addClass('is-visible');
             }
         }
     ];
@@ -64,23 +64,22 @@ filterColumn.addEventListener("change",updateFilter);
 filterType.addEventListener("change",updateFilter);
 filterInput.addEventListener("keyup",updateFilter);
 
-
 function updateFilter(){
     let filterColumnValue = filterColumn.options[filterColumn.selectedIndex].value
     let filterTypeValue = filterType.options[filterType.selectedIndex].value;
     //Если выбрана для фильтра колонка startDate или endDate, то вставляем кастомный фильтр для дат
     if (filterColumnValue === "dateTime"){
         if (filterTypeValue === "<"){
-            expenseTable.setFilter(dateTimeFilterLess);
+            incomeTable.setFilter(dateTimeFilterLess);
         }
         else if (filterTypeValue === ">"){
-            expenseTable.setFilter(dateTimeFilterBigger)
+            incomeTable.setFilter(dateTimeFilterBigger)
         }
         else {
-            shiftTable.setFilter(filterColumnValue,filterType.value,filterInput.value);
+            incomeTable.setFilter(filterColumnValue,filterType.value,filterInput.value);
         }
     }else {
-        expenseTable.setFilter(filterColumnValue,filterType.value,filterInput.value);
+        incomeTable.setFilter(filterColumnValue,filterType.value,filterInput.value);
     }
 
 }
@@ -108,7 +107,7 @@ function dateTimeFilterBigger(data){
 filterClearButton.addEventListener("click",function (){
     filterColumn.value = "";
     filterInput.value = "";
-    expenseTable.clearFilter();
+    incomeTable.clearFilter();
 })
 
 //-------------------------------------------------
@@ -117,7 +116,7 @@ filterClearButton.addEventListener("click",function (){
 //При нажатии кнопки коллекция с измененными dto отправляется на сервер и очищается
 document.querySelector("#main-table-save-update")
     .addEventListener("click",function () {
-    fetch("/tables/expense/update_expense_rows",{
+    fetch("/tables/income/update_income_rows",{
         method: "PUT",
         headers:{
             "Content-Type":"application/json"
@@ -126,24 +125,24 @@ document.querySelector("#main-table-save-update")
     }).then(response => {
         if (!response.ok){
             updatedRows = [];
-            expenseTable.alert("Ошибка. Изменения не сохранены","error");
+            incomeTable.alert("Ошибка. Изменения не сохранены","error");
             setTimeout(function (){
-                expenseTable.clearAlert();
+                incomeTable.clearAlert();
             },3000)
             throw new Error('DB error')
         }
         else {
             updatedRows = [];
-            expenseTable.alert("Изменения сохранены успешно");
+            incomeTable.alert("Изменения сохранены успешно");
             setTimeout(function (){
-                expenseTable.clearAlert();
+                incomeTable.clearAlert();
             },2000)
         }
     })
 })
 
 //Слушатель обновления рядов в основной таблице. Сохраняет ряды, в которых внесены изменения
-expenseTable.on("cellEdited",function (cell){
+incomeTable.on("cellEdited",function (cell){
     let row = cell.getRow().getData();
     console.log(JSON.stringify(row));
     for (let i=0; i<updatedRows.length;i++){
@@ -161,10 +160,10 @@ expenseTable.on("cellEdited",function (cell){
 //Переход к нопке добавить ряд-----------------------------------------------------
 //кнопка "добавить ряд" (выводит форму для нового ряда)
 document.getElementById("add-row-button").addEventListener("click",async function (){
-    let expenseForm = document.querySelector(".expense-form");
-    expenseForm.style.display = "block";
+    let incomeForm = document.querySelector(".income-form");
+    incomeForm.style.display = "block";
     setTimeout(() => {
-        expenseForm.style.opacity = "1";
+        incomeForm.style.opacity = "1";
     }, 50);
     let main = document.querySelector("main");
     main.style.opacity = "0.5";
@@ -226,7 +225,7 @@ document.getElementById("main-form-submit").addEventListener("click",
         let form = document.getElementById("main-form");
         const formData = new FormData(form);
         try {
-            let response = await fetch('/tables/expense/add_expense_row', {
+            let response = await fetch('/tables/income/add_income_row', {
                 method: "POST",
                 headers: {
                     "Content-Type":"application/json"
@@ -239,7 +238,7 @@ document.getElementById("main-form-submit").addEventListener("click",
             }
             else {
                 console.log("Форма на создание оборудования создана успешно");
-                expenseTable.setData("/tables/expense/main_table");
+                incomeTable.setData("/tables/income/main_table");
                 $('#form-popup').addClass('is-visible');
             }
         } catch (error){
@@ -250,11 +249,10 @@ document.getElementById("main-form-submit").addEventListener("click",
 document.getElementById("form-exit").addEventListener("click",function (){
     closeForm()
 })
-
 function closeForm(){
-    let expenseForm = document.querySelector(".expense-form");
-    expenseForm.style.opacity = "0";
-    setTimeout(function (){expenseForm.style.display = "none"},300);//Чтобы была анимация
+    let incomeForm = document.querySelector(".income-form");
+    incomeForm.style.opacity = "0";
+    setTimeout(function (){incomeForm.style.display = "none"},300);//Чтобы была анимация
     let main = document.querySelector("main");
     main.style.opacity = "1";
     main.style.filter = "blur(0px)";

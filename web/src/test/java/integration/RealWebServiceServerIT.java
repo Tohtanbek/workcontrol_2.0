@@ -7,7 +7,7 @@ import org.springframework.test.context.jdbc.Sql;
 @RealServerIT
 @Sql({"/sql/test.sql"})
 @RequiredArgsConstructor
-public class EquipControllerRealServerIT extends IntegrationTestBase {
+public class RealWebServiceServerIT extends IntegrationTestBase {
 
     @Test
     void test() {
@@ -15,7 +15,6 @@ public class EquipControllerRealServerIT extends IntegrationTestBase {
         //todo:добавить zone в address
         //todo: вставить formatter money там, где это подходит, то же самое с link и т.п
         //todo: реализовать свободный выбор статусов и  типов и т.п с помощью самосборного списка
-        //todo: Сделать расходы и переходить к телеге, чтобы не тронуться умом
         //Придумать, как реализовать zones.
         //Оставляем сервер работать
         while (true){}

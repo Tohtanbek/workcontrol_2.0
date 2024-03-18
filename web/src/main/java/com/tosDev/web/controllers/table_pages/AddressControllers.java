@@ -2,8 +2,8 @@ package com.tosDev.web.controllers.table_pages;
 
 import com.tosDev.web.dto.AddressDto;
 import com.tosDev.web.dto.BrigadierSmallDto;
+import com.tosDev.web.dto.JobDto;
 import com.tosDev.web.dto.WorkerDto;
-import com.tosDev.web.jpa.repository.AddressRepository;
 import com.tosDev.web.service.AddressService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,6 @@ import java.util.List;
 @RequestMapping("/tables/address")
 @RequiredArgsConstructor
 public class AddressControllers {
-    private final AddressRepository addressRepository;
     private final AddressService addressService;
 
     /**
@@ -27,7 +26,16 @@ public class AddressControllers {
     @GetMapping("/main")
     String showAddressPage(){
         log.info("Загружена страница адресов");
-        return "address_tab";
+        return "/address/address_tab";
+    }
+
+    /**
+     * Загружает страницу с профессиями на объектах
+     */
+    @GetMapping("/address_job_main")
+    String showAddressJobPage(){
+        log.info("Загружена страница профессий адресов");
+        return "/address/address_job_tab";
     }
 
     /**
@@ -100,8 +108,25 @@ public class AddressControllers {
      * @return возвращает json мапы с ключом - id и value - коротким именем адреса.
      */
     @GetMapping("/load_address_map")
-    ResponseEntity<String> loadBrigadierMap(){
+    ResponseEntity<String> loadAddressMap(){
         return addressService.addressToJsonMap();
     }
 
+    @GetMapping("/address_job_table")
+    ResponseEntity<String> loadAddressJobs(){
+        return addressService.mapAddressJobs();
+    }
+
+    /**
+     * Принимает с фронтенда запрос на смену профессий на адресе
+     * @param id - айди адреса
+     * @param jobDtos новые актуальные профессии на адресе
+     * @return http result code
+     */
+    @PutMapping("/change_jobs_on_address")
+    ResponseEntity<Void> changeJobsOnAddress(
+            @RequestParam("id") Integer id,
+            @RequestBody List<JobDto> jobDtos) {
+        return addressService.updateJobsOnAddress(id,jobDtos);
+    }
 }
