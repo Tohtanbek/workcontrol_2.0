@@ -4,10 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Закончена работа со страницей распределения профессий по адресам.&#10;Закончена работа со страницей счета.">
+    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Адаптивный дизайн сайта вместо px.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/address/styles_address_job_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/address/styles_address_job_tab.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/address/styles_address_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/address/styles_address_tab.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/brigadier/styles_brigadier_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/brigadier/styles_brigadier_tab.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/equipment/styles_equipment_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/equipment/styles_equipment_tab.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/expense/styles_expense_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/expense/styles_expense_tab.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/income/styles_income_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/income/styles_income_tab.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/responsible/styles_responsible_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/responsible/styles_responsible_tab.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/shift/styles_shift_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/shift/styles_shift_tab.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/worker/styles_worker_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/worker/styles_worker_tab.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/address/address_job_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/address/address_job_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/address/address_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/address/address_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/brigadier_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/brigadier_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/equipment_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/equipment_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/expense_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/expense_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/income_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/income_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/responsible_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/responsible_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/shift_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/shift_tab.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/worker_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/worker_tab.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -267,7 +282,8 @@
       <workItem from="1710849354446" duration="26008000" />
       <workItem from="1710890143872" duration="298000" />
       <workItem from="1710890576788" duration="4451000" />
-      <workItem from="1710895104054" duration="348000" />
+      <workItem from="1710895104054" duration="575000" />
+      <workItem from="1710930609108" duration="9319000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит workcontrol 2.0. Работа над frontend">
       <created>1708303197812</created>
@@ -402,7 +418,14 @@
       <option name="project" value="LOCAL" />
       <updated>1710805723975</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Адаптивный дизайн сайта вместо px.">
+      <created>1710895668839</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1710895668839</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -450,7 +473,8 @@
     <MESSAGE value="Продолжение работы с тг ботом&#10;Добавлен функционал расчета зп и счетов для работников и бригадиров. Для этого созданы сущности Job, AddressJob, добавлены отдельные поля для тех же нужд у Brigadier.&#10;Закончена работа с алгоритмом смены job бригадиром у подтвержденной смены работника." />
     <MESSAGE value="Добавлена роль ответственного (supervisor)&#10;Добавлены кнопки меню бригадира." />
     <MESSAGE value="Закончена работа со страницей распределения профессий по адресам.&#10;Закончена работа со страницей счета." />
-    <option name="LAST_COMMIT_MESSAGE" value="Закончена работа со страницей распределения профессий по адресам.&#10;Закончена работа со страницей счета." />
+    <MESSAGE value="Адаптивный дизайн сайта вместо px." />
+    <option name="LAST_COMMIT_MESSAGE" value="Адаптивный дизайн сайта вместо px." />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

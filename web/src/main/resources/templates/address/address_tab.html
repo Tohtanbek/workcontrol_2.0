@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Объекты</title>
-    <link href="https://unpkg.com/tabulator-tables@5.6.0/dist/css/tabulator_site.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/sass/general.css}" href="/sass/general.css">
     <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.6.0/dist/js/tabulator.min.js"></script>
-    <link th:href="@{/css/address/styles_address_tab.css}" href="/css/address/styles_address_tab.css" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/css/tables-general/general.css}" href="/css/tables-general/general.css"/>
+    <link rel="stylesheet" th:href="@{/css/tables-general/main-form.css}" href="/css/tables-general/main-form.css"/>
+    <link rel="stylesheet" th:href="@{/css/tables-general/header.css}" href="/css/tables-general/header.css"/>
+    <link rel="stylesheet" th:href="@{/css/tables-general/nav.css}" href="/css/tables-general/nav.css"/>
+    <link rel="stylesheet" th:href="@{/css/tables-general/notifiication_popup.css}" href="/css/tables-general/notifiication_popup.css"/>
+    <link rel="stylesheet" th:href="@{/css/address/styles_address_tab.css}" href="/css/address/styles_address_tab.css" />
     <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -18,9 +23,9 @@
 <nav class="sidebar">
     <div class="nav-header">
         <div class="logo-wrap">
+            <a class="logo-text" href="https://workcontrol.site/form/authentication">Личный <br> кабинет</a>
             <a class="logo-icon" href="https://workcontrol.site/form/authentication">
                 <img src="/images/new_logo.jpg" alt="logo-icon" th:src="@{/images/new_logo.jpg}"></a>
-            <a class="logo-text" href="https://workcontrol.site/form/authentication">Личный <br> кабинет</a>
         </div>
 
         <div class="nav-search">

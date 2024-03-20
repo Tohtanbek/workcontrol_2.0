@@ -2,17 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Супервайзеры</title>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://unpkg.com/tabulator-tables@5.6.0/dist/css/tabulator_site.min.css" rel="stylesheet">
-        <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.6.0/dist/js/tabulator.min.js"></script>
-        <link th:href="@{/css/responsible/styles_responsible_tab.css}" href="/static/css/responsible/styles_responsible_tab.css" rel="stylesheet" />
-        <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
-        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300'>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <link rel="icon" href="/static/images/favicon.ico" th:href="@{/images/favicon.ico}">
-    </head>
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.6.0/dist/js/tabulator.min.js"></script>
+    <link rel="stylesheet" th:href="@{/sass/general.css}" href="/sass/general.css">
+    <link rel="stylesheet"  th:href="@{/css/tables-general/general.css}" href="/css/tables-general/general.css"/>
+    <link rel="stylesheet"  th:href="@{/css/tables-general/main-form.css}" href="/css/tables-general/main-form.css"/>
+    <link rel="stylesheet"  th:href="@{/css/tables-general/header.css}" href="/css/tables-general/header.css"/>
+    <link rel="stylesheet"  th:href="@{/css/tables-general/nav.css}" href="/css/tables-general/nav.css"/>
+    <link rel="stylesheet"  th:href="@{/css/tables-general/notifiication_popup.css}" href="/css/tables-general/notifiication_popup.css"/>
+    <link rel="stylesheet" th:href="@{/css/responsible/styles_responsible_tab.css}" href="/static/css/responsible/styles_responsible_tab.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="/static/images/favicon.ico" th:href="@{/images/favicon.ico}">
 </head>
 <body>
 
@@ -20,9 +23,9 @@
 <nav class="sidebar">
     <div class="nav-header">
         <div class="logo-wrap">
+            <a class="logo-text" href="https://workcontrol.site/form/authentication">Личный <br> кабинет</a>
             <a class="logo-icon" href="https://workcontrol.site/form/authentication">
                 <img src="/static/images/new_logo.jpg" alt="logo-icon" th:src="@{/images/new_logo.jpg}"></a>
-            <a class="logo-text" href="https://workcontrol.site/form/authentication">Личный <br> кабинет</a>
         </div>
 
         <div class="nav-search">
@@ -34,14 +37,14 @@
     </div>
     <ul class="nav-categories ul-base">
         <li><a href="/tables/equip/main">Оборудование</a></li>
-        <li><a href="http://www.mediahawkz.com/topic/science">Рабочее время</a></li>
+        <li><a href="/tables/shift/main">Рабочее время</a></li>
         <li><a href="/tables/brigadier/main">Бригадиры</a></li>
         <li><a href="/tables/worker/main">Персонал</a></li>
         <li><a href="/tables/supervisors/main">Супервайзеры</a></li>
         <li><a href="http://www.mediahawkz.com/topic/lifestyle">Клиенты</a></li>
         <li><a href="http://www.mediahawkz.com/topic/world">Организации</a></li>
         <li><a href="/tables/address/main">Объекты</a></li>
-        <li><a href="http://www.mediahawkz.com/topic/entertainment">Расходы</a></li>
+        <li><a href="/tables/expense/main">Расходы</a></li>
         <li><a href="/tables/income/main">Доходы</a></li>
     </ul>
     <div class="copyright">

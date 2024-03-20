@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Доходы</title>
-    <link href="https://unpkg.com/tabulator-tables@5.6.0/dist/css/tabulator_site.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.6.0/dist/js/tabulator.min.js"></script>
-    <link th:href="@{/css/income/styles_income_tab.css}" href="/static/css/income/styles_income_tab.css" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/sass/general.css}" href="/sass/general.css">
+    <link rel="stylesheet"  th:href="@{/css/tables-general/general.css}" href="/css/tables-general/general.css"/>
+    <link rel="stylesheet"  th:href="@{/css/tables-general/main-form.css}" href="/css/tables-general/main-form.css"/>
+    <link rel="stylesheet"  th:href="@{/css/tables-general/header.css}" href="/css/tables-general/header.css"/>
+    <link rel="stylesheet"  th:href="@{/css/tables-general/nav.css}" href="/css/tables-general/nav.css"/>
+    <link rel="stylesheet"  th:href="@{/css/tables-general/notifiication_popup.css}" href="/css/tables-general/notifiication_popup.css"/>
+    <link rel="stylesheet" th:href="@{/css/income/styles_income_tab.css}" href="/static/css/income/styles_income_tab.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -18,9 +23,9 @@
 <nav class="sidebar">
     <div class="nav-header">
         <div class="logo-wrap">
+            <a class="logo-text" href="https://workcontrol.site/form/authentication">Личный <br> кабинет</a>
             <a class="logo-icon" href="https://workcontrol.site/form/authentication">
                 <img src="/static/images/new_logo.jpg" alt="logo-icon" th:src="@{/images/new_logo.jpg}"></a>
-            <a class="logo-text" href="https://workcontrol.site/form/authentication">Личный <br> кабинет</a>
         </div>
 
         <div class="nav-search">
@@ -59,7 +64,7 @@
         <div class="header-categories">
             <ul class="ul-base">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" href="#"><span>Расходы</span> <i class="material-icons">keyboard_arrow_down</i></a>
+                    <a class="dropdown-toggle" href="#"><span>Доходы</span> <i class="material-icons">keyboard_arrow_down</i></a>
                     <ul class="dropdown-menu ul-base">
                         <li><a href="/tables/equip/main">Оборудование</a></li>
                         <li><a href="/tables/brigadier/main">Бригадиры</a></li>
@@ -69,7 +74,7 @@
                         <li><a href="http://www.mediahawkz.com/topic/world">Организации</a></li>
                         <li><a href="/tables/address/main">Объекты</a></li>
                         <li><a href="/tables/shift/main">Рабочее время</a></li>
-                        <li><a href="http://www.mediahawkz.com/topic/sports">Счета</a></li>
+                        <li><a href="/tables/expense/main">Расходы</a></li>
                     </ul>
                 </li>
             </ul>
@@ -77,7 +82,7 @@
         <div class="header-categories">
             <ul class="ul-base">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" href="#"><span>Расходы</span> <i class="material-icons">keyboard_arrow_down</i></a>
+                    <a class="dropdown-toggle" href="#"><span>Доходы</span> <i class="material-icons">keyboard_arrow_down</i></a>
                     <ul class="dropdown-menu ul-base">
                         <li><a href="http://www.mediahawkz.com/topic/science">Вариант 1</a></li>
                     </ul>
