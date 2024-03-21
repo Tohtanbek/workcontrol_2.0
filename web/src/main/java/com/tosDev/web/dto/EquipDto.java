@@ -16,17 +16,17 @@ public class EquipDto {
     private String naming;
     private String type;
     private String responsible;
-    private int amount;
-    private float total;
+    private Float amount;
+    private Float total;
 
     @JsonProperty("price4each")
-    private float priceForEach;
+    private Float priceForEach;
 
-    private float totalLeft;
-    private int amountLeft;
+    private Float totalLeft;
+    private Float amountLeft;
     private String unit;
-    private int givenAmount;
-    private int givenTotal;
+    private Float givenAmount;
+    private Float givenTotal;
     private String link;
     private String source;
 

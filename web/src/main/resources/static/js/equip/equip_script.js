@@ -241,8 +241,23 @@ function createEquipMenu(){
             action: function (e, row) {
                 $('#equip-delete-popup').addClass('is-visible');
             }
+        },
+        {
+            label: "<i class='fas fa-user'></i>Назначить оборудование",
+            action: function (e, row) {
+                //Перенаправляем на назначение оборудования
+                redirectAssignEquip(row)
+            }
         }
     ];
+}
+
+//redirect на форму выдачи оборудования
+function redirectAssignEquip(row){
+    let assignRedirectParam = "assign_redirect=true"
+    let equipIdParam = row.getCell("id").getValue();
+    console.log(equipIdParam);
+    window.location.href = "/tables/assignment_equip/main?" + assignRedirectParam + "&row_id=" + equipIdParam;
 }
 
 //Фильтры для основной таблицы

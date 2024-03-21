@@ -134,17 +134,28 @@ CREATE TABLE IF NOT EXISTS equipment(
                                         naming VARCHAR ,
                                         type_id INTEGER references equipment_type(id) ON DELETE SET NULL ,
                                         responsible_id INTEGER references responsible(id) ON DELETE SET NULL,
-                                        amount INTEGER ,
+                                        amount FLOAT ,
                                         total FLOAT ,
                                         price4each FLOAT ,
                                         total_left FLOAT ,
-                                        amount_left INTEGER ,
+                                        amount_left FLOAT ,
                                         unit VARCHAR ,
-                                        given_amount INTEGER ,
+                                        given_amount FLOAT ,
                                         given_total FLOAT ,
                                         link VARCHAR ,
                                         source VARCHAR ,
                                         supply_date DATE
+);
+
+CREATE TABLE IF NOT EXISTS assignment_equip(
+    id BIGSERIAL PRIMARY KEY ,
+    naming VARCHAR,
+    worker_id INTEGER references worker(id) ON DELETE SET NULL ,
+    equipment_id BIGINT references equipment(id) ON DELETE SET NULL ,
+    amount FLOAT,
+    start_date_time TIMESTAMP,
+    end_date_time TIMESTAMP,
+    status INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS shift(

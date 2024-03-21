@@ -35,18 +35,44 @@ public class EquipmentService {
     private final DateTimeFormatter kebabFormatter;
 
     public ResponseEntity<String> mapAllEquipmentToJson(){
-        List<Equipment> equipmentList =
-                Optional.of(equipmentRepository.findAll()).orElse(Collections.emptyList());
-        String allEquipStr;
+        List<Equipment> equipmentList = equipmentRepository.findAll();
         try {
-            allEquipStr = objectMapper.writeValueAsString(equipmentList);
-        } catch (JsonProcessingException e) {
-            log.error("При конвертации таблицы оборудования в json произошла ошибка");
+            List<EquipDto> equipDtoList = new ArrayList<>();
+            for (Equipment equipDao : equipmentList){
+                String typeStr =
+                        Optional.ofNullable(equipDao.getType().getName()).orElse("");
+                String responsibleStr =
+                        Optional.ofNullable(equipDao.getResponsible().getName()).orElse("");
+                Optional<LocalDate> maybeDate = Optional.ofNullable(equipDao.getSupplyDate());
+                String dateStr = maybeDate.map(kebabFormatter::format).orElse("");
+                equipDtoList.add(EquipDto
+                                .builder()
+                                .id(equipDao.getId())
+                                .naming(equipDao.getNaming())
+                                .type(typeStr)
+                                .responsible(responsibleStr)
+                                .amount(equipDao.getAmount())
+                                .total(equipDao.getTotal())
+                                .priceForEach(equipDao.getPrice4each())
+                                .totalLeft(equipDao.getTotalLeft())
+                                .amountLeft(equipDao.getAmountLeft())
+                                .unit(equipDao.getUnit())
+                                .givenAmount(equipDao.getGivenAmount())
+                                .givenTotal(equipDao.getGivenTotal())
+                                .link(equipDao.getLink())
+                                .source(equipDao.getSource())
+                                .supplyDate(dateStr)
+                                .build());
+            }
+            String allEquipStr;
+            allEquipStr = objectMapper.writeValueAsString(equipDtoList);
+            log.info("Загружена таблица оборудования");
+            return ResponseEntity.ok(allEquipStr);
+        } catch (Exception e) {
+            log.error("При загрузке json таблицы оборудования произошла ошибка");
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
-        log.info("Загружена таблица оборудования");
-        return ResponseEntity.ok(allEquipStr);
     }
     public String mapAllEquipTypesToJson(){
         List<EquipmentType> equipmentTypes =
@@ -183,5 +209,23 @@ public class EquipmentService {
     }
         log.info("Записи {} обновлены",equipDtos);
         return ResponseEntity.ok().build();
+    }
+
+    public ResponseEntity<String> mapSingleEquipById(Long equipId) {
+        try {
+            Equipment equipment = equipmentRepository.findById(equipId).orElseThrow();
+            EquipDto equipDto = EquipDto
+                    .builder()
+                    .naming(equipment.getNaming())
+                    .amountLeft(equipment.getAmountLeft())
+                    .build();
+            String equipDtoStr = objectMapper.writeValueAsString(equipDto);
+            log.info("Загрузили единицу оборудования {} из бд",equipDtoStr);
+            return ResponseEntity.ok(equipDtoStr);
+        } catch (Exception e) {
+            log.error("Ошибка при загрузке из бд единицы оборудования id: {}",equipId);
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.tosDev.web.controllers.table_pages;
 import com.tosDev.web.dto.EquipTypeDto;
 import com.tosDev.web.dto.EquipDto;
 import com.tosDev.web.service.EquipmentService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class EquipControllers {
     @GetMapping("/main")
     String showEquipPage(){
         log.info("Загружена страница оборудования");
-        return "equipment_tab";
+        return "equipment/equipment_tab";
     }
 
     /**
@@ -95,6 +96,16 @@ public class EquipControllers {
     @PutMapping("/update_equip_rows")
     ResponseEntity<Void> update_equip_rows(@RequestBody List<EquipDto> equipDtos){
         return equipmentService.saveEquipUpdate(equipDtos);
+    }
+
+    /**
+     * Принимает с фронтенда заявку на конкретную единицу оборудования
+     * @return json единицы оборудования
+     */
+    @GetMapping("/get_equip_by_id")
+    ResponseEntity<String> getEquipById(HttpServletRequest httpServletRequest){
+        Long equipId = Long.valueOf(httpServletRequest.getHeader("id"));
+        return equipmentService.mapSingleEquipById(equipId);
     }
 
 

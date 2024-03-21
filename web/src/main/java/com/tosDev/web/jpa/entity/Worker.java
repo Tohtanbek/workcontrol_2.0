@@ -39,5 +39,9 @@ public class Worker {
     @OneToMany(mappedBy = "worker")
     List<Income> incomeList = new ArrayList<>();
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "worker")
+    List<AssignmentEquip> assignmentEquipList = new ArrayList<>();
 
 }

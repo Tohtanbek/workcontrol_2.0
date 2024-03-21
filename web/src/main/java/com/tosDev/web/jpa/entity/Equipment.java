@@ -7,6 +7,8 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -32,17 +34,23 @@ public class Equipment {
     @JsonIdentityReference(alwaysAsId=true)
     private Responsible responsible;
 
-    private Integer amount;
+    private Float amount;
     private Float total;
     private Float price4each;
     private Float totalLeft;
     private Float amountLeft;
     private String unit;
-    private Integer givenAmount;
+    private Float givenAmount;
     private Float givenTotal;
     private String link;
     private String source;
 
     @JsonFormat(pattern = "MM.dd.yyyy")
     private LocalDate supplyDate;
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(mappedBy = "equipment",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AssignmentEquip> assignmentEquipList = new ArrayList<>();
+
 }

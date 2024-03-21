@@ -4,26 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Адаптивный дизайн сайта вместо px.">
+    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Продолжение работы с адаптивным дизайном &#10;Создание общих css стилей для страниц с таблицами">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/address/styles_address_job_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/address/styles_address_job_tab.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/address/styles_address_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/address/styles_address_tab.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/brigadier/styles_brigadier_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/brigadier/styles_brigadier_tab.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/equipment/styles_equipment_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/equipment/styles_equipment_tab.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/expense/styles_expense_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/expense/styles_expense_tab.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/income/styles_income_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/income/styles_income_tab.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/responsible/styles_responsible_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/responsible/styles_responsible_tab.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/shift/styles_shift_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/shift/styles_shift_tab.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/worker/styles_worker_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/worker/styles_worker_tab.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/address/address_job_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/address/address_job_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/hs_err_pid10424.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/hs_err_pid10824.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/hs_err_pid11728.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/hs_err_pid12340.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/hs_err_pid8668.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/replay_pid10824.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/controllers/table_pages/EquipControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/controllers/table_pages/EquipControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/dto/EquipDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/dto/EquipDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/entity/Equipment.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/entity/Equipment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/entity/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/jpa/entity/Worker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/service/EquipmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/service/EquipmentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/equip/equip_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/equip/equip_script.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/address/address_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/address/address_tab.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/brigadier_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/brigadier_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/equipment_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/equipment_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/expense_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/expense_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/income_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/income_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/responsible_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/responsible_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/shift_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/shift_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/worker_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/worker_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/equipment_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/equipment/equipment_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/test/resources/sql/test.sql" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/resources/sql/test.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,11 +33,11 @@
       <list>
         <option value="AnnotationType" />
         <option value="HTML File" />
-        <option value="Enum" />
         <option value="Interface" />
         <option value="JUnit5 Test Class" />
-        <option value="Class" />
         <option value="JavaScript File" />
+        <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -66,53 +64,53 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;database.data.extractors.current.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Docs/Java Projects/workcontrol_2.0/web/src/main/resources/static/sass&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;db952fcf6ed0899e7f339ea0e5b090f8&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
+    "database.data.extractors.current.id": "Comma-separated (CSV)_id",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "C:/Docs/Java Projects/workcontrol_2.0/web/src/main/resources/static/css/equipment",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "spring.configuration.checksum": "db952fcf6ed0899e7f339ea0e5b090f8"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.tosDev.tg.bot_services" />
       <recent name="com.tosDev.jpa.entity" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css\equipment" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\equip" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\templates\equipment" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\sass" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\address\address_job" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\templates\address" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css\income" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\income" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\templates\equipment" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\templates\address" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\templates" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css\responsible" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css\equipment" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\equip" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -124,11 +122,11 @@
       <recent name="unit" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.tosDev.web.service" />
+      <recent name="com.tosDev.web.jpa.repository" />
+      <recent name="com.tosDev.web.controllers.table_pages" />
       <recent name="com.tosDev.tg.db" />
       <recent name="com.tosDev.tg.bot_services" />
-      <recent name="integration.bd_and_tg.bd" />
-      <recent name="integration" />
-      <recent name="com.tosDev.controllers.table_pages" />
     </key>
   </component>
   <component name="RunManager" selected="JUnit.RealWebServiceServerIT">
@@ -283,7 +281,7 @@
       <workItem from="1710890143872" duration="298000" />
       <workItem from="1710890576788" duration="4451000" />
       <workItem from="1710895104054" duration="575000" />
-      <workItem from="1710930609108" duration="9319000" />
+      <workItem from="1710930609108" duration="36852000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит workcontrol 2.0. Работа над frontend">
       <created>1708303197812</created>
@@ -425,7 +423,14 @@
       <option name="project" value="LOCAL" />
       <updated>1710895668839</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Продолжение работы с адаптивным дизайном &#10;Создание общих css стилей для страниц с таблицами">
+      <created>1710940906882</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1710940906882</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -474,7 +479,8 @@
     <MESSAGE value="Добавлена роль ответственного (supervisor)&#10;Добавлены кнопки меню бригадира." />
     <MESSAGE value="Закончена работа со страницей распределения профессий по адресам.&#10;Закончена работа со страницей счета." />
     <MESSAGE value="Адаптивный дизайн сайта вместо px." />
-    <option name="LAST_COMMIT_MESSAGE" value="Адаптивный дизайн сайта вместо px." />
+    <MESSAGE value="Продолжение работы с адаптивным дизайном &#10;Создание общих css стилей для страниц с таблицами" />
+    <option name="LAST_COMMIT_MESSAGE" value="Продолжение работы с адаптивным дизайном &#10;Создание общих css стилей для страниц с таблицами" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
