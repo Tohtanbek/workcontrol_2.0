@@ -2,13 +2,13 @@ package com.tosDev.web.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tosDev.web.dto.EquipTypeDto;
+import com.tosDev.web.dto.equip.EquipTypeDto;
 import com.tosDev.web.jpa.entity.Equipment;
 import com.tosDev.web.jpa.entity.EquipmentType;
 import com.tosDev.web.jpa.entity.Responsible;
 import com.tosDev.web.jpa.repository.EquipmentTypeRepository;
 import com.tosDev.web.jpa.repository.ResponsibleRepository;
-import com.tosDev.web.dto.EquipDto;
+import com.tosDev.web.dto.equip.EquipDto;
 import com.tosDev.web.jpa.repository.EquipmentRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -29,10 +30,10 @@ import java.util.stream.Collectors;
 public class EquipmentService {
     private final EquipmentRepository equipmentRepository;
     private final EquipmentTypeRepository equipmentTypeRepository;
-    private final ResponsibleRepository responsibleRepository;
     private final ObjectMapper objectMapper;
     @Qualifier("kebabFormatter")
     private final DateTimeFormatter kebabFormatter;
+    private final DecimalFormat decimalFormat;
 
     public ResponseEntity<String> mapAllEquipmentToJson(){
         List<Equipment> equipmentList = equipmentRepository.findAll();
@@ -41,8 +42,6 @@ public class EquipmentService {
             for (Equipment equipDao : equipmentList){
                 String typeStr =
                         Optional.ofNullable(equipDao.getType().getName()).orElse("");
-                String responsibleStr =
-                        Optional.ofNullable(equipDao.getResponsible().getName()).orElse("");
                 Optional<LocalDate> maybeDate = Optional.ofNullable(equipDao.getSupplyDate());
                 String dateStr = maybeDate.map(kebabFormatter::format).orElse("");
                 equipDtoList.add(EquipDto
@@ -50,7 +49,6 @@ public class EquipmentService {
                                 .id(equipDao.getId())
                                 .naming(equipDao.getNaming())
                                 .type(typeStr)
-                                .responsible(responsibleStr)
                                 .amount(equipDao.getAmount())
                                 .total(equipDao.getTotal())
                                 .priceForEach(equipDao.getPrice4each())
@@ -141,14 +139,11 @@ public class EquipmentService {
         try {
             EquipmentType chosenType =
                     equipmentTypeRepository.findByName(equipDto.getType()).orElseThrow();
-            Responsible responsible =
-                    responsibleRepository.findByName(equipDto.getResponsible()).orElseThrow();
             LocalDate localDate = LocalDate.parse(equipDto.getSupplyDate(),kebabFormatter);
             freshEquip = Equipment
                     .builder()
                     .naming(equipDto.getNaming())
                     .type(chosenType)
-                    .responsible(responsible)
                     .amount(equipDto.getAmount())
                     .price4each(equipDto.getPriceForEach())
                     .unit(equipDto.getUnit())
@@ -185,15 +180,22 @@ public class EquipmentService {
                 Equipment equipDao = equipmentRepository.findById(equipDto.getId()).orElseThrow();
                 EquipmentType chosenType =
                         equipmentTypeRepository.findByName(equipDto.getType()).orElseThrow();
-                Responsible responsible =
-                        responsibleRepository.findByName(equipDto.getResponsible()).orElseThrow();
                 Optional<String> optSupplyDate = Optional.ofNullable(equipDto.getSupplyDate());
+
+                //При изменении количества нужно увеличить поля left и поля total
+                Float updatedAmountLeft =
+                        equipDao.getAmountLeft()+(equipDto.getAmount()-equipDao.getAmount());
+                Float updatedTotal = Float.parseFloat(
+                        decimalFormat.format(equipDto.getPriceForEach()*equipDto.getAmount()));
+                Float updatedTotalLeft =
+                        equipDao.getTotalLeft()+(updatedTotal - equipDao.getTotal());
 
                 equipDao.setNaming(equipDto.getNaming());
                 equipDao.setType(chosenType);
-                equipDao.setResponsible(responsible);
                 equipDao.setAmount(equipDto.getAmount());
-                equipDao.setPrice4each(equipDto.getPriceForEach());
+                equipDao.setAmountLeft(updatedAmountLeft);
+                equipDao.setTotal(updatedTotal);
+                equipDao.setTotalLeft(updatedTotalLeft);
                 equipDao.setUnit(equipDto.getUnit());
                 equipDao.setLink(equipDto.getLink());
                 equipDao.setSource(equipDto.getSource());
@@ -202,6 +204,7 @@ public class EquipmentService {
                         ()->equipDao.setSupplyDate(null));
 
                 equipmentRepository.save(equipDao);
+
             }
         } catch (NoSuchElementException e) {
         log.error("При изменении выбранного оборудования по одному из id не было найдено записи в бд");

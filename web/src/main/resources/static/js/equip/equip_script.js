@@ -206,11 +206,6 @@ function createEquipTable() {
                     valuesURL: "/tables/equip/equip_types_array"
                 }
             },
-            {
-                title: "Ответственный", field: "responsible", editor: "list", editorParams: {
-                    valuesURL: "/tables/supervisors/responsible_names_array",
-                }
-            },
             {title: "Кол-во", field: "amount", editor: "number"},
             {title: "Итого", field: "total", bottomCalc: "sum", bottomCalcParams: {precision: 1}},
             {title: "Цена за 1", field: "price4each"},
@@ -262,21 +257,56 @@ function redirectAssignEquip(row){
 
 //Фильтры для основной таблицы
 let filterColumn = document.getElementById("filter-column");
+let filterType = document.getElementById("filter-type");
 let filterInput = document.getElementById("filter-input");
 let filterClearButton = document.getElementById("clear-filter");
 filterColumn.addEventListener("change",updateFilter);
+filterType.addEventListener("change",updateFilter);
 filterInput.addEventListener("keyup",updateFilter);
 
 function updateFilter(){
-    let filterColumnValue = filterColumn.options[filterColumn.selectedIndex].value;
-    equipTable.setFilter(filterColumnValue,"like",filterInput.value);
+    let filterColumnValue = filterColumn.options[filterColumn.selectedIndex].value
+    let filterTypeValue = filterType.options[filterType.selectedIndex].value;
+    //Если выбрана для фильтра колонка startDate или endDate, то вставляем кастомный фильтр для дат
+    if (filterColumnValue === "supplyDate"){
+        if (filterTypeValue === "<"){
+            equipTable.setFilter(dateTimeFilterLess);
+        }
+        else if (filterTypeValue === ">"){
+            equipTable.setFilter(dateTimeFilterBigger)
+        }
+        else {
+            equipTable.setFilter(filterColumnValue,filterType.value,filterInput.value);
+        }
+    }else {
+        equipTable.setFilter(filterColumnValue,filterType.value,filterInput.value);
+    }
 
-    filterClearButton.addEventListener("click",function (){
-        filterColumn.value = "";
-        filterInput.value = "";
-        equipTable.clearFilter();
-    })
 }
+
+//Кастомный фильтр для дат
+function dateTimeFilterLess(data){
+    let filterInput = document.getElementById("filter-input");
+    let filterInputValue = filterInput.value;
+    let tableStartDateTime = new Date(data.supplyDate);
+    let inputStartDateTime = new Date(filterInputValue);
+    return tableStartDateTime.getTime()<inputStartDateTime.getTime();
+}
+//Кастомный фильтр для дат
+function dateTimeFilterBigger(data){
+    let filterInput = document.getElementById("filter-input");
+    let filterInputValue = filterInput.value;
+    let tableStartDateTime = new Date(data.supplyDate);
+    let inputStartDateTime = new Date(filterInputValue);
+    return tableStartDateTime.getTime()>inputStartDateTime.getTime();
+}
+
+//Очистка фильтров слушатель
+filterClearButton.addEventListener("click",function (){
+    filterColumn.value = "";
+    filterInput.value = "";
+    shiftTable.clearFilter();
+})
 
 //-------------------------------------------------
 //Таблица типов оборудования
@@ -344,6 +374,7 @@ document.querySelector("#main-table-save-update")
             equipTable.alert("Изменения сохранены успешно");
             setTimeout(function (){
                 equipTable.clearAlert();
+                equipTable.setData("/tables/equip/main_table");
             },2000)
         }
     })

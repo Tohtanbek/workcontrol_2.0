@@ -1,7 +1,10 @@
 package com.tosDev.web.controllers.table_pages;
 
-import com.tosDev.web.dto.EquipTypeDto;
-import com.tosDev.web.dto.EquipDto;
+import com.tosDev.web.dto.equip.AssignEquipDto;
+import com.tosDev.web.dto.equip.EquipTypeDto;
+import com.tosDev.web.dto.equip.EquipDto;
+import com.tosDev.web.jpa.entity.AssignmentEquip;
+import com.tosDev.web.service.AssignmentEquipService;
 import com.tosDev.web.service.EquipmentService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;

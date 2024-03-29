@@ -6,7 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.swing.text.DateFormatter;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 @Configuration
 public class SpringConfig {
@@ -25,5 +28,11 @@ public class SpringConfig {
     @Bean
     DateTimeFormatter basicDateTimeFormatter(){
         return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    }
+
+    @Bean
+    DecimalFormat decimalFormat(){
+        return new DecimalFormat("#.##",
+                DecimalFormatSymbols.getInstance(Locale.ENGLISH));
     }
 }

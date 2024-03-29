@@ -1,4 +1,4 @@
-package com.tosDev.web.dto;
+package com.tosDev.web.dto.equip;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

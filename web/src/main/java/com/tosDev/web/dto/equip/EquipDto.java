@@ -1,4 +1,4 @@
-package com.tosDev.web.dto;
+package com.tosDev.web.dto.equip;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;

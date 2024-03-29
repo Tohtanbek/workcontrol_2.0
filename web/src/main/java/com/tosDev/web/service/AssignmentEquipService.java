@@ -2,9 +2,7 @@ package com.tosDev.web.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tosDev.web.dto.AssignEquipDto;
-import com.tosDev.web.dto.EquipDto;
-import com.tosDev.web.dto.EquipTypeDto;
+import com.tosDev.web.dto.equip.AssignEquipDto;
 import com.tosDev.web.enums.AssignmentStatus;
 import com.tosDev.web.jpa.entity.*;
 import com.tosDev.web.jpa.repository.*;
@@ -15,11 +13,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
+import java.text.DecimalFormat;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -29,19 +29,40 @@ public class AssignmentEquipService {
 
     private final AssignmentEquipRepository assignEquipRepo;
     private final EquipmentRepository equipmentRepository;
-    private final EquipmentTypeRepository equipmentTypeRepository;
 
     private final WorkerRepository workerRepository;
     private final ObjectMapper objectMapper;
     @Qualifier("basicDateTimeFormatter")
     private final DateTimeFormatter formatter;
+    private final DecimalFormat decimalFormat;
 
     public ResponseEntity<String> mapAllAssignEquipToJson(){
         List<AssignmentEquip> assignmentEquipList =
                 Optional.of(assignEquipRepo.findAll()).orElse(Collections.emptyList());
+        List<AssignEquipDto> assignEquipDtoList = new ArrayList<>();
+        for (AssignmentEquip assignmentEquip : assignmentEquipList){
+            Optional<LocalDateTime> endDateTimeOpt =
+                    Optional.ofNullable(assignmentEquip.getEndDateTime());
+            String endDate = "";
+            if (endDateTimeOpt.isPresent()){
+                endDate = formatter.format(endDateTimeOpt.get());
+            }
+            assignEquipDtoList.add(
+                    AssignEquipDto.builder()
+                    .id(assignmentEquip.getId())
+                    .equipId(assignmentEquip.getEquipment().getId())
+                    .equipment(assignmentEquip.getEquipment().getNaming())
+                    .naming(assignmentEquip.getNaming())
+                    .status(assignmentEquip.getStatus().getDescription())
+                    .total(assignmentEquip.getTotal())
+                    .amount(assignmentEquip.getAmount())
+                    .startDateTime(assignmentEquip.getStartDateTime().format(formatter))
+                    .endDateTime(endDate)
+                    .build());
+        }
         String allAssignEquipStr;
         try {
-            allAssignEquipStr = objectMapper.writeValueAsString(assignmentEquipList);
+            allAssignEquipStr = objectMapper.writeValueAsString(assignEquipDtoList);
         } catch (JsonProcessingException e) {
             log.error("При конвертации таблицы выданного оборужования в json произошла ошибка");
             e.printStackTrace();
@@ -55,21 +76,31 @@ public class AssignmentEquipService {
     public ResponseEntity<Void> mapAndSaveFreshAssignEquip(AssignEquipDto assignEquipDto){
         AssignmentEquip freshAssignEquip;
         try {
-            Worker worker = workerRepository.findByName(assignEquipDto.getWorker()).orElseThrow();
+            Worker worker = workerRepository.findById(assignEquipDto.getWorkerId()).orElseThrow();
             Equipment equip =
                     equipmentRepository.findById(assignEquipDto.getEquipId()).orElseThrow();
+            Float total = equip.getPrice4each()*assignEquipDto.getAmount();
+            total = Float.parseFloat(decimalFormat.format(total));
             LocalDateTime startDateTime =
-                    LocalDateTime.parse(assignEquipDto.getStartDateTime(),formatter);
+                    LocalDateTime.ofInstant(Instant.now(),ZoneId.of("UTC"));
             freshAssignEquip = AssignmentEquip
                     .builder()
-                    .id(assignEquipDto.getId())
+                    .naming(assignEquipDto.getNaming())
                     .worker(worker)
                     .equipment(equip)
                     .amount(assignEquipDto.getAmount())
+                    .total(total)
                     .startDateTime(startDateTime)
                     .status(AssignmentStatus.AT_WORK)
                     .build();
             assignEquipRepo.save(freshAssignEquip);
+
+            //Обновляем данные в equip об оставшемся оборудовании после выдачи
+            equip.setAmountLeft(equip.getAmountLeft()-assignEquipDto.getAmount());
+            equip.setTotalLeft(equip.getTotalLeft()-total);
+            equip.setGivenAmount(equip.getGivenAmount()+assignEquipDto.getAmount());
+            equip.setGivenTotal(equip.getGivenTotal()+total);
+            equipmentRepository.save(equip);
         } catch (Exception e) {
             log.error("Ошибка при сохранении выдачи оборудования в бд{}",assignEquipDto);
             e.printStackTrace();

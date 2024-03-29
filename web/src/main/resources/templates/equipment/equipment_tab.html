@@ -122,10 +122,26 @@
         <span style="margin-bottom: 1vh">Выберите столбик</span>
         <select class="filter-window" id="filter-column">
             <option value="naming">Наименование</option>
-            <option value="responsible">Ответственный</option>
+            <option value="type">Тип</option>
+            <option value="amount">Кол-во</option>
+            <option value="total">Итого</option>
+            <option value="price4each">Цена за 1</option>
+            <option value="totalLeft">Остаток суммы</option>
+            <option value="amountLeft">Остаток кол-во</option>
+            <option value="unit">Ед.изм</option>
+            <option value="givenAmount">Выдано кол-во</option>
+            <option value="givenTotal">Выдано сумма</option>
             <option value="source">Поставщик</option>
+            <option value="supplyDate">Дата поставки</option>
         </select>
         <input class="filter-window" type="text" id="filter-input" placeholder="Впишите значение">
+        <select class="filter-window" id="filter-type">
+            <option value="like">Совпадение</option>
+            <option value="=">Точное совпадение</option>
+            <option value="<">Меньше</option>
+            <option value=">">Больше</option>
+            <option value="!=">Не равно</option>
+        </select>
         <button class="filter-window" id="clear-filter">Очистить фильтр</button>
     </div>
     <div id="overlay"></div>

@@ -16,7 +16,7 @@ document.getElementById("main-form-submit").addEventListener("click",
         let form = document.getElementById("main-form");
         const formData = new FormData(form);
         try {
-            let response = await fetch('/tables/equip/add_assignment_equip_row', {
+            let response = await fetch('/tables/assignment_equip/add_assignment_equip_row', {
                 method: "POST",
                 headers: {
                     "Content-Type":"application/json"
@@ -74,7 +74,7 @@ function createAssignEquipTable() {
             {title: "Оборудование", field: "equipment"},
             {title: "equipId", field: "equipId"},
             {title: "Кол-во", field: "amount", bottomCalc: "sum", bottomCalcParams: {precision: 1}},
-            {title: "Сумма", field: "totalAssigned", bottomCalc: "sum", bottomCalcParams: {precision: 1}},
+            {title: "Сумма", field: "total", bottomCalc: "sum", bottomCalcParams: {precision: 1}},
             {title: "Дата выдачи", field: "startDateTime"},
             {title: "Дата отработки", field: "endDateTime"},
         ]
@@ -101,12 +101,12 @@ filterInput.addEventListener("keyup",updateFilter);
 
 function updateFilter(){
     let filterColumnValue = filterColumn.options[filterColumn.selectedIndex].value;
-    equipTable.setFilter(filterColumnValue,"like",filterInput.value);
+    assignEquipTable.setFilter(filterColumnValue,"like",filterInput.value);
 
     filterClearButton.addEventListener("click",function (){
         filterColumn.value = "";
         filterInput.value = "";
-        equipTable.clearFilter();
+        assignEquipTable.clearFilter();
     })
 }
 
@@ -114,14 +114,15 @@ function updateFilter(){
 
 
 function closeForm(){
-    let assignEquipForm = document.querySelector(".assign-equip-form");
-    assignEquipForm.style.opacity = "0";
-    setTimeout(function (){assignEquipForm.style.display = "none"},300);//Чтобы была анимация
-    let main = document.querySelector("main");
-    main.style.opacity = "1";
-    main.style.filter = "blur(0px)";
-    document.body.style.overflow = "visible"; //Вернули возможность скролить после нажатия
-    document.getElementById("overlay").style.display = "none";
+    // let assignEquipForm = document.querySelector(".assign-equip-form");
+    // assignEquipForm.style.opacity = "0";
+    // setTimeout(function (){assignEquipForm.style.display = "none"},300);//Чтобы была анимация
+    // let main = document.querySelector("main");
+    // main.style.opacity = "1";
+    // main.style.filter = "blur(0px)";
+    // document.body.style.overflow = "visible"; //Вернули возможность скролить после нажатия
+    // document.getElementById("overlay").style.display = "none";
+    window.location.href = "/tables/assignment_equip/main";
 }
 
 
@@ -137,17 +138,17 @@ document.querySelector("#main-table-save-update")
     }).then(response => {
         if (!response.ok){
             updatedRows = [];
-            equipTable.alert("Ошибка. Изменения не сохранены","error");
+            assignEquipTable.alert("Ошибка. Изменения не сохранены","error");
             setTimeout(function (){
-                equipTable.clearAlert();
+                assignEquipTable.clearAlert();
             },3000)
             throw new Error('DB error')
         }
         else {
             updatedRows = [];
-            equipTable.alert("Изменения сохранены успешно");
+            assignEquipTable.alert("Изменения сохранены успешно");
             setTimeout(function (){
-                equipTable.clearAlert();
+                assignEquipTable.clearAlert();
             },2000)
         }
     })
@@ -190,13 +191,13 @@ function checkIfRedirected(){
             }
             else {
                 //Если успешно загрузили выбранное пользователем оборудование, то показываем форму
-                response.json().then(data => loadWorkersList(data))
+                response.json().then(data => loadWorkersList(data,equipIdParam))
             }
         })
     }
 }
 
-function loadWorkersList(equipDto){
+function loadWorkersList(equipDto,equipId){
     fetch("/tables/worker/main_table",{
         method: "GET"
     }).then(response => {
@@ -211,14 +212,18 @@ function loadWorkersList(equipDto){
         else {
             response.json().then(data => {
                 workersList = data
-                showForm(equipDto['naming'],equipDto['amountLeft'])
+                showForm(equipId,equipDto['naming'],equipDto['amountLeft'])
             })
         }
     })
 }
 
 
-function showForm(equipName,equipLeft){
+function showForm(equipId,equipName,equipLeft){
+    //Вставляем id оборудования, которое выбрал пользователь в передаваемую форму
+    console.log(equipId)
+    document.getElementById("equipId").value = equipId;
+
     let assignEquipForm = document.querySelector(".assign-equip-form");
     assignEquipForm.style.display = "block";
     setTimeout(() => {
@@ -231,7 +236,7 @@ function showForm(equipName,equipLeft){
     document.getElementById("overlay").style.display = "block";
 
     //Загружаем работников в форму (но сначала очищаем, чтобы не дублировались):
-    let workerSelect = document.querySelector("#worker");
+    let workerSelect = document.querySelector("#workerId");
     while (workerSelect.firstChild) {
         workerSelect.removeChild(workerSelect.firstChild);
     }

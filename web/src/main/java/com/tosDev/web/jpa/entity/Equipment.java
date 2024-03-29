@@ -28,12 +28,6 @@ public class Equipment {
     @OnDelete(action = OnDeleteAction.SET_NULL)
     private EquipmentType type;
 
-    @ManyToOne
-    @OnDelete(action = OnDeleteAction.SET_NULL)
-    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="name")
-    @JsonIdentityReference(alwaysAsId=true)
-    private Responsible responsible;
-
     private Float amount;
     private Float total;
     private Float price4each;

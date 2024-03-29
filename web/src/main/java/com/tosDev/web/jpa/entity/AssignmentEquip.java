@@ -29,11 +29,12 @@ public class AssignmentEquip {
     Equipment equipment;
 
     private Float amount;
+    private Float total;
 
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
 
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated
     private AssignmentStatus status;
 
 }

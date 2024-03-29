@@ -24,13 +24,6 @@ public class Responsible {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @JsonIgnore
-    @OneToMany(mappedBy = "responsible")
-    private List<Equipment> equipmentList = new ArrayList<>();
-
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @JsonIgnore
     @OneToMany(mappedBy = "responsible", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ResponsibleBrigadier> responsibleBrigadierList = new ArrayList<>();
 }
