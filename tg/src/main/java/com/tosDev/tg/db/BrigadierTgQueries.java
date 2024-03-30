@@ -1,10 +1,10 @@
 package com.tosDev.tg.db;
 
 import com.pengrad.telegrambot.TelegramBot;
+import com.tosDev.spring.jpa.entity.*;
+import com.tosDev.spring.jpa.repository.*;
 import com.tosDev.tg.bot_services.BrigadierWorkerCommonTgMethods;
-import com.tosDev.web.enums.ShiftEndTypeEnum;
-import com.tosDev.web.jpa.entity.*;
-import com.tosDev.web.jpa.repository.*;
+import com.tosDev.enums.ShiftEndTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-import static com.tosDev.web.enums.ShiftStatusEnum.*;
+import static com.tosDev.enums.ShiftStatusEnum.*;
 
 @Component
 @Transactional
@@ -82,7 +82,7 @@ public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
     }
 
 
-    public Optional<Shift> loadFreshBrigadierShift(String addressId,Integer brigadierId){
+    public Optional<Shift> loadFreshBrigadierShift(String addressId, Integer brigadierId){
 
         Address chosenAddress = new Address();
         Brigadier brigadier = new Brigadier();
@@ -181,7 +181,7 @@ public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
         }
     }
 
-    public List<Job> loadJobsOfAddress(Integer shiftId,Integer brigadierId){
+    public List<Job> loadJobsOfAddress(Integer shiftId, Integer brigadierId){
         try {
             Brigadier brigadier = brigadierRepository.findById(brigadierId).orElseThrow();
             Shift shift = shiftRepository.findById(shiftId).orElseThrow();

@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
         "com.tosDev.tg",
         "com.tosDev.amqp"
 })
-@EntityScan("com/tosDev/web/jpa/entity")
-@EnableJpaRepositories("com.tosDev.web.jpa.repository")
+@EntityScan("com/tosDev/spring/jpa/entity")
+@EnableJpaRepositories("com.tosDev.spring.jpa.repository")
 public class TgApplicationRunner {
     public static void main(String[] args) {
         SpringApplication.run(TgApplicationRunner.class,args);

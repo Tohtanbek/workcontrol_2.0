@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Выберите дату</title>
+    <link href="/static/styles_select_date.css"
+          th:href="@{/styles_select_date.css}" rel="stylesheet" />
+</head>
+<body>
+<header th:text="'Choose date'"></header>
+
+<div class="images">
+
+    <a th:if="${month>1&&month<13}" th:href="@{/form/select_date(month=${month}-1)}"
+       id="prevMonth">
+        <img id="prevMonthImg" src="/images/next_page.png" alt="prev">
+    </a>
+    <a th:if="${month==1}" th:href="@{/form/select_date(month=12)}"
+       id="prevMonth1">
+        <img id="prevMonthImg1" src="/images/next_page.png" alt="prev">
+    </a>
+    <h1 th:text="${monthName}"></h1>
+    <a th:if="${month>0&&month<12}" th:href="@{/form/select_date(month=${month}+1)}"
+   id="nextMonth">
+        <img id="nextMonthImg" src="/images/next_page.png" alt="next">
+    </a>
+<a th:if="${month==12}" th:href="@{/form/select_date(month=1)}"
+   id="nextMonth1">
+    <img id="nextMonthImg1" src="/images/next_page.png" alt="prev">
+</a>
+</div>
+
+    <div class="allDates">
+        <span class="linkSpan" th:each="date : ${datesOfMonth}">
+            <a th:href="@{/form/select_time(date=${date.dateInt})}"
+               th:utext="${date.dateInt + '&lt;br /&gt;' + date.dateString}"></a>
+        </span>
+    </div>
+</body>
+</html>

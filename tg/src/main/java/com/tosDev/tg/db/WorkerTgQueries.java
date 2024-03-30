@@ -1,13 +1,13 @@
 package com.tosDev.tg.db;
 
-import com.tosDev.web.enums.ShiftEndTypeEnum;
-import com.tosDev.web.jpa.entity.Address;
-import com.tosDev.web.jpa.entity.Shift;
-import com.tosDev.web.jpa.entity.Worker;
-import com.tosDev.web.jpa.entity.WorkerAddress;
-import com.tosDev.web.jpa.repository.AddressRepository;
-import com.tosDev.web.jpa.repository.ShiftRepository;
-import com.tosDev.web.jpa.repository.WorkerRepository;
+import com.tosDev.enums.ShiftEndTypeEnum;
+import com.tosDev.spring.jpa.entity.Address;
+import com.tosDev.spring.jpa.entity.Shift;
+import com.tosDev.spring.jpa.entity.Worker;
+import com.tosDev.spring.jpa.entity.WorkerAddress;
+import com.tosDev.spring.jpa.repository.AddressRepository;
+import com.tosDev.spring.jpa.repository.ShiftRepository;
+import com.tosDev.spring.jpa.repository.WorkerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Hibernate;
@@ -17,8 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.*;
 
-import static com.tosDev.web.enums.ShiftStatusEnum.AT_WORK;
-import static com.tosDev.web.enums.ShiftStatusEnum.FINISHED;
+import static com.tosDev.enums.ShiftStatusEnum.AT_WORK;
+import static com.tosDev.enums.ShiftStatusEnum.FINISHED;
 
 @Component
 @RequiredArgsConstructor

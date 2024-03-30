@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.images {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1vh
+}
+
+#nextMonthImg,
+#prevMonthImg,
+#nextMonthImg1,
+#prevMonthImg1{
+    margin-top: 2vh;
+    width: 50px; /* Замените на нужный вам размер */
+    height: auto;
+}
+
+#prevMonthImg,
+#prevMonthImg1{
+    transform: scaleX(-1);
+}
+
+header {
+    text-align: center;
+    background-color: #C8DCE1;
+    padding: 10px;
+    width: 100%;
+    font-size: 120%;
+}
+
+h1 {
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 200%;
+}
+
+.allDates {
+    height: 80%;
+    width: 40%;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.linkSpan {
+    width: min-content;
+    height: min-content;
+    padding: 2px;
+    display: flex; /* Добавлено для центрирования содержимого a внутри .linkSpan */
+    justify-content: center; /* Центрирование содержимого a по горизонтали */
+    align-items: center; /* Центрирование содержимого a по вертикали */
+    text-align: center;
+    margin: 5px;
+}
+
+.linkSpan a {
+    height: 40px;
+    width: 40px;
+    text-decoration: none;
+    padding: 10px;
+    border: 1px solid #4CAF50;
+    border-radius: 50%;
+    color: #4CAF50;
+    font-size: 105%;
+}
+
+.linkSpan a:hover {
+    background-color: #f0f0f0;
+}
+
+@media (max-width: 600px) {
+
+    header {
+       margin-bottom: 5vh ;
+    }
+
+    .allDates {
+        height: auto;
+        width: 90%;
+        text-align: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .linkSpan {
+        text-align: center;
+    }
+
+    .linkSpan a {
+        width: 40px;
+        height: 40px;
+        text-decoration: none;
+        border: 1px solid #4CAF50;
+        border-radius: 50%;
+        color: #4CAF50;
+        font-size: 90%;
+        text-align: center;
+    }
+    h1 {
+        font-size: 200%;
+    }
+
+
+}

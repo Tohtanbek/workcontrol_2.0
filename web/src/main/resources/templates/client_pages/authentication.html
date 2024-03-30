@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <link th:href="@{/css/client_pages/styles_authentication.css}" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/css/intlTelInput.css">
+</head>
+<body>
+<img th:src="@{/images/client_pages/logo.png}" id="logo" alt="error" width=500vw height=auto>
+<form action="/form/authentication" method="post" id="authenticationForm" onsubmit="updatePhoneNumber()">
+
+    <div th:if="${errors}">
+        <p th:each="error : ${errors}" th:text="${error.defaultMessage}">Error messages</p>
+    </div>
+
+    <label for="username" th:text="'Name'">Name</label>
+    <input type="text" id="username" name="username">
+    <br>
+
+    <label for="phoneNumber" th:text="'Phone'">Phone</label>
+    <input type="tel" id="phoneNumber" name="phoneNumber">
+    <br>
+
+    <p>or</p>
+
+    <label for="email" th:text="'Email'">Email</label>
+    <input type="email" id="email" name="email">
+    <br>
+
+    <input type="submit" value="Choose services">
+    <br>
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/intlTelInput.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#phoneNumber').mask('(999) 999-99-99');
+    });
+    const input = document.querySelector("#phoneNumber");
+    const iti = window.intlTelInput(input, {
+        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+        initialCountry: "US",
+    });
+    function updatePhoneNumber() {
+        // Обновляем значение скрытого поля с выбранным номером телефона
+        input.value = iti.getNumber();
+    }
+</script>
+
+</body>
+</html>

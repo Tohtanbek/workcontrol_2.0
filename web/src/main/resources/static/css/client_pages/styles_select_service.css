@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+body {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: #C8DCE1;
+    width: 100%;
+
+}
+
+#mainPart {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-top: 5vh;
+}
+
+h1, form {
+    text-align: center;
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 2vh;
+}
+
+form {
+    margin-left: 5vw;
+}
+
+h1 {
+    padding: 10px;
+    color: #333;
+}
+
+
+ul {
+    margin-top: 0;
+    text-align: left;
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    text-align: left;
+    margin-bottom: 1em;
+}
+
+label {
+    display: flex;
+    justify-content: left;
+}
+
+input[type="radio"] {
+    margin-right: 0.5em;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+button:hover {
+    background-color: #45a049;
+}
+
+#leftSide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+#squareCounter {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+#squareInput {
+    margin: 2vh 0;
+    width: 50%;
+    font-size: 100%;
+}
+
+button {
+    display: block;
+    margin: 0;
+    width: 50%;
+    font-size: 70%;
+    background-color: #4caf50;
+    color: #fff;
+    padding: 1em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.center-block {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.inline {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center !important;
+}
+#emptyElement1, #emptyElement2 {
+    height: 50px;
+    width: 54px;
+}
+
+#links input[type="submit"] {
+    display: block;
+    margin: 0;
+    width: 50%;
+    font-size: 90%;
+    background-color: #4caf50;
+    color: #fff;
+    padding: 1em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#links {
+    text-align: center !important;
+}
+
+#prevPageImg,
+#nextPageImg {
+    width: 50px; /* Замените на нужный вам размер */
+    height: auto;
+}
+
+#prevPageImg {
+    transform: scaleX(-1);
+}
+
+
+@media (max-width: 600px)  {
+
+    header {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    #countedPrice {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    #squareInput {
+        font-size: 150%;
+    }
+
+    form {
+        margin-top: 5px;
+        margin-left: 0;
+    }
+
+    li {
+        text-align: left;
+    }
+
+    h1 {
+        margin-top: 0;
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+    #mainPart {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 2vh;
+    }
+
+    #prevPageImg,
+    #nextPageImg {
+        width: 10vw; /* Замените на нужный вам размер */
+        height: auto;
+    }
+
+
+}
+
+@media (max-width: 600px) and (max-height: 700px) {
+    li {
+        text-align: left;
+        font-size: 80%;
+    }
+    h1 {
+        font-size: 100%;
+    }
+    header {
+        display: none;
+    }
+}
+
+/* styles_select_service.css */
+
+/* Остальные стили */
+
+input[type="radio"] {
+    display: none; /* Скрыть оригинальную радиокнопку */
+}
+
+/* Создание стилизованных радиокнопок */
+input[type="radio"] + label {
+    position: relative;
+    padding-left: 30px; /* Расстояние между текстом и кнопкой */
+    cursor: pointer;
+    display: inline-block;
+}
+
+input[type="radio"] + label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px; /* Размер кнопки */
+    height: 20px;
+    border: 2px solid #4caf50; /* Цвет обводки */
+    border-radius: 50%; /* Для круглой формы */
+    background-color: #fff; /* Цвет фона кнопки */
+}
+
+/* При наведении на радиокнопку */
+input[type="radio"]:hover + label::before {
+    border-color: #45a049; /* Измененный цвет обводки при наведении */
+}
+
+/* При выборе радиокнопки */
+input[type="radio"]:checked + label::before {
+    background-color: #4caf50; /* Измененный цвет фона кнопки при выборе */
+    border-color: #4caf50; /* Измененный цвет обводки при выборе */
+}
+
+/* Стили для текста метки радиокнопки */
+input[type="radio"] + label span {
+    position: relative;
+    z-index: 1;
+}
+
+
+
+
+

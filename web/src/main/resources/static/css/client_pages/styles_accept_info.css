@@ -1,0 +1,169 @@
+/* styles_accept_info.css */
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: #C8DCE1;
+    width: 100%;
+}
+
+/* Отдельные стили для блока date_time_info */
+.date_time_info {
+    text-align: center;
+    width: 80%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+/* Отдельные стили для блока service_info */
+.service_info {
+    text-align: center;
+    width: 80%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+/* Отдельные стили для блока personal_info */
+.personal_info {
+    text-align: center;
+    width: 80%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+/* Стили для скрытой формы */
+.hidden-form {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+/* Стили для видимой формы */
+.visible-form {
+    opacity: 1;
+    max-height: 500px; /* Установите максимальную высоту в зависимости от содержимого формы */
+    overflow: hidden;
+    transition: max-height 0.5s ease-in, opacity 0.5s ease-in;
+}
+
+/* Стили для кнопок и ссылок */
+button, a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 100%;
+
+    width: 20%;
+}
+
+button:hover, a:hover {
+    background-color: #0056b3;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+
+@media (max-width: 600px) {
+    button, a {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 5px;
+        text-decoration: none;
+        color: #fff;
+        background-color: #007BFF;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-size: 100%;
+        width: fit-content;
+    }
+
+}
+#editButton {
+    font-family: 'Montserrat', sans-serif;
+}
+
+@media (max-width: 600px) and (min-height: 700px){
+    header {
+        margin-bottom: 10vh;
+        text-align: center;
+        padding: 20px;
+        background-color: #C8DCE1;
+        width: 100%;
+    }
+
+    .date_time_info {
+        text-align: center;
+        width: 80%;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+    }
+
+    /* Отдельные стили для блока service_info */
+    .service_info {
+        text-align: center;
+        width: 80%;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+    }
+
+    /* Отдельные стили для блока personal_info */
+    .personal_info {
+        text-align: center;
+        width: 80%;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+    }
+}

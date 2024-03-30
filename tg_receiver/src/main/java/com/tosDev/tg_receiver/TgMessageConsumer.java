@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class TgMessageConsumer {
 
-    //Добавляем сюда сервисы из web модуля, которые нужно вызвать, когда получаем message
+    //Добавляем сюда гугл сервис, который нужно вызвать, когда получаем message
     private final SomeService someService;
 
     @RabbitListener(queues = "${rabbitmq.queue.tg}")

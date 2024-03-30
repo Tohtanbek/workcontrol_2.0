@@ -1,23 +1,17 @@
 package com.tosDev.tg.db;
 
-import com.pengrad.telegrambot.TelegramBot;
-import com.tosDev.tg.bot_services.BrigadierWorkerCommonTgMethods;
-import com.tosDev.web.jpa.entity.*;
-import com.tosDev.web.jpa.repository.*;
+import com.tosDev.spring.jpa.entity.Brigadier;
+import com.tosDev.spring.jpa.entity.Responsible;
+import com.tosDev.spring.jpa.entity.ResponsibleBrigadier;
+import com.tosDev.spring.jpa.repository.ResponsibleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Hibernate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
-
-import static com.tosDev.tg.bot.enums.ShiftStatusEnum.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 @Component
 @Transactional

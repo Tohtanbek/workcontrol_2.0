@@ -7,9 +7,9 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.tosDev.tg.db.AdminTgQueries;
 import com.tosDev.tg.db.TgQueries;
-import com.tosDev.web.jpa.entity.Address;
-import com.tosDev.web.jpa.entity.Admin;
-import com.tosDev.web.jpa.entity.Shift;
+import com.tosDev.spring.jpa.entity.Address;
+import com.tosDev.spring.jpa.entity.Admin;
+import com.tosDev.spring.jpa.entity.Shift;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,8 +23,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-import static com.tosDev.web.enums.ShiftEndTypeEnum.PLANNED;
-import static com.tosDev.web.enums.ShiftEndTypeEnum.UNPLANNED;
+import static com.tosDev.enums.ShiftEndTypeEnum.PLANNED;
+import static com.tosDev.enums.ShiftEndTypeEnum.UNPLANNED;
 
 @Slf4j
 @Component

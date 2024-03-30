@@ -1,15 +1,13 @@
 package com.tosDev.tg.db;
 
-import com.tosDev.web.jpa.entity.*;
-import com.tosDev.web.jpa.repository.AddressRepository;
-import com.tosDev.web.jpa.repository.BrigadierRepository;
-import com.tosDev.web.jpa.repository.ResponsibleBrigadierRepository;
+import com.tosDev.spring.jpa.entity.*;
+import com.tosDev.spring.jpa.repository.AddressRepository;
+import com.tosDev.spring.jpa.repository.BrigadierRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Hibernate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

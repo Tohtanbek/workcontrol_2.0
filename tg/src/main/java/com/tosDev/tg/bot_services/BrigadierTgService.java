@@ -1,16 +1,19 @@
 package com.tosDev.tg.bot_services;
 
 import com.pengrad.telegrambot.TelegramBot;
-import com.pengrad.telegrambot.model.*;
+import com.pengrad.telegrambot.model.BotCommand;
+import com.pengrad.telegrambot.model.CallbackQuery;
+import com.pengrad.telegrambot.model.Message;
+import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.botcommandscope.BotCommandsScopeChat;
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SetMyCommands;
+import com.tosDev.spring.jpa.entity.*;
 import com.tosDev.tg.db.AdminTgQueries;
 import com.tosDev.tg.db.BrigadierTgQueries;
 import com.tosDev.tg.db.TgQueries;
-import com.tosDev.web.jpa.entity.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +23,8 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.tosDev.tg.bot.enums.ShiftEndTypeEnum.PLANNED;
-import static com.tosDev.tg.bot.enums.ShiftEndTypeEnum.UNPLANNED;
+import static com.tosDev.enums.ShiftEndTypeEnum.PLANNED;
+import static com.tosDev.enums.ShiftEndTypeEnum.UNPLANNED;
 
 @Service
 @Slf4j

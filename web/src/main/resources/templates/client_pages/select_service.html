@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome</title>
+<link th:href="@{/css/client_pages/styles_select_service.css}" rel="stylesheet" />
+<head>
+    <meta charset="UTF-8">
+    <title>Choose service</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header th:text="|Hello, ${session.client.username}|">Приветствие с именем юзера</header>
+
+
+    <div class="center-block" id="mainPart">
+        <div class="leftSide" id="leftSide">
+        <h1> Выберите услуги</h1>
+            <div class="squareCounter" id="squareCounter">
+
+                <label for="squareInput">
+                    Enter the area of the apartment<br/>(sq. ft)</label>
+            <input type="number" id="squareInput" name="squareInput" min="0">
+            </div>
+        <p id="countedPrice" style="display: none;">Counted price</p>
+        </div>
+
+        <form id="mainForm" action="/form/submit_selected_service" method="post">
+
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/styles_final_page.css" th:href="@{/styles_final_page.css}" rel="stylesheet" />
+    <title>Thanks!</title>
+</head>
+<body>
+    <h1 th:text="'Thank you, we will contact you soon!'"></h1>
+    <div class="link_to_main">
+        <span th:text="'Main page:'"></span>
+        <a href="https://Deepcleanhq.com">Deepcleanhq.com</a>
+    </div>
+    <a th:href="@{/form/authentication}" th:text="'New order'"></a>
+</body>
+</html>

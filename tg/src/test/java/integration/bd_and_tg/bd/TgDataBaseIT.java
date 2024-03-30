@@ -1,14 +1,14 @@
 package integration.bd_and_tg.bd;
 
 import com.tosDev.tg.db.TgQueries;
-import com.tosDev.web.jpa.entity.Admin;
-import com.tosDev.web.jpa.entity.Brigadier;
-import com.tosDev.web.jpa.entity.Responsible;
-import com.tosDev.web.jpa.entity.Worker;
-import com.tosDev.web.jpa.repository.AdminRepository;
-import com.tosDev.web.jpa.repository.BrigadierRepository;
-import com.tosDev.web.jpa.repository.ResponsibleRepository;
-import com.tosDev.web.jpa.repository.WorkerRepository;
+import com.tosDev.spring.jpa.entity.Admin;
+import com.tosDev.spring.jpa.entity.Brigadier;
+import com.tosDev.spring.jpa.entity.Responsible;
+import com.tosDev.spring.jpa.entity.Worker;
+import com.tosDev.spring.jpa.repository.AdminRepository;
+import com.tosDev.spring.jpa.repository.BrigadierRepository;
+import com.tosDev.spring.jpa.repository.ResponsibleRepository;
+import com.tosDev.spring.jpa.repository.WorkerRepository;
 import integration.bd_and_tg.IntegrationTestBase;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;

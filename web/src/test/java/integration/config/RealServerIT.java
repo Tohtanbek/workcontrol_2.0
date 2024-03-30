@@ -1,6 +1,6 @@
 package integration.config;
 
-import com.tosDev.web.ApplicationRunner;
+import com.tosDev.SpringMainModuleRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @ActiveProfiles("test")
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-@ContextConfiguration(classes = ApplicationRunner.class)
+@ContextConfiguration(classes = SpringMainModuleRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public @interface RealServerIT {
 }

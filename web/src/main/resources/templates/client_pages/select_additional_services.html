@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome</title>
+<link href="/static/styles_select_additional_services.css"
+      th:href="@{/styles_select_additional_services.css}" rel="stylesheet" />
+<head>
+    <meta charset="UTF-8">
+    <title>Additional services</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<header th:text="|${session.user.username}, choose additional services|">Choose additional</header>
+
+
+<div class="center-block" id="mainPart">
+    <div class="leftSide" id="leftSide">
+        <h1 th:text="'Choose extra services:'">Choose several services:</h1>
+        <div class="totalCounter" id="totalCounter">
+        <p id="countedPrice" style="display: none;">Counted price</p>
+        </div>
+        <div class="totalPrice" id="totalPrice">
+            <p id="TotalPriceParagraph"
+               th:utext="'Main service: ' + ${#numbers.formatDecimal(session.mainProductTotal,2,2,'POINT')}"></p>
+             <p id="totalPriceInteger" th:idPriceAttr="${idPriceJson}"></p>
+            <p id="finalTotalPrice" th:mainProductTotal="${session.mainProductTotal}"></p>
+        </div>
+    </div>
+
+    <form id="submitForm" action="/form/submit_selected_services" method="post">
+
+        <ul>
+            <li th:each="service : ${additionalProducts}">
+                <input type="checkbox" th:id="${'service_' + service.id}" th:value="${service.id}"
+                       th:chosenPrice="${service.price}" name="selectedService" hidden/>
+                <label th:for="${'service_' + service.id}">
+                    <span th:if="${#strings.endsWith(service.price,'.0')}"
+                          th:text="|${service.name} - ${#strings.substring(service.price, 0, #strings.length(service.price) - 2)}|"></span>
+                    <span th:unless="${#strings.endsWith(service.price, '.0')}"
+                          th:text="|${service.name} - ${#numbers.formatDecimal(service.price,2,2,'POINT')}|"></span>
+                </label>
+            </li>
+        </ul>
+        <span th:if="${page >= 1}" th:text="'Page № '+${page}"
+              style="display: block; text-align: center;"></span>
+
+        <div class="inline" id="links" th:page-attr="${page}" th:selected-attr="${selected}">
+
+            <a th:if="${page > 1}" href="/form/select_additional_services"
+               id="previousPage" style="display: block; text-align: center;"
+               onclick="updatePrevPageUrl('/form/select_additional_services')">
+                <img id="prevPageImg" src="/images/next_page.png" alt="Prev">
+            </a>
+
+            <div th:if="${page == 1}" id="emptyElement1"></div>
+
+            <input type="submit" value="Next" name="submitBtn" onclick="changeSubmitHref()">
+
+            <div th:if="${isLastPage}" id="emptyElement2"></div>
+
+            <a th:if="${page >= 1 && !isLastPage}"
+               href="/form/select_additional_services"
+               id="nextPage" style="display: block; text-align: center;"
+               onclick="updateNextPage('/form/select_additional_services')">
+                <img id="nextPageImg" src="/images/next_page.png" alt="Next">
+            </a>
+        </div>
+    </form>
+</div>
+
+<script>
+
+    //Автоматически отмечаем на странице услуги, если ранее клиент их уже отметил
+    var selectedServices = document.getElementById("links").getAttribute("selected-attr");
+    selectedServices.substring(0,selectedServices.length);
+    var servicesArray = selectedServices.split(",");
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(function (checkbox){
+        if (servicesArray.includes(checkbox.value)){
+            checkbox.checked=true;
+        }
+    })
+
+    changeAdditionalSubTotal();
+
+    //Рассчитываем стоимость за дополнительные услуги при нажатии на выбор
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            changeAdditionalSubTotal();
+        });
+    });
+
+    function changeAdditionalSubTotal() {
+        //Получаем ссылки на список
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        var chosenCheckboxes = Array.from(checkboxes).filter(function (checkbox) {
+            return checkbox.checked;
+        });
+        //Получаем параметры ранее выбранных услуг
+        var selected = document.getElementById("links").getAttribute("selected-attr");
+        var prevSelectedArray = selected.split(',').filter(Boolean);
+        //Фильтруем только те параметры, которые не относятся к этой странице
+        var prevSelectedArrayOfAnotherPages = [];
+        var checkBoxesValuesArray = Array.from(checkboxes).map(function (checkbox) {
+            return checkbox.value;
+        })
+
+        var additionalSubTotalPrice = 0;
+        //Добавляем к цене те, которые выбраны на данной странице
+        for (const checkbox of chosenCheckboxes) {
+            additionalSubTotalPrice += parseFloat(checkbox.getAttribute('chosenPrice'));
+        }
+        console.log(additionalSubTotalPrice);
+        //Заполняем список только теми id, которые выбраны на других страницах
+        if (prevSelectedArray.length!==0) {
+            for (const id of prevSelectedArray) {
+                if (!checkBoxesValuesArray.includes(id)) {
+                    prevSelectedArrayOfAnotherPages.push(id);
+                }
+            }
+        }
+        console.log(additionalSubTotalPrice);
+
+        //Потом добавляем к цене позиции с других страниц
+        if (prevSelectedArrayOfAnotherPages.length!==0 && !prevSelectedArrayOfAnotherPages.includes("null")) {
+            var attrString = document.getElementById("totalPriceInteger").getAttribute("idPriceAttr");
+            var jsonMap = JSON.parse(attrString);
+            for (const prevSelectedId of prevSelectedArrayOfAnotherPages) {
+                additionalSubTotalPrice += parseFloat(jsonMap[prevSelectedId]);
+            }
+        }
+        console.log(additionalSubTotalPrice);
+        document.getElementById("totalPriceInteger").innerText = "Additional Services: " + additionalSubTotalPrice.toFixed(2);
+        document.getElementById("totalPriceInteger").removeAttribute("hidden");
+        var finalTotal = document.getElementById("finalTotalPrice");
+        var totalPriceFinal = parseFloat(finalTotal.getAttribute("mainProductTotal")) + additionalSubTotalPrice;
+        finalTotal.innerText =
+            "Total: " + totalPriceFinal.toFixed(2);
+    }
+
+
+
+    function updatePrevPageUrl(){
+        var url = "/form/select_additional_services"
+        var currentPage = document.getElementById("links").getAttribute("page-attr");
+        var intCurrentPage = parseInt(currentPage);
+
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        var selectedCheckBoxes = Array.from(checkboxes).filter(function(checkbox){
+            return checkbox.checked;
+        })
+        var selectedValues = selectedCheckBoxes.map(function(checkbox){
+            return checkbox.value;
+        })
+
+        url+="?page="+(intCurrentPage-1); //Добавили параметр страницы
+        var selected = document.getElementById("links").getAttribute("selected-attr");
+        console.log(selected);
+        if (selected==="null") {
+            url += "&selected_services=";
+            console.log(url);
+            for (const value of selectedValues) {
+                url = url + value + ","
+            }
+            console.log(url);
+        }
+        else {
+            var unselected = Array.from(checkboxes).filter(function(checkbox){
+                return !checkbox.checked;
+            })
+            var unselectedValues = unselected.map(function(checkbox){
+                return checkbox.value;
+            })
+            var selectedArray = selected.split(",").filter(function (value){
+                return !unselectedValues.includes(value);
+            });
+            selected = selectedArray.join(",");
+            url += "&selected_services="+selected;
+            for (const value of selectedValues) {
+                if (!servicesArray.includes(value)) {
+                    url = url + value + ","
+                }
+            }
+        }
+
+
+        var prevPage = document.getElementById("previousPage");
+        prevPage.href = url;
+
+    }
+
+    function updateNextPage(){
+        var url = "/form/select_additional_services"
+        var currentPage = document.getElementById("links").getAttribute("page-attr");
+        var intCurrentPage = parseInt(currentPage);
+
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        var selectedCheckBoxes = Array.from(checkboxes).filter(function(checkbox){
+            return checkbox.checked;
+        })
+        var selectedValues = selectedCheckBoxes.map(function(checkbox){
+            return checkbox.value;
+        })
+
+        url+="?page="+(intCurrentPage+1); //Добавили параметр страницы
+        var selected = document.getElementById("links").getAttribute("selected-attr");
+        if (selected==="null") {
+            url += "&selected_services=";
+            for (const value of selectedValues) {
+                url = url + value + ","
+            }
+        }
+        else {
+            var unselected = Array.from(checkboxes).filter(function(checkbox){
+                return !checkbox.checked;
+            })
+            var unselectedValues = unselected.map(function(checkbox){
+                return checkbox.value;
+            })
+            var selectedArray = selected.split(",").filter(function (value){
+                return !unselectedValues.includes(value);
+            });
+            selected = selectedArray.join(",");
+            url += "&selected_services="+selected;
+            for (const value of selectedValues) {
+                if (!servicesArray.includes(value)) {
+                    url = url + value + ","
+                }
+            }
+        }
+
+
+        var nextPage = document.getElementById("nextPage");
+        nextPage.href = url;
+
+    }
+
+    function changeSubmitHref() {
+        var url = "/form/submit_additional_services"
+
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        var selectedCheckBoxes = Array.from(checkboxes).filter(function(checkbox){
+            return checkbox.checked;
+        })
+        var selectedValues = selectedCheckBoxes.map(function(checkbox){
+            return checkbox.value;
+        })
+
+        var selected = document.getElementById("links").getAttribute("selected-attr");
+        if (selected==="null") {
+            url += "?selected_services=";
+            for (const value of selectedValues) {
+                url = url + value + ","
+            }
+        }
+        else {
+            var unselected = Array.from(checkboxes).filter(function(checkbox){
+                return !checkbox.checked;
+            })
+            var unselectedValues = unselected.map(function(checkbox){
+                return checkbox.value;
+            })
+            var selectedArray = selected.split(",").filter(function (value){
+                return !unselectedValues.includes(value);
+            });
+            selected = selectedArray.join(",");
+            url += "?selected_services="+selected;
+            for (const value of selectedValues) {
+                if (!servicesArray.includes(value)) {
+                    url = url + value + ","
+                }
+            }
+        }
+
+        var submitForm = document.getElementById("submitForm");
+        submitForm.action = url;
+
+    }
+
+
+</script>
+
+</body>
+</html>

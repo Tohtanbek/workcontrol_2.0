@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 30vw;
+}
+
+form #promoCode, #promoCodeLabel {
+    font-size: smaller;
+}
+#promoCodeLabel{
+    text-align: center;
+    margin-top: 5vh;
+}
+input#promoCode{
+    width: 50%;
+    padding: 4px;
+    align-self: center;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+}
+
+label {
+    margin-top: 15px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    margin-top: 1vh;
+    background-color: #1bb1ab;
+    color: #fff;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #166c69;
+}
+
+img {
+    margin-right: 10vw;
+    max-width: 100%; /* Максимальная ширина изображения, чтобы не выходило за пределы контейнера */
+}
+
+@media (max-width: 600px) {
+    body {
+        flex-direction: column; /* Элементы располагаются вертикально */
+        align-items: center; /* Центрируем элементы по горизонтали */
+        justify-content: center;
+    }
+
+    form {
+        width: 80%; /* Ширина формы на мобильных устройствах */
+    }
+
+    img {
+        justify-content: center;
+        margin-right: 0;
+        margin-left: 0;
+        margin-bottom: 20vw;
+        max-width: 80%;
+    }
+
+}
+

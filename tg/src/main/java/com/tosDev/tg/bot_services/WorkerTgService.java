@@ -10,11 +10,11 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SetMyCommands;
+import com.tosDev.spring.jpa.entity.*;
 import com.tosDev.tg.db.AdminTgQueries;
 import com.tosDev.tg.db.BrigadierTgQueries;
 import com.tosDev.tg.db.TgQueries;
 import com.tosDev.tg.db.WorkerTgQueries;
-import com.tosDev.web.jpa.entity.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +23,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
-import static com.tosDev.web.enums.ShiftEndTypeEnum.PLANNED;
-import static com.tosDev.web.enums.ShiftEndTypeEnum.UNPLANNED;
+import static com.tosDev.enums.ShiftEndTypeEnum.PLANNED;
+import static com.tosDev.enums.ShiftEndTypeEnum.UNPLANNED;
 
 @Service
 @Slf4j

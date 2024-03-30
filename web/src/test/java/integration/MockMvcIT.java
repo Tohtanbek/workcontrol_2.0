@@ -1,6 +1,6 @@
 package integration;
 
-import com.tosDev.web.dto.equip.EquipTypeDto;
+import com.tosDev.dto.equip.EquipTypeDto;
 import integration.config.IntegrationTestBase;
 import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
