@@ -1,6 +1,10 @@
 package com.tosDev.tg.db;
 
-import com.tosDev.web.jpa.entity.*;
+import com.tosDev.web.enums.ShiftEndTypeEnum;
+import com.tosDev.web.jpa.entity.Address;
+import com.tosDev.web.jpa.entity.Shift;
+import com.tosDev.web.jpa.entity.Worker;
+import com.tosDev.web.jpa.entity.WorkerAddress;
 import com.tosDev.web.jpa.repository.AddressRepository;
 import com.tosDev.web.jpa.repository.ShiftRepository;
 import com.tosDev.web.jpa.repository.WorkerRepository;
@@ -11,13 +15,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
-import static com.tosDev.tg.bot.enums.ShiftStatusEnum.AT_WORK;
-import static com.tosDev.tg.bot.enums.ShiftStatusEnum.FINISHED;
+import static com.tosDev.web.enums.ShiftStatusEnum.AT_WORK;
+import static com.tosDev.web.enums.ShiftStatusEnum.FINISHED;
 
 @Component
 @RequiredArgsConstructor
@@ -65,7 +66,7 @@ public class WorkerTgQueries {
             chosenAddress = addressRepository.findById(Integer.valueOf(addressId)).orElseThrow();
             worker = workerRepository.findById(workerId).orElseThrow();
             //Проверка на наличие активной смены
-            if (shiftRepository.existsByWorkerAndStatus(worker, AT_WORK.getDescription()))
+            if (shiftRepository.existsByWorkerAndStatus(worker, AT_WORK))
             {
                 return Optional.empty();
             }
@@ -83,7 +84,7 @@ public class WorkerTgQueries {
                 .address(chosenAddress)
                 .worker(worker)
                 .job(worker.getJob())
-                .status(AT_WORK.getDescription())
+                .status(AT_WORK)
                 .startDateTime(LocalDateTime.now())
                 .build());
         log.info("Смена {} загружена в базу данных",shift);
@@ -98,7 +99,7 @@ public class WorkerTgQueries {
         try {
             Worker worker = workerRepository.findById(workerId).orElseThrow();
             Shift shift = shiftRepository
-                            .findByWorkerAndStatus(worker,AT_WORK.getDescription())
+                            .findByWorkerAndStatus(worker,AT_WORK)
                             .orElseThrow();
 
             String shortInfo = String.format("""
@@ -109,10 +110,13 @@ public class WorkerTgQueries {
                     shift.getAddress().getShortName(),
                     callbackData);
 
+            ShiftEndTypeEnum shiftEndTypeEnum = Arrays.stream(ShiftEndTypeEnum.values())
+                    .filter(value -> value.getDescription().equals(callbackData))
+                    .findFirst().orElseThrow();
             shift.setShortInfo(shortInfo);
             shift.setEndDateTime(LocalDateTime.now());
-            shift.setStatus(FINISHED.getDescription());
-            shift.setType(callbackData);
+            shift.setStatus(FINISHED);
+            shift.setType(shiftEndTypeEnum);
 
             shiftRepository.save(shift);
 

@@ -1,4 +1,4 @@
-package integration;
+package integration.config;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.springframework.test.context.DynamicPropertyRegistry;

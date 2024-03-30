@@ -1,5 +1,10 @@
 let updatedRows = [];
 
+//Валидатор изменения amount, чтобы запретить ставить меньше оборудования, чем было изначально
+let noSubtractAmount = function(cell, value){
+    return cell.getValue() < value
+}
+
 let typeMenu = createTypeMenu();
 let equipMenu = createEquipMenu();
 let typeTable = createTypeTable()
@@ -206,7 +211,11 @@ function createEquipTable() {
                     valuesURL: "/tables/equip/equip_types_array"
                 }
             },
-            {title: "Кол-во", field: "amount", editor: "number"},
+            {title: "Кол-во", field: "amount", editor: "number",validator:[
+                    {
+                        type:noSubtractAmount,
+                    }
+                ]},
             {title: "Итого", field: "total", bottomCalc: "sum", bottomCalcParams: {precision: 1}},
             {title: "Цена за 1", field: "price4each"},
             {title: "Остаток суммы", field: "totalLeft"},
@@ -228,6 +237,7 @@ function createEquipTable() {
         ]
     });
 }
+
 
 function createEquipMenu(){
     return [

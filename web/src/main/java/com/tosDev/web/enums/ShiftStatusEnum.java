@@ -1,4 +1,4 @@
-package com.tosDev.tg.bot.enums;
+package com.tosDev.web.enums;
 
 public enum ShiftStatusEnum {
     AT_WORK("В работе"),

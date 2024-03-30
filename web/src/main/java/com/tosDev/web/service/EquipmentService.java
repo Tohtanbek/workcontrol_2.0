@@ -139,13 +139,25 @@ public class EquipmentService {
         try {
             EquipmentType chosenType =
                     equipmentTypeRepository.findByName(equipDto.getType()).orElseThrow();
-            LocalDate localDate = LocalDate.parse(equipDto.getSupplyDate(),kebabFormatter);
+            LocalDate localDate = equipDto.getSupplyDate().isBlank()?
+                    null
+                    :
+                    LocalDate.parse(equipDto.getSupplyDate(), kebabFormatter);
+            //Рассчитываем цену за единицу
+            Float priceForEach = Float.parseFloat(
+                    decimalFormat.format(equipDto.getTotal()/equipDto.getAmount()));
+
             freshEquip = Equipment
                     .builder()
                     .naming(equipDto.getNaming())
                     .type(chosenType)
                     .amount(equipDto.getAmount())
-                    .price4each(equipDto.getPriceForEach())
+                    .amountLeft(equipDto.getAmount())
+                    .givenAmount(0.0F)
+                    .total(equipDto.getTotal())
+                    .totalLeft(equipDto.getTotal())
+                    .givenTotal(0.0F)
+                    .price4each(priceForEach)
                     .unit(equipDto.getUnit())
                     .link(equipDto.getLink())
                     .source(equipDto.getSource())

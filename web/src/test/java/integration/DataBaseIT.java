@@ -8,6 +8,7 @@ import com.tosDev.web.jpa.entity.Responsible;
 import com.tosDev.web.jpa.repository.AddressRepository;
 import com.tosDev.web.jpa.repository.ResponsibleBrigadierRepository;
 import com.tosDev.web.jpa.repository.ResponsibleRepository;
+import integration.config.IntegrationTestBase;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;

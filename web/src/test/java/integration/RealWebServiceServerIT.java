@@ -1,5 +1,7 @@
 package integration;
 
+import integration.config.IntegrationTestBase;
+import integration.config.RealServerIT;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.jdbc.Sql;

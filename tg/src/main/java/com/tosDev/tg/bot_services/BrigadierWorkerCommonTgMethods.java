@@ -19,13 +19,12 @@ import java.text.DecimalFormatSymbols;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-import static com.tosDev.tg.bot.enums.ShiftEndTypeEnum.PLANNED;
-import static com.tosDev.tg.bot.enums.ShiftEndTypeEnum.UNPLANNED;
+import static com.tosDev.web.enums.ShiftEndTypeEnum.PLANNED;
+import static com.tosDev.web.enums.ShiftEndTypeEnum.UNPLANNED;
 
 @Slf4j
 @Component

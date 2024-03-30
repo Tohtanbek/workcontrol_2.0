@@ -1,5 +1,7 @@
 package com.tosDev.web.jpa.entity;
 
+import com.tosDev.web.enums.ShiftEndTypeEnum;
+import com.tosDev.web.enums.ShiftStatusEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,8 +24,10 @@ public class Shift {
     private String shortInfo;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-    private String status;
-    private String type;
+    @Enumerated
+    private ShiftStatusEnum status;
+    @Enumerated
+    private ShiftEndTypeEnum type;
 
     @ManyToOne
     private Address address;

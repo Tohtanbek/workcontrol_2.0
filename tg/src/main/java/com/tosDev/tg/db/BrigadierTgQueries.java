@@ -1,8 +1,8 @@
 package com.tosDev.tg.db;
 
 import com.pengrad.telegrambot.TelegramBot;
-import com.tosDev.tg.bot.enums.ShiftStatusEnum;
 import com.tosDev.tg.bot_services.BrigadierWorkerCommonTgMethods;
+import com.tosDev.web.enums.ShiftEndTypeEnum;
 import com.tosDev.web.jpa.entity.*;
 import com.tosDev.web.jpa.repository.*;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-import static com.tosDev.tg.bot.enums.ShiftStatusEnum.*;
+import static com.tosDev.web.enums.ShiftStatusEnum.*;
 
 @Component
 @Transactional
@@ -90,7 +90,7 @@ public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
             chosenAddress = addressRepository.findById(Integer.valueOf(addressId)).orElseThrow();
             brigadier = brigadierRepository.findById(brigadierId).orElseThrow();
             //Проверка на наличие активной смены
-            if (shiftRepository.existsByBrigadierAndStatus(brigadier, AT_WORK.getDescription()))
+            if (shiftRepository.existsByBrigadierAndStatus(brigadier, AT_WORK))
             {
                 return Optional.empty();
             }
@@ -107,7 +107,7 @@ public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
                 .brigadier(brigadier)
                 .shortInfo(shortInfo)
                 .address(chosenAddress)
-                .status(AT_WORK.getDescription())
+                .status(AT_WORK)
                 .startDateTime(LocalDateTime.now())
                 .build());
         //Инициализируем, чтобы потом найти супервайзеров для переправки
@@ -121,7 +121,7 @@ public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
         try {
             Brigadier brigadier = brigadierRepository.findById(brigadierId).orElseThrow();
             Shift shift = shiftRepository
-                            .findByBrigadierAndStatus(brigadier,AT_WORK.getDescription())
+                            .findByBrigadierAndStatus(brigadier,AT_WORK)
                             .orElseThrow();
 
             String shortInfo = String.format("""
@@ -129,10 +129,13 @@ public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
                 тип: %s
                 """,brigadier.getName(),shift.getAddress().getShortName(),callbackData);
 
+            ShiftEndTypeEnum shiftEndTypeEnum = Arrays.stream(ShiftEndTypeEnum.values())
+                    .filter(value -> value.getDescription().equals(callbackData))
+                            .findFirst().orElseThrow();
             shift.setShortInfo(shortInfo);
             shift.setEndDateTime(LocalDateTime.now());
-            shift.setStatus(FINISHED.getDescription());
-            shift.setType(callbackData);
+            shift.setStatus(FINISHED);
+            shift.setType(shiftEndTypeEnum);
             String totalHours = countTotalHours(shift.getStartDateTime(), shift.getEndDateTime());
             shift.setTotalHours(Float.valueOf(totalHours));
 
@@ -154,12 +157,12 @@ public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
         try {
             Shift shift = shiftRepository.findById(shiftId).orElseThrow();
             //Если смену уже подтвердили или она по какой-то причине не окончена
-            if (!shift.getStatus().equals(FINISHED.getDescription())){
+            if (!shift.getStatus().equals(FINISHED)){
                 log.warn("Смена {} уже подтверждена",shift.getShortInfo());
                 return Optional.empty();
             }
             Brigadier brigadier = brigadierRepository.findById(brigadierId).orElseThrow();
-            shift.setStatus(APPROVED.getDescription());
+            shift.setStatus(APPROVED);
             shift.setBrigadier(brigadier);
             String totalHours = countTotalHours(shift.getStartDateTime(), shift.getEndDateTime());
             shift.setTotalHours(Float.valueOf(totalHours));
@@ -395,7 +398,7 @@ public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
         return findLinkedWorkers(brigadierId)
                 .stream()
                 .filter(worker -> worker.getShiftList()
-                        .stream().anyMatch(shift -> shift.getStatus().equals(AT_WORK.getDescription())))
+                        .stream().anyMatch(shift -> shift.getStatus().equals(AT_WORK)))
                 .toList();
     }
 

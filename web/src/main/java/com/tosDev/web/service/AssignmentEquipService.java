@@ -29,6 +29,8 @@ public class AssignmentEquipService {
 
     private final AssignmentEquipRepository assignEquipRepo;
     private final EquipmentRepository equipmentRepository;
+    private final ShiftRepository shiftRepository;
+    private final ExpenseRepository expenseRepository;
 
     private final WorkerRepository workerRepository;
     private final ObjectMapper objectMapper;
@@ -50,6 +52,8 @@ public class AssignmentEquipService {
             assignEquipDtoList.add(
                     AssignEquipDto.builder()
                     .id(assignmentEquip.getId())
+                    .worker(assignmentEquip.getWorker().getName())
+                    .workerId(assignmentEquip.getWorker().getId())
                     .equipId(assignmentEquip.getEquipment().getId())
                     .equipment(assignmentEquip.getEquipment().getNaming())
                     .naming(assignmentEquip.getNaming())
@@ -68,7 +72,7 @@ public class AssignmentEquipService {
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
-        log.info("Загружена таблица выдачт оборудования");
+        log.info("Загружена таблица выдачи оборудования");
         return ResponseEntity.ok(allAssignEquipStr);
     }
 
@@ -127,23 +131,121 @@ public class AssignmentEquipService {
     public ResponseEntity<Void> saveAssignEquipUpdate(List<AssignEquipDto> assignEquipDtos){
         try {
             for (AssignEquipDto assignEquipDto : assignEquipDtos) {
-                AssignmentStatus assignmentStatus =
+                AssignmentEquip dao = assignEquipRepo.findById(assignEquipDto.getId()).orElseThrow();
+                AssignmentStatus updatedStatus =
                         Arrays.stream(AssignmentStatus.values())
                                 .filter(status ->
                                         status.getDescription().equals(assignEquipDto.getStatus()))
                                 .findFirst().orElseThrow();
-                assignEquipRepo.save(AssignmentEquip
-                        .builder()
-                        .id(assignEquipDto.getId())
-                        .status(assignmentStatus)
-                        .build());
+                LocalDateTime endDateTime =
+                        LocalDateTime.ofInstant(Instant.now(),ZoneId.of("UTC"));
+                //Запуск логики расчета по оборудованию, если переключили статус на "отработано"
+                try {
+                    dao =
+                            countEquipmentAssignmentResult(dao,assignEquipDto,updatedStatus,endDateTime);
+                } catch (Exception e) {
+                    log.error("Ошибка при выставлении счетов за траты оборудования",e);
+                    return ResponseEntity.internalServerError().build();
+                }
+
+                dao.setNaming(assignEquipDto.getNaming());
+                dao.setStatus(updatedStatus);
+                assignEquipRepo.save(dao);
             }
         } catch (NoSuchElementException e) {
         log.error("При обновлении записей выдачи оборудования" +
-                " по одному из id не было найдено записи в бд");
-        e.printStackTrace();
+                " по одному из id не было найдено записи в бд",e);
+        return ResponseEntity.internalServerError().build();
     }
         log.info("Записи {} обновлены",assignEquipDtos);
         return ResponseEntity.ok().build();
     }
+
+    /**
+     * Метод рассчитывает траты оборудования на каждом объекте из списка смен
+     * @param dao dao выдачи оборудования
+     * @param dto dto возможно отработанного оборудования
+     * @param updatedStatus enum статуса из dto
+     * @param endDateTime Рассчитанная дата получения dto по гринвичу
+     * @return entity выданного оборудования на сохранение обновления
+     */
+    private AssignmentEquip countEquipmentAssignmentResult(AssignmentEquip dao,
+                                                AssignEquipDto dto,
+                                                AssignmentStatus updatedStatus,
+                                                LocalDateTime endDateTime){
+        //Запуск логики расчета по оборудованию, если переключили статус на "отработано"
+        if (dao.getStatus()!=updatedStatus){
+            if (updatedStatus.equals(AssignmentStatus.READY)){
+                LocalDateTime startDateTime =
+                        LocalDateTime.parse(dto.getStartDateTime(),formatter);
+                //Ищем смены между датой выдачи и отработкой у этого работника
+                List<Shift> shiftsOfRange =
+                        shiftRepository.findAllByWorkerIdAndDataRange(
+                                dto.getWorkerId(),
+                                startDateTime,
+                                endDateTime);
+
+                //Рассчитываем долю каждого объекта в отработке оборудования
+                //ключ - адрес, значение - кол-во часов работы на адресе работника за промежуток вр.
+                Map<Address,Float> addressTotalHoursMap = new HashMap<>();
+                for (Shift shift : shiftsOfRange){
+                    Address shiftAddress = shift.getAddress();
+                    //Если уже записывали часы работы на этом адресе, то добавляем к ним еще
+                    if (addressTotalHoursMap.containsKey(shiftAddress)){
+                        Float totalHoursOfShiftsOnAddress = addressTotalHoursMap.get(shiftAddress);
+                        totalHoursOfShiftsOnAddress+=shift.getTotalHours();
+                        addressTotalHoursMap.put(shiftAddress,totalHoursOfShiftsOnAddress);
+                    }
+                    //Иначе добавляем новый адрес в мапу и записываем первые часы работы
+                    else {
+                        addressTotalHoursMap.put(shiftAddress,shift.getTotalHours());
+                    }
+                }
+                //Рассчитываем % каждого адреса в отработке оборудования за промежуток времени
+                Map<Address,Float> addressPercentMap = new HashMap<>();
+                Float totalExpense = dto.getTotal();
+                for (Map.Entry<Address,Float> entry : addressTotalHoursMap.entrySet()){
+                    Float addressShare = (entry.getValue()*100)/totalExpense;
+                    addressPercentMap.put(entry.getKey(),addressShare);
+                }
+                //Рассчитываем сколько денег было потрачено на каждом адресе
+                Map<Address,Float> addressMoneyShareMap = new HashMap<>();
+                for (Map.Entry<Address,Float> entry : addressPercentMap.entrySet()){
+                    Float moneyShare = (totalExpense*entry.getValue())/100;
+                    addressMoneyShareMap.put(entry.getKey(),moneyShare);
+                }
+                //Формируем ExpenseDao на каждый адрес в мапе
+                List<Expense> expenseList = new ArrayList<>();
+                for (Map.Entry<Address,Float> entry : addressMoneyShareMap.entrySet()){
+                    String description = String.format("""
+                            Трата оборудования на объекте %s
+                            с %s по %s работником %s
+                            """,entry.getKey().getShortName(),
+                            startDateTime.format(formatter),
+                            endDateTime.format(formatter),
+                            dto.getWorker());
+                    Expense expense = Expense
+                            .builder()
+                            .shortInfo(description)
+                            .address(entry.getKey())
+                            .totalSum(entry.getValue())
+                            .type("оборудование")
+                            .status("Выставлен")
+                            .dateTime(endDateTime)
+                            .worker(dao.getWorker())
+                            .build();
+                    expenseList.add(expense);
+                }
+                //Сохраняем траты в таблицу expense
+                expenseRepository.saveAll(expenseList);
+
+                //Ставим dao конечную дату, чтобы вернуть с ней на сохранение изменений
+                dao.setEndDateTime(endDateTime);
+                return dao;
+            }
+        }
+        //Если это не обновление отработки оборудования, то просто вернем пустую entity
+        return dao;
+    }
 }
+

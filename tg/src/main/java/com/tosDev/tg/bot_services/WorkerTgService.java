@@ -23,7 +23,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
-import static com.tosDev.tg.bot.enums.ShiftEndTypeEnum.*;
+import static com.tosDev.web.enums.ShiftEndTypeEnum.PLANNED;
+import static com.tosDev.web.enums.ShiftEndTypeEnum.UNPLANNED;
 
 @Service
 @Slf4j

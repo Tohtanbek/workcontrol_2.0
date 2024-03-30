@@ -1,9 +1,16 @@
 let updatedRows = [];
 let workersList;
+
+//Валидатор, запрещающий менять статус после того, как смена закрыта
+let noChangeAfterClosed = function(cell, value){
+    return cell.getValue()==="Черновик" || cell.getValue()==="Выдано работнику"
+}
+
 let assignEquipMenu = createAssignEquipMenu();
 let assignEquipTable = createAssignEquipTable()
 assignEquipTable.on("tableBuilt",function () {
     assignEquipTable.hideColumn("equipId")
+    assignEquipTable.hideColumn("workerId")
     checkIfRedirected();
 })
 
@@ -67,10 +74,18 @@ function createAssignEquipTable() {
             {title: "Id", field: "id", sorter: "number"},
             {title: "Описание", field: "naming", width: "10%", editor: true},
             {
-                title: "Статус", field: "status", editor: "list", editorParams: {
-                    values:["Черновик", "Выдано работнику", "Отработано", "Рассчитано"]
-                }
+                title: "Статус", field: "status", editor: "list",
+                editorParams: {
+                    values:["Черновик", "Выдано работнику", "Отработано",]
+                },
+                validator:[
+                    {
+                        type:noChangeAfterClosed,
+                    }
+                ]
             },
+            {title: "Работник", field: "worker"},
+            {title: "workerId",field: "workerId"},
             {title: "Оборудование", field: "equipment"},
             {title: "equipId", field: "equipId"},
             {title: "Кол-во", field: "amount", bottomCalc: "sum", bottomCalcParams: {precision: 1}},

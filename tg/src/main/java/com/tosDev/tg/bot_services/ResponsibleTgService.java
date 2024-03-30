@@ -6,23 +6,15 @@ import com.pengrad.telegrambot.model.CallbackQuery;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.botcommandscope.BotCommandsScopeChat;
-import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
-import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SetMyCommands;
 import com.tosDev.tg.db.ResponsibleTgQueries;
 import com.tosDev.web.jpa.entity.Brigadier;
-import com.tosDev.web.jpa.entity.Responsible;
-import com.tosDev.web.jpa.repository.ResponsibleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
-import static com.tosDev.tg.bot.enums.ShiftEndTypeEnum.PLANNED;
-import static com.tosDev.tg.bot.enums.ShiftEndTypeEnum.UNPLANNED;
 
 @Service
 @Slf4j

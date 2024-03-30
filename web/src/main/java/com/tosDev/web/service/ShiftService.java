@@ -43,7 +43,7 @@ public class ShiftService {
                                     .job(dao.getJob().getName())
                                     .address(dao.getAddress().getShortName())
                                     .brigadier(dao.getBrigadier().getName())
-                                    .status(dao.getStatus())
+                                    .status(dao.getStatus().getDescription())
                                     .zone(dao.getAddress().getZone())
                                     .startDateTime(dao.getStartDateTime().format(basicDateTimeFormatter))
                                     .endDateTime(dao.getEndDateTime().format(basicDateTimeFormatter))

@@ -163,8 +163,8 @@ CREATE TABLE IF NOT EXISTS shift(
                                     short_info VARCHAR,
                                     start_date_time TIMESTAMP,
                                     end_date_time TIMESTAMP,
-                                    status VARCHAR,
-                                    type VARCHAR,
+                                    status INTEGER,
+                                    type INTEGER,
                                     address_id INTEGER references address(id) ON DELETE SET NULL,
                                     worker_id INTEGER references worker(id) ON DELETE SET NULL ,
                                     job_id INTEGER references job(id) ON DELETE SET NULL ,
@@ -172,22 +172,22 @@ CREATE TABLE IF NOT EXISTS shift(
                                     total_hours FLOAT
 );
 INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job_id, brigadier_id, total_hours)
-VALUES ('Short info 1', '2024-03-06 09:00:00', '2024-03-06 17:00:00', 'Completed', 1, 1, 1, 1, 8.0);
+VALUES ('Short info 1', '2024-03-06 09:00:00', '2024-03-06 17:00:00', 1, 1, 1, 1, 1, 8.0);
 
 INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job_id, brigadier_id, total_hours)
-VALUES ('Short info 2', '2024-03-07 10:00:00', '2024-03-07 18:00:00', 'In progress', 2, 2, 2, 2, 8.0);
+VALUES ('Short info 2', '2024-03-07 10:00:00', '2024-03-07 18:00:00', 1, 2, 2, 2, 2, 8.0);
 
 INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job_id, brigadier_id, total_hours)
-VALUES ('Short info 3', '2024-03-08 08:00:00', '2024-03-08 16:00:00', 'Completed', 1, 2, 3, 1, 8.0);
+VALUES ('Short info 3', '2024-03-08 08:00:00', '2024-03-08 16:00:00', 2, 1, 2, 3, 1, 8.0);
 
 INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job_id, brigadier_id, total_hours)
-VALUES ('Short info 4', '2024-03-09 07:00:00', '2024-03-09 15:00:00', 'In progress', 2, 1, 4, 2, 8.0);
+VALUES ('Short info 4', '2024-03-09 07:00:00', '2024-03-09 15:00:00', 2, 2, 1, 4, 2, 8.0);
 
 INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job_id, brigadier_id, total_hours)
-VALUES ('Short info 5', '2024-03-10 08:00:00', '2024-03-10 16:00:00', 'Completed', 1, 1, 5, 1, 8.0);
+VALUES ('Short info 5', '2024-03-10 08:00:00', '2024-03-10 16:00:00', 1, 1, 1, 5, 1, 8.0);
 
 INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job_id, brigadier_id, total_hours)
-VALUES ('Short info 6', '2024-03-11 09:00:00', '2024-03-11 17:00:00', 'In progress', 2, 2, 6, 2, 8.0);
+VALUES ('Short info 6', '2024-03-11 09:00:00', '2024-03-11 17:00:00', 1, 2, 2, 6, 2, 8.0);
 
 
 CREATE TABLE IF NOT EXISTS expense(
