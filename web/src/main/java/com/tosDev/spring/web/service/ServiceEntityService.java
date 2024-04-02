@@ -95,7 +95,9 @@ public class ServiceEntityService {
             freshService.setName(serviceDto.getName());
             freshService.setCategory(ServiceCategory.valueOf(serviceDto.getCategory()));
             freshService.setPrice(serviceDto.getPrice());
-            freshService.setMinimalPrice(serviceDto.getMinimalPrice());
+            freshService.setMinimalPrice(
+                    Optional.ofNullable(serviceDto.getMinimalPrice()).orElse(0F)
+            );
             if (!serviceDto.getPromoCode().isBlank()){
                 freshService.setPromoCode(serviceDto.getPromoCode());
             }
@@ -103,11 +105,11 @@ public class ServiceEntityService {
                     .ifPresent(freshService::setPromoCodeDiscount);
             serviceRepository.save(freshService);
         } catch (Exception e) {
-            log.error("Ошибка при сохранении нового адреса в бд{}",serviceDto);
+            log.error("Ошибка при сохранении новой услуги в бд{}",serviceDto);
             e.printStackTrace();
             return ResponseEntity.status(500).build();
         }
-        log.info("Добавили новый адрес {}", freshService);
+        log.info("Добавили новую услугу {}", freshService);
         return ResponseEntity.ok().build();
     }
 

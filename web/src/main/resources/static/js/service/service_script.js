@@ -230,7 +230,7 @@ function createFormJson(){
     let promoCode = document.querySelector("#promoCode");
     let promoCodeDiscount = document.querySelector("#promoCodeDiscount");
 
-    if (!checkForm([name,category,price,minPrice])){
+    if (!checkForm([name,category,price])){
         throw new Error("Not valid input")
     }
 

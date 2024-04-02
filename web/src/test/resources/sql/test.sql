@@ -265,7 +265,18 @@ CREATE TABLE IF NOT EXISTS service(
 );
 
 INSERT INTO service (name, price, category, minimal_price, promo_code, promo_code_discount)
-VALUES ('cleaning','50.5',0,'100.4','Skidka','50');
+VALUES ('cleaning','50.5',0,'100.4','Skidka','50'),
+       ('window cleaning','60.5',0,'150.4','Skidka','50'),
+       ('vacuum cleaning','50.5',0,'100.4','Skidka','50'),
+       ('deep cleaning','50.5',0,'100.4','Skidka','50'),
+       ('mopping','50.5',0,'100.4','Skidka','50'),
+       ('dish washing','50.5',0,'100.4','Skidka','50'),
+       ('extra1','50.5',1,'100.4','Skidka','50'),
+       ('extra2','60.5',1,'150.4','Skidka','50'),
+       ('extra3','50.5',1,'100.4','Skidka','50'),
+       ('extra4','50.5',1,'100.4','Skidka','50'),
+       ('extra5','50.5',1,'100.4','Skidka','50'),
+       ('extra6','50.5',1,'100.4','Skidka','50');
 
 CREATE TABLE IF NOT EXISTS "order"(
     id BIGSERIAL PRIMARY KEY ,

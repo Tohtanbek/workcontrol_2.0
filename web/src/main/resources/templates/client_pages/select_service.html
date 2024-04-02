@@ -2,35 +2,39 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Welcome</title>
-<link th:href="@{/sass/styles_select_service.css}" rel="stylesheet" />
+<link th:href="@{/sass/styles_select_service.css}" href="/static/sass/styles_select_service.css" rel="stylesheet" />
+<link th:href="@{/css/client_pages/general/wave_header.css}" href="/static/css/client_pages/general/wave_header.css" rel="stylesheet" />
 <head>
     <meta charset="UTF-8">
     <title>Choose service</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+<section th:replace="~{/client_pages/general/wave_header.html :: section}"></section>
 <main>
 	<h1>Services</h1>
 	<section id="to-do-app">
 		<span id="new-todo">Choose main service:</span>
 		<div class="todos">
-			<ul id="todos" th:each="service: ${serviceList}">
-				<li>
-					<input th:id="${service.id}" type="checkbox">
+			<ul id="todos">
+				<li th:each="service: ${serviceList}">
+					<input th:id="${service.id}" th:price="${service.price}"
+						   th:minimalPrice="${service.minimalPrice}" type="checkbox">
 					<label th:for="${service.id}">
-						<span th:text="${service.name}"></span>
 						<span class="box"></span>
+						<span th:utext="${service.name}"></span>
 					</label>
 				</li>
 			</ul>
 		</div>
 	</section>
-	<div class="input-container">
-		<span>Input the room area:</span>
-		<input type="number" id="hiddenInput">
-		<span class="total-counter">Your price: 500</span>
-		<button type="submit">continue</button>
-	</div>
 </main>
+<div class="input-container">
+	<span>Input the area (sqr. feet):</span>
+	<input type="number" min="0" id="areaInput">
+	<span class="hidden" id="total-counter"></span>
+	<button type="submit" class="hidden" id="continueButton">continue</button>
+</div>
+<script src="/js/client_pages/select_service.js" th:src="@{/js/client_pages/select_service.js}"></script>
 </body>
 </html>

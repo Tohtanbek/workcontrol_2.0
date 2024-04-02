@@ -53,6 +53,7 @@ body {
 }
 
 main {
+	margin-top: 2vh;
 	max-width: 60rem;
 	position: relative;
 	padding-bottom: 1.5rem;
@@ -150,25 +151,13 @@ button[type="submit"]:hover {
 }
 
 .input-container{
+	margin-top: 2vh;
 	width: 24%;
 	justify-self: center;
 	justify-items: center;
 	align-items: center;
 	display: flex;
 	flex-direction: column;
-}
-
-input {
-	box-shadow: none;
-    text-align: center;
-    width: 5em;
-    padding: 15px 18px;
-    background: #fff;
-    border: 2px solid #1bb1ab;
-    font: 1.6rem "Caladea", serif;
-    border-radius: 10px;
-    margin: 2vh;
-    outline-color: rgba(1, 63, 138, 0.4);
 }
 
 li {

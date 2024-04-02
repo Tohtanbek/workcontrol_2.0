@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome</title>
+<link th:href="@{/sass/styles_select_extra_service.css}" href="/static/sass/styles_select_extra_service.css" rel="stylesheet" />
+<link th:href="@{/css/client_pages/general/wave_header.css}" href="/static/css/client_pages/general/wave_header.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Choose additional services</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<section th:replace="~{/client_pages/general/wave_header.html :: section}"></section>
+<main>
+    <h1>Services</h1>
+    <section id="to-do-app">
+        <span id="new-todo">Choose additional services:</span>
+        <div class="todos">
+            <ul id="todos">
+                <li th:each="service: ${extraServiceList}">
+                    <input th:id="${service.id}" th:price="${service.price}" type="checkbox">
+                    <label th:for="${service.id}">
+                        <span class="box"></span>
+                        <span th:utext="${service.name}"></span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+    </section>
+</main>
+<div class="input-container">
+    <span>Pick date and time:</span>
+    <div id="dateTimePicker"></div>
+    <button type="submit" class="hidden" id="continueButton">continue</button>
+</div>
+<script src="/js/client_pages/select_extra_service.js" th:src="@{/js/client_pages/select_extra_service.js}"></script>
+</body>
+</html>

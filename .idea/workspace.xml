@@ -6,82 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Работа над сайтом заказа услуг.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/AdminTgService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/AdminTgService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/BrigadierTgService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/BrigadierTgService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/BrigadierWorkerCommonTgMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/BrigadierWorkerCommonTgMethods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/CommonTgService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/CommonTgService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/ResponsibleTgService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/ResponsibleTgService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/WorkerTgService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/WorkerTgService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/AdminTgQueries.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/AdminTgQueries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/BrigadierTgQueries.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/BrigadierTgQueries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/ResponsibleTgQueries.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/ResponsibleTgQueries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/TgQueries.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/TgQueries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/WorkerTgQueries.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/WorkerTgQueries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/test/java/integration/bd_and_tg/bd/TgDataBaseIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/test/java/integration/bd_and_tg/bd/TgDataBaseIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/test/java/unit/BrigadierTgServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/test/java/unit/BrigadierTgServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/main_tables/Address.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/AddressJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/main_tables/AddressJob.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/main_tables/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/AssignmentEquip.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/main_tables/AssignmentEquip.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/Brigadier.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/main_tables/Brigadier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/BrigadierAddress.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/main_tables/BrigadierAddress.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/Contact.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/main_tables/Contact.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/Equipment.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/main_tables/Equipment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/EquipmentType.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/main_tables/EquipmentType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/Expense.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/main_tables/Expense.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/Income.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/main_tables/Income.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/Job.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/main_tables/Job.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/Responsible.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/main_tables/Responsible.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/ResponsibleBrigadier.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/main_tables/ResponsibleBrigadier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/Shift.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/main_tables/Shift.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/main_tables/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/main_tables/Worker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/WorkerAddress.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/main_tables/WorkerAddress.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/AddressJobRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/main_tables/AddressJobRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/AddressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/main_tables/AddressRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/AdminRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/main_tables/AdminRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/AssignmentEquipRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/main_tables/AssignmentEquipRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/BrigadierAddressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/main_tables/BrigadierAddressRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/BrigadierRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/main_tables/BrigadierRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/EquipmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/main_tables/EquipmentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/EquipmentTypeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/main_tables/EquipmentTypeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/ExpenseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/main_tables/ExpenseRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/IncomeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/main_tables/IncomeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/JobRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/main_tables/JobRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/ResponsibleBrigadierRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/main_tables/ResponsibleBrigadierRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/ResponsibleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/main_tables/ResponsibleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/ShiftRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/main_tables/ShiftRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/main_tables/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/WorkerAddressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/main_tables/WorkerAddressRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/WorkerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/main_tables/WorkerRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/controllers/client_pages/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/controllers/client_pages/AuthenticationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/controllers/client_pages/SelectServiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/controllers/client_pages/SelectServiceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/controllers/table_pages/BrigadierControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/controllers/table_pages/BrigadierControllers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/controllers/table_pages/ShiftControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/controllers/table_pages/ShiftControllers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/AddressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/AddressService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/AssignmentEquipService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/AssignmentEquipService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/BrigadierService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/BrigadierService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/EquipmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/EquipmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/ExpenseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/ExpenseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/IncomeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/IncomeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/JobService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/JobService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/ResponsibleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/ResponsibleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/ShiftService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/ShiftService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/WorkerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/WorkerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/client_pages/styles_select_service.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/address/address_job_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/address/address_job_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/address/address_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/address/address_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/brigadier_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/brigadier_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/ServiceEntityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/ServiceEntityService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/service/service_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/service/service_script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_service.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_service.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_service.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_service.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_service.scss" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_service.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/accept_info.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/select_additional_services.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/select_extra_service.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/select_date.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/select_service.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/select_service.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/equipment/assignment_equipment_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/equipment/assignment_equipment_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/equipment/equipment_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/equipment/equipment_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/expense_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/expense_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/income_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/income_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/responsible_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/responsible_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/shift_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/shift_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/worker_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/worker_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/test/java/integration/DataBaseIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/java/integration/DataBaseIT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/select_time.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/test/resources/sql/test.sql" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/resources/sql/test.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -140,7 +75,7 @@
     "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
     "database.data.extractors.current.id": "Comma-separated (CSV)_id",
     "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "C:/Docs/Java Projects/workcontrol_2.0/web/src/main/resources/templates/order",
+    "last_opened_file_path": "C:/Docs/Java Projects/workcontrol_2.0/web/src/main/resources/static/js/client_pages",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
@@ -161,11 +96,11 @@
       <recent name="com.tosDev.jpa.entity" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\client_pages" />
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\sass" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\templates\order" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\service" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css\service" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\order" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css\order" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\templates\order" />
@@ -352,7 +287,8 @@
       <workItem from="1711724832510" duration="12045000" />
       <workItem from="1711796389421" duration="17693000" />
       <workItem from="1711818484993" duration="9197000" />
-      <workItem from="1711965758752" duration="23875000" />
+      <workItem from="1711965758752" duration="23992000" />
+      <workItem from="1712053166068" duration="29979000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит workcontrol 2.0. Работа над frontend">
       <created>1708303197812</created>
@@ -529,7 +465,14 @@
       <option name="project" value="LOCAL" />
       <updated>1711836433871</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Работа над сайтом заказа услуг.">
+      <created>1712017870261</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1712017870261</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
