@@ -1,0 +1,14 @@
+/* Ваши собственные стили */
+@font-face {
+    font-family: Montserrat, sans-serif;
+    src: url('https://fonts.googleapis.com/css?family=Montserrat&display=swap') format('truetype');
+}
+@font-face {
+    font-family: RaleWay;
+    src: url("../../images/fonts/Raleway-VariableFont_wght.ttf");
+}
+
+#order-table {
+    width: 100%;
+}
+

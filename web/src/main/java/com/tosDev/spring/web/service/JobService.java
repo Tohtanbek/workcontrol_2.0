@@ -2,11 +2,11 @@ package com.tosDev.spring.web.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tosDev.spring.jpa.entity.AddressJob;
-import com.tosDev.spring.jpa.entity.Job;
+import com.tosDev.spring.jpa.entity.main_tables.AddressJob;
+import com.tosDev.spring.jpa.entity.main_tables.Job;
 import com.tosDev.dto.tableDto.JobDto;
-import com.tosDev.spring.jpa.repository.AddressJobRepository;
-import com.tosDev.spring.jpa.repository.JobRepository;
+import com.tosDev.spring.jpa.repository.main_tables.AddressJobRepository;
+import com.tosDev.spring.jpa.repository.main_tables.JobRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

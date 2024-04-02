@@ -254,6 +254,38 @@ CREATE TABLE IF NOT EXISTS users(
                                     role VARCHAR
 );
 
+CREATE TABLE IF NOT EXISTS service(
+    id SERIAL PRIMARY KEY ,
+    name VARCHAR,
+    price FLOAT,
+    category INTEGER,
+    minimal_price FLOAT,
+    promo_code VARCHAR,
+    promo_code_discount INTEGER
+);
+
+INSERT INTO service (name, price, category, minimal_price, promo_code, promo_code_discount)
+VALUES ('cleaning','50.5',0,'100.4','Skidka','50');
+
+CREATE TABLE IF NOT EXISTS "order"(
+    id BIGSERIAL PRIMARY KEY ,
+    name VARCHAR,
+    total FLOAT,
+    date_time TIMESTAMP,
+    area FLOAT,
+    phone_number BIGINT,
+    email VARCHAR,
+    address VARCHAR
+);
+
+INSERT INTO "order" (name, total, date_time, area, phone_number, email, address)
+VALUES ('Заказ тестовый',520.50,'2024-03-11 17:00:00',50.5,79661919669,'someemail@.ru','тестовый адрес');
+
+CREATE TABLE IF NOT EXISTS order_service(
+    id BIGSERIAL PRIMARY KEY ,
+    order_id BIGINT references "order"(id) ON DELETE CASCADE,
+    service_id INTEGER references service("id") ON DELETE SET NULL
+);
 
 
 

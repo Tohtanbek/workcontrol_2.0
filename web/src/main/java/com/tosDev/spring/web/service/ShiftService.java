@@ -2,11 +2,11 @@ package com.tosDev.spring.web.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tosDev.spring.jpa.repository.JobRepository;
-import com.tosDev.spring.jpa.repository.ShiftRepository;
+import com.tosDev.spring.jpa.repository.main_tables.JobRepository;
+import com.tosDev.spring.jpa.repository.main_tables.ShiftRepository;
 import com.tosDev.dto.tableDto.ShiftDto;
-import com.tosDev.spring.jpa.entity.Job;
-import com.tosDev.spring.jpa.entity.Shift;
+import com.tosDev.spring.jpa.entity.main_tables.Job;
+import com.tosDev.spring.jpa.entity.main_tables.Shift;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;

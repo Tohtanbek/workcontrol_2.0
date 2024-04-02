@@ -1,8 +1,8 @@
 package com.tosDev.tg.db;
 
 import com.pengrad.telegrambot.TelegramBot;
-import com.tosDev.spring.jpa.entity.*;
-import com.tosDev.spring.jpa.repository.*;
+import com.tosDev.spring.jpa.entity.main_tables.*;
+import com.tosDev.spring.jpa.repository.main_tables.*;
 import com.tosDev.tg.bot_services.BrigadierWorkerCommonTgMethods;
 import com.tosDev.enums.ShiftEndTypeEnum;
 import lombok.extern.slf4j.Slf4j;

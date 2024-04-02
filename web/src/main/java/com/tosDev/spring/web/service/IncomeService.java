@@ -1,10 +1,10 @@
 package com.tosDev.spring.web.service;
 
-import com.tosDev.spring.jpa.repository.AddressRepository;
-import com.tosDev.spring.jpa.repository.IncomeRepository;
-import com.tosDev.spring.jpa.repository.WorkerRepository;
+import com.tosDev.spring.jpa.repository.main_tables.AddressRepository;
+import com.tosDev.spring.jpa.repository.main_tables.IncomeRepository;
+import com.tosDev.spring.jpa.repository.main_tables.WorkerRepository;
 import com.tosDev.dto.tableDto.IncomeDto;
-import com.tosDev.spring.jpa.entity.Income;
+import com.tosDev.spring.jpa.entity.main_tables.Income;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

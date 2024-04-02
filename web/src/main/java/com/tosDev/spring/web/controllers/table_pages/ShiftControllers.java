@@ -29,7 +29,7 @@ public class ShiftControllers {
 
     /**
      * Загружает из бд таблицу shift и преобразует в json строку
-     * @return json таблицы "оборудование"
+     * @return json таблицы "рабочее время"
      */
     @GetMapping("/main_table")
     @ResponseBody

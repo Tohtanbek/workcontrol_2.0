@@ -9,7 +9,7 @@ import com.pengrad.telegrambot.model.botcommandscope.BotCommandsScopeChat;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SetMyCommands;
 import com.tosDev.tg.db.ResponsibleTgQueries;
-import com.tosDev.spring.jpa.entity.Brigadier;
+import com.tosDev.spring.jpa.entity.main_tables.Brigadier;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

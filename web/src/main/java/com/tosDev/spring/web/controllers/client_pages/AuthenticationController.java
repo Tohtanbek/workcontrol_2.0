@@ -33,7 +33,7 @@ public class AuthenticationController {
         else {
             model.addAttribute("client",client);
             log.info("Пользователь {} оставил свои данные и начал выбор услуг",client);
-            return "/client_pages/select_service";
+            return "redirect:select_service";
         }
     }
 }

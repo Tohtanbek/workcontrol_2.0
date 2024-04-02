@@ -1,13 +1,13 @@
 package com.tosDev.tg.db;
 
 import com.tosDev.enums.ShiftEndTypeEnum;
-import com.tosDev.spring.jpa.entity.Address;
-import com.tosDev.spring.jpa.entity.Shift;
-import com.tosDev.spring.jpa.entity.Worker;
-import com.tosDev.spring.jpa.entity.WorkerAddress;
-import com.tosDev.spring.jpa.repository.AddressRepository;
-import com.tosDev.spring.jpa.repository.ShiftRepository;
-import com.tosDev.spring.jpa.repository.WorkerRepository;
+import com.tosDev.spring.jpa.entity.main_tables.Address;
+import com.tosDev.spring.jpa.entity.main_tables.Shift;
+import com.tosDev.spring.jpa.entity.main_tables.Worker;
+import com.tosDev.spring.jpa.entity.main_tables.WorkerAddress;
+import com.tosDev.spring.jpa.repository.main_tables.AddressRepository;
+import com.tosDev.spring.jpa.repository.main_tables.ShiftRepository;
+import com.tosDev.spring.jpa.repository.main_tables.WorkerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Hibernate;

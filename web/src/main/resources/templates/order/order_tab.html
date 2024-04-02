@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заказы</title>
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.6.0/dist/js/tabulator.min.js"></script>
+    <link rel="stylesheet" th:href="@{/sass/general.css}" href="/sass/general.css">
+    <link rel="stylesheet"  th:href="@{/css/tables-general/general.css}" href="/css/tables-general/general.css"/>
+    <link rel="stylesheet"  th:href="@{/css/tables-general/main-form.css}" href="/css/tables-general/main-form.css"/>
+    <link rel="stylesheet"  th:href="@{/css/tables-general/header.css}" href="/css/tables-general/header.css"/>
+    <link rel="stylesheet"  th:href="@{/css/tables-general/nav.css}" href="/css/tables-general/nav.css"/>
+    <link rel="stylesheet"  th:href="@{/css/tables-general/notifiication_popup.css}" href="/css/tables-general/notifiication_popup.css"/>
+    <link th:href="@{/css/order/styles_order_tab.css}" href="/css/order/styles_order_tab.css" rel="stylesheet" />
+    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="/images/favicon.ico" th:href="@{/images/favicon.ico}">
+</head>
+<body>
+
+<!-- nav -->
+<nav class="sidebar">
+    <div class="nav-header">
+        <div class="logo-wrap">
+            <a class="logo-text" href="https://workcontrol.site/form/authentication">Личный <br> кабинет</a>
+            <a class="logo-icon" href="https://workcontrol.site/form/authentication">
+                <img src="/images/new_logo.jpg" alt="logo-icon" th:src="@{/images/new_logo.jpg}"></a>
+        </div>
+
+        <div class="nav-search">
+            <div class="search">
+                <i class="material-icons">search</i>
+                <input type="search" name="search" placeholder="Поиск">
+            </div>
+        </div>
+    </div>
+    <ul class="nav-categories ul-base">
+        <li><a href="/tables/equip/main">Оборудование</a></li>
+        <li><a href="/tables/shift/main">Рабочее время</a></li>
+        <li><a href="/tables/brigadier/main">Бригадиры</a></li>
+        <li><a href="/tables/worker/main">Персонал</a></li>
+        <li><a href="/tables/supervisors/main">Супервайзеры</a></li>
+        <li><a href="/tables/order/main">Заказы</a></li>
+        <li><a href="/tables/address/main">Объекты</a></li>
+        <li><a href="/tables/expense/main">Расходы</a></li>
+        <li><a href="/tables/income/main">Счета</a></li>
+    </ul>
+    <div class="copyright">
+        <span>&copy; 2024 <a href="https://workcontrol.site/form/authentication" class="link">DeepClean.site</a> </span>
+        <span>Designed by <a href="https://workcontrol.site/form/authentication" target="_blank">DeepClean</a></span>
+    </div>
+</nav><!-- @end nav -->
+
+<!-- header -->
+<header>
+    <div class="header-inner clearfix">
+        <div class="nav-btn nav-slider">
+            <i class="material-icons">menu</i>
+        </div>
+        <div class="header-logo">
+            <a href="https://deepcleanhq.com/"><img alt="logo" th:src="@{/images/new_logo_tight.jpg}" src="/images/new_logo_tight.jpg"></a>
+        </div>
+        <div class="header-categories">
+            <ul class="ul-base">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#"><span>Заказы</span> <i class="material-icons">keyboard_arrow_down</i></a>
+                    <ul class="dropdown-menu ul-base">
+                        <li><a href="/tables/equip/main">Оборудование</a></li>
+                        <li><a href="/tables/shift/main">Рабочее время</a></li>
+                        <li><a href="/tables/brigadier/main">Бригадиры</a></li>
+                        <li><a href="/tables/worker/main">Персонал</a></li>
+                        <li><a href="/tables/supervisors/main">Супервайзеры</a></li>
+                        <li><a href="/tables/address/main">Объекты</a></li>
+                        <li><a href="/tables/expense/main">Расходы</a></li>
+                        <li><a href="/tables/income/main">Доходы</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="header-categories">
+            <ul class="ul-base">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#"><span>Список заказов</span> <i class="material-icons">keyboard_arrow_down</i></a>
+                    <ul class="dropdown-menu ul-base">
+                        <li><a href="/tables/service/main">Услуги</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="header-search">
+            <div class="search">
+                <i class="material-icons">search</i>
+                <input type="search" name="search" placeholder="Искать">
+            </div>
+        </div>
+
+    </div>
+</header><!-- @end header -->
+
+<!-- Main content -->
+<footer></footer><!-- @end footer -->
+
+<main role="main">
+    <div id="table-left">
+        <div id="table-buttons">
+            <button id="main-table-save-update">Сохранить изменения в таблице</button>
+        </div>
+        <!-- Таблица основная -->
+        <div id="order-table"></div>
+    </div>
+    <!-- Окно фильтров -->
+    <div id="filter-window">
+        <div id="header" class="filter-window">
+            <span style="margin-right: 1vw">Фильтры</span>
+            <span class="material-icons">manage_search</span>
+        </div>
+        <span style="margin-bottom: 1vh">Выберите столбик</span>
+        <select class="filter-window" id="filter-column">
+            <option value="shortInfo">Отчет</option>
+            <option value="status">Статус</option>
+            <option value="total">Сумма</option>
+            <option value="address">Адрес</option>
+            <option value="email">Email</option>
+            <option value="area">Площадь</option>
+            <option value="dateTime">Дата</option>
+        </select>
+        <input class="filter-window" type="text" id="filter-input" placeholder="Впишите значение">
+        <select class="filter-window" id="filter-type">
+            <option value="like">Совпадение</option>
+            <option value="=">Точное совпадение</option>
+            <option value="<">Меньше</option>
+            <option value=">">Больше</option>
+            <option value="!=">Не равно</option>
+        </select>
+        <button class="filter-window" id="clear-filter">Очистить фильтр</button>
+    </div>
+    <div id="overlay"></div>
+</main><!-- @end main -->
+<!--Меню при удалении записи order-->
+<div class="cd-popup" id="order-delete-popup" role="alert">
+    <div class="cd-popup-container">
+        <p>Вы точно хотите удалить записи?</p>
+        <ul class="cd-buttons">
+            <li><a href="" id="order-popup-yes">Да</a></li>
+            <li><a href="" id="order-popup-no">Нет</a></li>
+        </ul>
+    </div> <!-- cd-popup-container -->
+</div> <!-- cd-popup -->
+
+<!-- partial -->
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script th:src="@{/js/main_header.js}" src="/js/main_header.js"></script>
+<script th:src="@{/js/order/order_script.js}" src="/js/order/order_script.js"></script>
+<script th:src="@{/js/order/order_delete_popup_script.js}" src="/js/order/order_delete_popup_script.js"></script>
+</body>
+</html>

@@ -1,9 +1,9 @@
 package com.tosDev.tg.db;
 
-import com.tosDev.spring.jpa.entity.Brigadier;
-import com.tosDev.spring.jpa.entity.Responsible;
-import com.tosDev.spring.jpa.entity.ResponsibleBrigadier;
-import com.tosDev.spring.jpa.repository.ResponsibleRepository;
+import com.tosDev.spring.jpa.entity.main_tables.Brigadier;
+import com.tosDev.spring.jpa.entity.main_tables.Responsible;
+import com.tosDev.spring.jpa.entity.main_tables.ResponsibleBrigadier;
+import com.tosDev.spring.jpa.repository.main_tables.ResponsibleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

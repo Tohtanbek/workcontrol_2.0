@@ -1,0 +1,54 @@
+/* Ваши собственные стили */
+@font-face {
+    font-family: Montserrat, sans-serif;
+    src: url('https://fonts.googleapis.com/css?family=Montserrat&display=swap') format('truetype');
+}
+@font-face {
+    font-family: RaleWay;
+    src: url("../../images/fonts/Raleway-VariableFont_wght.ttf");
+}
+
+#service-table {
+    width: 100%;
+}
+
+
+form.service-form {
+    margin-top: 5vh;
+    max-height: 80vh;
+    overflow-y: auto;
+    background-color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: none;
+    opacity: 0;
+    box-shadow: 0 1px 6px rgba(32,33,36,.28);
+    border-radius: .5rem;
+    padding: 20px;
+    box-sizing: border-box;
+    color: #444;
+    font-size: 14px;
+    line-height: 1.5;
+    transition: 0.3s ease, display 0.3s ease;
+}
+.service-form a.send_form {
+    color: #fff;
+    background: #21a51f;
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: .3rem;
+    font-weight: 700;
+    letter-spacing: .5px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.service-form{
+    width:100%;
+    max-width:700px;
+    margin:0 auto;
+    box-sizing:border-box;
+}

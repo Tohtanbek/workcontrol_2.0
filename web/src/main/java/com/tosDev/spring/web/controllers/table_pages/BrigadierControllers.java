@@ -2,7 +2,7 @@ package com.tosDev.spring.web.controllers.table_pages;
 
 import com.tosDev.dto.tableDto.BrigadierSmallDto;
 import com.tosDev.dto.tableDto.BrigadierDtoWithSuper;
-import com.tosDev.spring.jpa.repository.BrigadierRepository;
+import com.tosDev.spring.jpa.repository.main_tables.BrigadierRepository;
 import com.tosDev.spring.web.service.BrigadierService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
