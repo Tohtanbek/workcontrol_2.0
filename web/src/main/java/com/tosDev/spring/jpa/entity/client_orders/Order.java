@@ -16,13 +16,17 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private Float subTotal;
     private Float total;
+    private LocalDateTime orderDateTime;
+    private Integer orderOffset;
     private LocalDateTime dateTime;
     private Float area;
     private Long phoneNumber;
+    private String clientName;
     private String email;
     private String address;
+    private String promoCode;
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

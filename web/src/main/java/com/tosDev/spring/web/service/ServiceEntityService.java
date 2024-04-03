@@ -2,7 +2,7 @@ package com.tosDev.spring.web.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tosDev.dto.client_pages.ShortServiceDto;
+import com.tosDev.dto.client_pages.*;
 import com.tosDev.dto.tableDto.AddressDto;
 import com.tosDev.dto.tableDto.ServiceDto;
 import com.tosDev.enums.ServiceCategory;
@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.*;
 
 @RequiredArgsConstructor
@@ -113,6 +115,11 @@ public class ServiceEntityService {
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * Метод для загрузки списка услуг клиенту
+     * @param neededCategory - категория (Основные услуги\дополнительные)
+     * @return Список услуг выбранной категории
+     */
     public List<ShortServiceDto> loadAndMapToShorServices(ServiceCategory neededCategory){
         List<ShortServiceDto> serviceDtoList = new ArrayList<>();
         try {
@@ -130,5 +137,53 @@ public class ServiceEntityService {
         }
         log.info("Успешно загрузили список shortServiceDto");
         return serviceDtoList;
+    }
+
+    /**
+     * Загружает по id основную услугу и список дополнительных
+     * @param extraServiceIdArr массив id выбранных доп услуг
+     * @param mainServiceDto дто основной услуги с id и выбранной area
+     * @return dto для выдачи клиенту страницы-корзины
+     */
+    public CartDto loadDtoForClientCart(Integer[] extraServiceIdArr,
+                                        ChosenMainServiceDto mainServiceDto){
+
+        DecimalFormat decimalFormat = new DecimalFormat("0.00",
+                DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+        //Получаем extra услуги из бд и мапим в список дто
+        List<Service> extraServices =
+                serviceRepository.findAllById(List.of(extraServiceIdArr));
+        List<ChosenExtraServiceDto> extraServiceDtoList =
+                extraServices.stream().map(dao -> ChosenExtraServiceDto
+                .builder()
+                .id(dao.getId())
+                .name(dao.getName())
+                .price(decimalFormat.format(dao.getPrice()))
+                .build()).toList();
+
+        //Получаем основную услугу из бд
+        Service mainService =
+                serviceRepository.findById(mainServiceDto.getServiceId()).orElseThrow();
+
+        return CartDto
+                .builder()
+                .mainServiceId(mainService.getId())
+                .mainServiceName(mainService.getName())
+                .mainServiceTotal(decimalFormat.format(mainServiceDto.getTotal()))
+                .mainServiceArea(mainServiceDto.getArea())
+                .extraServiceList(extraServiceDtoList)
+                .build();
+    }
+
+    /**
+     * Проверяет переданный промокод
+     * @param promoCode введенный пользователем промокод
+     * @return мапу с id сервиса и размером скидки
+     */
+    public Map<Integer,Integer> checkPromoCode(String promoCode){
+        List<Service> servicesWithPromo = serviceRepository.findAllByPromoCode(promoCode);
+        Map<Integer,Integer> resultMap = new HashMap<>();
+        servicesWithPromo.forEach(dao -> resultMap.put(dao.getId(),dao.getPromoCodeDiscount()));
+        return resultMap;
     }
 }

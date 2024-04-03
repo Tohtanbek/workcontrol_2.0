@@ -36,7 +36,7 @@ continueButton.addEventListener("click",function (event){
             throw new Error("error submitting")
         } else {
             console.log("redirecting...")
-            window.location.href = "/form/select_data_time";
+            window.location.href = "/form/cart";
         }
     })
 })

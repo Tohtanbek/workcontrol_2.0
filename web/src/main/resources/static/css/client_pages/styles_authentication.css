@@ -27,14 +27,6 @@ form #promoCode, #promoCodeLabel {
     text-align: center;
     margin-top: 5vh;
 }
-input#promoCode{
-    width: 50%;
-    padding: 4px;
-    align-self: center;
-    margin: 0 auto;
-    display: block;
-    text-align: center;
-}
 
 label {
     margin-top: 15px;
@@ -73,7 +65,9 @@ img {
         justify-content: center;
     }
 
-    form {
+    form {background-color: #1bb1ab;
+        color: #fff;
+        cursor: pointer;
         width: 80%; /* Ширина формы на мобильных устройствах */
     }
 

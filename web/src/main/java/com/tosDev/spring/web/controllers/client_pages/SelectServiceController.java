@@ -19,7 +19,7 @@ import java.util.List;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-@SessionAttributes({"client","mainService"})
+@SessionAttributes({"client","mainService","extraServices"})
 @RequestMapping("/form")
 public class SelectServiceController {
 

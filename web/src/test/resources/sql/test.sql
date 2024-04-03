@@ -280,17 +280,19 @@ VALUES ('cleaning','50.5',0,'100.4','Skidka','50'),
 
 CREATE TABLE IF NOT EXISTS "order"(
     id BIGSERIAL PRIMARY KEY ,
-    name VARCHAR,
     total FLOAT,
+    sub_total FLOAT,
+    order_date_time TIMESTAMP,
+    order_offset INTEGER,
     date_time TIMESTAMP,
     area FLOAT,
     phone_number BIGINT,
+    client_name VARCHAR,
     email VARCHAR,
-    address VARCHAR
+    address VARCHAR,
+    promo_code VARCHAR
 );
 
-INSERT INTO "order" (name, total, date_time, area, phone_number, email, address)
-VALUES ('Заказ тестовый',520.50,'2024-03-11 17:00:00',50.5,79661919669,'someemail@.ru','тестовый адрес');
 
 CREATE TABLE IF NOT EXISTS order_service(
     id BIGSERIAL PRIMARY KEY ,

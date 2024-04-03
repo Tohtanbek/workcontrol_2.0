@@ -6,17 +6,21 @@
   <component name="ChangeListManager">
     <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Работа над сайтом заказа услуг.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/tableDto/OrderDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/tableDto/OrderDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/client_orders/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/client_orders/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/client_orders/ServiceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/client_orders/ServiceRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/controllers/client_pages/DateTimePickerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/controllers/client_pages/CartController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/controllers/client_pages/SelectServiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/controllers/client_pages/SelectServiceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/OrderEntityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/OrderEntityService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/ServiceEntityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/ServiceEntityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/service/service_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/service/service_script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_service.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_service.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_service.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_service.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_service.scss" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_service.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/accept_info.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/select_additional_services.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/select_extra_service.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/select_date.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/select_service.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/select_service.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/select_time.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/client_pages/styles_accept_info.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/client_pages/styles_authentication.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/client_pages/styles_authentication.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/client_pages/styles_select_additional_services.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/client_pages/styles_select_date.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/client_pages/styles_select_time.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/client_pages/select_date_time.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/client_pages/cart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/client_pages/select_extra_service.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/client_pages/select_extra_service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/select_date_time.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/cart.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/test/resources/sql/test.sql" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/resources/sql/test.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +85,7 @@
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "File.Encoding",
+    "settings.editor.selected.configurable": "editing.templates",
     "spring.configuration.checksum": "fe59745b02ff75aa95594825ed88b7e5"
   },
   "keyToStringList": {
@@ -288,7 +292,8 @@
       <workItem from="1711796389421" duration="17693000" />
       <workItem from="1711818484993" duration="9197000" />
       <workItem from="1711965758752" duration="23992000" />
-      <workItem from="1712053166068" duration="29979000" />
+      <workItem from="1712053166068" duration="30125000" />
+      <workItem from="1712144963531" duration="25405000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит workcontrol 2.0. Работа над frontend">
       <created>1708303197812</created>
@@ -472,7 +477,14 @@
       <option name="project" value="LOCAL" />
       <updated>1712017870261</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Работа над сайтом заказа услуг.">
+      <created>1712097361277</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1712097361277</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

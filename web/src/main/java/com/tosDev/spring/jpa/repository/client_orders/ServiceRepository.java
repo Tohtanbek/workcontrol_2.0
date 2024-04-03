@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface ServiceRepository extends JpaRepository<Service,Integer> {
     List<Service> findAllByCategory(ServiceCategory category);
+    List<Service> findAllByPromoCode(String promoCode);
 }

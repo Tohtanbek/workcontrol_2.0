@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome</title>
+<link th:href="@{/sass/styles_cart.css}" href="/static/sass/styles_cart.css" rel="stylesheet" />
+<link th:href="@{/css/client_pages/general/wave_header.css}" href="/static/css/client_pages/general/wave_header.css" rel="stylesheet" />
+<head>
+    <meta charset="UTF-8">
+    <title>Choose service</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<h1>Your Cart</h1>
+
+<div class="shopping-cart">
+
+    <div class="column-labels">
+        <label class="product-image">Image</label>
+        <label class="product-details">Product</label>
+        <label class="product-removal">Remove</label>
+        <label class="product-line-price">Total</label>
+    </div>
+
+    <div class="product mainService">
+        <div class="product-image">
+            <img th:src="@{/images/client_pages/logo.png}" src="/static/images/client_pages/logo.png">
+        </div>
+        <div class="product-details" th:id="${cartDto.mainServiceId}">
+            <div class="product-title" th:text="${cartDto.mainServiceName}"></div>
+        </div>
+        <div class="product-removal" th:main="true">
+            <button class="remove-product">Change</button>
+        </div>
+        <div class="product-line-price" th:id="|product-line-price-id-${cartDto.mainServiceId}|"
+             th:text="${cartDto.mainServiceTotal}"></div>
+    </div>
+
+    <div th:each="extraService : ${cartDto.extraServiceList}" class="product extraService">
+        <div class="product-image">
+            <img th:src="@{/images/client_pages/logo.png}" src="/static/images/client_pages/logo.png">
+        </div>
+        <div class="product-details" th:id="${extraService.id}">
+            <div class="product-title" th:text="${extraService.name}"></div>
+        </div>
+        <div class="product-removal" th:main="false">
+            <button class="remove-product">Remove</button>
+        </div>
+        <div class="product-line-price" th:id="|product-line-price-id-${extraService.id}|"
+             th:text="${extraService.price}"></div>
+    </div>
+
+    <div class="promoZone">
+        <label id="promoLabel" for="promoInput">Promo Code</label>
+        <input id="promoInput" type="text">
+        <button id="applyPromo">Apply</button>
+    </div>
+
+    <div class="totals">
+        <div class="totals-item">
+            <label>Subtotal</label>
+            <div class="totals-value" id="cart-subtotal"></div>
+        </div>
+        <div class="totals-item">
+            <label>Promo discount</label>
+            <div class="totals-value" id="cart-promo"></div>
+        </div>
+        <div class="totals-item totals-item-total">
+            <label>Final total</label>
+            <div class="totals-value" id="cart-total"></div>
+        </div>
+    </div>
+
+    <button class="checkout">Accept</button>
+
+</div>
+
+<script src="/js/client_pages/cart.js" th:src="@{/js/client_pages/cart.js}"></script>
+</body>
+</html>
