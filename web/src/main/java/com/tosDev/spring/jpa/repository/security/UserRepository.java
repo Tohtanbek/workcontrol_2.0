@@ -1,6 +1,6 @@
-package com.tosDev.spring.jpa.repository.main_tables;
+package com.tosDev.spring.jpa.repository.security;
 
-import com.tosDev.spring.jpa.entity.main_tables.User;
+import com.tosDev.spring.jpa.entity.security.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

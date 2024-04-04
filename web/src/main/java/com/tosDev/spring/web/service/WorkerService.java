@@ -138,7 +138,7 @@ public class WorkerService {
                     .builder()
                     .name(workerDto.getName())
                     .phoneNumber(workerDto.getPhoneNumber())
-                    .job(checkAndReturnJob(workerDto.getName()))
+                    .job(checkAndReturnJob(workerDto.getJob()))
                     .build());
 
             for (String shortName : workerDto.getAddresses()){

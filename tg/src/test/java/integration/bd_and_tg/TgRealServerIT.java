@@ -18,7 +18,6 @@ public class TgRealServerIT extends IntegrationTestBase {
             бригадирам - по entityJob с названием по имени бригадира.
             то есть при расчете зарплаты бригадиру ищем job идентичный имени бригадира
          */
-        mainListener.activateListener();
         //Оставляем сервер работать
         while (true){
 

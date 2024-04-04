@@ -4,37 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Работа над сайтом заказа услуг.">
+    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Доделан сайт заявок v.1.0">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/client_pages/CheckoutDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/client_pages/CheckoutDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/tableDto/OrderDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/dto/tableDto/OrderDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/client_orders/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/client_orders/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/client_orders/OrderServiceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/client_orders/OrderServiceRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/controllers/client_pages/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/controllers/client_pages/CartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/controllers/client_pages/SelectServiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/controllers/client_pages/SelectServiceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/controllers/table_pages/OrderControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/controllers/table_pages/OrderControllers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/OrderEntityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/OrderEntityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/client_pages/styles_authentication.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/client_pages/styles_authentication.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/order/styles_order_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/order/styles_order_tab.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/client_pages/cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/client_pages/cart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/client_pages/select_extra_service.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/client_pages/select_extra_service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/order/order_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/order/order_script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_cart.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_cart.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_cart.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_cart.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_cart.scss" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_cart.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_extra_service.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_extra_service.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_extra_service.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_extra_service.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_extra_service.scss" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_extra_service.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_service.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_service.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_service.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_service.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_service.scss" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_service.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/authentication.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/authentication.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/cart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/final_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/final_page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/select_extra_service.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/select_extra_service.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/select_service.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/client_pages/select_service.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/order/order_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/order/order_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/test/resources/sql/test.sql" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/resources/sql/test.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tg/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tg/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/TgApplicationRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/TgApplicationRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/CommonTgService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/CommonTgService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tg/src/test/java/integration/bd_and_tg/TgRealServerIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/test/java/integration/bd_and_tg/TgRealServerIT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/main_tables/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/entity/security/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/main_tables/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/jpa/repository/security/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/IncomeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/IncomeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/ShiftService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/ShiftService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/WorkerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/spring/web/service/WorkerService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,47 +60,47 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;database.data.extractors.current.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Docs/Java Projects/workcontrol_2.0/web/src/main/resources/static/js/client_pages&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editing.templates&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;fe59745b02ff75aa95594825ed88b7e5&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
+    "database.data.extractors.current.id": "Comma-separated (CSV)_id",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "C:/Docs/Java Projects/workcontrol_2.0",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "editing.templates",
+    "spring.configuration.checksum": "fe59745b02ff75aa95594825ed88b7e5"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.tosDev.tg.bot_services" />
       <recent name="com.tosDev.jpa.entity" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\client_pages" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\sass" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\templates\order" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\service" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css\service" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\templates\order" />
@@ -143,7 +126,7 @@
       <recent name="com.tosDev.tg.db" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.RealWebServiceServerIT">
+  <component name="RunManager" selected="Spring Boot.SpringMainModuleRunner">
     <configuration name="HandleChangeOfJobTest.checkRegex" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="tg" />
       <extension name="coverage">
@@ -227,6 +210,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SpringTgReceiverRunner" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="tg_receiver" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.tosDev.tg_receiver.SpringTgReceiverRunner" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TgApplicationRunner" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="tg" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.tosDev.tg.TgApplicationRunner" />
@@ -236,8 +226,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.RealWebServiceServerIT" />
         <item itemvalue="Spring Boot.SpringMainModuleRunner" />
+        <item itemvalue="JUnit.RealWebServiceServerIT" />
         <item itemvalue="JUnit.RealWebServiceServerIT.test" />
         <item itemvalue="JUnit.TgRealServerIT.test" />
         <item itemvalue="JUnit.HandleChangeOfJobTest.checkRegex" />
@@ -307,7 +297,7 @@
       <workItem from="1711965758752" duration="23992000" />
       <workItem from="1712053166068" duration="30125000" />
       <workItem from="1712144963531" duration="25490000" />
-      <workItem from="1712224494604" duration="21327000" />
+      <workItem from="1712224494604" duration="31856000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит workcontrol 2.0. Работа над frontend">
       <created>1708303197812</created>
@@ -505,7 +495,14 @@
       <option name="project" value="LOCAL" />
       <updated>1712185399283</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Доделан сайт заявок v.1.0">
+      <created>1712247863575</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1712247863575</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -559,7 +556,8 @@
     <MESSAGE value="Доработка таблиц по части оборудования" />
     <MESSAGE value="Доработка таблиц по части оборудования&#10;Логика расчета трат оборудования" />
     <MESSAGE value="Работа над сайтом заказа услуг." />
-    <option name="LAST_COMMIT_MESSAGE" value="Работа над сайтом заказа услуг." />
+    <MESSAGE value="Доделан сайт заявок v.1.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="Доделан сайт заявок v.1.0" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

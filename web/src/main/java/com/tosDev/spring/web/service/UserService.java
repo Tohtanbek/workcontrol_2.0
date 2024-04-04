@@ -1,6 +1,6 @@
 package com.tosDev.spring.web.service;
 
-import com.tosDev.spring.jpa.repository.main_tables.UserRepository;
+import com.tosDev.spring.jpa.repository.security.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

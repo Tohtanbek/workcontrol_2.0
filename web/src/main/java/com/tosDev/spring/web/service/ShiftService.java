@@ -38,19 +38,25 @@ public class ShiftService {
                     Optional.of(shiftRepository.findAll()).orElse(Collections.emptyList());
             List<ShiftDto> shiftDtos =
                     shiftList.stream()
-                            .map(dao -> ShiftDto.builder()
-                                    .id(dao.getId())
-                                    .shortInfo(dao.getShortInfo())
-                                    .job(dao.getJob().getName())
-                                    .address(dao.getAddress().getShortName())
-                                    .brigadier(dao.getBrigadier().getName())
-                                    .status(dao.getStatus().getDescription())
-                                    .zone(dao.getAddress().getZone())
-                                    .startDateTime(dao.getStartDateTime().format(basicDateTimeFormatter))
-                                    .endDateTime(dao.getEndDateTime().format(basicDateTimeFormatter))
-                                    .totalHours(dao.getTotalHours())
-                                    .worker(dao.getWorker().getName())
-                                    .build()).toList();
+                            .map(dao -> {
+                                ShiftDto dto = ShiftDto.builder()
+                                        .id(dao.getId())
+                                        .shortInfo(dao.getShortInfo())
+                                        .job(dao.getJob().getName())
+                                        .address(dao.getAddress().getShortName())
+                                        .status(dao.getStatus().getDescription())
+                                        .zone(dao.getAddress().getZone())
+                                        .startDateTime(dao.getStartDateTime().format(basicDateTimeFormatter))
+                                        .totalHours(dao.getTotalHours())
+                                        .worker(dao.getWorker().getName())
+                                        .build();
+                                Optional.ofNullable(dao.getBrigadier())
+                                        .ifPresent(brig -> dto.setBrigadier(brig.getName()));
+                                Optional.ofNullable(dao.getEndDateTime())
+                                        .ifPresent(dt -> dto.setEndDateTime(dt.format(basicDateTimeFormatter)));
+                                return dto;
+                            }).toList();
+
             allShiftStr = objectMapper.writeValueAsString(shiftDtos);
         } catch (JsonProcessingException e) {
             log.error("При конвертации таблицы смен в json произошла ошибка");

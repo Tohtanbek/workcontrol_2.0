@@ -69,24 +69,24 @@ public class CommonTgService {
         if (optionalExistingUser.isPresent()) {
             String className = optionalExistingUser.get().getClass().getName();
             switch (className) {
-                case ("com.tosDev.web.jpa.entity.Admin") -> {
+                case ("com.tosDev.spring.jpa.entity.main_tables.Admin") -> {
                     log.info("Пользователь найден в бд в роли админа");
                     Admin updatedAdmin = adminTgService.linkChatIdToExistingAdmin(phoneNumber,chatId);
                   adminTgService.startAdminLogic(update);
                 }
-                case ("com.tosDev.web.jpa.entity.Worker") -> {
+                case ("com.tosDev.spring.jpa.entity.main_tables.Worker") -> {
                     log.info("Пользователь найден в бд в роли работника");
                     Worker linkedWorker =
                             workerTgQueries.linkChatIdToExistingWorker(phoneNumber,chatId);
                   workerTgService.startWorkerLogic(update,linkedWorker.getId());
                 }
-                case ("com.tosDev.web.jpa.entity.Brigadier") -> {
+                case ("com.tosDev.spring.jpa.entity.main_tables.Brigadier") -> {
                     log.info("Пользователь найден в бд в роли бригадира");
                     Brigadier linkedBrigadier =
                             brigadierTgQueries.linkChatIdToExistingBrigadier(phoneNumber,chatId);
                   brigadierTgService.startBrigadierLogic(update,linkedBrigadier.getId());
                 }
-                case ("com.tosDev.web.jpa.entity.Responsible") -> {
+                case ("com.tosDev.spring.jpa.entity.main_tables.Responsible") -> {
                     log.info("Пользователь найден в бд в роли супервайзера");
                     Responsible linkedResponsible =
                             responsibleTgQueries.linkChatIdToExistingSupervisor(phoneNumber,chatId);
@@ -118,21 +118,21 @@ public class CommonTgService {
             Object someAuthorizedUser = optionalAuthorizedUser.get();
             String className = optionalAuthorizedUser.get().getClass().getName();
             switch (className) {
-                case ("com.tosDev.web.jpa.entity.Admin") -> {
+                case ("com.tosDev.spring.jpa.entity.main_tables.Admin") -> {
                     log.info("update от админа");
 //                    adminTgService.startAdminLogic((Admin)someAuthorizedUser);
                 }
-                case ("com.tosDev.web.jpa.entity.Worker") -> {
+                case ("com.tosDev.spring.jpa.entity.main_tables.Worker") -> {
                     log.info("update от работника");
                     Worker worker = (Worker) someAuthorizedUser;
                     workerTgService.startWorkerLogic(update,worker.getId());
                 }
-                case ("com.tosDev.web.jpa.entity.Brigadier") -> {
+                case ("com.tosDev.spring.jpa.entity.main_tables.Brigadier") -> {
                     log.info("update от бригадира");
                     Brigadier brigadier = (Brigadier) someAuthorizedUser;
                     brigadierTgService.startBrigadierLogic(update, brigadier.getId());
                 }
-                case ("com.tosDev.web.jpa.entity.Responsible") -> {
+                case ("com.tosDev.spring.jpa.entity.main_tables.Responsible") -> {
                     log.info("update от супервайзера");
                     Responsible responsible = (Responsible) someAuthorizedUser;
                     responsibleTgService.startResponsibleLogic(update,responsible.getId());

@@ -23,6 +23,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/tables/**").hasAuthority(Role.ADMIN.getAuthority())
                         .requestMatchers("/css/**").permitAll()
+                        .requestMatchers("/form/**").permitAll()
                         .anyRequest()
                         .authenticated())
                 .formLogin(login -> login

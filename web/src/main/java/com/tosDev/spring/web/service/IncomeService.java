@@ -40,22 +40,26 @@ public class IncomeService {
                     Optional.of(incomeRepository.findAll()).orElse(Collections.emptyList());
             List<IncomeDto> incomeDtos =
                     incomeList.stream()
-                            .map(dao -> IncomeDto.builder()
-                                    .id(dao.getId())
-                                    .shortInfo(dao.getShortInfo())
-                                    .totalSum(dao.getTotalSum())
-                                    .type(dao.getType())
-                                    .status(dao.getStatus())
-                                    .dateTime(dao.getDateTime().format(basicDateTimeFormatter))
-                                    .address(Optional.ofNullable(dao
-                                            .getAddress()).isPresent()?dao.getAddress().getShortName():null)
-                                    .worker(Optional.ofNullable(dao
-                                            .getWorker()).isPresent()?dao.getWorker().getName():null)
-                                    .shift(Optional.ofNullable(dao
-                                            .getShift()).isPresent()?dao.getShift().getShortInfo():null)
-                                    .zone(Optional.ofNullable(dao
-                                            .getAddress()).isPresent()?dao.getAddress().getZone():null)
-                                    .build()).toList();
+                            .map(dao -> {
+                                IncomeDto dto = IncomeDto.builder()
+                                        .id(dao.getId())
+                                        .shortInfo(dao.getShortInfo())
+                                        .totalSum(dao.getTotalSum())
+                                        .type(dao.getType())
+                                        .status(dao.getStatus())
+                                        .address(Optional.ofNullable(dao
+                                                .getAddress()).isPresent() ? dao.getAddress().getShortName() : null)
+                                        .worker(Optional.ofNullable(dao
+                                                .getWorker()).isPresent() ? dao.getWorker().getName() : null)
+                                        .shift(Optional.ofNullable(dao
+                                                .getShift()).isPresent() ? dao.getShift().getShortInfo() : null)
+                                        .zone(Optional.ofNullable(dao
+                                                .getAddress()).isPresent() ? dao.getAddress().getZone() : null)
+                                        .build();
+                                Optional.ofNullable(dao.getDateTime())
+                                        .ifPresent(dt -> dto.setDateTime(dt.format(basicDateTimeFormatter)));
+                                return dto;
+                            }).toList();
             allIncomeStr = objectMapper.writeValueAsString(incomeDtos);
         } catch (JsonProcessingException e) {
             log.error("При конвертации таблицы доходов в json произошла ошибка");

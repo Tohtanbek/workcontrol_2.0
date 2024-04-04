@@ -1,4 +1,4 @@
-package com.tosDev.spring.jpa.entity.main_tables;
+package com.tosDev.spring.jpa.entity.security;
 
 import com.tosDev.enums.Role;
 import jakarta.persistence.*;
