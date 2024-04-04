@@ -1,6 +1,7 @@
 package com.tosDev.spring.web.controllers.client_pages;
 
 import com.tosDev.dto.client_pages.ChosenMainServiceDto;
+import com.tosDev.dto.client_pages.ClientDto;
 import com.tosDev.dto.client_pages.ExtraServiceDateTimeDto;
 import com.tosDev.dto.client_pages.ShortServiceDto;
 import com.tosDev.enums.ServiceCategory;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @Slf4j
@@ -27,6 +29,9 @@ public class SelectServiceController {
 
     @GetMapping("/select_service")
     String getMainServicesPage(Model model){
+        if (model.getAttribute("client")==null){
+            return "redirect:authentication";
+        }
         List<ShortServiceDto> dtoList =
                 serviceEntityService.loadAndMapToShorServices(ServiceCategory.MAIN);
         if (dtoList.isEmpty()){
@@ -48,6 +53,11 @@ public class SelectServiceController {
 
     @GetMapping("/select_extra_service")
     String getAdditionalServicePage(Model model){
+        if (model.getAttribute("client")==null
+                ||
+                model.getAttribute("mainService")==null){
+            return "redirect:authentication";
+        }
         List<ShortServiceDto> dtoList =
                 serviceEntityService.loadAndMapToShorServices(ServiceCategory.EXTRA);
         if (dtoList.isEmpty()){

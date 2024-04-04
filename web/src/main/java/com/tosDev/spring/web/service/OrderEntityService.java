@@ -5,10 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tosDev.dto.client_pages.CheckoutDto;
 import com.tosDev.dto.client_pages.ClientDto;
 import com.tosDev.dto.tableDto.OrderDto;
+import com.tosDev.dto.tableDto.ServiceNameDto;
 import com.tosDev.spring.jpa.entity.client_orders.Order;
 import com.tosDev.spring.jpa.entity.client_orders.OrderService;
 import com.tosDev.spring.jpa.entity.client_orders.Service;
 import com.tosDev.spring.jpa.repository.client_orders.OrderRepository;
+import com.tosDev.spring.jpa.repository.client_orders.OrderServiceRepository;
 import com.tosDev.spring.jpa.repository.client_orders.ServiceRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,10 +18,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.io.IOException;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -31,6 +31,7 @@ public class OrderEntityService {
 
     private final OrderRepository orderRepository;
     private final ServiceRepository serviceRepository;
+    private final OrderServiceRepository orderServiceRepository;
     private final ObjectMapper objectMapper;
 
     @Qualifier("basicDateTimeFormatter")
@@ -46,14 +47,22 @@ public class OrderEntityService {
             for (Order dao : orderList){
                 OrderDto freshDto = OrderDto.builder()
                         .id(dao.getId())
+                        .clientName(dao.getClientName())
                         .total(dao.getTotal())
+                        .subTotal(dao.getSubTotal())
+                        .promoTotal(dao.getPromoTotal())
                         .area(dao.getArea())
                         .dateTime(basicDateTimeFormatter.format(dao.getDateTime()))
+                        .orderDateTime(basicDateTimeFormatter.format(dao.getOrderDateTime()))
+                        .timeZone(ZoneOffset.ofTotalSeconds(dao.getOrderOffset()).toString())
                         .build();
-                Optional.ofNullable(dao.getPhoneNumber())
-                        .ifPresent(number -> freshDto.setPhoneNumber(number.toString()));
+
                 Optional.ofNullable(dao.getEmail()).ifPresent(freshDto::setEmail);
                 Optional.ofNullable(dao.getAddress()).ifPresent(freshDto::setAddress);
+                Optional.ofNullable(dao.getPromoCode()).ifPresent(freshDto::setPromoCode);
+                Optional.ofNullable(dao.getPhoneNumber()).ifPresent(freshDto::setPhoneNumber);
+                freshDto.setStatus("Открытый заказ");
+
                 orderDtoList.add(freshDto);
             }
             allOrderStr = objectMapper.writeValueAsString(orderDtoList);
@@ -84,7 +93,7 @@ public class OrderEntityService {
 
                 orderDao.setAddress(orderDto.getAddress());
                 orderDao.setEmail(orderDto.getEmail());
-                orderDao.setPhoneNumber(Long.parseLong(orderDto.getPhoneNumber()));
+                orderDao.setPhoneNumber(orderDao.getPhoneNumber());
 
                 orderRepository.save(orderDao);
             }
@@ -119,12 +128,23 @@ public class OrderEntityService {
                 .area(area)
                 .build();
         //Если был номер, то вписываем, если не было, то ничего не делаем
-        Optional.ofNullable(clientDto.getPhoneNumber()).ifPresent(str ->
-                freshOrder.setPhoneNumber(Long.parseLong(str.substring(1))));
+        String phoneStr = clientDto.getPhoneNumber();
+        if (!phoneStr.isBlank())
+        {
+            freshOrder.setPhoneNumber(Long.parseLong(phoneStr.substring(1)));
+        }
         //То же самое с почтой
-        Optional.ofNullable(clientDto.getEmail()).ifPresent(freshOrder::setEmail);
+        String emailStr = clientDto.getEmail();
+        if (!emailStr.isBlank())
+        {
+            freshOrder.setEmail(emailStr);
+        }
         //И с промокодом
-        Optional.ofNullable(checkoutDto.getPromoCode()).ifPresent(freshOrder::setPromoCode);
+        String promoStr = checkoutDto.getPromoCode();
+        if (!promoStr.isBlank()){
+            freshOrder.setPromoCode(promoStr);
+        }
+        Optional.ofNullable(checkoutDto.getPromoTotal()).ifPresent(freshOrder::setPromoTotal);
 
         //Создаем OrderService
         List<OrderService> freshOrderServices = new ArrayList<>();
@@ -143,6 +163,27 @@ public class OrderEntityService {
         freshOrder.setOrderServices(freshOrderServices);
 
         return orderRepository.save(freshOrder);
+    }
+
+    public ResponseEntity<String> loadAndMapServicesOfOrder(Long id) {
+        try {
+            List<OrderService> orderServiceList = orderServiceRepository.findAllByOrderId(id);
+            if (orderServiceList.isEmpty()) {
+                throw new RuntimeException("У заказа пустой список сервисов");
+            }
+           List<ServiceNameDto> dtoList = new ArrayList<>();
+            for (OrderService dao : orderServiceList) {
+                Integer serviceId = dao.getService().getId();
+                String serviceName = dao.getService().getName();
+                dtoList.add(new ServiceNameDto(serviceId,serviceName));
+            }
+            String resultStr = objectMapper.writeValueAsString(dtoList);
+            log.info("Успешно загрузили список сервисов заказа");
+            return ResponseEntity.ok(resultStr);
+        } catch (Exception e) {
+            log.error("Ошибка при загрузке сервисов заказа");
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
 

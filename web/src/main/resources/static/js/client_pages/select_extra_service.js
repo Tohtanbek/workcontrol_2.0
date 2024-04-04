@@ -1,9 +1,17 @@
-
-let flatPickr = flatpickr("#dateTimePicker", {
-    enableTime: true,
-    dateFormat: "Y-m-d H:i",
-    inline: true
-});
+let flatPickr;
+if (window.innerWidth>600) {
+    flatPickr = flatpickr("#dateTimePicker", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        inline: true
+    });
+}
+else if (window.innerWidth<=600){
+    flatPickr = flatpickr("#dateTimePicker", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+    });
+}
 
 flatPickr.config.onChange.push(function (){
     let continueButton = document.querySelector("#continueButton");

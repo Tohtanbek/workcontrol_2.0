@@ -13,6 +13,7 @@ public class CheckoutDto {
     private Integer mainServiceId;
     private Integer[] extraServiceIds;
     private Float subTotal;
+    private Float promoTotal;
     private Float total;
     private String promoCode;
 }

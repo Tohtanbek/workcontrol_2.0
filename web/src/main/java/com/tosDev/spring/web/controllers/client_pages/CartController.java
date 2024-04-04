@@ -4,6 +4,7 @@ import com.tosDev.dto.client_pages.*;
 import com.tosDev.spring.jpa.entity.client_orders.Order;
 import com.tosDev.spring.web.service.OrderEntityService;
 import com.tosDev.spring.web.service.ServiceEntityService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Map;
@@ -97,5 +99,12 @@ public class CartController {
             log.error("Ошибка при сохранении заказа пользователя {}",clientDto,e);
             return ResponseEntity.internalServerError().build();
         }
+    }
+
+    @GetMapping("/final_page")
+    String showFinalPage(SessionStatus sessionStatus){
+        //Когда пользователь успешно сделал заказ, очищаем session атрибуты
+        sessionStatus.setComplete();
+        return "/client_pages/final_page";
     }
 }

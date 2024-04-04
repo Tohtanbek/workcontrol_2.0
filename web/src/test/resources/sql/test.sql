@@ -271,17 +271,24 @@ VALUES ('cleaning','50.5',0,'100.4','Skidka','50'),
        ('deep cleaning','50.5',0,'100.4','Skidka','50'),
        ('mopping','50.5',0,'100.4','Skidka','50'),
        ('dish washing','50.5',0,'100.4','Skidka','50'),
+       ('balcony cleaning','50.5',0,'100.4','Skidka','50'),
+       ('relocation cleaning','50.5',0,'100.4','Skidka','50'),
        ('extra1','50.5',1,'100.4','Skidka','50'),
        ('extra2','60.5',1,'150.4','Skidka','50'),
        ('extra3','50.5',1,'100.4','Skidka','50'),
        ('extra4','50.5',1,'100.4','Skidka','50'),
        ('extra5','50.5',1,'100.4','Skidka','50'),
-       ('extra6','50.5',1,'100.4','Skidka','50');
+       ('extra6','50.5',1,'100.4','Skidka','50'),
+       ('extra7','50.5',1,'100.4','Skidka','50'),
+       ('extra8','50.5',1,'100.4','Skidka','50'),
+       ('extra9','50.5',1,'100.4','Skidka','50');
+
 
 CREATE TABLE IF NOT EXISTS "order"(
     id BIGSERIAL PRIMARY KEY ,
     total FLOAT,
     sub_total FLOAT,
+    promo_total FLOAT,
     order_date_time TIMESTAMP,
     order_offset INTEGER,
     date_time TIMESTAMP,
@@ -292,13 +299,15 @@ CREATE TABLE IF NOT EXISTS "order"(
     address VARCHAR,
     promo_code VARCHAR
 );
-
-
+INSERT INTO "order"(total,sub_total,promo_total,order_date_time,order_offset,date_time,area,phone_number,client_name,email,address,promo_code)
+VALUES (500,500,0,'2024-03-11 17:00:00',0,'2024-03-11 17:00:00',20,79661919669,'tos',null,null,null);
 CREATE TABLE IF NOT EXISTS order_service(
     id BIGSERIAL PRIMARY KEY ,
     order_id BIGINT references "order"(id) ON DELETE CASCADE,
     service_id INTEGER references service("id") ON DELETE SET NULL
 );
+insert into order_service (order_id, service_id)
+VALUES(1,1);
 
 
 

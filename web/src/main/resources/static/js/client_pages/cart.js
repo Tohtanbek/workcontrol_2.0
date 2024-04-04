@@ -1,4 +1,5 @@
 let isPromoActivated = false;
+let promoActivated = "";
 let promoCounter = 0;
 countTotal();
 //расчет total
@@ -34,6 +35,7 @@ removeButtons.forEach(function (button){
             productEl.remove();
             countTotal();
             isPromoActivated = false;
+            promoActivated = '';
         }
         else if (parentEl.getAttribute("main")==="true"){
             window.location.href = "/form/select_service";
@@ -63,14 +65,14 @@ applyPromoButton.addEventListener("click",function (){
         }
         else {
             response.json().then(object => {
-                changePricesWithPromo(object)
+                changePricesWithPromo(object,promoValue)
             })
         }
     })
 })
 
 //функция получает мапу id и скидки по промокоду и начинает менять цену
-function changePricesWithPromo(promoCodeMap){
+function changePricesWithPromo(promoCodeMap,promoValue){
     //Проверяем, что по промокоду что-то нашлось
     if (Object.keys(promoCodeMap).length !== 0){
         //Берем все id продуктов
@@ -85,6 +87,7 @@ function changePricesWithPromo(promoCodeMap){
         updateFinalTotal()
         //В конце запрещаем еще раз использовать промокод
         isPromoActivated = true;
+        promoActivated = promoValue;
     }
     //Если пользователь ввел неправильный промокод
     else {
@@ -140,5 +143,53 @@ function updateFinalTotal(){
 //Логика отправки заказа
 let checkoutButton = document.querySelector(".checkout");
 checkoutButton.addEventListener("click",function (){
-    fetch()
+    fetch("/form/checkout",{
+        method: "POST",
+        headers: {
+            "Content-Type":"application/JSON"
+        },
+        body: JSON.stringify(createCheckoutBody())
+    }).then(response => {
+        if (!response.ok){
+            throw new Error("Could not save order")
+        }
+        else {
+            window.location.href = "/form/final_page"
+        }
+    })
 })
+
+function createCheckoutBody(){
+    //Сначала достаем id основного сервиса
+    let parentDiv = document.querySelector('.product.mainService');
+
+    let childDiv = parentDiv.querySelector('.product-details');
+
+    let mainServiceId = childDiv.getAttribute('id');
+
+    //Потом достаем id extra сервисов
+    let extraServiceIdArr = [];
+    let extraParentDivs = document.querySelectorAll(".product.extraService")
+    extraParentDivs.forEach(div => {
+        let extraChildDiv = div.querySelector(".product-details")
+        let extraServiceId = extraChildDiv.getAttribute("id");
+        extraServiceIdArr.push(extraServiceId);
+    })
+
+    //Получаем subTotal, promoTotal, finalTotal
+    let subTotalEl = document.querySelector("#cart-subtotal");
+    let promoEl = document.querySelector("#cart-promo");
+    let totalEl = document.querySelector("#cart-total")
+
+    console.log(promoActivated)
+    //Создаем json
+    return {
+        mainServiceId: mainServiceId,
+        extraServiceIds: extraServiceIdArr,
+        subTotal: subTotalEl.textContent,
+        promoTotal: promoEl.textContent,
+        total: totalEl.textContent,
+        promoCode: promoActivated
+    }
+
+}

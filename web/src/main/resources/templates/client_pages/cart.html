@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Welcome</title>
+<title>Cart</title>
 <link th:href="@{/sass/styles_cart.css}" href="/static/sass/styles_cart.css" rel="stylesheet" />
 <link th:href="@{/css/client_pages/general/wave_header.css}" href="/static/css/client_pages/general/wave_header.css" rel="stylesheet" />
 <head>
     <meta charset="UTF-8">
     <title>Choose service</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/favicon.ico" th:href="@{/images/favicon.ico}">
 </head>
 <body>
 
@@ -19,7 +20,6 @@
         <label class="product-image">Image</label>
         <label class="product-details">Product</label>
         <label class="product-removal">Remove</label>
-        <label class="product-line-price">Total</label>
     </div>
 
     <div class="product mainService">
@@ -69,9 +69,9 @@
             <label>Final total</label>
             <div class="totals-value" id="cart-total"></div>
         </div>
+        <button class="checkout">Accept</button>
     </div>
 
-    <button class="checkout">Accept</button>
 
 </div>
 

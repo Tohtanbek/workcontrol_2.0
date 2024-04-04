@@ -15,11 +15,14 @@ public class OrderDto {
     private String status;
     private Float total;
     private Float subTotal;
+    private Float promoTotal;
     private String clientName;
-    private String phoneNumber;
+    private Long phoneNumber;
     private String email;
     private String address;
     private Float area;
     private String dateTime;
     private String orderDateTime;
+    private String timeZone;
+    private String promoCode;
 }

@@ -58,4 +58,9 @@ public class OrderControllers {
     ResponseEntity<Void> update_order_rows(@RequestBody List<OrderDto> orderDtos){
         return orderEntityService.saveOrderUpdate(orderDtos);
     }
+
+    @GetMapping("/load_order_services")
+    ResponseEntity<String> loadServicesOfOrder(@RequestParam("id") Long id){
+        return orderEntityService.loadAndMapServicesOfOrder(id);
+    }
 }

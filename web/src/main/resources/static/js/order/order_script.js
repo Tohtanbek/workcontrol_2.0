@@ -3,6 +3,8 @@ let updatedRows = [];
 let orderMenu = createOrderMenu();
 let orderTable = createOrderTable()
 
+let orderServicesTable;
+
 
 
 //Таблица заказов-------------------------------------------------
@@ -26,17 +28,22 @@ function createOrderTable() {
         rowContextMenu: orderMenu,
         columns: [
             {title: "Id", field: "id", sorter: "number"},
-            {title: "Отчет", field: "shortInfo", editor: true},
             {title: "Статус", field: "status", editor: "list", editorParams: {
                     valuesLookup: "active", autocomplete: true, freetext: true
                 }},
             {title: "Сумма", field: "total"},
-            {title: "Позиции", field: "serviceList"},
+            {title: "Сумма до скидки", field: "subTotal"},
+            {title: "Сумма скидки", field: "promoTotal"},
+            {title: "Промокод", field: "promoCode"},
+            {title: "Площадь", field: "area"},
+            {title: "Имя клиента", field: "clientName", editor: true},
             {title: "Телефон", field: "phoneNumber", editor:"number"},
             {title: "Email", field: "email", editor: true},
             {title: "Адрес", field: "address", editor: true},
             {title: "Площадь", field: "area"},
-            {title: "Дата", field: "dateTime",sorter:"date"},
+            {title: "Выбранная дата", field: "orderDateTime",sorter:"date"},
+            {title: "Часовой пояс", field: "timeZone"},
+            {title: "Дата заказа", field: "dateTime"},
         ]
     });
 }
@@ -44,11 +51,18 @@ function createOrderTable() {
 function createOrderMenu(){
     return [
         {
-            label: "<i class='fas fa-user'></i>Удалить выбранные ряды",
+            label: "<i class='fas fa-user'></i> Удалить выбранные ряды",
             action: function (e, row) {
                 $('#order-delete-popup').addClass('is-visible');
             }
-        }
+        },
+        {
+            label: "<i class='fas fa-list'></i> Список услуг ",
+            action: function (e, row) {
+                showServicesOfOrder(row);
+            }
+        },
+
     ];
 }
 
@@ -150,4 +164,52 @@ orderTable.on("cellEdited",function (cell){
     updatedRows.push(row);
     console.log(updatedRows);
     console.log(JSON.stringify(updatedRows));
+})
+
+//Просмотр услуг в заказе
+function showServicesOfOrder(row){
+    //Сначала загружаем по id Order ServiceOrder
+    orderServicesTable = loadOrderServicesTable(row.getCell("id").getValue())
+    orderServicesTable.on("tableBuilt",function () {
+        let orderServicesTable = document.querySelector("#orderServicesTable");
+        orderServicesTable.style.visibility = "visible";
+        orderServicesTable.style.opacity = "1";
+        let orderServicesBox = document.querySelector("#service-table-box");
+        orderServicesBox.style.opacity = "1";
+        orderServicesBox.style.visibility = "visible";
+        let main = document.querySelector("main");
+        main.style.opacity = "0.5";
+        main.style.filter = "blur(5px)";
+        document.body.style.overflow = "hidden"; //Убрали возможность скролить после нажатия
+        document.getElementById("overlay").style.display = "block";
+    });
+}
+
+//Таблица услуг в заказе по id
+function loadOrderServicesTable(id){
+    return new Tabulator("#orderServicesTable", {
+        ajaxURL: "/tables/order/load_order_services?id="+id,
+        maxHeight: "80%",
+        layout: "fitDataStretch",
+        addRowPos: "top",
+        columns: [
+            {title: "Id",field: "id"},
+            {title: "name", field: "name"}
+        ]
+    })
+}
+
+//Крестик (закрыть сервисы)
+document.getElementById("service-exit").addEventListener("click",function (){
+    let orderServicesTable = document.querySelector("#orderServicesTable");
+    orderServicesTable.style.visibility = "hidden";
+    orderServicesTable.style.opacity = "0";
+    let orderServicesBox = document.querySelector("#service-table-box");
+    orderServicesBox.style.opacity = "0";
+    orderServicesBox.style.visibility = "hidden";
+    let main = document.querySelector("main");
+    main.style.opacity = "1";
+    main.style.filter = "blur(0px)";
+    document.body.style.overflow = "visible"; //Вернули возможность скролить после нажатия
+    document.getElementById("overlay").style.display = "none";
 })

@@ -65,8 +65,7 @@ img {
         justify-content: center;
     }
 
-    form {background-color: #1bb1ab;
-        color: #fff;
+    form {
         cursor: pointer;
         width: 80%; /* Ширина формы на мобильных устройствах */
     }

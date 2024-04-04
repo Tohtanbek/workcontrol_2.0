@@ -18,6 +18,7 @@ public class Order {
 
     private Float subTotal;
     private Float total;
+    private Float promoTotal;
     private LocalDateTime orderDateTime;
     private Integer orderOffset;
     private LocalDateTime dateTime;

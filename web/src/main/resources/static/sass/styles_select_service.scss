@@ -248,3 +248,17 @@ li {
 	}
 }
 
+@media (max-width: 600px) {
+	body{
+		flex-wrap: wrap;
+	}
+	.input-container{
+		width: 100%;
+	}
+	.todos{
+		max-height: 50vh;
+		overflow: auto;
+	}
+
+}
+

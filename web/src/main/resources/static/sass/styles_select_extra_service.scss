@@ -54,6 +54,7 @@ body {
 
 main {
 	margin-top: 2vh;
+	margin-right: 100px;
 	max-width: 60rem;
 	position: relative;
 	padding-bottom: 1.5rem;
@@ -235,5 +236,23 @@ li {
 			left: 40px;
 		}
 	}
+}
+
+@media (max-width: 600px) {
+	body{
+		flex-wrap: wrap;
+	}
+	.input-container{
+		width: 100%;
+		margin-top: -10vh;
+	}
+	.todos{
+		max-height: 50vh;
+		overflow: auto;
+	}
+	main{
+		margin: 0;
+	}
+
 }
 

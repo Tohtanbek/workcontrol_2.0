@@ -11,4 +11,38 @@
 #order-table {
     width: 100%;
 }
+#orderServicesTable
+{
+    height: 80%;
+    width: 40%;
+}
+
+#service-table-box{
+    transform: translate(-50%, -50%);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 80%;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 500ms;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+#service-exit{
+    color: red;
+    position: absolute;
+    top: 10%;
+    right: 25%;
+    font-size: x-large;
+}
+#service-exit:hover,
+#service-exit:active{
+    transform: scale(1.1);
+    color: darkred;
+    cursor: pointer;
+}
 
