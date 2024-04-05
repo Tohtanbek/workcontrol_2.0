@@ -7,9 +7,10 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.tosDev.tg.db.AdminTgQueries;
 import com.tosDev.tg.db.TgQueries;
-import com.tosDev.spring.jpa.entity.main_tables.Address;
-import com.tosDev.spring.jpa.entity.main_tables.Admin;
-import com.tosDev.spring.jpa.entity.main_tables.Shift;
+import com.tosDev.web.spring.jpa.entity.main_tables.Address;
+import com.tosDev.web.spring.jpa.entity.main_tables.Admin;
+import com.tosDev.web.spring.jpa.entity.main_tables.Shift;
+import com.tosDev.web.enums.ShiftEndTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,9 +23,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
-
-import static com.tosDev.enums.ShiftEndTypeEnum.PLANNED;
-import static com.tosDev.enums.ShiftEndTypeEnum.UNPLANNED;
 
 @Slf4j
 @Component
@@ -105,10 +103,10 @@ public class BrigadierWorkerCommonTgMethods extends CommonTgMethods {
         InlineKeyboardMarkup ikbMarkup = new InlineKeyboardMarkup();
         InlineKeyboardButton ikbButtonPlanned =
                 new InlineKeyboardButton("Плановое")
-                        .callbackData(PLANNED.getDescription());
+                        .callbackData(ShiftEndTypeEnum.PLANNED.getDescription());
         InlineKeyboardButton ikbButtonUnplanned =
                 new InlineKeyboardButton("Неплановое")
-                        .callbackData(UNPLANNED.getDescription());
+                        .callbackData(ShiftEndTypeEnum.UNPLANNED.getDescription());
 
         ikbMarkup.addRow(ikbButtonPlanned);
         ikbMarkup.addRow(ikbButtonUnplanned);

@@ -1,7 +1,7 @@
 package com.tosDev.tg.db;
 
-import com.tosDev.spring.jpa.entity.main_tables.Admin;
-import com.tosDev.spring.jpa.repository.main_tables.AdminRepository;
+import com.tosDev.web.spring.jpa.entity.main_tables.Admin;
+import com.tosDev.web.spring.jpa.repository.main_tables.AdminRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

@@ -1,5 +1,5 @@
 <configuration>
-    <springProfile name="dev,test">
+    <springProfile name="dev,test,dockerdev">
         <root level="info">
             <appender-ref ref="CONSOLE" />
         </root>

@@ -1,8 +1,8 @@
 package com.tosDev.tg.db;
 
-import com.tosDev.spring.jpa.entity.main_tables.*;
-import com.tosDev.spring.jpa.repository.main_tables.AddressRepository;
-import com.tosDev.spring.jpa.repository.main_tables.BrigadierRepository;
+import com.tosDev.web.spring.jpa.entity.main_tables.*;
+import com.tosDev.web.spring.jpa.repository.main_tables.AddressRepository;
+import com.tosDev.web.spring.jpa.repository.main_tables.BrigadierRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;

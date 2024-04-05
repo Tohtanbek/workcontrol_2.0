@@ -2,12 +2,12 @@ package integration;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tosDev.dto.tableDto.AddressDto;
-import com.tosDev.spring.jpa.entity.main_tables.Address;
-import com.tosDev.spring.jpa.entity.main_tables.Responsible;
-import com.tosDev.spring.jpa.repository.main_tables.AddressRepository;
-import com.tosDev.spring.jpa.repository.main_tables.ResponsibleBrigadierRepository;
-import com.tosDev.spring.jpa.repository.main_tables.ResponsibleRepository;
+import com.tosDev.web.dto.tableDto.AddressDto;
+import com.tosDev.web.spring.jpa.entity.main_tables.Address;
+import com.tosDev.web.spring.jpa.entity.main_tables.Responsible;
+import com.tosDev.web.spring.jpa.repository.main_tables.AddressRepository;
+import com.tosDev.web.spring.jpa.repository.main_tables.ResponsibleBrigadierRepository;
+import com.tosDev.web.spring.jpa.repository.main_tables.ResponsibleRepository;
 import integration.config.IntegrationTestBase;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;

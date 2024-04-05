@@ -4,11 +4,7 @@ import com.pengrad.telegrambot.TelegramBot;
 import com.tosDev.tg.bot_services.BrigadierWorkerCommonTgMethods;
 import com.tosDev.tg.db.AdminTgQueries;
 import com.tosDev.tg.db.TgQueries;
-import integration.bd_and_tg.IT;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

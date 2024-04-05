@@ -10,7 +10,8 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SetMyCommands;
-import com.tosDev.spring.jpa.entity.main_tables.*;
+import com.tosDev.web.enums.ShiftEndTypeEnum;
+import com.tosDev.web.spring.jpa.entity.main_tables.*;
 import com.tosDev.tg.db.AdminTgQueries;
 import com.tosDev.tg.db.BrigadierTgQueries;
 import com.tosDev.tg.db.TgQueries;
@@ -22,9 +23,6 @@ import org.springframework.stereotype.Service;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
-
-import static com.tosDev.enums.ShiftEndTypeEnum.PLANNED;
-import static com.tosDev.enums.ShiftEndTypeEnum.UNPLANNED;
 
 @Service
 @Slf4j
@@ -128,9 +126,9 @@ public class WorkerTgService extends BrigadierWorkerCommonTgMethods {
         else if (callBackData.equals(READY_TO_END_SHIFT_CALLBACK)){
             sendTypeChooserToEndShift(update,workerId);
         }
-        else if (callBackData.equals(PLANNED.getDescription())
+        else if (callBackData.equals(ShiftEndTypeEnum.PLANNED.getDescription())
                 ||
-                callBackData.equals(UNPLANNED.getDescription()))
+                callBackData.equals(ShiftEndTypeEnum.UNPLANNED.getDescription()))
         {
             handleFinishedShift(update,workerId);
         }

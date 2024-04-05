@@ -5,14 +5,13 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.KeyboardButton;
 import com.pengrad.telegrambot.model.request.ReplyKeyboardMarkup;
 import com.pengrad.telegrambot.request.SendMessage;
-import com.tosDev.amqp.RabbitMQMessageProducer;
 import com.tosDev.tg.db.BrigadierTgQueries;
 import com.tosDev.tg.db.ResponsibleTgQueries;
 import com.tosDev.tg.db.WorkerTgQueries;
-import com.tosDev.spring.jpa.entity.main_tables.Admin;
-import com.tosDev.spring.jpa.entity.main_tables.Brigadier;
-import com.tosDev.spring.jpa.entity.main_tables.Responsible;
-import com.tosDev.spring.jpa.entity.main_tables.Worker;
+import com.tosDev.web.spring.jpa.entity.main_tables.Admin;
+import com.tosDev.web.spring.jpa.entity.main_tables.Brigadier;
+import com.tosDev.web.spring.jpa.entity.main_tables.Responsible;
+import com.tosDev.web.spring.jpa.entity.main_tables.Worker;
 import com.tosDev.tg.db.TgQueries;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +25,6 @@ import java.util.Optional;
 public class CommonTgService {
 
     private final TelegramBot bot;
-    private final RabbitMQMessageProducer rabbitMQMessageProducer;
     private final TgQueries tgQueries;
     private final WorkerTgQueries workerTgQueries;
     private final BrigadierTgQueries brigadierTgQueries;
@@ -69,24 +67,24 @@ public class CommonTgService {
         if (optionalExistingUser.isPresent()) {
             String className = optionalExistingUser.get().getClass().getName();
             switch (className) {
-                case ("com.tosDev.spring.jpa.entity.main_tables.Admin") -> {
+                case ("com.tosDev.web.spring.jpa.entity.main_tables.Admin") -> {
                     log.info("Пользователь найден в бд в роли админа");
                     Admin updatedAdmin = adminTgService.linkChatIdToExistingAdmin(phoneNumber,chatId);
                   adminTgService.startAdminLogic(update);
                 }
-                case ("com.tosDev.spring.jpa.entity.main_tables.Worker") -> {
+                case ("com.tosDev.web.spring.jpa.entity.main_tables.Worker") -> {
                     log.info("Пользователь найден в бд в роли работника");
                     Worker linkedWorker =
                             workerTgQueries.linkChatIdToExistingWorker(phoneNumber,chatId);
                   workerTgService.startWorkerLogic(update,linkedWorker.getId());
                 }
-                case ("com.tosDev.spring.jpa.entity.main_tables.Brigadier") -> {
+                case ("com.tosDev.web.spring.jpa.entity.main_tables.Brigadier") -> {
                     log.info("Пользователь найден в бд в роли бригадира");
                     Brigadier linkedBrigadier =
                             brigadierTgQueries.linkChatIdToExistingBrigadier(phoneNumber,chatId);
                   brigadierTgService.startBrigadierLogic(update,linkedBrigadier.getId());
                 }
-                case ("com.tosDev.spring.jpa.entity.main_tables.Responsible") -> {
+                case ("com.tosDev.web.spring.jpa.entity.main_tables.Responsible") -> {
                     log.info("Пользователь найден в бд в роли супервайзера");
                     Responsible linkedResponsible =
                             responsibleTgQueries.linkChatIdToExistingSupervisor(phoneNumber,chatId);
@@ -118,21 +116,21 @@ public class CommonTgService {
             Object someAuthorizedUser = optionalAuthorizedUser.get();
             String className = optionalAuthorizedUser.get().getClass().getName();
             switch (className) {
-                case ("com.tosDev.spring.jpa.entity.main_tables.Admin") -> {
+                case ("com.tosDev.web.spring.jpa.entity.main_tables.Admin") -> {
                     log.info("update от админа");
 //                    adminTgService.startAdminLogic((Admin)someAuthorizedUser);
                 }
-                case ("com.tosDev.spring.jpa.entity.main_tables.Worker") -> {
+                case ("com.tosDev.web.spring.jpa.entity.main_tables.Worker") -> {
                     log.info("update от работника");
                     Worker worker = (Worker) someAuthorizedUser;
                     workerTgService.startWorkerLogic(update,worker.getId());
                 }
-                case ("com.tosDev.spring.jpa.entity.main_tables.Brigadier") -> {
+                case ("com.tosDev.web.spring.jpa.entity.main_tables.Brigadier") -> {
                     log.info("update от бригадира");
                     Brigadier brigadier = (Brigadier) someAuthorizedUser;
                     brigadierTgService.startBrigadierLogic(update, brigadier.getId());
                 }
-                case ("com.tosDev.spring.jpa.entity.main_tables.Responsible") -> {
+                case ("com.tosDev.web.spring.jpa.entity.main_tables.Responsible") -> {
                     log.info("update от супервайзера");
                     Responsible responsible = (Responsible) someAuthorizedUser;
                     responsibleTgService.startResponsibleLogic(update,responsible.getId());
