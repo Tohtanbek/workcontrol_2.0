@@ -5,6 +5,7 @@ import com.tosDev.web.spring.jpa.entity.main_tables.Shift;
 import com.tosDev.web.enums.ShiftStatusEnum;
 import com.tosDev.web.spring.jpa.entity.main_tables.Worker;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -29,4 +30,11 @@ public interface ShiftRepository extends JpaRepository<Shift, Integer> {
     List<Shift> findAllByWorkerIdAndDataRange(@Param("workerId") Integer workerId,
                                               @Param("sdt") LocalDateTime startDateTime,
                                               @Param("edt") LocalDateTime endDateTime);
+
+    @Modifying
+    @Query("UPDATE Shift s " +
+            "SET s.folderId=:folderId " +
+            "WHERE s.id=:shiftId")
+    void updateFolderName(@Param("shiftId") Integer shiftId,
+                          @Param("folderId") String folderId);
 }

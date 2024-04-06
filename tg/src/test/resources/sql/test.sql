@@ -161,18 +161,19 @@ CREATE TABLE IF NOT EXISTS assignment_equip(
 );
 
 CREATE TABLE IF NOT EXISTS shift(
-                                    id SERIAL PRIMARY KEY ,
-                                    short_info VARCHAR,
-                                    start_date_time TIMESTAMP,
-                                    end_date_time TIMESTAMP,
-                                    status INTEGER,
-                                    type INTEGER,
-                                    address_id INTEGER references address(id) ON DELETE SET NULL,
-                                    worker_id INTEGER references worker(id) ON DELETE SET NULL ,
-                                    job_id INTEGER references job(id) ON DELETE SET NULL ,
-                                    brigadier_id INTEGER references brigadier(id) ON DELETE SET NULL ,
-                                    total_hours FLOAT,
-                                    first_photo_sent BOOLEAN
+id SERIAL PRIMARY KEY ,
+short_info VARCHAR,
+start_date_time TIMESTAMP,
+end_date_time TIMESTAMP,
+status INTEGER,
+type INTEGER,
+address_id INTEGER references address(id) ON DELETE SET NULL,
+worker_id INTEGER references worker(id) ON DELETE SET NULL ,
+job_id INTEGER references job(id) ON DELETE SET NULL ,
+brigadier_id INTEGER references brigadier(id) ON DELETE SET NULL ,
+total_hours FLOAT,
+first_photo_sent BOOLEAN,
+folder_id VARCHAR
 );
 INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job_id, brigadier_id, total_hours)
 VALUES ('Short info 1', '2024-03-06 09:00:00', '2024-03-06 17:00:00', 1, 1, 1, 1, 1, 8.0);

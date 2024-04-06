@@ -22,7 +22,7 @@ public class RabbitMQConfig {
     @Bean
     public AmqpTemplate amqpTemplate(){
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-        rabbitTemplate.setMessageConverter(jacksonConverter());
+        rabbitTemplate.setMessageConverter(jackson2JsonMessageConverter());
         return rabbitTemplate;
     }
 
@@ -32,18 +32,12 @@ public class RabbitMQConfig {
         SimpleRabbitListenerContainerFactory factory =
                 new SimpleRabbitListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
-        factory.setMessageConverter(jacksonConverter());
+        factory.setMessageConverter(jackson2JsonMessageConverter());
         return factory;
     }
 
-    @Bean
-    public MessageConverter jacksonConverter(){
-        //При необходимости конвертер можно настроить здесь
-        return new Jackson2JsonMessageConverter(objectMapper());
-    }
-
-    @Bean
-    public ObjectMapper objectMapper(){
-        return new ObjectMapper();
+    @Bean("Jackson2JsonMessageConverter")
+    Jackson2JsonMessageConverter jackson2JsonMessageConverter() {
+        return new Jackson2JsonMessageConverter();
     }
 }

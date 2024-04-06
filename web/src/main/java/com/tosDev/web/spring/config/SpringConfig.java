@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 import javax.swing.text.DateFormatter;
 import java.text.DecimalFormat;
@@ -34,5 +35,9 @@ public class SpringConfig {
     DecimalFormat decimalFormat(){
         return new DecimalFormat("#.##",
                 DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+    }
+    @Bean
+    RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 }

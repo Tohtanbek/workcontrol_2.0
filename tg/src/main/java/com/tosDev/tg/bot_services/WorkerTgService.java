@@ -107,13 +107,18 @@ public class WorkerTgService extends BrigadierWorkerCommonTgMethods {
         if (freshMsg.contact()!=null){
             sendGreeting(chatId);
         }
-        else if (freshMsg.text().equals("/start_shift")){
-            sendAddressList(update,workerId);
+        //Логика с текстовыми сообщениями
+        else if (freshMsg.text()!=null){
+            if (freshMsg.text().equals("/start_shift")){
+                sendAddressList(update,workerId);
+            }
         }
-        //Если поступили фото в чат, то проверяем, готов ли он отправить их в gDrive
-        else if (checkIfValidPhotoMsg(freshMsg,workerId,Worker.class)){
-            //Если да, то отправляем фото в rabbit message queue
-            sendPhotoToQueue(update,freshMsg,workerId,Worker.class);
+        //Если поступили фото в чат, то проверяем, готов ли работник отправить их в gDrive
+        else if (freshMsg.photo()!=null) {
+            if (checkIfValidPhotoMsg(freshMsg, workerId, Worker.class)) {
+                //Если да, то отправляем фото в rabbit message queue
+                sendPhotoToQueue(update, freshMsg, workerId, Worker.class);
+            }
         }
     }
 
@@ -167,6 +172,7 @@ public class WorkerTgService extends BrigadierWorkerCommonTgMethods {
     private void sendOfferToUploadPhoto(Update update, Integer workerId){
         createOfferToUploadPhoto(update);
         log.info("Отправили работнику {} запрос на фото смены",workerId);
+        deletePrevCallbackMessage(update);
     }
 
     private void editMenuForWorker(Update update){

@@ -97,6 +97,8 @@ public class WorkerTgQueries {
     public Shift saveFinishedShift(Integer workerId,String callbackData){
         try {
             Worker worker = workerRepository.findById(workerId).orElseThrow();
+            worker.setReadyToSendPhoto(false);
+            workerRepository.save(worker);
             Shift shift = shiftRepository
                             .findByWorkerIdAndStatus(workerId, ShiftStatusEnum.AT_WORK)
                             .orElseThrow();

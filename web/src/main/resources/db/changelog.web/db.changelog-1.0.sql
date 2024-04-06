@@ -116,7 +116,8 @@ worker_id INTEGER references worker(id) ON DELETE SET NULL ,
 job_id INTEGER references job(id) ON DELETE SET NULL ,
 brigadier_id INTEGER references brigadier(id) ON DELETE SET NULL ,
 total_hours FLOAT,
-first_photo_sent BOOLEAN
+first_photo_sent BOOLEAN,
+folder_id VARCHAR
 );
 
 

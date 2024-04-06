@@ -4,26 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="bug fix, работа со структурой проекта">
+    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Работа над сохранением фото из бота в google drive через rabbitmq">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amqp/src/main/java/com/tosDev/web/amqp/RabbitMQConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/amqp/src/main/java/com/tosDev/amqp/RabbitMQConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/amqp/src/main/java/com/tosDev/web/amqp/RabbitMQMessageProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/amqp/src/main/java/com/tosDev/amqp/RabbitMQMessageProducer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/tg/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/TgApplicationRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/TgApplicationRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/BrigadierTgService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/BrigadierTgService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amqp/src/main/java/com/tosDev/amqp/PhotoShiftIdRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/amqp/src/main/java/com/tosDev/amqp/PhotoShiftIdRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/amqp/src/main/java/com/tosDev/amqp/RabbitMQConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/amqp/src/main/java/com/tosDev/amqp/RabbitMQConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/BrigadierWorkerCommonTgMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/BrigadierWorkerCommonTgMethods.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/WorkerTgService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/WorkerTgService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/BrigadierTgQueries.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/BrigadierTgQueries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/TgQueries.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/TgQueries.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/WorkerTgQueries.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/db/WorkerTgQueries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/test/java/unit/BrigadierTgServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/test/java/unit/BrigadierTgServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tg/src/test/java/unit/BrigadierWorkerCommonTgMethodsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/test/java/unit/BrigadierWorkerCommonTgMethodsTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tg/src/test/resources/sql/test.sql" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/test/resources/sql/test.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/jpa/entity/main_tables/Brigadier.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/jpa/entity/main_tables/Brigadier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/SpringMainModuleRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/SpringMainModuleRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/config/SpringConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/config/SpringConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/jpa/entity/main_tables/Shift.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/jpa/entity/main_tables/Shift.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/jpa/entity/main_tables/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/jpa/entity/main_tables/Worker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/jpa/repository/main_tables/ShiftRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/jpa/repository/main_tables/ShiftRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/drive/DriveService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/drive/DriveService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/rabbit/TgPictureConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/rabbit/TgPictureConsumer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/db/changelog.web/db.changelog-1.0.sql" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/db/changelog.web/db.changelog-1.0.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/test/resources/sql/test.sql" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/resources/sql/test.sql" afterDir="false" />
@@ -42,8 +35,8 @@
         <option value="JavaScript File" />
         <option value="Enum" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="Record" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -85,14 +78,14 @@
     "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
     "database.data.extractors.current.id": "Comma-separated (CSV)_id",
     "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "C:/Docs/Java Projects/workcontrol_2.0/web/src/main/resources/drive",
+    "last_opened_file_path": "C:/Docs/Java Projects/workcontrol_2.0",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
     "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "editing.templates",
-    "spring.configuration.checksum": "59bfc69752712e8becdf193cbe47923a"
+    "spring.configuration.checksum": "db952fcf6ed0899e7f339ea0e5b090f8"
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
@@ -106,10 +99,10 @@
       <recent name="com.tosDev.jpa.entity" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\drive" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\tg\src\main\resources" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\client_pages" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -136,7 +129,7 @@
       <recent name="com.tosDev.tg.db" />
     </key>
   </component>
-  <component name="RunManager" selected="JAR Application.tg-1.0-SNAPSHOT-exec.jar">
+  <component name="RunManager" selected="Spring Boot.SpringMainModuleRunner">
     <configuration name="tg-1.0-SNAPSHOT-exec.jar" type="JarApplication" temporary="true">
       <option name="JAR_PATH" value="$PROJECT_DIR$/tg/target/tg-1.0-SNAPSHOT-exec.jar" />
       <method v="2" />
@@ -192,14 +185,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="docker-compose.yaml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="sourceFilePath" value="docker-compose.yaml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <configuration name="docker-compose.yaml.postgres: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
@@ -213,13 +198,26 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="docker-compose.yaml.rabbitmq: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="rabbitmq" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.SpringMainModuleRunner" />
+        <item itemvalue="Docker.docker-compose.yaml.rabbitmq: Compose Deployment" />
         <item itemvalue="JAR Application.tg-1.0-SNAPSHOT-exec.jar" />
         <item itemvalue="JAR Application.web-1.0-SNAPSHOT-exec.jar" />
         <item itemvalue="Docker.docker-compose.yaml.postgres: Compose Deployment" />
-        <item itemvalue="Spring Boot.SpringMainModuleRunner" />
-        <item itemvalue="Docker.docker-compose.yaml: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -289,7 +287,8 @@
       <workItem from="1712224494604" duration="31952000" />
       <workItem from="1712309839242" duration="5663000" />
       <workItem from="1712316071590" duration="7063000" />
-      <workItem from="1712323754202" duration="23496000" />
+      <workItem from="1712323754202" duration="23817000" />
+      <workItem from="1712398055605" duration="22678000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит workcontrol 2.0. Работа над frontend">
       <created>1708303197812</created>
@@ -508,7 +507,14 @@
       <option name="project" value="LOCAL" />
       <updated>1712339602588</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Работа над сохранением фото из бота в google drive через rabbitmq">
+      <created>1712362255872</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1712362255872</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -538,7 +544,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Работа над макетной страницей equipment сайта, начало работы с backend." />
     <MESSAGE value="Продолжение работы с макетной страницей equipment. Решил проблему с логированием кириллицы в контроллерах, добавил окно фильтрации, дополнил внешний вид." />
     <MESSAGE value="Добавлена страница супервайзеров, работа над связями таблиц в sql. Логика пересена из контроллерова в сервисы. При создании новой записи через сайт выпадающие списки используют актуальные данные в sql. Сохранение новой строки происходит засчет ajax запроса из js, что позволяет обновлять таблицу на сайте без обновления всей страницы.&#10;Для тестирования доступны все страницы через отдельный config SecurityFilterChain." />
     <MESSAGE value="Продолжение работы, добавлены новые сущности и таблицы, работа над страницей address, popup с доп. информацией на странице responsible" />
@@ -563,7 +568,8 @@
     <MESSAGE value="Доделан сайт заявок v.1.0" />
     <MESSAGE value="bug fix, liquibase" />
     <MESSAGE value="bug fix, работа со структурой проекта" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug fix, работа со структурой проекта" />
+    <MESSAGE value="Работа над сохранением фото из бота в google drive через rabbitmq" />
+    <option name="LAST_COMMIT_MESSAGE" value="Работа над сохранением фото из бота в google drive через rabbitmq" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

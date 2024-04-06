@@ -122,7 +122,13 @@ public class BrigadierWorkerCommonTgMethods extends CommonTgMethods {
     }
 
     void createTypeChooserToEndShift(Update update){
-        Long chatId = update.callbackQuery().from().id();
+        Long chatId;
+        if (update.callbackQuery()!=null) {
+            chatId = update.callbackQuery().from().id();
+        }
+        else {
+            chatId = update.message().chat().id();
+        }
         InlineKeyboardMarkup ikbMarkup = new InlineKeyboardMarkup();
         InlineKeyboardButton ikbButtonPlanned =
                 new InlineKeyboardButton("Плановое")
@@ -179,7 +185,8 @@ public class BrigadierWorkerCommonTgMethods extends CommonTgMethods {
         }
         Shift currentShift = tgQueries.findShiftByEntityId(id,clazz);
         PhotoShiftIdRecord record =
-                new PhotoShiftIdRecord(biggestSize.fileId(),currentShift.getId(),isFirstPhotoInQueue);
+                new PhotoShiftIdRecord(biggestSize.fileId(),currentShift.getId(),
+                        isFirstPhotoInQueue, bot.getToken());
         //Передаем фото в очередь rabbitmq
         rabbitMQMessageProducer.publish(record,internalExchange,internalTgRoutingKey);
     }

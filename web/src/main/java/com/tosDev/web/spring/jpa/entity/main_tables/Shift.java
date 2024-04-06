@@ -30,6 +30,7 @@ public class Shift {
     private ShiftEndTypeEnum type;
 
     private boolean firstPhotoSent;
+    private String folderId;
 
     @ManyToOne
     private Address address;

@@ -33,20 +33,20 @@ VALUES ('Бригадир Иван',88005553535,150.5,200.0,true),
        ('Тестовый бригадир тг',84792547313,150.5,200.0,true);
 
 CREATE TABLE IF NOT EXISTS job (
-    id SERIAL PRIMARY KEY ,
-    name VARCHAR UNIQUE,
-    wage_rate FLOAT,
-    income_rate FLOAT,
-    is_hourly BOOLEAN
+                                   id SERIAL PRIMARY KEY ,
+                                   name VARCHAR UNIQUE,
+                                   wage_rate FLOAT,
+                                   income_rate FLOAT,
+                                   is_hourly BOOLEAN
 );
 
 INSERT INTO job (name,wage_rate,income_rate,is_hourly) VALUES
-('клинер',50.0,100.0,true),
-('механик',25.55,55.55,true),
-('космонавт',1000.0,5000.0,false),
-('плотник',50.0,100.0,true),
-('слесарь',50.0,100.0,true),
-('водитель',50.0,100.0,false);
+                                                           ('клинер',50.0,100.0,true),
+                                                           ('механик',25.55,55.55,true),
+                                                           ('космонавт',1000.0,5000.0,false),
+                                                           ('плотник',50.0,100.0,true),
+                                                           ('слесарь',50.0,100.0,true),
+                                                           ('водитель',50.0,100.0,false);
 
 CREATE TABLE IF NOT EXISTS worker(
                                      id SERIAL PRIMARY KEY ,
@@ -97,9 +97,9 @@ INSERT INTO address (short_name, full_name, zone)
 VALUES ('888 Spruce Pl', '888 Spruce Place', 'US');
 
 CREATE TABLE IF NOT EXISTS address_job(
-    id SERIAL primary key ,
-    address_id INTEGER references address(id) ON DELETE CASCADE ,
-    job_id INTEGER references job(id) ON DELETE CASCADE
+                                          id SERIAL primary key ,
+                                          address_id INTEGER references address(id) ON DELETE CASCADE ,
+                                          job_id INTEGER references job(id) ON DELETE CASCADE
 );
 
 INSERT INTO address_job (address_id, job_id)
@@ -132,32 +132,32 @@ VALUES (1,1),(1,2),(2,1),(3,3),(3,1);
 
 
 CREATE TABLE IF NOT EXISTS equipment(
-id BIGSERIAL PRIMARY KEY ,
-naming VARCHAR ,
-type_id INTEGER references equipment_type(id) ON DELETE SET NULL ,
-amount FLOAT ,
-total FLOAT ,
-price4each FLOAT ,
-total_left FLOAT ,
-amount_left FLOAT ,
-unit VARCHAR ,
-given_amount FLOAT ,
-given_total FLOAT ,
-link VARCHAR ,
-source VARCHAR ,
-supply_date DATE
+                                        id BIGSERIAL PRIMARY KEY ,
+                                        naming VARCHAR ,
+                                        type_id INTEGER references equipment_type(id) ON DELETE SET NULL ,
+                                        amount FLOAT ,
+                                        total FLOAT ,
+                                        price4each FLOAT ,
+                                        total_left FLOAT ,
+                                        amount_left FLOAT ,
+                                        unit VARCHAR ,
+                                        given_amount FLOAT ,
+                                        given_total FLOAT ,
+                                        link VARCHAR ,
+                                        source VARCHAR ,
+                                        supply_date DATE
 );
 
 CREATE TABLE IF NOT EXISTS assignment_equip(
-    id BIGSERIAL PRIMARY KEY ,
-    naming VARCHAR,
-    worker_id INTEGER references worker(id) ON DELETE SET NULL ,
-    equipment_id BIGINT references equipment(id) ON DELETE SET NULL ,
-    amount FLOAT,
-    total Float,
-    start_date_time TIMESTAMP,
-    end_date_time TIMESTAMP,
-    status INTEGER
+                                               id BIGSERIAL PRIMARY KEY ,
+                                               naming VARCHAR,
+                                               worker_id INTEGER references worker(id) ON DELETE SET NULL ,
+                                               equipment_id BIGINT references equipment(id) ON DELETE SET NULL ,
+                                               amount FLOAT,
+                                               total Float,
+                                               start_date_time TIMESTAMP,
+                                               end_date_time TIMESTAMP,
+                                               status INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS shift(
@@ -172,7 +172,8 @@ CREATE TABLE IF NOT EXISTS shift(
                                     job_id INTEGER references job(id) ON DELETE SET NULL ,
                                     brigadier_id INTEGER references brigadier(id) ON DELETE SET NULL ,
                                     total_hours FLOAT,
-                                    first_photo_sent BOOLEAN
+                                    first_photo_sent BOOLEAN,
+                                    folder_id VARCHAR
 );
 INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job_id, brigadier_id, total_hours)
 VALUES ('Short info 1', '2024-03-06 09:00:00', '2024-03-06 17:00:00', 1, 1, 1, 1, 1, 8.0);
@@ -205,20 +206,20 @@ CREATE TABLE IF NOT EXISTS expense(
 );
 
 CREATE TABLE IF NOT EXISTS contact(
-    id SERIAL PRIMARY KEY ,
-    name VARCHAR
+                                      id SERIAL PRIMARY KEY ,
+                                      name VARCHAR
 );
 
 CREATE TABLE IF NOT EXISTS income(
-                                      id SERIAL PRIMARY KEY ,
-                                      short_info VARCHAR,
-                                      total_sum FLOAT,
-                                      type VARCHAR,
-                                      status VARCHAR,
-                                      date_time TIMESTAMP,
-                                      address_id INTEGER references address(id) ON DELETE SET NULL ,
-                                      worker_id INTEGER references worker(id) ON DELETE SET NULL,
-                                      contact_id INTEGER references contact(id) ON DELETE SET NULL
+                                     id SERIAL PRIMARY KEY ,
+                                     short_info VARCHAR,
+                                     total_sum FLOAT,
+                                     type VARCHAR,
+                                     status VARCHAR,
+                                     date_time TIMESTAMP,
+                                     address_id INTEGER references address(id) ON DELETE SET NULL ,
+                                     worker_id INTEGER references worker(id) ON DELETE SET NULL,
+                                     contact_id INTEGER references contact(id) ON DELETE SET NULL
 
 );
 
@@ -258,13 +259,13 @@ CREATE TABLE IF NOT EXISTS users(
 );
 
 CREATE TABLE IF NOT EXISTS service(
-    id SERIAL PRIMARY KEY ,
-    name VARCHAR,
-    price FLOAT,
-    category INTEGER,
-    minimal_price FLOAT,
-    promo_code VARCHAR,
-    promo_code_discount INTEGER
+                                      id SERIAL PRIMARY KEY ,
+                                      name VARCHAR,
+                                      price FLOAT,
+                                      category INTEGER,
+                                      minimal_price FLOAT,
+                                      promo_code VARCHAR,
+                                      promo_code_discount INTEGER
 );
 
 INSERT INTO service (name, price, category, minimal_price, promo_code, promo_code_discount)
@@ -288,26 +289,26 @@ VALUES ('cleaning','50.5',0,'100.4','Skidka','50'),
 
 
 CREATE TABLE IF NOT EXISTS "order"(
-    id BIGSERIAL PRIMARY KEY ,
-    total FLOAT,
-    sub_total FLOAT,
-    promo_total FLOAT,
-    order_date_time TIMESTAMP,
-    order_offset INTEGER,
-    date_time TIMESTAMP,
-    area FLOAT,
-    phone_number BIGINT,
-    client_name VARCHAR,
-    email VARCHAR,
-    address VARCHAR,
-    promo_code VARCHAR
+                                      id BIGSERIAL PRIMARY KEY ,
+                                      total FLOAT,
+                                      sub_total FLOAT,
+                                      promo_total FLOAT,
+                                      order_date_time TIMESTAMP,
+                                      order_offset INTEGER,
+                                      date_time TIMESTAMP,
+                                      area FLOAT,
+                                      phone_number BIGINT,
+                                      client_name VARCHAR,
+                                      email VARCHAR,
+                                      address VARCHAR,
+                                      promo_code VARCHAR
 );
 INSERT INTO "order"(total,sub_total,promo_total,order_date_time,order_offset,date_time,area,phone_number,client_name,email,address,promo_code)
 VALUES (500,500,0,'2024-03-11 17:00:00',0,'2024-03-11 17:00:00',20,79661919669,'tos',null,null,null);
 CREATE TABLE IF NOT EXISTS order_service(
-    id BIGSERIAL PRIMARY KEY ,
-    order_id BIGINT references "order"(id) ON DELETE CASCADE,
-    service_id INTEGER references service("id") ON DELETE SET NULL
+                                            id BIGSERIAL PRIMARY KEY ,
+                                            order_id BIGINT references "order"(id) ON DELETE CASCADE,
+                                            service_id INTEGER references service("id") ON DELETE SET NULL
 );
 insert into order_service (order_id, service_id)
 VALUES(1,1);

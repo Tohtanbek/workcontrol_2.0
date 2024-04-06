@@ -1,4 +1,8 @@
 package com.tosDev.amqp;
 
-public record PhotoShiftIdRecord(String photoId,Integer shiftId,boolean isFirstPhoto) {
-}
+import java.io.Serializable;
+
+public record PhotoShiftIdRecord(String photoId,
+                                 Integer shiftId,
+                                 boolean isFirstPhoto,
+                                 String token){}
