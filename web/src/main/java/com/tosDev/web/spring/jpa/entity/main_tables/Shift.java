@@ -29,6 +29,8 @@ public class Shift {
     @Enumerated
     private ShiftEndTypeEnum type;
 
+    private boolean firstPhotoSent;
+
     @ManyToOne
     private Address address;
 
@@ -47,6 +49,7 @@ public class Shift {
     private Expense expense;
     @OneToOne
     private Income income;
+
 
 
 }

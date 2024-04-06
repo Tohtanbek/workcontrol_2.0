@@ -1,4 +1,4 @@
-package com.tosDev.web.amqp;
+package com.tosDev.amqp;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

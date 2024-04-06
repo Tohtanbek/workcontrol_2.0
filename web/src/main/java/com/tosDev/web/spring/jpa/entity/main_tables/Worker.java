@@ -24,6 +24,8 @@ public class Worker {
 
     private Long chatId;
 
+    private boolean readyToSendPhoto;
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "worker",cascade = CascadeType.ALL,orphanRemoval = true)

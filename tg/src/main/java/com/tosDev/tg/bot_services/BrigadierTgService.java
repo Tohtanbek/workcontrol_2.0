@@ -10,6 +10,7 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SetMyCommands;
+import com.tosDev.amqp.RabbitMQMessageProducer;
 import com.tosDev.web.enums.ShiftEndTypeEnum;
 import com.tosDev.web.spring.jpa.entity.main_tables.*;
 import com.tosDev.tg.db.AdminTgQueries;
@@ -84,8 +85,9 @@ public class BrigadierTgService extends BrigadierWorkerCommonTgMethods {
                               BrigadierTgQueries brigadierTgQueries,
                               TgQueries tgQueries,
                               DateTimeFormatter tgDateTimeFormatter,
-                              AdminTgQueries adminTgQueries) {
-        super(bot, tgQueries,tgDateTimeFormatter,adminTgQueries);
+                              AdminTgQueries adminTgQueries,
+                              RabbitMQMessageProducer rabbitMQMessageProducer) {
+        super(bot, tgQueries,tgDateTimeFormatter,adminTgQueries,rabbitMQMessageProducer);
         this.tgQueries = tgQueries;
         this.bot = bot;
         this.brigadierTgQueries = brigadierTgQueries;

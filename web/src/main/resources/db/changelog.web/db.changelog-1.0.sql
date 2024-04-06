@@ -10,47 +10,49 @@ CREATE TABLE IF NOT EXISTS responsible(
 );
 
 CREATE TABLE IF NOT EXISTS equipment_type(
-                                             id SERIAL PRIMARY KEY ,
-                                             name VARCHAR UNIQUE
+id SERIAL PRIMARY KEY ,
+name VARCHAR UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS brigadier(
-                                        id SERIAL PRIMARY KEY ,
-                                        name VARCHAR UNIQUE ,
-                                        phone_number BIGINT,
-                                        wage_rate FLOAT,
-                                        income_rate FLOAT,
-                                        is_hourly BOOLEAN,
-                                        chat_id BIGINT
+id SERIAL PRIMARY KEY ,
+name VARCHAR UNIQUE ,
+phone_number BIGINT,
+wage_rate FLOAT,
+income_rate FLOAT,
+is_hourly BOOLEAN,
+chat_id BIGINT,
+ready_to_send_photo BOOLEAN
 );
 
 CREATE TABLE IF NOT EXISTS job (
-                                   id SERIAL PRIMARY KEY ,
-                                   name VARCHAR UNIQUE,
-                                   wage_rate FLOAT,
-                                   income_rate FLOAT,
-                                   is_hourly BOOLEAN
+id SERIAL PRIMARY KEY ,
+name VARCHAR UNIQUE,
+wage_rate FLOAT,
+income_rate FLOAT,
+is_hourly BOOLEAN
 );
 
 CREATE TABLE IF NOT EXISTS worker(
-                                     id SERIAL PRIMARY KEY ,
-                                     name VARCHAR UNIQUE ,
-                                     job_id INTEGER references job(id),
-                                     phone_number BIGINT,
-                                     chat_id BIGINT
+id SERIAL PRIMARY KEY ,
+name VARCHAR UNIQUE ,
+job_id INTEGER references job(id),
+phone_number BIGINT,
+chat_id BIGINT,
+ready_to_send_photo BOOLEAN
 );
 
 CREATE TABLE if NOT EXISTS address(
-                                      id SERIAL PRIMARY KEY ,
-                                      short_name VARCHAR UNIQUE ,
-                                      full_name VARCHAR UNIQUE ,
-                                      zone VARCHAR
+id SERIAL PRIMARY KEY ,
+short_name VARCHAR UNIQUE ,
+full_name VARCHAR UNIQUE ,
+zone VARCHAR
 );
 
 CREATE TABLE IF NOT EXISTS address_job(
-                                          id SERIAL primary key ,
-                                          address_id INTEGER references address(id) ON DELETE CASCADE ,
-                                          job_id INTEGER references job(id) ON DELETE CASCADE
+id SERIAL primary key ,
+address_id INTEGER references address(id) ON DELETE CASCADE ,
+job_id INTEGER references job(id) ON DELETE CASCADE
 );
 
 
@@ -91,29 +93,30 @@ supply_date DATE
 );
 
 CREATE TABLE IF NOT EXISTS assignment_equip(
-                                               id BIGSERIAL PRIMARY KEY ,
-                                               naming VARCHAR,
-                                               worker_id INTEGER references worker(id) ON DELETE SET NULL ,
-                                               equipment_id BIGINT references equipment(id) ON DELETE SET NULL ,
-                                               amount FLOAT,
-                                               total Float,
-                                               start_date_time TIMESTAMP,
-                                               end_date_time TIMESTAMP,
-                                               status INTEGER
+id BIGSERIAL PRIMARY KEY ,
+naming VARCHAR,
+worker_id INTEGER references worker(id) ON DELETE SET NULL ,
+equipment_id BIGINT references equipment(id) ON DELETE SET NULL ,
+amount FLOAT,
+total Float,
+start_date_time TIMESTAMP,
+end_date_time TIMESTAMP,
+status INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS shift(
-                                    id SERIAL PRIMARY KEY ,
-                                    short_info VARCHAR,
-                                    start_date_time TIMESTAMP,
-                                    end_date_time TIMESTAMP,
-                                    status INTEGER,
-                                    type INTEGER,
-                                    address_id INTEGER references address(id) ON DELETE SET NULL,
-                                    worker_id INTEGER references worker(id) ON DELETE SET NULL ,
-                                    job_id INTEGER references job(id) ON DELETE SET NULL ,
-                                    brigadier_id INTEGER references brigadier(id) ON DELETE SET NULL ,
-                                    total_hours FLOAT
+id SERIAL PRIMARY KEY ,
+short_info VARCHAR,
+start_date_time TIMESTAMP,
+end_date_time TIMESTAMP,
+status INTEGER,
+type INTEGER,
+address_id INTEGER references address(id) ON DELETE SET NULL,
+worker_id INTEGER references worker(id) ON DELETE SET NULL ,
+job_id INTEGER references job(id) ON DELETE SET NULL ,
+brigadier_id INTEGER references brigadier(id) ON DELETE SET NULL ,
+total_hours FLOAT,
+first_photo_sent BOOLEAN
 );
 
 

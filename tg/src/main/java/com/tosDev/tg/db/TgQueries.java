@@ -1,8 +1,11 @@
 package com.tosDev.tg.db;
 
+import com.tosDev.web.enums.ShiftStatusEnum;
 import com.tosDev.web.spring.jpa.entity.main_tables.*;
 import com.tosDev.web.spring.jpa.repository.main_tables.AddressRepository;
 import com.tosDev.web.spring.jpa.repository.main_tables.BrigadierRepository;
+import com.tosDev.web.spring.jpa.repository.main_tables.ShiftRepository;
+import com.tosDev.web.spring.jpa.repository.main_tables.WorkerRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
@@ -16,6 +19,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import static com.tosDev.web.enums.ShiftStatusEnum.*;
+
 @Component
 @RequiredArgsConstructor
 @Transactional
@@ -24,6 +29,8 @@ public class TgQueries {
     private final EntityManager entityManager;
     private final AddressRepository addressRepository;
     private final BrigadierRepository brigadierRepository;
+    private final WorkerRepository workerRepository;
+    private final ShiftRepository shiftRepository;
 
 
     /**
@@ -167,6 +174,72 @@ public class TgQueries {
         return responsibleList;
     }
 
+    public void setEntityReadyToSendPhoto(Class<?> clazz, Integer id){
+        if (clazz.equals(Worker.class)){
+            Worker worker = workerRepository.findById(id).orElseThrow();
+            worker.setReadyToSendPhoto(true);
+            workerRepository.save(worker);
+            log.info("Чат открыл флаг, чтобы принять фото работника {}",worker);
+        }
+        else if (clazz.equals(Brigadier.class)){
+            Brigadier brigadier = brigadierRepository.findById(id).orElseThrow();
+            brigadier.setReadyToSendPhoto(true);
+            brigadierRepository.save(brigadier);
+            log.info("Чат открыл флаг, чтобы принять фото бригадира {}",brigadier);
+        }
+    }
 
+    public boolean checkEntityReadyForPhoto(Class<?> clazz, Integer id){
+        boolean isEntityReadyToSendPhoto = false;
+        if (clazz.equals(Worker.class)){
+            Worker worker = workerRepository.findById(id).orElseThrow();
+            isEntityReadyToSendPhoto =  worker.isReadyToSendPhoto();
+        }
+        else if (clazz.equals(Brigadier.class)){
+            Brigadier brigadier = brigadierRepository.findById(id).orElseThrow();
+            isEntityReadyToSendPhoto =  brigadier.isReadyToSendPhoto();
+        }
+        return isEntityReadyToSendPhoto;
+    }
+
+    //Если это первое фото в очереди, то возвращаем true и ставим флаг в бд на смену.
+    public boolean setShiftFirstPhotoReceived(Class<?> clazz, Integer id){
+        boolean isItFirstPhoto = true;
+        if (clazz.equals(Worker.class)){
+            Shift shift = shiftRepository
+                    .findByWorkerIdAndStatus(id, AT_WORK).orElseThrow();
+            if (!shift.isFirstPhotoSent()) {
+                shift.setFirstPhotoSent(true);
+                shiftRepository.save(shift);
+            }
+            else {
+                isItFirstPhoto = false;
+            }
+        }
+        else if (clazz.equals(Brigadier.class)){
+            Shift shift = shiftRepository
+                    .findByBrigadierIdAndStatus(id, AT_WORK).orElseThrow();
+            if (!shift.isFirstPhotoSent()) {
+                shift.setFirstPhotoSent(true);
+                shiftRepository.save(shift);
+            }
+            else {
+                isItFirstPhoto = false;
+            }
+        }
+        return isItFirstPhoto;
+    }
+
+    public Shift findShiftByEntityId(Integer id, Class<?> clazz){
+        if (clazz.equals(Worker.class)){
+            return shiftRepository.findByWorkerIdAndStatus(id, AT_WORK).orElseThrow();
+        }
+        else if (clazz.equals(Brigadier.class)){
+            return shiftRepository.findByBrigadierIdAndStatus(id, AT_WORK).orElseThrow();
+        }
+        else {
+            throw new RuntimeException("Ошибка загрузки смены из бд при сохранении фото");
+        }
+    }
 
 }

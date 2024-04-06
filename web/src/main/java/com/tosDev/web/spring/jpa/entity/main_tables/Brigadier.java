@@ -26,6 +26,8 @@ public class Brigadier {
 
     private Long chatId;
 
+    private boolean readyToSendPhoto;
+
     @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude

@@ -83,6 +83,7 @@ public class WorkerTgQueries {
                 .worker(worker)
                 .job(worker.getJob())
                 .status(ShiftStatusEnum.AT_WORK)
+                .firstPhotoSent(false)
                 .startDateTime(LocalDateTime.now())
                 .build());
         log.info("Смена {} загружена в базу данных",shift);
@@ -97,7 +98,7 @@ public class WorkerTgQueries {
         try {
             Worker worker = workerRepository.findById(workerId).orElseThrow();
             Shift shift = shiftRepository
-                            .findByWorkerAndStatus(worker, ShiftStatusEnum.AT_WORK)
+                            .findByWorkerIdAndStatus(workerId, ShiftStatusEnum.AT_WORK)
                             .orElseThrow();
 
             String shortInfo = String.format("""

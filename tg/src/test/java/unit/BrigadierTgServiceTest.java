@@ -1,6 +1,7 @@
 package unit;
 
 import com.pengrad.telegrambot.TelegramBot;
+import com.tosDev.amqp.RabbitMQMessageProducer;
 import com.tosDev.tg.bot_services.BrigadierTgService;
 import com.tosDev.tg.db.AdminTgQueries;
 import com.tosDev.tg.db.BrigadierTgQueries;
@@ -32,6 +33,8 @@ class SendOutOtherBrigsThatShiftApprovedTest {
     private DateTimeFormatter dateTimeFormatterMock;
     @Mock
     private AdminTgQueries adminTgQueriesMock;
+    @Mock
+    RabbitMQMessageProducer rabbitMQMessageProducerMock;
 
     private Brigadier brigMock1;
     private Brigadier brigMock2;
@@ -75,7 +78,8 @@ class SendOutOtherBrigsThatShiftApprovedTest {
                 brigadierTgQueriesMock,
                 tgQueriesMock,
                 dateTimeFormatterMock,
-                adminTgQueriesMock);
+                adminTgQueriesMock,
+                rabbitMQMessageProducerMock);
         method = brigadierTgServiceMock
                 .getClass()
                 .getDeclaredMethod("sendOutOtherBrigsThatShiftApproved",Shift.class,Long.class);

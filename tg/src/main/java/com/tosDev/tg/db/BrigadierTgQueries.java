@@ -1,6 +1,7 @@
 package com.tosDev.tg.db;
 
 import com.pengrad.telegrambot.TelegramBot;
+import com.tosDev.amqp.RabbitMQMessageProducer;
 import com.tosDev.web.enums.ShiftEndTypeEnum;
 import com.tosDev.web.enums.ShiftStatusEnum;
 import com.tosDev.web.spring.jpa.entity.main_tables.*;
@@ -41,8 +42,9 @@ public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
                               ExpenseRepository expenseRepository,
                               IncomeRepository incomeRepository,
                               DateTimeFormatter tgDateTimeFormatter1,
-                              AdminTgQueries adminTgQueries) {
-        super(bot, tgQueries,tgDateTimeFormatter,adminTgQueries);
+                              AdminTgQueries adminTgQueries,
+                              RabbitMQMessageProducer rabbitMQMessageProducer) {
+        super(bot, tgQueries,tgDateTimeFormatter,adminTgQueries, rabbitMQMessageProducer);
         this.brigadierRepository = brigadierRepository;
         this.addressRepository = addressRepository;
         this.shiftRepository = shiftRepository;
@@ -107,6 +109,7 @@ public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
                 .shortInfo(shortInfo)
                 .address(chosenAddress)
                 .status(ShiftStatusEnum.AT_WORK)
+                .firstPhotoSent(false)
                 .startDateTime(LocalDateTime.now())
                 .build());
         //Инициализируем, чтобы потом найти супервайзеров для переправки
@@ -120,7 +123,7 @@ public class BrigadierTgQueries extends BrigadierWorkerCommonTgMethods {
         try {
             Brigadier brigadier = brigadierRepository.findById(brigadierId).orElseThrow();
             Shift shift = shiftRepository
-                            .findByBrigadierAndStatus(brigadier, ShiftStatusEnum.AT_WORK)
+                            .findByBrigadierIdAndStatus(brigadierId, ShiftStatusEnum.AT_WORK)
                             .orElseThrow();
 
             String shortInfo = String.format("""

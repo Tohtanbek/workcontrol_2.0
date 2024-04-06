@@ -1,4 +1,4 @@
-package com.tosDev.web.amqp;
+package com.tosDev.amqp;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

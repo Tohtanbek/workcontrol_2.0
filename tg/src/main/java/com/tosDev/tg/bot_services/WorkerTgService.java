@@ -10,6 +10,7 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SetMyCommands;
+import com.tosDev.amqp.RabbitMQMessageProducer;
 import com.tosDev.web.enums.ShiftEndTypeEnum;
 import com.tosDev.web.spring.jpa.entity.main_tables.*;
 import com.tosDev.tg.db.AdminTgQueries;
@@ -57,6 +58,9 @@ public class WorkerTgService extends BrigadierWorkerCommonTgMethods {
     private final String APPROVED_SHIFT_CALLBACK = "approved_shift_id_";
     private final String CHANGE_JOB_ON_SHIFT_CALLBACK = "change_job_of_shift_id_";
 
+    private final String SEND_PHOTO_YES = "send_photo_yes";
+    private final String SEND_PHOTO_NO = "send_photo_no";
+
 
     private final WorkerTgQueries workerTgQueries;
     private final BrigadierTgQueries brigadierTgQueries;
@@ -71,8 +75,9 @@ public class WorkerTgService extends BrigadierWorkerCommonTgMethods {
                            WorkerTgQueries workerTgQueries,
                            BrigadierTgQueries brigadierTgQueries, TgQueries tgQueries,
                            AdminTgQueries adminTgQueries,
-                           DateTimeFormatter tgDateTimeFormatter) {
-        super(bot,tgQueries,tgDateTimeFormatter,adminTgQueries);
+                           DateTimeFormatter tgDateTimeFormatter,
+                           RabbitMQMessageProducer rabbitMQMessageProducer) {
+        super(bot,tgQueries,tgDateTimeFormatter,adminTgQueries,rabbitMQMessageProducer);
         this.bot = bot;
         this.brigadierTgQueries = brigadierTgQueries;
         this.tgQueries = tgQueries;
@@ -105,6 +110,11 @@ public class WorkerTgService extends BrigadierWorkerCommonTgMethods {
         else if (freshMsg.text().equals("/start_shift")){
             sendAddressList(update,workerId);
         }
+        //Если поступили фото в чат, то проверяем, готов ли он отправить их в gDrive
+        else if (checkIfValidPhotoMsg(freshMsg,workerId,Worker.class)){
+            //Если да, то отправляем фото в rabbit message queue
+            sendPhotoToQueue(update,freshMsg,workerId,Worker.class);
+        }
     }
 
     //Если работник нажал на inline кнопку
@@ -124,6 +134,12 @@ public class WorkerTgService extends BrigadierWorkerCommonTgMethods {
             sendAddressList(update,workerId);
         }
         else if (callBackData.equals(READY_TO_END_SHIFT_CALLBACK)){
+            sendOfferToUploadPhoto(update,workerId);
+        }
+        else if (callBackData.equals(SEND_PHOTO_YES)){
+            getReadyToReceivePhoto(update,workerId);
+        }
+        else if (callBackData.equals(SEND_PHOTO_NO)){
             sendTypeChooserToEndShift(update,workerId);
         }
         else if (callBackData.equals(ShiftEndTypeEnum.PLANNED.getDescription())
@@ -138,6 +154,20 @@ public class WorkerTgService extends BrigadierWorkerCommonTgMethods {
     }
     //    Приватные методы ---------------------------------------------------------------
 
+
+
+
+    private void getReadyToReceivePhoto(Update update, Integer workerId){
+        log.info("Работник {} согласился отправить фото",workerId);
+        setReadyToReceivePhoto(update,workerId,Worker.class);
+        log.info("Подготовили чат работника {} к принятию фото",workerId);
+        deletePrevCallbackMessage(update);
+    }
+
+    private void sendOfferToUploadPhoto(Update update, Integer workerId){
+        createOfferToUploadPhoto(update);
+        log.info("Отправили работнику {} запрос на фото смены",workerId);
+    }
 
     private void editMenuForWorker(Update update){
         //Ставим личное меню работнику
@@ -225,7 +255,6 @@ public class WorkerTgService extends BrigadierWorkerCommonTgMethods {
                     freshlyUpdatedShift.getShortInfo());
         }
     }
-
 
     private void sendTypeChooserToEndShift(Update update,Integer workerId){
         createTypeChooserToEndShift(update);

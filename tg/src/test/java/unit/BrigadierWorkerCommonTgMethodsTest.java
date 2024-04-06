@@ -1,6 +1,7 @@
 package unit;
 
 import com.pengrad.telegrambot.TelegramBot;
+import com.tosDev.amqp.RabbitMQMessageProducer;
 import com.tosDev.tg.bot_services.BrigadierWorkerCommonTgMethods;
 import com.tosDev.tg.db.AdminTgQueries;
 import com.tosDev.tg.db.TgQueries;
@@ -23,7 +24,8 @@ class BrigadierWorkerCommonTgMethodsTest {
                 = new BrigadierWorkerCommonTgMethods(mock(TelegramBot.class),
                 mock(TgQueries.class),
                 mock(DateTimeFormatter.class),
-                mock(AdminTgQueries.class));
+                mock(AdminTgQueries.class),
+                mock(RabbitMQMessageProducer.class));
         Method method =
                 mock.getClass()
                         .getMethod("countTotalHours",LocalDateTime.class,LocalDateTime.class);

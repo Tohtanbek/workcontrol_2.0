@@ -24,7 +24,8 @@ CREATE TABLE IF NOT EXISTS brigadier(
                                         wage_rate FLOAT,
                                         income_rate FLOAT,
                                         is_hourly BOOLEAN,
-                                        chat_id BIGINT
+                                        chat_id BIGINT,
+                                        ready_to_send_photo BOOLEAN
 );
 INSERT INTO brigadier (name, phone_number,wage_rate,income_rate,is_hourly)
 VALUES ('Бригадир Иван',88005553535,150.5,200.0,true),
@@ -52,7 +53,8 @@ CREATE TABLE IF NOT EXISTS worker(
                                      name VARCHAR UNIQUE ,
                                      job_id INTEGER references job(id),
                                      phone_number BIGINT,
-                                     chat_id BIGINT
+                                     chat_id BIGINT,
+                                     ready_to_send_photo BOOLEAN
 );
 INSERT INTO worker (name, job_id, phone_number)
 VALUES ('Работник Елена', 1, 19568004545),('работник Александр', 2,19002332323),
@@ -169,7 +171,8 @@ CREATE TABLE IF NOT EXISTS shift(
                                     worker_id INTEGER references worker(id) ON DELETE SET NULL ,
                                     job_id INTEGER references job(id) ON DELETE SET NULL ,
                                     brigadier_id INTEGER references brigadier(id) ON DELETE SET NULL ,
-                                    total_hours FLOAT
+                                    total_hours FLOAT,
+                                    first_photo_sent BOOLEAN
 );
 INSERT INTO shift (short_info, start_date_time, end_date_time, status, address_id, worker_id, job_id, brigadier_id, total_hours)
 VALUES ('Short info 1', '2024-03-06 09:00:00', '2024-03-06 17:00:00', 1, 1, 1, 1, 1, 8.0);

@@ -16,11 +16,11 @@ public interface ShiftRepository extends JpaRepository<Shift, Integer> {
 
     boolean existsByWorkerAndStatus(Worker worker, ShiftStatusEnum status);
 
-    Optional<Shift> findByWorkerAndStatus(Worker worker,ShiftStatusEnum status);
+    Optional<Shift> findByWorkerIdAndStatus(Integer workerId,ShiftStatusEnum status);
 
     boolean existsByBrigadierAndStatus(Brigadier brigadier, ShiftStatusEnum status);
 
-    Optional<Shift> findByBrigadierAndStatus(Brigadier brigadier, ShiftStatusEnum status);
+    Optional<Shift> findByBrigadierIdAndStatus(Integer brigadierId, ShiftStatusEnum status);
 
     @Query("SELECT s FROM Shift s " +
             "WHERE s.worker.id=:workerId " +
