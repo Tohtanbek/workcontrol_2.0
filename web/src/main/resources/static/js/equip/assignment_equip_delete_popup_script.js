@@ -1,26 +1,26 @@
 jQuery(document).ready(function($){
 
     //Закрываем, если не удаляем
-    $('#equip-popup-no').on('click', function(event){
+    $('#assign-equip-popup-no').on('click', function(event){
         event.preventDefault();
         $('.cd-popup').removeClass('is-visible');
     });
 
     //Удаляем выбранные ряды, если да
-    $('#equip-popup-yes').on('click', function(event) {
+    $('#assign-equip-popup-yes').on('click', function(event) {
         event.preventDefault();
         $('.cd-popup').removeClass('is-visible');
-        equipTable.alert("Удаляем записи...", "msg");
+        assignEquipTable.alert("Удаляем записи...", "msg");
         setTimeout(function (){deleteRows()},1000)
     });
 
     function deleteRows(){
         let deletedIdsArray = [];
-        for (selectedRow of equipTable.getSelectedRows()) {
+        for (selectedRow of assignEquipTable.getSelectedRows()) {
             deletedIdsArray.push(selectedRow.getData().id)
             selectedRow.delete()
         }
-        fetch("/tables/equip/delete_equip_rows", {
+        fetch("/tables/assignment_equip/delete_assignment_equip_rows", {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -29,18 +29,18 @@ jQuery(document).ready(function($){
         })
             .then(response => {
                 if (!response.ok) {
-                    equipTable.clearAlert();
-                    equipTable.alert("Ошибка. Изменения не сохранены", "error");
+                    assignEquipTable.clearAlert();
+                    assignEquipTable.alert("Ошибка. Изменения не сохранены", "error");
                     setTimeout(function () {
-                        equipTable.clearAlert();
+                        assignEquipTable.clearAlert();
                     }, 4000)
                     throw new Error('DB error')
                 } else {
-                    equipTable.setData("/tables/equip/main_table").then(function () {
-                        equipTable.clearAlert();
-                        equipTable.alert("Записи удалены", "msg");
+                    assignEquipTable.setData("/tables/assignment_equip/main_table").then(function () {
+                        assignEquipTable.clearAlert();
+                        assignEquipTable.alert("Записи удалены", "msg");
                         setTimeout(function () {
-                            equipTable.clearAlert();
+                            assignEquipTable.clearAlert();
                         }, 2000)
                     })
                 }

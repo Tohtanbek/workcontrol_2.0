@@ -1,6 +1,6 @@
 let updatedRows = [];
 
-//Валидатор, запрещающий менять статус после того, как смена закрыта
+//Валидатор, запрещающий ставить скидку выше 100%
 let discountLessThan101 = function(cell, value){
     return value<101
 }

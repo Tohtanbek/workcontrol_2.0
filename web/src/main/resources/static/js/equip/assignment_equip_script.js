@@ -1,5 +1,6 @@
 let updatedRows = [];
 let workersList;
+let equipLeftInForm;
 
 //Валидатор, запрещающий менять статус после того, как смена закрыта
 let noChangeAfterClosed = function(cell, value){
@@ -20,6 +21,10 @@ assignEquipTable.on("tableBuilt",function () {
 document.getElementById("main-form-submit").addEventListener("click",
     async function (event){
         event.preventDefault();
+        //Проверяем, что не выбрано больше оборудования, чем есть на складе
+        if (!validateChosenEquipAmount()){
+            return;
+        }
         let form = document.getElementById("main-form");
         const formData = new FormData(form);
         try {
@@ -47,13 +52,27 @@ document.getElementById("main-form-submit").addEventListener("click",
 document.getElementById("form-exit").addEventListener("click",function (){
     closeForm()
 })
+
+function validateChosenEquipAmount(){
+    let amountEl = document.querySelector("#amount");
+    let amountVal = amountEl.value;
+    if (amountVal>equipLeftInForm){
+        amountEl.setCustomValidity("Нельзя выдать больше, чем есть на складе")
+        amountEl.reportValidity()
+        setTimeout(function() {
+            amountEl.setCustomValidity(""); // Скрыть сообщения об ошибках
+        }, 2000);
+        return false;
+    }
+    return true;
+}
 //-----------------------------------------------------------------------------------
 
 
 //Таблица выданного оборудования-------------------------------------------------
 
 
-//Сама таблица оборудования
+//Сама таблица выданного оборудования
 function createAssignEquipTable() {
     return new Tabulator("#assign-equip-table", {
         ajaxURL: "/tables/assignment_equip/main_table",
@@ -101,7 +120,7 @@ function createAssignEquipMenu(){
         {
             label: "<i class='fas fa-user'></i>Удалить выбранные ряды",
             action: function (e, row) {
-                $('#equip-delete-popup').addClass('is-visible');
+                $('#assign-equip-delete-popup').addClass('is-visible');
             }
         },
     ];
@@ -129,14 +148,6 @@ function updateFilter(){
 
 
 function closeForm(){
-    // let assignEquipForm = document.querySelector(".assign-equip-form");
-    // assignEquipForm.style.opacity = "0";
-    // setTimeout(function (){assignEquipForm.style.display = "none"},300);//Чтобы была анимация
-    // let main = document.querySelector("main");
-    // main.style.opacity = "1";
-    // main.style.filter = "blur(0px)";
-    // document.body.style.overflow = "visible"; //Вернули возможность скролить после нажатия
-    // document.getElementById("overlay").style.display = "none";
     window.location.href = "/tables/assignment_equip/main";
 }
 
@@ -277,4 +288,6 @@ function showForm(equipId,equipName,equipLeft){
     let equipLeftHintEl = document.getElementById("assignment-equip-left");
     equipNameHintEl.textContent = "Выдаем " + equipName;
     equipLeftHintEl.textContent = "Доступно для выдачи на складе: " + equipLeft;
+    //Добавляем в глобальную переменную, чтобы валидировать при отправке формы
+    equipLeftInForm = equipLeft;
 }

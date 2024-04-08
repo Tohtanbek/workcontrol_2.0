@@ -200,15 +200,23 @@ public class AssignmentEquipService {
                         addressTotalHoursMap.put(shiftAddress,shift.getTotalHours());
                     }
                 }
+
                 //Рассчитываем % каждого адреса в отработке оборудования за промежуток времени
+
                 Map<Address,Float> addressPercentMap = new HashMap<>();
-                Float totalExpense = dto.getTotal();
+                //Получаем общее кол-во часов за все смены на всех адресах
+                float totalHours = (float) addressTotalHoursMap.values()
+                        .stream()
+                        .mapToDouble(v -> v)
+                        .sum();
                 for (Map.Entry<Address,Float> entry : addressTotalHoursMap.entrySet()){
-                    Float addressShare = (entry.getValue()*100)/totalExpense;
+                    Float addressShare = (entry.getValue()*100)/totalHours;
                     addressPercentMap.put(entry.getKey(),addressShare);
                 }
+
                 //Рассчитываем сколько денег было потрачено на каждом адресе
                 Map<Address,Float> addressMoneyShareMap = new HashMap<>();
+                Float totalExpense = dto.getTotal();
                 for (Map.Entry<Address,Float> entry : addressPercentMap.entrySet()){
                     Float moneyShare = (totalExpense*entry.getValue())/100;
                     addressMoneyShareMap.put(entry.getKey(),moneyShare);
