@@ -14,9 +14,6 @@ document.getElementById("add-row-button").addEventListener("click",function (){
     document.getElementById("overlay").style.display = "block";
     //Получаем адреса в форму  (но сначала очищаем, чтобы не дублировались):
     let workerCheckBoxDiv = document.querySelector("#addresses");
-    while (workerCheckBoxDiv.firstChild) {
-        workerCheckBoxDiv.removeChild(workerCheckBoxDiv.firstChild);
-    }
     let jsonAddressMap;
     loadAddressJsonMap().then(json => {
         jsonAddressMap = json;
@@ -33,6 +30,21 @@ document.getElementById("add-row-button").addEventListener("click",function (){
             workerCheckBoxDiv.appendChild(freshVariant)
         }
     });
+    //Получаем профессии в форму
+    let jsonJobMap;
+    loadJobJsonMap().then(json => {
+        console.log(json)
+        let jobSelectEl = document.querySelector("#job");
+        jsonJobMap = json;
+        //Добавляем варианты option
+        for (let entry in jsonJobMap){
+            let freshVariant = document.createElement("option");
+            freshVariant.innerText = jsonJobMap[entry];
+            freshVariant.setAttribute("value",entry);
+            jobSelectEl.add(freshVariant);
+        }
+    })
+
 })
 //Отправляем форму и ожидаем ответа, чтобы обновить таблицу, не обновляя всю страницу
 document.getElementById("main-form-submit").addEventListener("click",
@@ -91,7 +103,12 @@ function createWorkerTable(){
             {title:"Id", field: "id"},
             {title: "Имя", field: "name", editor: true},
             {title: "Телефон",field: "phoneNumber", editor: true},
-            {title: "Специальность",field: "job",editor: true},
+            {
+                title: "Специальность", field: "job", editor: "list",
+                editorParams: {
+                    valuesURL: "/tables/job/job_names_array"
+                }
+            },
             {title: "Объекты", field: "addresses"}
         ]
     })
@@ -139,6 +156,22 @@ async function loadAddressJsonMap() {
     }
 }
 
+//Метод загрузки работников в форму
+async function loadJobJsonMap() {
+    try {
+        let response = await fetch("/tables/job/load_job_map", {
+            method: "GET"
+        });
+        if (!response.ok) {
+            throw new Error("Internal Server Error");
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error while fetching job map:", error);
+        throw error;
+    }
+}
+
 //Создает корректный json формы на отправку
 function createFormJson(){
 
@@ -151,7 +184,7 @@ function createFormJson(){
 
     return {
         name: name,
-        job: job,
+        jobId: job,
         phoneNumber: phoneNumber,
         addresses: selectedAddressesArray,
     };

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tosDev.web.spring.jpa.entity.main_tables.AddressJob;
 import com.tosDev.web.spring.jpa.entity.main_tables.Job;
 import com.tosDev.web.dto.tableDto.JobDto;
+import com.tosDev.web.spring.jpa.entity.main_tables.Worker;
 import com.tosDev.web.spring.jpa.repository.main_tables.AddressJobRepository;
 import com.tosDev.web.spring.jpa.repository.main_tables.JobRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,10 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -130,5 +129,35 @@ public class JobService {
         }
         return ResponseEntity.ok(dtoStr);
     }
+
+    public ResponseEntity<String> jobsToJsonMap(){
+        List<Job> jobs =
+                Optional.of(jobRepository.findAll()).orElse(Collections.emptyList());
+        Map<Integer,String> jsonMap = jobs
+                .stream()
+                .collect(Collectors.toMap(Job::getId,Job::getName));
+        String jsonMapStr;
+        try {
+            jsonMapStr = objectMapper.writeValueAsString(jsonMap);
+        } catch (JsonProcessingException e) {
+            log.error("Не удалось передать мапу профессий для фронтенда");
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+        log.info("Загружена мапа профессий из бд");
+        return ResponseEntity.ok(jsonMapStr);
+    }
+
+    public ResponseEntity<String[]> mapAllJobToNamesArray(){
+        try{
+            String[] namesArray = jobRepository.findAll().stream().map(Job::getName).toArray(String[]::new);
+            return ResponseEntity.ok(namesArray);
+        } catch (Exception e) {
+            log.error("Ошибка при загрузке списка названий профессий",e);
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+
 
 }

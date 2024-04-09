@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Персонал</title>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.6.0/dist/js/tabulator.min.js"></script>
-        <link rel="stylesheet" th:href="@{/sass/general.css}" href="/sass/general.css">
-        <link rel="stylesheet"  th:href="@{/css/tables-general/general.css}" href="/css/tables-general/general.css"/>
-        <link rel="stylesheet"  th:href="@{/css/tables-general/main-form.css}" href="/css/tables-general/main-form.css"/>
-        <link rel="stylesheet"  th:href="@{/css/tables-general/header.css}" href="/css/tables-general/header.css"/>
-        <link rel="stylesheet"  th:href="@{/css/tables-general/nav.css}" href="/css/tables-general/nav.css"/>
-        <link rel="stylesheet"  th:href="@{/css/tables-general/notifiication_popup.css}" href="/css/tables-general/notifiication_popup.css"/>
-        <link rel="stylesheet" th:href="@{/css/worker/styles_worker_tab.css}" href="/css/worker/styles_worker_tab.css">
-        <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
-        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300'>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <link rel="icon" href="/images/favicon.ico" th:href="@{/images/favicon.ico}">
-    </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.6.0/dist/js/tabulator.min.js"></script>
+    <link rel="stylesheet" th:href="@{/sass/general.css}" href="/sass/general.css">
+    <link rel="stylesheet"  th:href="@{/css/tables-general/general.css}" href="/css/tables-general/general.css"/>
+    <link rel="stylesheet"  th:href="@{/css/tables-general/main-form.css}" href="/css/tables-general/main-form.css"/>
+    <link rel="stylesheet"  th:href="@{/css/tables-general/header.css}" href="/css/tables-general/header.css"/>
+    <link rel="stylesheet"  th:href="@{/css/tables-general/nav.css}" href="/css/tables-general/nav.css"/>
+    <link rel="stylesheet"  th:href="@{/css/tables-general/notifiication_popup.css}" href="/css/tables-general/notifiication_popup.css"/>
+    <link rel="stylesheet" th:href="@{/css/worker/styles_worker_tab.css}" href="/css/worker/styles_worker_tab.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="/images/favicon.ico" th:href="@{/images/favicon.ico}">
 </head>
 <body>
 
@@ -74,7 +72,7 @@
                         <li><a href="/tables/order/main">Заказы</a></li>
                         <li><a href="/tables/address/main">Объекты</a></li>
                         <li><a href="/tables/expense/main">Расходы</a></li>
-                        <li><a href="/tables/income/main">Счета</a></li>
+                        <li><a href="/tables/income/main">Доходы</a></li>
                     </ul>
                 </li>
             </ul>
@@ -121,11 +119,11 @@
         <span class="highlight"></span><span class="bar"></span>
         <label>Номер телефона</label>
     </div>
-    <div class="datainput">
-        <input class="validate" id="job" name="job" required="" type="text" value=''/>
-        <span class="highlight"></span><span class="bar"></span>
-        <label>Специальность</label>
-    </div>
+    <label for="job">Выберите специальность:</label><br>
+    <select id="job">
+    </select>
+    <br>
+    <span class="bar-static"></span>
     <label for="addresses">Выберите объекты:</label><br>
     <div id="addresses">
     </div>

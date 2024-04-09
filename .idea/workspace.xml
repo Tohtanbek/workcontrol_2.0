@@ -4,12 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Работа над сохранением фото из бота в google drive через rabbitmq">
+    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Баг фикс работы с оборудованием, добавлен валидатор количества при выдаче оборудования">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/AssignmentEquipService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/AssignmentEquipService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/equip/assignment_equip_delete_popup_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/equip/assignment_equip_delete_popup_script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/equip/assignment_equip_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/equip/assignment_equip_script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/service/service_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/service/service_script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/dto/tableDto/WorkerDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/dto/tableDto/WorkerDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/controllers/table_pages/JobControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/controllers/table_pages/JobControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/JobService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/JobService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/ShiftService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/ShiftService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/WorkerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/WorkerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/worker/worker_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/worker/worker_script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/worker_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/worker_tab.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -279,7 +282,8 @@
       <workItem from="1712316071590" duration="7063000" />
       <workItem from="1712323754202" duration="23817000" />
       <workItem from="1712398055605" duration="22745000" />
-      <workItem from="1712587834906" duration="11180000" />
+      <workItem from="1712587834906" duration="11429000" />
+      <workItem from="1712676651730" duration="4954000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит workcontrol 2.0. Работа над frontend">
       <created>1708303197812</created>
@@ -512,7 +516,14 @@
       <option name="project" value="LOCAL" />
       <updated>1712437805657</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Баг фикс работы с оборудованием, добавлен валидатор количества при выдаче оборудования">
+      <created>1712611743130</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1712611743130</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -542,7 +553,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Продолжение работы с макетной страницей equipment. Решил проблему с логированием кириллицы в контроллерах, добавил окно фильтрации, дополнил внешний вид." />
     <MESSAGE value="Добавлена страница супервайзеров, работа над связями таблиц в sql. Логика пересена из контроллерова в сервисы. При создании новой записи через сайт выпадающие списки используют актуальные данные в sql. Сохранение новой строки происходит засчет ajax запроса из js, что позволяет обновлять таблицу на сайте без обновления всей страницы.&#10;Для тестирования доступны все страницы через отдельный config SecurityFilterChain." />
     <MESSAGE value="Продолжение работы, добавлены новые сущности и таблицы, работа над страницей address, popup с доп. информацией на странице responsible" />
     <MESSAGE value="Продвижение с таблицей &quot;адреса&quot;, начальный вариант таблицы супервайзеров и оборудования готов." />
@@ -567,7 +577,8 @@
     <MESSAGE value="bug fix, liquibase" />
     <MESSAGE value="bug fix, работа со структурой проекта" />
     <MESSAGE value="Работа над сохранением фото из бота в google drive через rabbitmq" />
-    <option name="LAST_COMMIT_MESSAGE" value="Работа над сохранением фото из бота в google drive через rabbitmq" />
+    <MESSAGE value="Баг фикс работы с оборудованием, добавлен валидатор количества при выдаче оборудования" />
+    <option name="LAST_COMMIT_MESSAGE" value="Баг фикс работы с оборудованием, добавлен валидатор количества при выдаче оборудования" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

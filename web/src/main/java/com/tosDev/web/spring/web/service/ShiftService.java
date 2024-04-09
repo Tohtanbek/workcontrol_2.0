@@ -48,8 +48,10 @@ public class ShiftService {
                                         .zone(dao.getAddress().getZone())
                                         .startDateTime(dao.getStartDateTime().format(basicDateTimeFormatter))
                                         .totalHours(dao.getTotalHours())
-                                        .worker(dao.getWorker().getName())
                                         .build();
+                                //Работника может не быть, если его удалили, а смена с ним осталась
+                                Optional.ofNullable(dao.getWorker())
+                                                .ifPresent(worker -> dto.setWorker(worker.getName()));
                                 Optional.ofNullable(dao.getBrigadier())
                                         .ifPresent(brig -> dto.setBrigadier(brig.getName()));
                                 Optional.ofNullable(dao.getEndDateTime())

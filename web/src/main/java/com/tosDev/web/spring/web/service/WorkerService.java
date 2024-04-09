@@ -134,11 +134,12 @@ public class WorkerService {
 
     public ResponseEntity<Void> mapAndSaveFreshWorker(WorkerDto workerDto){
         try {
+            Job job = jobRepository.findById(workerDto.getJobId()).orElseThrow();
             Worker freshWorker = workerRepository.save(Worker
                     .builder()
                     .name(workerDto.getName())
                     .phoneNumber(workerDto.getPhoneNumber())
-                    .job(checkAndReturnJob(workerDto.getJob()))
+                    .job(job)
                     .build());
 
             for (String shortName : workerDto.getAddresses()){
@@ -175,9 +176,10 @@ public class WorkerService {
             for (WorkerDto workerDto : workerDtos) {
                 Worker workerDao =
                         workerRepository.findById(workerDto.getId()).orElseThrow();
+                Job workerJob = jobRepository.findByName(workerDto.getName()).orElseThrow();
                 workerDao.setName(workerDto.getName());
                 workerDao.setPhoneNumber(workerDto.getPhoneNumber());
-                workerDao.setJob(checkAndReturnJob(workerDto.getJob()));
+                workerDao.setJob(workerJob);
 
                 workerRepository.save(workerDao);
             }
@@ -187,18 +189,5 @@ public class WorkerService {
         }
         log.info("Записи {} обновлены",workerDtos);
         return ResponseEntity.ok().build();
-    }
-
-    private Job checkAndReturnJob(String jobName){
-        Optional<Job> existingJob = jobRepository.findByName(jobName);
-        //Если такой профессии еще не использовали, то сохраняем ее в бд и возвращаем
-        if (existingJob.isEmpty()){
-            return jobRepository.save(
-                    Job.builder().name(jobName).build());
-        }
-        //Иначе берем уже существующую с таким же названием и возвращаем для новой сущности
-        else {
-            return existingJob.get();
-        }
     }
 }

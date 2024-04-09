@@ -13,6 +13,7 @@ public class WorkerDto {
     private String name;
     private long phoneNumber;
     private String job;
+    private Integer jobId;
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

@@ -57,4 +57,24 @@ public class JobControllers {
             (@RequestParam("id")Integer id){
         return jobService.mapJobsWithoutChosenForAddress(id);
     }
+
+    /**
+     * Получает запрос с фронтенда на список профессий
+     *
+     * @return возвращает json мапы с ключом - id и value - названием специальности.
+     */
+    @GetMapping("/load_job_map")
+    ResponseEntity<String> loadJobMap() {
+        return jobService.jobsToJsonMap();
+    }
+
+    /**
+     *
+     * @return Массив строк названий специальностей
+     */
+    @GetMapping("/job_names_array")
+    @ResponseBody
+    ResponseEntity<String[]> jobNamesArray(){
+        return jobService.mapAllJobToNamesArray();
+    }
 }
