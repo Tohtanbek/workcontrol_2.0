@@ -90,6 +90,7 @@ form.job-form {
     left: 50%;
     justify-content: center;
     align-items: start;
+    display: inline;
 }
 #all-jobs-table {
     margin-top: 4vh;

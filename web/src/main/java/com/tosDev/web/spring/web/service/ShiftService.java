@@ -42,7 +42,6 @@ public class ShiftService {
                                 ShiftDto dto = ShiftDto.builder()
                                         .id(dao.getId())
                                         .shortInfo(dao.getShortInfo())
-                                        .job(dao.getJob().getName())
                                         .address(dao.getAddress().getShortName())
                                         .status(dao.getStatus().getDescription())
                                         .zone(dao.getAddress().getZone())
@@ -52,10 +51,18 @@ public class ShiftService {
                                 //Работника может не быть, если его удалили, а смена с ним осталась
                                 Optional.ofNullable(dao.getWorker())
                                                 .ifPresent(worker -> dto.setWorker(worker.getName()));
+                                //Бригадира может не быть, если начало смены
                                 Optional.ofNullable(dao.getBrigadier())
                                         .ifPresent(brig -> dto.setBrigadier(brig.getName()));
+                                //Профессии может не быть, если это бригадир
+                                Optional.ofNullable(dao.getJob())
+                                                .ifPresent(job -> dto.setJob(job.getName()));
+                                //Конечного времени может не быть, если начало смены
                                 Optional.ofNullable(dao.getEndDateTime())
                                         .ifPresent(dt -> dto.setEndDateTime(dt.format(basicDateTimeFormatter)));
+                                //Ссылки на папку с фото может не быть
+                                Optional.ofNullable(dao.getFolderLink())
+                                        .ifPresent(dto::setFolderLink);
                                 return dto;
                             }).toList();
 

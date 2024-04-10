@@ -37,6 +37,10 @@ function createShiftTable() {
             {title: "Начало", field: "startDateTime",sorter:"date"},
             {title: "Конец", field: "endDateTime",sorter:"date"},
             {title: "Время работы", field: "totalHours"},
+            {title: "Фото", field: "folderLink", formatter:"link",formatterParams:{
+                    label:"Ссылка",
+                    target:"_blank"}
+            }
         ]
     });
 }

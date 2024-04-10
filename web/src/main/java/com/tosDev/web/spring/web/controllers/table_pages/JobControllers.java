@@ -1,5 +1,6 @@
 package com.tosDev.web.spring.web.controllers.table_pages;
 
+import com.tosDev.web.dto.tableDto.AddressDto;
 import com.tosDev.web.dto.tableDto.JobDto;
 import com.tosDev.web.spring.web.service.JobService;
 import lombok.RequiredArgsConstructor;
@@ -7,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -23,7 +26,7 @@ public class JobControllers {
      */
     @GetMapping("/main_table")
     ResponseEntity<String> getAllJobRows(){
-        return jobService.mapAllAddressToJson();
+        return jobService.mapAllJobToJson();
     }
 
     /**
@@ -77,4 +80,26 @@ public class JobControllers {
     ResponseEntity<String[]> jobNamesArray(){
         return jobService.mapAllJobToNamesArray();
     }
+
+    /**
+     * Принимает с фронтенда заявку на сохранение изменений в существующих записях
+     * @param jobDtos дто, в которых были совершены изменения
+     * @return http status
+     */
+    @PutMapping("/update_job_rows")
+    ResponseEntity<Void> updateJobRows(@RequestBody List<JobDto> jobDtos){
+        return jobService.saveJobUpdate(jobDtos);
+    }
+
+    /**
+     * Принимает с фронтенда запрос на удаление определенных рядов.
+     * @param ids массив id профессий на удаление
+     * @return Response entity with http status
+     */
+    @DeleteMapping("/delete_job_rows")
+    ResponseEntity<Void> deleteAddressRows(@RequestBody Integer[] ids){
+        return jobService.deleteJobRows(ids);
+    }
+
+
 }

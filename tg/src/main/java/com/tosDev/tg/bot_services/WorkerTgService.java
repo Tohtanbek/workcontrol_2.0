@@ -160,8 +160,6 @@ public class WorkerTgService extends BrigadierWorkerCommonTgMethods {
     //    Приватные методы ---------------------------------------------------------------
 
 
-
-
     private void getReadyToReceivePhoto(Update update, Integer workerId){
         log.info("Работник {} согласился отправить фото",workerId);
         setReadyToReceivePhoto(update,workerId,Worker.class);

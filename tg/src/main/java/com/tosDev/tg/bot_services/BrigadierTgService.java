@@ -73,6 +73,8 @@ public class BrigadierTgService extends BrigadierWorkerCommonTgMethods {
     private final String CHECK_WORKERS_COMMAND = "check_workers";
     private final String CHECK_ADDRESS_COMMAND = "check_address";
     private final String CHECK_WORKERS_WORKING_COMMAND = "check_workers_working";
+    private final String SEND_PHOTO_YES = "send_photo_yes";
+    private final String SEND_PHOTO_NO = "send_photo_no";
 
     private final TelegramBot bot;
 
@@ -123,6 +125,12 @@ public class BrigadierTgService extends BrigadierWorkerCommonTgMethods {
             sendAddressList(update,brigadierId);
         }
         else if (callBackData.equals(READY_TO_END_SHIFT_CALLBACK)){
+            sendOfferToUploadPhoto(update,brigadierId);
+        }
+        else if (callBackData.equals(SEND_PHOTO_YES)){
+            getReadyToReceivePhoto(update,brigadierId);
+        }
+        else if (callBackData.equals(SEND_PHOTO_NO)){
             sendTypeChooserToEndShift(update,brigadierId);
         }
         else if (callBackData.equals(ShiftEndTypeEnum.PLANNED.getDescription())
@@ -151,20 +159,41 @@ public class BrigadierTgService extends BrigadierWorkerCommonTgMethods {
         if (freshMsg.contact()!=null){
             sendGreeting(chatId);
         }
-        else if (freshMsg.text().equals("/"+START_SHIFT_COMMAND)){
-            sendAddressList(update,brigadierId);
+        //Логика сообщений с текстом
+        else if (freshMsg.text()!=null) {
+        if (freshMsg.text().equals("/" + START_SHIFT_COMMAND)) {
+                sendAddressList(update, brigadierId);
+            } else if (freshMsg.text().equals("/" + CHECK_WORKERS_COMMAND)) {
+                checkWorkers(chatId, brigadierId);
+            } else if (freshMsg.text().equals("/" + CHECK_WORKERS_WORKING_COMMAND)) {
+                checkWorkersWorking(chatId, brigadierId);
+            } else if (freshMsg.text().equals("/" + CHECK_ADDRESS_COMMAND)) {
+                checkAddressList(chatId, brigadierId);
+            }
+        }//Логика сообщений с фото
+        else if (freshMsg.photo()!=null) {
+            if (checkIfValidPhotoMsg(freshMsg, brigadierId, Brigadier.class)) {
+                //Если да, то отправляем фото в rabbit message queue
+                sendPhotoToQueue(update, freshMsg, brigadierId, Brigadier.class);
+            }
         }
-        else if (freshMsg.text().equals("/"+CHECK_WORKERS_COMMAND)){
-            checkWorkers(chatId,brigadierId);
-        }
-        else if (freshMsg.text().equals("/"+CHECK_WORKERS_WORKING_COMMAND)){
-            checkWorkersWorking(chatId,brigadierId);
-        }
-        else if (freshMsg.text().equals("/"+CHECK_ADDRESS_COMMAND)){
-            checkAddressList(chatId,brigadierId);
-        }
+
     }
     //    Приватные методы ---------------------------------------------------------------
+
+
+    private void getReadyToReceivePhoto(Update update, Integer brigadierId){
+        log.info("Бригадир {} согласился отправить фото",brigadierId);
+        setReadyToReceivePhoto(update,brigadierId,Brigadier.class);
+        log.info("Подготовили чат бригадира {} к принятию фото",brigadierId);
+        deletePrevCallbackMessage(update);
+    }
+
+    private void sendOfferToUploadPhoto(Update update, Integer brigadierId){
+        createOfferToUploadPhoto(update);
+        log.info("Отправили бригадиру {} запрос на фото смены",brigadierId);
+        deletePrevCallbackMessage(update);
+    }
 
     private void checkAddressList(Long chatId,Integer brigadierId){
         List<Address> maybeAddressList =

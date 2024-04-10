@@ -4,15 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Баг фикс работы с оборудованием, добавлен валидатор количества при выдаче оборудования">
+    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Выбор профессии из списка при создании работника.&#10;Смена профессии из списка в таблице Worker">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/dto/tableDto/WorkerDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/dto/tableDto/WorkerDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/BrigadierTgService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/BrigadierTgService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/WorkerTgService.java" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/main/java/com/tosDev/tg/bot_services/WorkerTgService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tg/src/test/resources/sql/test.sql" beforeDir="false" afterPath="$PROJECT_DIR$/tg/src/test/resources/sql/test.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/dto/tableDto/ShiftDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/dto/tableDto/ShiftDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/jpa/entity/main_tables/Shift.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/jpa/entity/main_tables/Shift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/jpa/repository/main_tables/ShiftRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/jpa/repository/main_tables/ShiftRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/controllers/table_pages/JobControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/controllers/table_pages/JobControllers.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/JobService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/JobService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/ShiftService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/ShiftService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/WorkerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/WorkerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/worker/worker_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/worker/worker_script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/worker_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/worker_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/drive/DriveService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/drive/DriveService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/rabbit/TgPictureConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/rabbit/TgPictureConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/db/changelog.web/db.changelog-1.0.sql" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/db/changelog.web/db.changelog-1.0.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/address/styles_address_job_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/address/styles_address_job_tab.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/job/show_jobs_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/job/show_jobs_script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/shift/shift_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/shift/shift_script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/address/address_job_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/address/address_job_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/test/resources/sql/test.sql" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/resources/sql/test.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,54 +66,54 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;database.data.extractors.current.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Docs/Java Projects/workcontrol_2.0&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editing.templates&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;db952fcf6ed0899e7f339ea0e5b090f8&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
+    "database.data.extractors.current.id": "Comma-separated (CSV)_id",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "C:/Docs/Java Projects/workcontrol_2.0/web/src/main/resources/static/js/address/address_job",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "editing.templates",
+    "spring.configuration.checksum": "db952fcf6ed0899e7f339ea0e5b090f8"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.tosDev.tg.bot_services" />
       <recent name="com.tosDev.jpa.entity" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\address\address_job" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\drive" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\tg\src\main\resources" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\client_pages" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\js\job" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\templates\order" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\templates\equipment" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\templates\address" />
       <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\templates" />
-      <recent name="C:\Docs\Java Projects\workcontrol_2.0\web\src\main\resources\static\css\responsible" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -122,7 +132,7 @@
       <recent name="com.tosDev.tg.db" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.SpringMainModuleRunner">
+  <component name="RunManager" selected="Spring Boot.TgApplicationRunner">
     <configuration name="tg-1.0-SNAPSHOT-exec.jar" type="JarApplication" temporary="true">
       <option name="JAR_PATH" value="$PROJECT_DIR$/tg/target/tg-1.0-SNAPSHOT-exec.jar" />
       <method v="2" />
@@ -283,7 +293,9 @@
       <workItem from="1712323754202" duration="23817000" />
       <workItem from="1712398055605" duration="22745000" />
       <workItem from="1712587834906" duration="11429000" />
-      <workItem from="1712676651730" duration="4954000" />
+      <workItem from="1712676651730" duration="7013000" />
+      <workItem from="1712703216606" duration="206000" />
+      <workItem from="1712742076152" duration="12295000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит workcontrol 2.0. Работа над frontend">
       <created>1708303197812</created>
@@ -523,7 +535,14 @@
       <option name="project" value="LOCAL" />
       <updated>1712611743130</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Выбор профессии из списка при создании работника.&#10;Смена профессии из списка в таблице Worker">
+      <created>1712682498449</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1712682498449</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -553,7 +572,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Добавлена страница супервайзеров, работа над связями таблиц в sql. Логика пересена из контроллерова в сервисы. При создании новой записи через сайт выпадающие списки используют актуальные данные в sql. Сохранение новой строки происходит засчет ajax запроса из js, что позволяет обновлять таблицу на сайте без обновления всей страницы.&#10;Для тестирования доступны все страницы через отдельный config SecurityFilterChain." />
     <MESSAGE value="Продолжение работы, добавлены новые сущности и таблицы, работа над страницей address, popup с доп. информацией на странице responsible" />
     <MESSAGE value="Продвижение с таблицей &quot;адреса&quot;, начальный вариант таблицы супервайзеров и оборудования готов." />
     <MESSAGE value="Доделал таблицу &quot;адреса&quot;, сделана таблица &quot;персонал&quot;. В адресах реализовано меню управления персоналом и бригадирами с помощью перетаскивания в tabulator." />
@@ -578,7 +596,8 @@
     <MESSAGE value="bug fix, работа со структурой проекта" />
     <MESSAGE value="Работа над сохранением фото из бота в google drive через rabbitmq" />
     <MESSAGE value="Баг фикс работы с оборудованием, добавлен валидатор количества при выдаче оборудования" />
-    <option name="LAST_COMMIT_MESSAGE" value="Баг фикс работы с оборудованием, добавлен валидатор количества при выдаче оборудования" />
+    <MESSAGE value="Выбор профессии из списка при создании работника.&#10;Смена профессии из списка в таблице Worker" />
+    <option name="LAST_COMMIT_MESSAGE" value="Выбор профессии из списка при создании работника.&#10;Смена профессии из списка в таблице Worker" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

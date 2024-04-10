@@ -2,6 +2,8 @@ package com.tosDev.web.spring.web.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tosDev.web.dto.tableDto.AddressDto;
+import com.tosDev.web.spring.jpa.entity.main_tables.Address;
 import com.tosDev.web.spring.jpa.entity.main_tables.AddressJob;
 import com.tosDev.web.spring.jpa.entity.main_tables.Job;
 import com.tosDev.web.dto.tableDto.JobDto;
@@ -26,7 +28,7 @@ public class JobService {
     private final AddressJobRepository addressJobRepository;
     private final ObjectMapper objectMapper;
 
-    public ResponseEntity<String> mapAllAddressToJson() {
+    public ResponseEntity<String> mapAllJobToJson() {
         List<Job> jobList = Optional.of(jobRepository.findAll())
                 .orElse(Collections.emptyList());
         List<JobDto> dtoList = new ArrayList<>();
@@ -49,7 +51,7 @@ public class JobService {
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
-        log.info("Загружена таблица работников");
+        log.info("Загружена таблица профессий");
         return ResponseEntity.ok(allJobsStr);
     }
 
@@ -156,6 +158,39 @@ public class JobService {
             log.error("Ошибка при загрузке списка названий профессий",e);
             return ResponseEntity.internalServerError().build();
         }
+    }
+
+    public ResponseEntity<Void> saveJobUpdate(List<JobDto> jobDtos){
+        try {
+            for (JobDto jobDto : jobDtos) {
+                Job jobDao = jobRepository.findById(jobDto.getId()).orElseThrow();
+                jobDao.setName(jobDto.getName());
+                jobDao.setWageRate(jobDto.getWageRate());
+                jobDao.setIncomeRate(jobDto.getIncomeRate());
+                jobDao.setHourly(jobDto.isHourly());
+
+                jobRepository.save(jobDao);
+            }
+        } catch (NoSuchElementException e) {
+            log.error("При изменении выбранного адреса по одному из id не было найдено записи в бд");
+            e.printStackTrace();
+        }
+        log.info("Записи {} обновлены",jobDtos);
+        return ResponseEntity.ok().build();
+    }
+
+
+    public ResponseEntity<Void> deleteJobRows(Integer[] ids){
+        try {
+            Arrays.stream(ids)
+                    .map(jobRepository::findById)
+                    .forEach(optional -> jobRepository.delete(optional.orElseThrow()));
+        } catch (NoSuchElementException e) {
+            log.error("При удалении выбранной профессии по одному из id не было найдено записи в бд");
+            e.printStackTrace();
+        }
+        log.info("Записи удалены по айди: {}", Arrays.toString(ids));
+        return ResponseEntity.ok().build();
     }
 
 

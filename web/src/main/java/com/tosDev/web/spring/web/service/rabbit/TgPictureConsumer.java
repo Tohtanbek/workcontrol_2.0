@@ -9,23 +9,22 @@ import com.tosDev.web.spring.web.service.drive.DriveService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.security.core.parameters.P;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.time.ZoneOffset;
-import java.util.Map;
 import java.util.Optional;
 
-@Service
+@Component
 @Slf4j
 @RequiredArgsConstructor
 public class TgPictureConsumer {
     private final DriveService driveService;
     private final ShiftRepository shiftRepository;
 
+    private final TgPictureService tgPictureService;
     private final RestTemplate restTemplate;
     private final String TG_URI_PATH_REQUEST = "https://api.telegram.org/bot";
     private final String TG_URI_DOWNLOAD = "https://api.telegram.org/file/bot";
@@ -34,7 +33,6 @@ public class TgPictureConsumer {
      * Принимаем здесь мапу фото и смены на сохранение в google drive
      * @param fileIdShiftIdRecord record с id фото в чате и id смены
      */
-    @Transactional
     @RabbitListener(queues = "${rabbitmq.queue.tg}",messageConverter = "Jackson2JsonMessageConverter")
     public void consumer(PhotoShiftIdRecord fileIdShiftIdRecord){
         log.info("Получили {} из rabbitMQ очереди",fileIdShiftIdRecord);
@@ -42,8 +40,19 @@ public class TgPictureConsumer {
         Shift shift = shiftRepository.findById(fileIdShiftIdRecord.shiftId()).orElseThrow();
         //Для первой фото создаем папку сначала по id shift и началу shift
         if (fileIdShiftIdRecord.isFirstPhoto()){
-            String folderName = shift.getStartDateTime().toString()+" "+shift.getWorker().getName();
+            StringBuilder sb = new StringBuilder();
+            String shiftStartDTStr = shift.getStartDateTime().toString();
+            //Для бригадира в названии папки бригадир, для работника - работник
+            String folderName = shift.getWorker()!=null?
+                    sb.append(shiftStartDTStr).append(" ").append(shift.getWorker().getName()).toString()
+                    :
+                    sb.append(shiftStartDTStr).append(" ").append(shift.getBrigadier().getName()).toString();
             File folder = driveService.createFolder(folderName).orElseThrow();
+
+            //Загружаем ссылку на папку в смену
+            tgPictureService.saveFolderLink(folder.getWebViewLink(),shift.getId());
+            //id папки сохраняем в shiftDao для сохранения последующих фото
+            tgPictureService.saveFolderId(folder.getId(),shift.getId());
 
             //Получаем здесь byte array фотографии, загрузив из тг сервера по id фотки
             try {
@@ -57,8 +66,6 @@ public class TgPictureConsumer {
             } catch (Exception e) {
                 log.error("Не удалось скачать фото из тг для загрузки в gdrive");
             }
-            //id папки сохраняем в shiftDao для сохранения последующих фото
-            shiftRepository.updateFolderName(shift.getId(),folder.getId());
         }
         //Иначе смотрим в shift id папки и сохраняем в нее очередную фотку
         else {
@@ -77,6 +84,7 @@ public class TgPictureConsumer {
                 } catch (Exception e) {
                     log.error("Не удалось скачать фото из тг для загрузки в gdrive",e);
                 }
+                log.info("Загрузили фото {}",fileIdShiftIdRecord);
             }
             else {
                 throw new RuntimeException("Для загрузки фото не оказалось папки");

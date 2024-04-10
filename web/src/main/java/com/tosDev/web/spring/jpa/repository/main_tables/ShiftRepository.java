@@ -35,6 +35,13 @@ public interface ShiftRepository extends JpaRepository<Shift, Integer> {
     @Query("UPDATE Shift s " +
             "SET s.folderId=:folderId " +
             "WHERE s.id=:shiftId")
-    void updateFolderName(@Param("shiftId") Integer shiftId,
+    void updateFolderId(@Param("shiftId") Integer shiftId,
                           @Param("folderId") String folderId);
+
+    @Modifying
+    @Query("UPDATE Shift s " +
+            "SET s.folderLink=:folderLink " +
+            "WHERE s.id=:shiftId")
+    void updateFolderLink(@Param("shiftId") Integer shiftId,
+                          @Param("folderLink") String folderLink);
 }

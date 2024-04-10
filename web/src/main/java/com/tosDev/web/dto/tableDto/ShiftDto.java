@@ -21,4 +21,5 @@ public class ShiftDto {
     private String brigadier;
     private Float totalHours;
     private String zone;
+    private String folderLink;
 }

@@ -41,7 +41,7 @@ public class DriveService{
         // Вызов метода для создания папки
         try {
             File folder = drive.files().create(folderMetadata)
-                    .setFields("id")
+                    .setFields("id, webViewLink")
                     .execute();
             log.info("Папка создана. ID: {} ", folder.getId());
             return Optional.of(folder);

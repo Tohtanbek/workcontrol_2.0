@@ -31,6 +31,7 @@ public class Shift {
 
     private boolean firstPhotoSent;
     private String folderId;
+    private String folderLink;
 
     @ManyToOne
     private Address address;
