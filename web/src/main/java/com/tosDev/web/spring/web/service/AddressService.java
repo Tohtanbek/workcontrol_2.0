@@ -320,4 +320,27 @@ public class AddressService {
         log.info("Успешно сменили профессии на адресе с id {}",id);
         return ResponseEntity.ok().build();
     }
+
+    public ResponseEntity<Void> saveUniqueFreshAddresses(List<AddressDto> addressDtoList) {
+        try {
+            List<Address> allAddressDao = addressRepository.findAll();
+            List<Address> uniqueDaoList = addressDtoList.stream()
+                    .filter(dto ->
+                            allAddressDao.stream()
+                                    .noneMatch(dao -> dao.getShortName().equals(dto.getShortName())))
+                    .map(dto -> Address.builder()
+                            .shortName(dto.getShortName())
+                            .fullName(dto.getFullName())
+                            .zone(dto.getZone())
+                            .build())
+                    .toList();
+
+            List<Address> savedAddressList = addressRepository.saveAll(uniqueDaoList);
+            log.info("Сохранили {} новых адресов из excel",savedAddressList.size());
+        } catch (Exception e) {
+            log.error("Ошибка при сохранении уникальных новых адресов из excel",e);
+            return ResponseEntity.internalServerError().build();
+        }
+        return ResponseEntity.ok().build();
+    }
 }

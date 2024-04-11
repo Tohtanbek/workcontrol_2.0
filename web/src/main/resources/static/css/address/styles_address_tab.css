@@ -12,6 +12,25 @@
     width: 100%;
 }
 
+#excel-address-box {
+    height: 70vh;
+    transition: 0.5s ease;
+    transform: translate(-50%, -50%);
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    width: 50%;
+    top: 50%;
+    left: 50%;
+    justify-content: center;
+    align-items: start;
+    display: inline;
+}
+#excel-address-table {
+    margin-top: 4vh;
+    width: 90%;
+}
+
 /*Таблицы редактирования бригадиров и работников*/
 #drag-brigadiers-box, #drag-workers-box{
     transform: translate(-50%, -50%);
@@ -71,17 +90,19 @@
     align-items: center;
     transition: 0.5s ease
 }
-#drag-exit, #drag-exit-workers{
+#drag-exit, #drag-exit-workers,#excel-address-exit{
     color: red;
     position: absolute;
-    top: 20%;
+    top: 0%;
     right: 0%;
     font-size: x-large;
 }
 #drag-exit:hover,
 #drag-exit:active,
 #drag-exit-workers:hover,
-#drag-exit-workers:active{
+#drag-exit-workers:active,
+#excel-address-exit:hover,
+#excel-address-exit:active{
     transform: scale(1.1);
     color: darkred;
     cursor: pointer;

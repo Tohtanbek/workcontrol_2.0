@@ -45,7 +45,7 @@ ready_to_send_photo BOOLEAN
 CREATE TABLE if NOT EXISTS address(
 id SERIAL PRIMARY KEY ,
 short_name VARCHAR UNIQUE ,
-full_name VARCHAR UNIQUE ,
+full_name VARCHAR,
 zone VARCHAR
 );
 

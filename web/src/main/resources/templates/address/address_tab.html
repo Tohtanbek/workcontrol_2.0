@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Объекты</title>
     <link rel="stylesheet" th:href="@{/sass/general.css}" href="/sass/general.css">
-    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.6.0/dist/js/tabulator.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@6.2.0/dist/js/tabulator.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/tables-general/general.css}" href="/css/tables-general/general.css"/>
     <link rel="stylesheet" th:href="@{/css/tables-general/main-form.css}" href="/css/tables-general/main-form.css"/>
     <link rel="stylesheet" th:href="@{/css/tables-general/header.css}" href="/css/tables-general/header.css"/>
@@ -106,6 +106,7 @@
         <div id="table-buttons">
             <button id="add-row-button">Добавить поле</button>
             <button id="main-table-save-update">Сохранить изменения в таблице</button>
+            <button id="import-local-file">Загрузить из excel</button>
         </div>
         <!-- Таблица основная -->
         <div id="address-table"></div>
@@ -212,14 +213,22 @@
     <button class="button-save-on-address" id="save-workers-on-address">Сохранить изменения</button>
     <div id="addressWorkersTable"></div>
 </div>
+<div id="excel-address-box">
+    <i id="excel-address-exit" class="fa fa-times" aria-hidden="true"></i>
+    <button id="choose-local-file">Выбрать файл</button>
+    <button id="save-excel-address-update">Сохранить изменения</button>
+    <div id="excel-address-table"></div>
+</div>
 <div id="lower-drag-menu"></div>
 <!-- partial -->
 
+<script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script th:src="@{/js/address/address_drag_brigadiers_and_workers.js}" src="/js/address/address_drag_brigadiers_and_workers.js"></script>
 <script th:src="@{/js/main_header.js}" src="/js/main_header.js"></script>
 <script th:src="@{/js/address/address_script.js}" src="/js/address/address_script.js"></script>
 <script th:src="@{/js/form_popup_common.js}" src="/js/form_popup_common.js"></script>
 <script th:src="@{/js/address/address_delete_popup_script.js}" src="/js/address/address_delete_popup_script.js"></script>
+
 </body>
 </html>

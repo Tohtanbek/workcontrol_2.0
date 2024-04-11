@@ -1,7 +1,7 @@
 let updatedRows = [];
-
 let addressMenu = createAddressMenu();
 let addressTable = createAddressTable();
+let excelAddressTable = createExcelAddressTable();
 //Переход к нопке добавить ряд-----------------------------------------------------
 //кнопка "добавить ряд" (выводит форму для нового ряда)
 document.getElementById("add-row-button").addEventListener("click",async function (){
@@ -77,7 +77,7 @@ document.getElementById("main-form-submit").addEventListener("click",
                 throw new Error('Ошибка при отправке формы');
             }
             else {
-                console.log("Форма на создание оборудования создана успешно");
+                console.log("Форма на создание адреса создана успешно");
                 addressTable.setData("/tables/address/main_table");
                 $('#form-popup').addClass('is-visible');
             }
@@ -274,3 +274,115 @@ function createFormJson(){
         zone: zone
     };
 }
+
+//______________________________________________________________
+//Логика загрузки данных из excel
+
+//Сначала нужна новая таблица под загрузку данных
+function createExcelAddressTable() {
+    return new Tabulator("#excel-address-table", {
+        maxHeight: "80%",
+        layout: "fitData",
+        pagination: "local",
+        paginationSize: 10,
+        paginationSizeSelector: [10, 20, 30, 50, 100, true],
+        paginationCounter: "rows",
+        columns: [
+            {title: "Id", field: "id", sorter: "number"},
+            {title: "Название", field: "shortName", editor: true},
+            {title: "Полный адрес", field: "fullName", editor: true},
+            {title: "Зона", field: "zone",editor: true},
+        ]
+    });
+}
+
+//Кнопка вызывает отдельную таблицу для загрузки новых рядов из excel
+document.querySelector("#import-local-file").addEventListener("click", function () {
+    showExcelBox();
+})
+
+//Слушатель нажатия на импорт файла
+document.querySelector("#choose-local-file").addEventListener("click",function () {
+    excelAddressTable.import("xlsx", ".xlsx", "buffer")
+        .then(() => {
+            excelAddressTable.alert("Успешно. Не забудьте нажать на кнопку \"Сохранить изменения\"");
+            setTimeout(function () {
+                excelAddressTable.clearAlert();
+            }, 4000)
+        })
+        .catch(() => {
+            excelAddressTable.alert("Ошибка. Не удалось загрузить", "error");
+            setTimeout(function () {
+                excelAddressTable.clearAlert();
+            }, 3000)
+            throw new Error("Local file import error");
+        })
+})
+
+//Слушатель начала работы с excel импортом
+function showExcelBox(){
+    let tableEl = document.querySelector("#excel-address-table");
+    let tableDiv = document.querySelector("#excel-address-box")
+    tableDiv.style.opacity = "1";
+    tableDiv.style.visibility = "visible";
+    tableEl.style.opacity = "1";
+    tableEl.style.visibility = "visible";
+    let main = document.querySelector("main");
+    main.style.opacity = "0.5";
+    main.style.filter = "blur(5px)";
+    document.body.style.overflow = "visible"; //Убрали возможность скролить после нажатия
+    document.getElementById("overlay").style.display = "block";
+}
+
+document.querySelector("#excel-address-exit").addEventListener("click",function () {
+    closeExcelAddress();
+})
+function closeExcelAddress(){
+    let excelTable = document.querySelector("#excel-address-table");
+
+    excelTable.style.visibility = "hidden";
+    excelTable.style.opacity = "0";
+
+    let tableDiv = document.querySelector("#excel-address-box");
+    tableDiv.style.opacity = "0";
+    tableDiv.style.visibility = "hidden";
+    let main = document.querySelector("main");
+    main.style.opacity = "1";
+    main.style.filter = "blur(0px)";
+    document.body.style.overflow = "visible"; //Убрали возможность скролить после нажатия
+    document.getElementById("overlay").style.display = "none";
+}
+
+//Слушатель кнопки сохранения новых адресов из excel
+document.querySelector("#save-excel-address-update").addEventListener("click",function () {
+sendExcelAddressesOnServer();
+})
+
+//Отправляем на сервер новые адреса из excel
+function sendExcelAddressesOnServer(){
+    fetch("/tables/address/save_fresh_address_list",{
+        method: "POST",
+        headers: {
+            "Content-Type":"Application/json"
+        },
+        body: JSON.stringify(excelAddressTable.getData())
+    }).then(response => {
+        if (!response.ok){
+            excelAddressTable.alert("Не удалось сохранить","error")
+            setTimeout(function () {
+                excelAddressTable.clearAlert();
+            }, 3000)
+            throw new Error("Excel address save error");
+        }
+        else {
+            excelAddressTable.alert("Новые адреса сохранены");
+            setTimeout(function () {
+                excelAddressTable.clearAlert();
+            }, 3000)
+            excelAddressTable.clearData();
+            addressTable = createAddressTable();
+        }
+    })
+}
+
+

@@ -4,6 +4,7 @@ import com.tosDev.web.dto.tableDto.AddressDto;
 import com.tosDev.web.dto.tableDto.BrigadierSmallDto;
 import com.tosDev.web.dto.tableDto.JobDto;
 import com.tosDev.web.dto.tableDto.WorkerDto;
+import com.tosDev.web.spring.jpa.entity.main_tables.Address;
 import com.tosDev.web.spring.web.service.AddressService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -128,5 +129,15 @@ public class AddressControllers {
             @RequestParam("id") Integer id,
             @RequestBody List<JobDto> jobDtos) {
         return addressService.updateJobsOnAddress(id,jobDtos);
+    }
+
+    /**
+     * Сохраняет поступивший список адресов, но только те, у которых новые названия
+     * @param addressDtoList список адресов на сохранение
+     * @return http status
+     */
+    @PostMapping("/save_fresh_address_list")
+    ResponseEntity<Void> saveFreshAddressList(@RequestBody List<AddressDto> addressDtoList){
+        return addressService.saveUniqueFreshAddresses(addressDtoList);
     }
 }
