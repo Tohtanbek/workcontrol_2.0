@@ -27,7 +27,7 @@ public class AddressControllers {
     @GetMapping("/main")
     String showAddressPage(){
         log.info("Загружена страница адресов");
-        return "/address/address_tab";
+        return "address/address_tab";
     }
 
     /**
@@ -36,7 +36,7 @@ public class AddressControllers {
     @GetMapping("/address_job_main")
     String showAddressJobPage(){
         log.info("Загружена страница профессий адресов");
-        return "/address/address_job_tab";
+        return "address/address_job_tab";
     }
 
     /**

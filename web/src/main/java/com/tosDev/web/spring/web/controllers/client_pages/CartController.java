@@ -41,7 +41,7 @@ public class CartController {
                         serviceEntityService
                                 .loadDtoForClientCart(extraService.getServiceIds(), mainServiceDto);
                 model.addAttribute("cartDto",cartDto);
-                return "/client_pages/cart";
+                return "client_pages/cart";
             } catch (Exception e) {
                 log.error("Ошибка при попытке загрузить корзину пользователю {}",
                         clientDto,e);
@@ -104,6 +104,6 @@ public class CartController {
     String showFinalPage(SessionStatus sessionStatus){
         //Когда пользователь успешно сделал заказ, очищаем session атрибуты
         sessionStatus.setComplete();
-        return "/client_pages/final_page";
+        return "client_pages/final_page";
     }
 }

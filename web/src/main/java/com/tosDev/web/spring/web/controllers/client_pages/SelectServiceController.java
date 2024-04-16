@@ -37,7 +37,7 @@ public class SelectServiceController {
                     "Ошибка при загрузке услуг");
         }
         model.addAttribute("serviceList",dtoList);
-        return "/client_pages/select_service";
+        return "client_pages/select_service";
     }
     @PostMapping("/select_service")
     ResponseEntity<Void> submitMainService(@RequestBody ChosenMainServiceDto chosenService,
@@ -63,7 +63,7 @@ public class SelectServiceController {
                     "Ошибка при загрузке дополнительных услуг");
         }
         model.addAttribute("extraServiceList",dtoList);
-        return "/client_pages/select_extra_service";
+        return "client_pages/select_extra_service";
     }
 
     @PostMapping("/select_extra_service")

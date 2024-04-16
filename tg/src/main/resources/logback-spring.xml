@@ -20,7 +20,7 @@
             <appender-ref ref="FILE" />
         </root>
         <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-            <file>/root/botdir/tg_module_logs.log</file> <!-- Укажите путь и имя файла для логов -->
+            <file>/home/torstein/workcontrol/logs/tg_module_logs.log</file> <!-- Укажите путь и имя файла для логов -->
             <encoder>
                 <pattern>%date [%thread] %-5level %logger{35} - %msg%n</pattern>
             </encoder>

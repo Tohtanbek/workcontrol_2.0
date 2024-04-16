@@ -17,7 +17,7 @@ public class AuthenticationController {
 
     @GetMapping("/authentication")
     String getAuthenticationPage(){
-        return "/client_pages/authentication";
+        return "client_pages/authentication";
     }
 
     @PostMapping("/authentication")
