@@ -13,21 +13,16 @@ document.getElementById("add-row-button").addEventListener("click",function (){
     document.body.style.overflow = "hidden"; //Убрали возможность скролить после нажатия
     document.getElementById("overlay").style.display = "block";
     //Получаем адреса в форму  (но сначала очищаем, чтобы не дублировались):
-    let workerCheckBoxDiv = document.querySelector("#addresses");
     let jsonAddressMap;
     loadAddressJsonMap().then(json => {
         jsonAddressMap = json;
         //Добавляем варианты чекбокса бригадиров (сначала загружаем через api)
+        let addressSelectEl = document.querySelector("#addresses");
         for (let entry in jsonAddressMap){
-            let freshVariant = document.createElement("INPUT");
-            freshVariant.setAttribute("type","checkbox");
-            freshVariant.setAttribute("name",jsonAddressMap[entry]);
-            freshVariant.setAttribute("value",entry);
-            let label = document.createElement("span");
-            label.textContent = jsonAddressMap[entry];
-
-            workerCheckBoxDiv.appendChild(label);
-            workerCheckBoxDiv.appendChild(freshVariant)
+            let freshOption = document.createElement("option");
+            freshOption.value = entry;
+            freshOption.innerText = jsonAddressMap[entry]
+            addressSelectEl.add(freshOption);
         }
     });
     //Получаем профессии в форму
@@ -178,9 +173,9 @@ function createFormJson(){
     let name = document.querySelector("#name").value;
     let job = document.querySelector("#job").value;
     let phoneNumber = document.querySelector("#phoneNumber").value;
-    let selectedAddresses = document.querySelectorAll('#addresses input:checked');
+    let selectedAddresses = document.querySelector('#addresses').selectedOptions;
 
-    let selectedAddressesArray = Array.from(selectedAddresses).map(input => input.name);
+    let selectedAddressesArray = Array.from(selectedAddresses).map(input => input.innerText);
 
     return {
         name: name,

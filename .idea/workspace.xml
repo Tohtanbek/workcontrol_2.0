@@ -4,17 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Бригадир теперь тоже сохраняет фото. Ссылка на папку прикрепляется к shift. &#10;Меню для таблицы профессий.">
+    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="Возможность загрузить адреса через excel.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/controllers/table_pages/AddressControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/controllers/table_pages/AddressControllers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/AddressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/web/service/AddressService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/db/changelog.web/db.changelog-1.0.sql" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/db/changelog.web/db.changelog-1.0.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/address/styles_address_tab.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/address/styles_address_tab.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/address/address_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/address/address_script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/address/address_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/address/address_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/order/service_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/order/service_tab.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/test/java/integration/RealWebServiceServerIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/java/integration/RealWebServiceServerIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/test/resources/sql/test.sql" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/resources/sql/test.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/styles_login.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/styles_login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/js/worker/worker_script.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/js/worker/worker_script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/worker_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/worker_tab.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +121,7 @@
       <recent name="com.tosDev.tg.db" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.RealWebServiceServerIT.test">
+  <component name="RunManager" selected="Spring Boot.SpringMainModuleRunner">
     <configuration name="RealWebServiceServerIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="web" />
       <extension name="coverage">
@@ -223,9 +219,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.SpringMainModuleRunner" />
         <item itemvalue="JUnit.RealWebServiceServerIT.test" />
         <item itemvalue="JUnit.RealWebServiceServerIT" />
-        <item itemvalue="Spring Boot.SpringMainModuleRunner" />
         <item itemvalue="Docker.docker-compose.yaml.rabbitmq: Compose Deployment" />
         <item itemvalue="JAR Application.tg-1.0-SNAPSHOT-exec.jar" />
       </list>
@@ -303,7 +299,8 @@
       <workItem from="1712676651730" duration="7013000" />
       <workItem from="1712703216606" duration="206000" />
       <workItem from="1712742076152" duration="12617000" />
-      <workItem from="1712831363160" duration="19275000" />
+      <workItem from="1712831363160" duration="21281000" />
+      <workItem from="1713255458722" duration="2938000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит workcontrol 2.0. Работа над frontend">
       <created>1708303197812</created>
@@ -557,7 +554,14 @@
       <option name="project" value="LOCAL" />
       <updated>1712762666290</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Возможность загрузить адреса через excel.">
+      <created>1712865624157</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1712865624157</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -587,7 +591,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Продвижение с таблицей &quot;адреса&quot;, начальный вариант таблицы супервайзеров и оборудования готов." />
     <MESSAGE value="Доделал таблицу &quot;адреса&quot;, сделана таблица &quot;персонал&quot;. В адресах реализовано меню управления персоналом и бригадирами с помощью перетаскивания в tabulator." />
     <MESSAGE value="Доделал таблицу работники и бригадиры. Начал работу над таблицей &quot;рабочее время&quot;. Доработал в таблицах базовый функционал." />
     <MESSAGE value="Доделал таблицу &quot;рабочее время&quot;, сделал таблицу расходы." />
@@ -612,7 +615,8 @@
     <MESSAGE value="Баг фикс работы с оборудованием, добавлен валидатор количества при выдаче оборудования" />
     <MESSAGE value="Выбор профессии из списка при создании работника.&#10;Смена профессии из списка в таблице Worker" />
     <MESSAGE value="Бригадир теперь тоже сохраняет фото. Ссылка на папку прикрепляется к shift. &#10;Меню для таблицы профессий." />
-    <option name="LAST_COMMIT_MESSAGE" value="Бригадир теперь тоже сохраняет фото. Ссылка на папку прикрепляется к shift. &#10;Меню для таблицы профессий." />
+    <MESSAGE value="Возможность загрузить адреса через excel." />
+    <option name="LAST_COMMIT_MESSAGE" value="Возможность загрузить адреса через excel." />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
