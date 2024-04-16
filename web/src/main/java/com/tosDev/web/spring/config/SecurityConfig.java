@@ -24,6 +24,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/tables/**").hasAuthority(Role.ADMIN.getAuthority())
                         .requestMatchers("/css/**").permitAll()
+                        .requestMatchers("/sass/**").permitAll()
                         .requestMatchers("/images/**").permitAll()
                         .requestMatchers("/fonts/**").permitAll()
                         .requestMatchers("/js/**").permitAll()
