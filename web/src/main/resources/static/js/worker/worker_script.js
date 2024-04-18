@@ -4,7 +4,7 @@ let workerTable = createWorkerTable();
 
 //кнопка "добавить ряд" (выводит форму для нового ряда)
 document.getElementById("add-row-button").addEventListener("click",function (){
-    let workerForm = document.querySelector(".worker-form");
+    let workerForm = document.querySelector("#main-form");
     workerForm.style.display = "block";
     setTimeout(()=>workerForm.style.opacity = "1",50);
     let main = document.querySelector("main");
@@ -69,7 +69,7 @@ document.getElementById("main-form-submit").addEventListener("click",
     })
 //Крестик (закрыть форму)
 document.getElementById("form-exit").addEventListener("click",function (){
-    let workerForm = document.querySelector(".worker-form");
+    let workerForm = document.querySelector("#main-form");
     workerForm.style.opacity = "0";
     setTimeout(function (){workerForm.style.display = "none"},300);//Чтобы была анимация
     let main = document.querySelector("main");
@@ -125,7 +125,7 @@ function createWorkerMenu(){
 
 
 function closeForm(){
-    let workerForm = document.querySelector(".worker-form");
+    let workerForm = document.querySelector("#main-form");
     workerForm.style.opacity = "0";
     setTimeout(function (){workerForm.style.display = "none"},300);//Чтобы была анимация
     let main = document.querySelector("main");

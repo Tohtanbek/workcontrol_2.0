@@ -10,7 +10,7 @@ let serviceTable = createServiceTable();
 //Переход к нопке добавить ряд-----------------------------------------------------
 //кнопка "добавить ряд" (выводит форму для нового ряда)
 document.getElementById("add-row-button").addEventListener("click",async function (){
-    let serviceForm = document.querySelector(".service-form");
+    let serviceForm = document.querySelector("#main-form");
     serviceForm.style.display = "block";
     setTimeout(() => {
         serviceForm.style.opacity = "1";
@@ -134,7 +134,7 @@ function updateFilter(){
 }
 
 function closeForm(){
-    let serviceForm = document.querySelector(".service-form");
+    let serviceForm = document.querySelector("#main-form");
     serviceForm.style.opacity = "0";
     setTimeout(function (){serviceForm.style.display = "none"},300);//Чтобы была анимация
     let main = document.querySelector("main");

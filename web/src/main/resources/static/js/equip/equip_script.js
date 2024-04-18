@@ -12,7 +12,7 @@ let equipTable = createEquipTable()
 //Переход к нопке добавить ряд-----------------------------------------------------
 //кнопка "добавить ряд" (выводит форму для нового ряда)
 document.getElementById("add-row-button").addEventListener("click",async function (){
-    let equipForm = document.querySelector(".equip-form");
+    let equipForm = document.querySelector("#main-form");
     equipForm.style.display = "block";
     setTimeout(() => {
         equipForm.style.opacity = "1";
@@ -350,7 +350,7 @@ function createTypeMenu(){
 
 
 function closeForm(){
-    let equipForm = document.querySelector(".equip-form");
+    let equipForm = document.querySelector("#main-form");
     equipForm.style.opacity = "0";
     setTimeout(function (){equipForm.style.display = "none"},300);//Чтобы была анимация
     let main = document.querySelector("main");

@@ -20,7 +20,7 @@ responsibleTable.on("tableBuilt",function (){loadLinkedBrigadiers()})
 
 //кнопка "добавить ряд" (выводит форму для нового ряда)
 document.getElementById("add-row-button").addEventListener("click",function (){
-    let responsibleForm = document.querySelector(".responsible-form");
+    let responsibleForm = document.querySelector("#main-form");
     responsibleForm.style.display = "block";
     setTimeout(()=>responsibleForm.style.opacity = "1",50);
     let main = document.querySelector("main");
@@ -78,7 +78,7 @@ document.getElementById("main-form-submit").addEventListener("click",
     })
 //Крестик (закрыть форму)
 document.getElementById("form-exit").addEventListener("click",function (){
-    let responsibleForm = document.querySelector(".responsible-form");
+    let responsibleForm = document.querySelector("#main-form");
     responsibleForm.style.opacity = "0";
     setTimeout(function (){responsibleForm.style.display = "none"},300);//Чтобы была анимация
     let main = document.querySelector("main");
@@ -136,7 +136,7 @@ function createResponsibleMenu(){
 
 
 function closeForm(){
-    let superForm = document.querySelector(".responsible-form");
+    let superForm = document.querySelector("#main-form");
     superForm.style.opacity = "0";
     setTimeout(function (){superForm.style.display = "none"},300);//Чтобы была анимация
     let main = document.querySelector("main");

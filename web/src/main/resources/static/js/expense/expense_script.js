@@ -161,7 +161,7 @@ expenseTable.on("cellEdited",function (cell){
 //Переход к нопке добавить ряд-----------------------------------------------------
 //кнопка "добавить ряд" (выводит форму для нового ряда)
 document.getElementById("add-row-button").addEventListener("click",async function (){
-    let expenseForm = document.querySelector(".expense-form");
+    let expenseForm = document.querySelector("#main-form");
     expenseForm.style.display = "block";
     setTimeout(() => {
         expenseForm.style.opacity = "1";
@@ -252,7 +252,7 @@ document.getElementById("form-exit").addEventListener("click",function (){
 })
 
 function closeForm(){
-    let expenseForm = document.querySelector(".expense-form");
+    let expenseForm = document.querySelector("#main-form");
     expenseForm.style.opacity = "0";
     setTimeout(function (){expenseForm.style.display = "none"},300);//Чтобы была анимация
     let main = document.querySelector("main");

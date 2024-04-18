@@ -1,16 +1,52 @@
 /*-----------------------*/
 /*Форма добавления ряда*/
 /* Input Field CSS */
+.basic-form {
+    width:100%;
+    max-width:50vw;
+    box-sizing:border-box;
+    margin-top: 5vh;
+    max-height: 80vh;
+    overflow-y: auto;
+    background-color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    opacity: 0;
+    box-shadow: 0 1px 6px rgba(32, 33, 36, .28);
+    border-radius: .5em;
+    padding: 1.5em;
+    color: #444;
+    font-size: 1em;
+    line-height: 1.5;
+    transition: 0.3s ease, display 0.3s ease;
+}
+
+.basic-form input[type=checkbox] {
+    height: 1vw;
+    width: 1vw;
+}
+
+.basic-form a.send_form {
+    color: #fff;
+    background: #21a51f;
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: .3rem;
+    font-weight: 700;
+    letter-spacing: .5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+
 .datainput{
     position:relative;
-    margin:5px 0 20px
-}
-.datainput p{
-    font-size:12px;
-    background:#eee;
-    display:inline-block;
-    padding:5px 15px;
-    border-radius:.5rem
+    margin: 0 0 0.5em;
+    width: 90%;
 }
 .address-form textarea{
     min-height:120px
@@ -18,7 +54,7 @@
 .datainput select{
     padding:12px 0;
     color:#555;
-    font-size:14px;
+    font-size:0.8em;
     width:100%;
     border:0;
     border-bottom:1px solid #ddd;
@@ -26,8 +62,8 @@
     background:#fff
 }
 .datainput input,.datainput textarea{
-    font-size:15px;
-    padding:15px 0;
+    font-size:1em;
+    padding:1em 0;
     display:block;
     width:100%;
     border:none;
@@ -38,17 +74,17 @@
 }
 .datainput label{
     color:#999;
-    font-size:14px;
+    font-size:1em;
     font-weight:400;
     position:absolute;
     pointer-events:none;
     left:0;
-    top:18px;
+    top:1em;
     transition:.2s ease all
 }
 .datainput input:focus~label,.datainput input:valid~label,.datainput textarea:focus~label,.datainput textarea:valid~label{
-    top:-10px;
-    font-size:14px;
+    top:-2em;
+    font-size:1em;
     color:#21a51f
 }
 #notif-license span{
@@ -126,16 +162,16 @@
 }
 .datainput input:focus~label,.datainput input:valid~label,.datainput textarea:focus~label,.datainput textarea:valid~label{
     top:-10px;
-    font-size:13px;
+    font-size:1em;
     color:#21a51f
 }
 
 #form-exit{
     color: red;
     position: absolute;
-    top: 5px;
-    right: 15px;
-    font-size: x-large;
+    top: 1%;
+    right: 1%;
+    font-size: 1.5em;
 }
 #form-exit:hover,
 #form-exit:active{

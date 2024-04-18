@@ -54,7 +54,7 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" href="#"><span>Список объектов</span> <i class="material-icons">keyboard_arrow_down</i></a>
                     <ul class="dropdown-menu ul-base">
-                        <li><a href="/tables/address/address_job_main">Профессии на объектах</a></li>
+                        <li><a href="/tables/address/address_job_main">Профессии</a></li>
                     </ul>
                 </li>
             </ul>
@@ -102,7 +102,7 @@
 </main><!-- @end main -->
 
 <!--    форма на новое поле        -->
-<form id="main-form" class="address-form">
+<form id="main-form" class="basic-form">
     <i id="form-exit" class="fa fa-times" aria-hidden="true"></i>
     <div class="datainput">
         <input class="validate" id="shortNaming" name="shortNaming" required="" type="text" value=''/>
@@ -200,6 +200,6 @@
 <script th:src="@{/js/address/address_script.js}" src="/js/address/address_script.js"></script>
 <script th:src="@{/js/form_popup_common.js}" src="/js/form_popup_common.js"></script>
 <script th:src="@{/js/address/address_delete_popup_script.js}" src="/js/address/address_delete_popup_script.js"></script>
-
+<script src="/js/delete_autocomplete.js"></script>
 </body>
 </html>

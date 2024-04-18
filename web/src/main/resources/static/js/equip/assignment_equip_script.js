@@ -250,7 +250,7 @@ function showForm(equipId,equipName,equipLeft){
     console.log(equipId)
     document.getElementById("equipId").value = equipId;
 
-    let assignEquipForm = document.querySelector(".assign-equip-form");
+    let assignEquipForm = document.querySelector("#main-form");
     assignEquipForm.style.display = "block";
     setTimeout(() => {
         assignEquipForm.style.opacity = "1";

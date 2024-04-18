@@ -3,7 +3,7 @@ let updatedRows = [];
 
 //кнопка "добавить ряд" (выводит форму для нового ряда)
 document.getElementById("add-row-button").addEventListener("click",function (){
-    let brigadierForm = document.querySelector(".brigadier-form");
+    let brigadierForm = document.querySelector("#main-form");
     brigadierForm.style.display = "block";
     setTimeout(()=>brigadierForm.style.opacity = "1",50);
     let main = document.querySelector("main");
@@ -39,7 +39,7 @@ document.getElementById("main-form-submit").addEventListener("click",
 })
 //Крестик (закрыть форму)
 document.getElementById("form-exit").addEventListener("click",function (){
-    let brigadierForm = document.querySelector(".brigadier-form");
+    let brigadierForm = document.querySelector("#main-form");
     brigadierForm.style.opacity = "0";
     setTimeout(function (){brigadierForm.style.display = "none"},300);//Чтобы была анимация
     let main = document.querySelector("main");
@@ -93,7 +93,7 @@ function createBrigadierMenu(){
 
 
 function closeForm(){
-    let brigadierForm = document.querySelector(".brigadier-form");
+    let brigadierForm = document.querySelector("#main-form");
     brigadierForm.style.opacity = "0";
     setTimeout(function (){brigadierForm.style.display = "none"},300);//Чтобы была анимация
     let main = document.querySelector("main");

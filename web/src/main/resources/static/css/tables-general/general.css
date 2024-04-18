@@ -65,7 +65,7 @@ a:hover {
 
 button {
     font-size: calc(0.2vh + 1vw);
-    padding: 5px 10px;
+    padding: 0.2em 0.3em;
     border: 1px solid #25682a;
     background: #3FB449;
     background: -webkit-gradient(linear, left top, left bottom, from(#3FB449), to(#25682a));

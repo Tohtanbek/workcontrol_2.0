@@ -5,7 +5,7 @@ createTables();
 //Переход к нопке добавить ряд-----------------------------------------------------
 //кнопка "добавить ряд" (выводит форму для нового ряда)
 document.getElementById("add-row-button").addEventListener("click",function (){
-    let equipForm = document.querySelector(".equip-form");
+    let equipForm = document.querySelector("#main-form");
     equipForm.style.display = "block";
     let main = document.querySelector("main");
     main.style.opacity = "0.5";
@@ -34,7 +34,7 @@ document.getElementById("add-row-button").addEventListener("click",function (){
 })
 //Крестик (закрыть форму)
 document.getElementById("form-exit").addEventListener("click",function (){
-    let equipForm = document.querySelector(".equip-form");
+    let equipForm = document.querySelector("#main-form");
     equipForm.style.display = "none";
     let main = document.querySelector("main");
     main.style.opacity = "1";

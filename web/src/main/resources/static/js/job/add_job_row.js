@@ -1,6 +1,6 @@
 //кнопка "добавить профессию" (выводит форму для нового ряда)
 document.getElementById("add-job-button").addEventListener("click",function () {
-    let jobForm = document.querySelector(".job-form");
+    let jobForm = document.querySelector("#main-form");
     jobForm.style.display = "block";
     setTimeout(() => jobForm.style.opacity = "1", 50);
     let main = document.querySelector("main");
@@ -39,7 +39,7 @@ document.getElementById("job-form-submit").addEventListener("click",
 
 
 function closeForm(){
-    let jobForm = document.querySelector(".job-form");
+    let jobForm = document.querySelector("#main-form");
     jobForm.style.opacity = "0";
     setTimeout(function (){jobForm.style.display = "none"},300);//Чтобы была анимация
     let main = document.querySelector("main");

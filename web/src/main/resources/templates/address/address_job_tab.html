@@ -101,7 +101,7 @@
 </main><!-- @end main -->
 
 <!--    форма на новое поле        -->
-<form id="main-form" class="job-form">
+<form id="main-form" class="basic-form">
     <i id="form-exit" class="fa fa-times" aria-hidden="true"></i>
     <div class="datainput">
         <input class="validate" id="name" name="name" required="" type="text" value=''/>
@@ -109,12 +109,12 @@
         <label>Название (уникальное)</label>
     </div>
     <div class="datainput">
-        <input class="validate" id="wageRate" name="wageRate" required="" type="text" value=''/>
+        <input class="validate" id="wageRate" name="wageRate" required="" type="number" step="0.01" value=''/>
         <span class="highlight"></span><span class="bar"></span>
         <label>Коэффициент ЗП</label>
     </div>
     <div class="datainput">
-        <input class="validate" id="incomeRate" name="incomeRate" required="" type="text" value=''/>
+        <input class="validate" id="incomeRate" name="incomeRate" required="" type="number" step="0.01" value=''/>
         <span class="highlight"></span><span class="bar"></span>
         <label>Доходный коэффициент</label>
     </div>
@@ -179,5 +179,6 @@
 <script th:src="@{/js/job/add_job_row.js}" src="/js/job/add_job_row.js"></script>
 <script th:src="@{/js/job/show_jobs_script.js}" src="/js/job/show_jobs_script.js"></script>
 <script th:src="@{/js/job/job_delete_popup_script.js}" src="/js/job/job_delete_popup_script.js"></script>
+<script src="/js/delete_autocomplete.js"></script>
 </body>
 </html>

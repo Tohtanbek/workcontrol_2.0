@@ -5,7 +5,7 @@ let excelAddressTable = createExcelAddressTable();
 //Переход к нопке добавить ряд-----------------------------------------------------
 //кнопка "добавить ряд" (выводит форму для нового ряда)
 document.getElementById("add-row-button").addEventListener("click",async function (){
-    let addressForm = document.querySelector(".address-form");
+    let addressForm = document.querySelector("#main-form");
     addressForm.style.display = "block";
     setTimeout(() => {
         addressForm.style.opacity = "1";
@@ -167,7 +167,7 @@ function updateFilter(){
 }
 
 function closeForm(){
-    let addressForm = document.querySelector(".address-form");
+    let addressForm = document.querySelector("#main-form");
     addressForm.style.opacity = "0";
     setTimeout(function (){addressForm.style.display = "none"},300);//Чтобы была анимация
     let main = document.querySelector("main");

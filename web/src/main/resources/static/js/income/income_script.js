@@ -160,7 +160,7 @@ incomeTable.on("cellEdited",function (cell){
 //Переход к нопке добавить ряд-----------------------------------------------------
 //кнопка "добавить ряд" (выводит форму для нового ряда)
 document.getElementById("add-row-button").addEventListener("click",async function (){
-    let incomeForm = document.querySelector(".income-form");
+    let incomeForm = document.querySelector("#main-form");
     incomeForm.style.display = "block";
     setTimeout(() => {
         incomeForm.style.opacity = "1";
@@ -250,7 +250,7 @@ document.getElementById("form-exit").addEventListener("click",function (){
     closeForm()
 })
 function closeForm(){
-    let incomeForm = document.querySelector(".income-form");
+    let incomeForm = document.querySelector("#main-form");
     incomeForm.style.opacity = "0";
     setTimeout(function (){incomeForm.style.display = "none"},300);//Чтобы была анимация
     let main = document.querySelector("main");

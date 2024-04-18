@@ -927,6 +927,7 @@ $rangeHeaderTextHighlightBackground: #000000 !default; //header text color when 
 			padding: 0;
 
 			input, select{
+				font-size: inherit;
 				border:1px;
 				background:transparent;
 				outline:none;
