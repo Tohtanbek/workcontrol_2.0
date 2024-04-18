@@ -46,6 +46,12 @@ $rangeHeaderTextHighlightBackground: #000000 !default; //header text color when 
 
 @import "tabulator";
 
+//custom
+select.tabulator-page-size {
+  font-size: 1em;
+}
+//
+
 .tabulator{
   border:none;
   border-bottom: 5px solid $borderColor;
@@ -170,6 +176,7 @@ $rangeHeaderTextHighlightBackground: #000000 !default; //header text color when 
     }
   }
 }
+
 
 .tabulator-row{
   .tabulator-cell{

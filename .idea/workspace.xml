@@ -4,13 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="bugfix">
+    <list default="true" id="66155060-837e-4430-9250-b1b5f4a5f458" name="Changes" comment="bugfix security">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/com/tosDev/web/spring/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/tables-general/nav.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/tables-general/nav.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/general.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/general.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/general.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/general.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/general.scss" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/general.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/site-theme.scss" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/site-theme.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_cart.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_cart.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_extra_service.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_extra_service.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_service.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/sass/styles_select_service.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/address/address_job_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/address/address_job_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/address/address_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/address/address_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/brigadier_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/brigadier_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/equipment/assignment_equipment_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/equipment/assignment_equipment_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/equipment/equipment_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/equipment/equipment_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/expense_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/expense_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/income_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/income_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/order/order_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/order/order_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/order/service_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/order/service_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/responsible_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/responsible_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/shift_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/shift_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/worker_tab.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/worker_tab.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/test/java/integration/RealWebServiceServerIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/test/java/integration/RealWebServiceServerIT.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +37,6 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="AnnotationType" />
-        <option value="HTML File" />
         <option value="JUnit5 Test Class" />
         <option value="JavaScript File" />
         <option value="Enum" />
@@ -29,13 +44,14 @@
         <option value="Record" />
         <option value="Class" />
         <option value="package.json" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="prod-v1" />
+        <entry key="$PROJECT_DIR$" value="first_dev_branch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -121,7 +137,7 @@
       <recent name="com.tosDev.tg.db" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.SpringMainModuleRunner">
+  <component name="RunManager" selected="JUnit.RealWebServiceServerIT.test">
     <configuration name="RealWebServiceServerIT" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="web" />
       <extension name="coverage">
@@ -210,8 +226,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.SpringMainModuleRunner" />
         <item itemvalue="JUnit.RealWebServiceServerIT.test" />
+        <item itemvalue="Spring Boot.SpringMainModuleRunner" />
         <item itemvalue="JUnit.RealWebServiceServerIT" />
         <item itemvalue="JAR Application.web-1.0-SNAPSHOT-exec.jar" />
         <item itemvalue="JAR Application.tg-1.0-SNAPSHOT-exec.jar" />
@@ -292,6 +308,10 @@
       <workItem from="1712742076152" duration="12617000" />
       <workItem from="1712831363160" duration="21281000" />
       <workItem from="1713255458722" duration="23370000" />
+      <workItem from="1713305192214" duration="79000" />
+      <workItem from="1713308891017" duration="203000" />
+      <workItem from="1713354046893" duration="25000" />
+      <workItem from="1713435427560" duration="5975000" />
     </task>
     <task id="LOCAL-00001" summary="Первый коммит workcontrol 2.0. Работа над frontend">
       <created>1708303197812</created>

@@ -20,37 +20,8 @@
 <body>
 
 <!-- nav -->
-<nav class="sidebar">
-    <div class="nav-header">
-        <div class="logo-wrap">
-            <a class="logo-text" href="https://workcontrol.site/form/authentication">Личный <br> кабинет</a>
-            <a class="logo-icon" href="https://workcontrol.site/form/authentication">
-                <img src="/images/new_logo.jpg" alt="logo-icon" th:src="@{/images/new_logo.jpg}"></a>
-        </div>
-
-        <div class="nav-search">
-            <div class="search">
-                <i class="material-icons">search</i>
-                <input type="search" name="search" placeholder="Поиск">
-            </div>
-        </div>
-    </div>
-    <ul class="nav-categories ul-base">
-        <li><a href="/tables/equip/main">Оборудование</a></li>
-        <li><a href="/tables/shift/main">Рабочее время</a></li>
-        <li><a href="/tables/brigadier/main">Бригадиры</a></li>
-        <li><a href="/tables/worker/main">Персонал</a></li>
-        <li><a href="/tables/supervisors/main">Супервайзеры</a></li>
-        <li><a href="/tables/order/main">Заказы</a></li>
-        <li><a href="/tables/address/main">Объекты</a></li>
-        <li><a href="/tables/expense/main">Расходы</a></li>
-        <li><a href="/tables/income/main">Доходы</a></li>
-    </ul>
-    <div class="copyright">
-        <span>&copy; 2024 <a href="https://workcontrol.site/form/authentication" class="link">DeepClean.site</a> </span>
-        <span>Designed by <a href="https://workcontrol.site/form/authentication" target="_blank">DeepClean</a></span>
-    </div>
-</nav><!-- @end nav -->
+<nav th:include="~{/general/nav.html :: nav}"></nav>
+<!-- @end nav -->
 
 <!-- header -->
 <header>

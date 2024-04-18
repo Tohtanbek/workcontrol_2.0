@@ -1135,6 +1135,10 @@ body.tabulator-print-fullscreen-hide > *:not(.tabulator-print-fullscreen) {
   background: #333;
 }
 
+select.tabulator-page-size {
+  font-size: 1em;
+}
+
 .tabulator {
   border: none;
   border-bottom: 5px solid #222;

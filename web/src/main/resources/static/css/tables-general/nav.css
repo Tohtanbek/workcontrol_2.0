@@ -7,7 +7,7 @@ nav {
     overflow-y: auto;
     position: fixed;
     top: 0px;
-    left: -250px;
+    left: -50vh;
     max-width: 30vh;
     height: 100%;
     color: #fff;
@@ -47,42 +47,42 @@ nav .nav-header .logo-wrap .logo-text {
     vertical-align: 12px;
     text-decoration: none;
 }
-nav .nav-header .nav-search {
+
+nav .nav-search {
+    background-color: forestgreen;
+    display: flex;
     position: relative;
-    height: 40px;
+    flex-direction: row-reverse;
+    height: fit-content;
 }
-nav .nav-header .nav-search .search {
-    display: block;
-    position: relative;
-}
-nav .nav-header .nav-search .search i {
+nav .nav-search i {
     position: absolute;
-    top: 8px;
+    top: 0.5em;
     right: 0.7em;
     color: rgba(255, 255, 255, 0.6);
-    font-size: 24px;
+    font-size: 0.7em;
     cursor: pointer;
 }
-nav .nav-header .nav-search .search input[type=search] {
+nav .nav-search input[type=search] {
     width: 100%;
-    height: 40px;
+    height: 3em;
     color: rgba(255, 255, 255, 0.8);
-    font-size: 15px;
+    font-size: 0.5em;
     padding: 0 48px 0 20px;
     outline: none;
     border: none;
     background-color: rgba(255, 255, 255, 0.2);
 }
-nav .nav-header .nav-search .search ::-webkit-input-placeholder {
+nav .nav-search ::-webkit-input-placeholder {
     color: rgba(255, 255, 255, 0.5);
 }
-nav .nav-header .nav-search .search ::-moz-placeholder {
+nav .nav-search ::-moz-placeholder {
     color: rgba(255, 255, 255, 0.8);
 }
-nav .nav-header .nav-search .search :-moz-placeholder {
+nav .nav-search :-moz-placeholder {
     color: rgba(255, 255, 255, 0.8);
 }
-nav .nav-header .nav-search .search :-ms-input-placeholder {
+nav .nav-search :-ms-input-placeholder {
     color: rgba(255, 255, 255, 0.8);
 }
 nav .nav-categories li {
@@ -167,7 +167,7 @@ nav .copyright {
 nav .copyright span {
     display: block;
     width: 100%;
-    font-size: 11px;
+    font-size: 0.7em;
     margin-bottom: 4px;
 }
 

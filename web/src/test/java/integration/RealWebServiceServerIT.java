@@ -30,8 +30,6 @@ public class RealWebServiceServerIT extends IntegrationTestBase {
 
     @Test
     void test() {
-        //todo:добавить куки, чтобы хранить авторизацию, сделать logout по таймеру
-        //todo: вставить formatter money там, где это подходит, то же самое с link и т.п
         //Оставляем сервер работать
         while (true){}
     }
